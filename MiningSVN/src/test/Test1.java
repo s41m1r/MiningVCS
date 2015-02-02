@@ -56,11 +56,14 @@ public class Test1 {
 	   
 	   //DateTime dt = fmt.parseDateTime(DateTime.now().toString());
 	   DateTime dt = DateTime.now();
-	   DateTimeFormatter dtf = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(Locale.GERMAN);
-	   System.out.println(dtf.print(dt.toDateTimeISO()));
+	   Locale locale = new Locale("de", "AT", "Austria");
 	   
-	   DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(Locale.GERMAN);
-	   DateTime date = germanFmt.parseDateTime("Dienstag, 20. J�nner 2015 11:43:43");
+	   DateTimeFormatter dtf = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
+	   System.out.println(dtf.print(dt.minusMonths(1).toDateTimeISO()));
+	   
+	   
+	   DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
+	   DateTime date = germanFmt.parseDateTime("Dienstag, 20. Jänner 2015 11:43:43");
 	   System.out.println(germanFmt.print(date)); //Success!
    }
 }
