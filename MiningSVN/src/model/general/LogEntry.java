@@ -1,4 +1,4 @@
-package model;
+package model.general;
 
 import java.sql.Date;
 
@@ -6,28 +6,12 @@ import java.sql.Date;
  * @author saimir
  *
  */
-public class LogEntry {
-	private String startingToken;
-	private String author;
-	private Date date;
-	private String comment;
-	private String action; //changed, modified, added, etc
-	
-	public LogEntry() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public LogEntry(String startingToken, String author, Date date,
-			String comment, String action) {
-		super();
-		this.startingToken = startingToken;
-		this.author = author;
-		this.date = date;
-		this.comment = comment;
-		this.action = action;
-	}
-
-
+public abstract class LogEntry {
+	protected String startingToken;
+	protected String author;
+	protected Date date;
+	protected String comment;
+	protected String action; //changed, modified, added, etc
 
 	public String getStartingToken() {
 		return startingToken;
@@ -68,4 +52,11 @@ public class LogEntry {
 	public void setAction(String action) {
 		this.action = action;
 	}
+	
+	@Override
+   public String toString() {
+	   return "LogEntry [startingToken=" + startingToken + ", author=" + author
+	         + ", date=" + date + ", comment=" + comment + ", action=" + action
+	         + "]";
+   }
 }
