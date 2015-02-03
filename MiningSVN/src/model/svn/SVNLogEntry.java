@@ -106,7 +106,8 @@ public class SVNLogEntry extends LogEntry {
 
 	@Override
    public String toString() {
-	   // TODO Auto-generated method stub
-	   return super.toString();
+	   return "LogEntry [revision=" + startingToken + ", author=" + author
+	         + ", date=" + date + ", comment=" + comment + ", changeList="
+	         + changeList + "]";
    }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 
 import model.Change;
+import model.LogEntry;
 import model.svn.SVNLogEntry;
 
 import org.joda.time.DateTime;
@@ -18,11 +19,16 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.tmatesoft.svn.core.SVNException;
 
+import reader.LogReader;
+import reader.SVNLogReader;
+
 /**
  * @author Saimir Bala
  *
  */
 public class TestReadSVNLog {
+	
+	final static String fileName = "resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log";
 
 	/**
 	 * @param args
@@ -30,8 +36,15 @@ public class TestReadSVNLog {
 	 * @throws SVNException 
 	 */
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log"));
-
+		LogReader<LogEntry> lr = new SVNLogReader(fileName);
+		System.out.println(lr.readNext());
+		System.out.println(lr.readNext());
+		System.out.println(lr.readNext());
+		System.out.println(lr.readAll());
+	}
+	
+	public static void readOne() throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
 		String revision = line.split("Revision: ")[1];
 		line = br.readLine();
@@ -44,7 +57,7 @@ public class TestReadSVNLog {
 			throw new IOException();
 		}
 		String message = br.readLine().trim();
-		br.readLine();
+		message=br.readLine();
 		
 		List<Change> changeList = new ArrayList<Change>();
 		
