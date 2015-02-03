@@ -17,7 +17,6 @@ import model.svn.SVNLogEntry;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.tmatesoft.svn.core.SVNException;
 
 import reader.LogReader;
 import reader.SVNLogReader;
