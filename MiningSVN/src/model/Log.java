@@ -1,7 +1,7 @@
 /**
  * This class represents a Log as a set of LogEntries
  */
-package model.general;
+package model;
 
 import java.util.Set;
 

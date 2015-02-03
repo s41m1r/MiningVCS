@@ -3,9 +3,11 @@
  */
 package model.svn;
 
-import java.sql.Date;
+import java.util.Map;
 
-import model.general.LogEntry;
+import model.LogEntry;
+
+import org.joda.time.DateTime;
 
 
 /**
@@ -25,16 +27,16 @@ public class SVNLogEntry extends LogEntry {
 	 * @param author
 	 * @param date
 	 * @param comment
-	 * @param action
+	 * @param @Map<String,String> changeList
 	 */
-   public SVNLogEntry(String startingToken, String author, Date date,
-         String comment, String action) {
+   public SVNLogEntry(String startingToken, String author, DateTime date,
+         String comment, Map<String, String> changeList) {
 //	   super();
 	   this.startingToken = startingToken;
 	   this.author = author;
 	   this.date = date;
 	   this.comment = comment;
-	   this.action = action;
+	   this.changeList = changeList;
    }
 
    
@@ -65,13 +67,13 @@ public class SVNLogEntry extends LogEntry {
    }
 
 	@Override
-   public Date getDate() {
+   public DateTime getDate() {
 	   // TODO Auto-generated method stub
 	   return super.getDate();
    }
 
 	@Override
-   public void setDate(Date date) {
+   public void setDate(DateTime date) {
 	   // TODO Auto-generated method stub
 	   super.setDate(date);
    }
@@ -88,16 +90,17 @@ public class SVNLogEntry extends LogEntry {
 	   super.setComment(comment);
    }
 
+	
 	@Override
-   public String getAction() {
+   public Map<String, String> getChangeList() {
 	   // TODO Auto-generated method stub
-	   return super.getAction();
+	   return super.getChangeList();
    }
 
 	@Override
-   public void setAction(String action) {
+   public void setChangeList(Map<String, String> changeList) {
 	   // TODO Auto-generated method stub
-	   super.setAction(action);
+	   super.setChangeList(changeList);
    }
 
 	@Override

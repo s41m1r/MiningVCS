@@ -1,6 +1,8 @@
-package model.general;
+package model;
 
-import java.sql.Date;
+import java.util.Map;
+
+import org.joda.time.DateTime;
 
 /**
  * @author saimir
@@ -9,9 +11,9 @@ import java.sql.Date;
 public abstract class LogEntry {
 	protected String startingToken;
 	protected String author;
-	protected Date date;
+	protected DateTime date;
 	protected String comment;
-	protected String action; //changed, modified, added, etc
+	protected Map<String,String> changeList; //changed, modified, added, etc
 
 	public String getStartingToken() {
 		return startingToken;
@@ -29,11 +31,11 @@ public abstract class LogEntry {
 		this.author = author;
 	}
 
-	public Date getDate() {
+	public DateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(DateTime date) {
 		this.date = date;
 	}
 
@@ -44,19 +46,19 @@ public abstract class LogEntry {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
-	public String getAction() {
-		return action;
-	}
-
-	public void setAction(String action) {
-		this.action = action;
-	}
 	
+	public Map<String, String> getChangeList() {
+		return changeList;
+	}
+
+	public void setChangeList(Map<String, String> changeList) {
+		this.changeList = changeList;
+	}
+
 	@Override
    public String toString() {
 	   return "LogEntry [startingToken=" + startingToken + ", author=" + author
-	         + ", date=" + date + ", comment=" + comment + ", action=" + action
-	         + "]";
+	         + ", date=" + date + ", comment=" + comment + ", changeList="
+	         + changeList + "]";
    }
 }

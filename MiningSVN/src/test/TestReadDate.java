@@ -45,7 +45,7 @@ import org.joda.time.format.DateTimeFormatter;
  ''      single quote                 literal       '
  *
  */
-public class Test1 {
+public class TestReadDate {
 	
 	public static void main(String[] args) {
 	   
