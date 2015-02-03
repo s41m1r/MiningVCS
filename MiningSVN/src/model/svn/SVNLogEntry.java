@@ -3,8 +3,9 @@
  */
 package model.svn;
 
-import java.util.Map;
+import java.util.List;
 
+import model.Change;
 import model.LogEntry;
 
 import org.joda.time.DateTime;
@@ -27,10 +28,10 @@ public class SVNLogEntry extends LogEntry {
 	 * @param author
 	 * @param date
 	 * @param comment
-	 * @param @Map<String,String> changeList
+	 * @param List<Change> changeList
 	 */
    public SVNLogEntry(String startingToken, String author, DateTime date,
-         String comment, Map<String, String> changeList) {
+         String comment, List<Change> changeList) {
 //	   super();
 	   this.startingToken = startingToken;
 	   this.author = author;
@@ -92,13 +93,13 @@ public class SVNLogEntry extends LogEntry {
 
 	
 	@Override
-   public Map<String, String> getChangeList() {
+   public List<Change> getChangeList() {
 	   // TODO Auto-generated method stub
 	   return super.getChangeList();
    }
 
 	@Override
-   public void setChangeList(Map<String, String> changeList) {
+   public void setChangeList(List<Change> changeList) {
 	   // TODO Auto-generated method stub
 	   super.setChangeList(changeList);
    }

@@ -6,10 +6,11 @@ package test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
+import model.Change;
 import model.svn.SVNLogEntry;
 
 import org.joda.time.DateTime;
@@ -45,11 +46,12 @@ public class TestReadSVNLog {
 		String message = br.readLine().trim();
 		br.readLine();
 		
-		Map<String, String> changeList = new HashMap<String,String>();
+		List<Change> changeList = new ArrayList<Change>();
 		
 		while(!(line = br.readLine()).trim().equals("")){
 			String[] changeLine = line.split(":");
-			changeList.put(changeLine[0].trim(), changeLine[1].trim());
+			Change ch = new Change(changeLine[0].trim(), changeLine[1].trim());
+			changeList.add(ch);
 		}
 		
 		Locale locale = new Locale("de", "AT", "Austria");

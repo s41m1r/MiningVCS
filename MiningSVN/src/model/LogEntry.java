@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Map;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -13,7 +13,7 @@ public abstract class LogEntry {
 	protected String author;
 	protected DateTime date;
 	protected String comment;
-	protected Map<String,String> changeList; //changed, modified, added, etc
+	protected List<Change> changeList; //changed, modified, added, etc
 
 	public String getStartingToken() {
 		return startingToken;
@@ -47,11 +47,11 @@ public abstract class LogEntry {
 		this.comment = comment;
 	}
 	
-	public Map<String, String> getChangeList() {
+	public List<Change> getChangeList() {
 		return changeList;
 	}
 
-	public void setChangeList(Map<String, String> changeList) {
+	public void setChangeList(List<Change> changeList) {
 		this.changeList = changeList;
 	}
 
