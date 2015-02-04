@@ -1,7 +1,7 @@
 /**
  * 
  */
-package gui;
+package gui.test;
 
 /**
  * @author Saimir Bala
