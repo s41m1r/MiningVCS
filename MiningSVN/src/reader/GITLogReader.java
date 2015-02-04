@@ -91,6 +91,10 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		while(line.startsWith("   "))
 			line = br2.readLine();
 		// changes do not start with many spaces
+		
+		if(line.equals(""))
+			br2.readLine();
+		
 //		TODO: cambia qui
 		while(!line.equals("")){
 			String[] changeLine = line.trim().split("|");
