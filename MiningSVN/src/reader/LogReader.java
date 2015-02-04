@@ -3,6 +3,7 @@
  */
 package reader;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author Saimir Bala
  *
  */
-public interface LogReader<LogEntry>{	
+public interface LogReader<LogEntry> extends Closeable{	
 	/**
 	 * @return all the log entries
 	 * @throws IOException

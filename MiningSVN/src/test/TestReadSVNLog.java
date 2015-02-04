@@ -40,6 +40,7 @@ public class TestReadSVNLog {
 		System.out.println(lr.readNext());
 		System.out.println(lr.readNext());
 		System.out.println(lr.readAll());
+		lr.close();
 	}
 	
 	public static void readOne() throws IOException{

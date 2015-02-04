@@ -8,11 +8,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import model.Change;
 import model.LogEntry;
-import model.svn.SVNLogEntry;
+import model.git.GITLogEntry;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -65,51 +64,65 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 
 		String revision = line.split("commit ")[1];
 		line = br.readLine();
-		String author = line.split("Author: ")[1];
-		line = br.readLine();
-		String dateString = line.split("Date: ")[1];
+		String author = readAuthor(line);
 		line = br.readLine().trim();
+		String dateString = line.split("Date: ")[1];
+		line = br.readLine();
 		
 		String message = readMessage(br); 
+		
+		//When a merge happens, GIT automatically generates a message describing it. Plus, there is no change-list to be read.
+		List<Change> changeList = (message.startsWith("Merge"))? new ArrayList<Change>(): readChangeList(br);
 
-		List<Change> changeList = readChangeList(br);
+	   DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z");
+		DateTime date = gitFmt.parseDateTime(dateString.trim());
 
-		Locale locale = new Locale("de", "AT", "Austria");
-		DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
-		DateTime date = germanFmt.parseDateTime(dateString);
+		LogEntry gitLogEntry = new GITLogEntry(revision,author,date,message,changeList);
 
-		SVNLogEntry svnLogEntry = new SVNLogEntry(revision,author,date,message,changeList);
-
-		return svnLogEntry;
+		return gitLogEntry;
 	}
+
+	/**
+	 * @param line
+	 * @return
+	 * @throws IOException 
+	 */
+   private String readAuthor(String line) throws IOException {
+   	String author = "";
+   	
+   	if(line.equals(""))
+   		return author;
+   	
+   	if(line.startsWith("Author"))
+   		 author = line.split("Author: ")[1];
+   	
+   	else if(line.startsWith("Merge"))
+   		author = readAuthor(br.readLine());
+   	
+	   return author;
+   }
 
 	private static List<Change> readChangeList(BufferedReader br2) throws IOException {
 		List<Change> changeList = new ArrayList<Change>();
 		//read the first line
 		String line = br2.readLine();
 		
-		while(line.startsWith("   "))
-			line = br2.readLine();
-		// changes do not start with many spaces
-		
-		if(line.equals(""))
-			br2.readLine();
-		
-//		TODO: cambia qui
-		while(!line.equals("")){
-			String[] changeLine = line.trim().split("|");
-			Change ch = new Change(changeLine[1].trim(), changeLine[2].trim());
+		while(line!=null && !line.equals("")){
+			String[] changeLine = line.trim().split("\\s+");
+			Change ch = new Change(changeLine[0].trim(), changeLine[1].trim());
 			changeList.add(ch);
 			line = br2.readLine();
 		}
-		return null;
+		return changeList;
 	}
 
 	private static String readMessage(BufferedReader br2) throws IOException {
 		String msg = "";
-		String line = null;
-		while((line=br2.readLine())!="")
+		String line = br2.readLine();
+		while(!line.equals("") && line!=null){
 			msg+=line.trim();
+			line = br2.readLine();
+		}
 		return msg;
 	}
 
@@ -118,8 +131,7 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 	 */
 	@Override
 	public void close() throws IOException {
-		// TODO Auto-generated method stub
-
+		br.close();
 	}
 
 }

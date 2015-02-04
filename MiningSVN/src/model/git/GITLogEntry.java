@@ -5,16 +5,39 @@ package model.git;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import model.Change;
 import model.LogEntry;
+
+import org.joda.time.DateTime;
 
 /**
  * @author saimir
  *
  */
 public class GITLogEntry extends LogEntry{
+	
+	/**
+    * 
+    */
+   public GITLogEntry() {
+   }
+   
+   /**
+	 * @param startingToken
+	 * @param author
+	 * @param date
+	 * @param comment
+	 * @param List<Change> changeList
+	 */
+   public GITLogEntry(String commit, String author, DateTime date,
+         String comment, List<Change> changeList) {
+   	
+	   this.startingToken = commit;
+	   this.author = author;
+	   this.date = date;
+	   this.comment = comment;
+	   this.changeList = changeList;
+   }
 
 	/* (non-Javadoc)
 	 * @see model.LogEntry#getStartingToken()

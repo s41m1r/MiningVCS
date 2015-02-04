@@ -63,6 +63,12 @@ public class TestReadDate {
 	   
 	   DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
 	   DateTime date = germanFmt.parseDateTime("Dienstag, 20. Jänner 2015 11:43:43");
-	   System.out.println(germanFmt.print(date)); //Success!
+	   System.out.println(germanFmt.print(date)); 
+	   
+	   DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z");
+	   DateTime gitDate = gitFmt.parseDateTime("Sat Jan 31 12:24:42 2015 +0100");
+	   
+	   System.out.println(gitFmt.print(gitDate)); 
+	   
    }
 }
