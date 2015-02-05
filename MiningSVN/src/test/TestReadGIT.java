@@ -24,9 +24,6 @@ public class TestReadGIT {
 	 */
 	public static void main(String[] args) throws IOException {
 		LogReader<LogEntry> lr = new GITLogReader(fileName);
-		System.out.println(lr.readNext());
-		System.out.println(lr.readNext());
-		System.out.println(lr.readNext());
 		System.out.println(lr.readAll());
 		lr.close();
 	}

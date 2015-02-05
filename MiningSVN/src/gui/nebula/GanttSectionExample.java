@@ -48,9 +48,9 @@ public class GanttSectionExample {
 		GanttEvent scopeEvent = new GanttEvent(ganttChart, "Scope");
 
 		// create some dates for our events
-		Calendar sdEventOne = Calendar.getInstance();
-		Calendar edEventOne = Calendar.getInstance();
-		edEventOne.add(Calendar.DATE, 10);
+		Calendar startDateEventOne = Calendar.getInstance();
+		Calendar endDateEventOne = Calendar.getInstance();
+		endDateEventOne.add(Calendar.DATE, 10);
 
 		Calendar rsEventOne = Calendar.getInstance();
 		Calendar reEventOne = Calendar.getInstance();
@@ -58,7 +58,7 @@ public class GanttSectionExample {
 		reEventOne.add(Calendar.DATE, 5);
 
 		// create event 1 with custom colors
-		GanttEvent eventOne = new GanttEvent(ganttChart, "Event 1", sdEventOne, edEventOne, rsEventOne, reEventOne, 35);
+		GanttEvent eventOne = new GanttEvent(ganttChart, "Event 1", startDateEventOne, endDateEventOne, rsEventOne, reEventOne, 35);
 		eventOne.setStatusColor(ColorCache.getColor(70, 132, 96));
 		eventOne.setGradientStatusColor(ColorCache.getColor(160, 210, 181));
 
@@ -75,6 +75,12 @@ public class GanttSectionExample {
 		chkStartAndEnd.add(Calendar.DATE, 16);
 		GanttEvent eventCheckpoint = new GanttEvent(ganttChart, "Checkpoint", chkStartAndEnd, chkStartAndEnd, 75);
 		eventCheckpoint.setCheckpoint(true);
+		Calendar startEventThree = Calendar.getInstance();
+		Calendar endEventThree = Calendar.getInstance();
+		endEventThree.add(Calendar.DATE, 10);
+		GanttEvent eventThree = new GanttEvent(
+				ganttChart, 1,"ciao", startEventThree, endEventThree, 90);
+		eventThree.setStatusColor(ColorCache.getRandomColor());
 
 		// create a custom menu item on the checkpoint
 		MenuItem testItem = new MenuItem(eventCheckpoint.getMenu(), SWT.PUSH);
@@ -102,20 +108,22 @@ public class GanttSectionExample {
 
 		GanttSection gs4 = new GanttSection(ganttChart, "Section Four");
 		gs4.setWeekdayBackgroundColorTop(ColorCache.getColor(215, 242, 222));
+		
+		gs4.addGanttEvent(eventThree);
 
 		// add loads of connections from everything to everything (pretty much) that even cross over sections and are reverse in dependencies as well.
-		ganttChart.addConnection(eventOne, eventTwo);
-		ganttChart.addConnection(eventTwo, eventOne);
-		ganttChart.addConnection(eventOne, eventCheckpoint);
-		ganttChart.addConnection(eventTwo, eventCheckpoint);
-
-		ganttChart.addConnection(scopeEvent, eventOne);
-		ganttChart.addConnection(scopeEvent, eventTwo);
-		ganttChart.addConnection(scopeEvent, eventCheckpoint);
-
-		ganttChart.addConnection(eventCheckpoint, scopeEvent);
-		ganttChart.addConnection(eventCheckpoint, eventTwo);
-		ganttChart.addConnection(eventCheckpoint, eventOne);
+//		ganttChart.addConnection(eventOne, eventTwo);
+//		ganttChart.addConnection(eventTwo, eventOne);
+//		ganttChart.addConnection(eventOne, eventCheckpoint);
+//		ganttChart.addConnection(eventTwo, eventCheckpoint);
+//
+//		ganttChart.addConnection(scopeEvent, eventOne);
+//		ganttChart.addConnection(scopeEvent, eventTwo);
+//		ganttChart.addConnection(scopeEvent, eventCheckpoint);
+//
+//		ganttChart.addConnection(eventCheckpoint, scopeEvent);
+//		ganttChart.addConnection(eventCheckpoint, eventTwo);
+//		ganttChart.addConnection(eventCheckpoint, eventOne);
 
 		// tell the scope what events belong to us. Note again that we add a cross-section event to the scope, which is possible but most likely illogical.
 		scopeEvent.addScopeEvent(eventOne);

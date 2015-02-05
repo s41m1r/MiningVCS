@@ -3,7 +3,7 @@
  */
 package model.svn;
 
-import java.util.Set;
+import java.util.Collection;
 
 import model.Log;
 import model.LogEntry;
@@ -15,7 +15,7 @@ import model.LogEntry;
 public class SVNLog extends Log {
 
 	@Override
-   public Set<LogEntry> getAllEntries() {
+   public Collection<LogEntry> getAllEntries() {
 	   // TODO Auto-generated method stub
 	   return super.getAllEntries();
    }

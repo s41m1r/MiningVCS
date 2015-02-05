@@ -36,9 +36,6 @@ public class TestReadSVNLog {
 	 */
 	public static void main(String[] args) throws IOException {
 		LogReader<LogEntry> lr = new SVNLogReader(fileName);
-		System.out.println(lr.readNext());
-		System.out.println(lr.readNext());
-		System.out.println(lr.readNext());
 		System.out.println(lr.readAll());
 		lr.close();
 	}
