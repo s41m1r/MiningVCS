@@ -92,5 +92,11 @@ public class EntryTransferObject {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	@Override
+   public String toString() {
+	   return "EntryTransferObject [id=" + id + ", author=" + author + ", date="
+	         + date + ", comment=" + comment + "]";
+   }
 	
 }
