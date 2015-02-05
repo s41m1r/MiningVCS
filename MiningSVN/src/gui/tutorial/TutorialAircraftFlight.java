@@ -53,7 +53,7 @@ public class TutorialAircraftFlight extends Application {
 	 * Each row represents an aircraft in this example. The activities shown on
 	 * the row are of type Flight.
 	 */
-	class Aircraft extends Row<Aircraft, Aircraft, Flight> {
+	public class Aircraft extends Row<Aircraft, Aircraft, Flight> {
 		public Aircraft(String name) {
 			super(name);
 		}
@@ -67,6 +67,7 @@ public class TutorialAircraftFlight extends Application {
 
 		Layer layer = new Layer("Flights");
 		gantt.getLayers().add(layer);
+		gantt.getRoot().setExpanded(true);
 
 		Aircraft b747 = new Aircraft("B747");
 		b747.addActivity(layer, new Flight(new FlightData("flight1", 1)));
@@ -89,6 +90,7 @@ public class TutorialAircraftFlight extends Application {
 		graphics.showEarliestActivities();
 
 		Scene scene = new Scene(gantt);
+		
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.centerOnScreen();

@@ -15,7 +15,8 @@ import reader.LogReader;
  */
 public class TestReadGIT {
 	
-	final static String fileName = "resources/MiningSvn.log";
+	final static String fileName = "resources/20150205_GIT_LOG_FROM_ECSPI_PROPOSAL.log";
+//	final static String fileName = "resources/MiningSvn.log";
 	
 	/**
 	 * @param args
