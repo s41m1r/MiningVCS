@@ -1,7 +1,7 @@
 /**
  * 
  */
-package db.jdbc;
+package test;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import model.LogEntry;
 import reader.LogReader;
 import reader.SVNLogReader;
 import db.dao.EntryDAO;
+import db.jdbc.ConnectionFactory;
 import db.to.EntryTransferObject;
 
 
