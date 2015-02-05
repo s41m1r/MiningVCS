@@ -26,7 +26,7 @@ public class EntryDAO extends GenericDAO<EntryTransferObject> {
 
 	@Override
 	public int count() throws SQLException {
-		String query = "SELECT COUNT(*) AS count FROM "+this.tableName;
+		String query = "SELECT COUNT(*) AS count FROM miningsvn."+this.tableName;
 		java.sql.PreparedStatement counter;
 		ResultSet res = null;
 		try

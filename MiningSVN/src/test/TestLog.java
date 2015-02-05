@@ -20,7 +20,6 @@ import model.LogEntry;
 
 import org.joda.time.DateTime;
 
-import reader.GITLogReader;
 import reader.LogReader;
 import reader.SVNLogReader;
 

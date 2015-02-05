@@ -33,12 +33,14 @@ public class TestMySqlConnection {
 //		lr.close();
 		Log log = new Log(lr.readAll());
 		ArrayList<LogEntry> entries = (ArrayList<LogEntry>) log.getAllEntries();
-		LogEntry le = entries.get(1);
-		EntryTransferObject eto = new EntryTransferObject(
-				le.getStartingToken(), le.getAuthor(),le.getDate().toString(), le.getComment());
-		EntryDAO edao = new EntryDAO(con);
-		System.out.println(edao.getAll());
-		edao.insertEntry(eto);
+		EntryDAO edao = null;
+		for (LogEntry logEntry : entries) {
+			EntryTransferObject eto = new EntryTransferObject(
+					logEntry.getStartingToken(), logEntry.getAuthor(),logEntry.getDate().toString(), logEntry.getComment());
+			edao = new EntryDAO(con);
+			edao.insertEntry(eto);
+      }
+		System.out.println("Entries = "+edao.count());
 		lr.close();
 	}
 }
