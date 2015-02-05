@@ -1,7 +1,7 @@
 /**
  * 
  */
-package jdbc;
+package db.jdbc;
 
 
 /**
