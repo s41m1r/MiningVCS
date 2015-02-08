@@ -43,12 +43,15 @@ public class EntryDAO extends GenericDAO<EntryTransferObject> {
 		}
 	}
 
-	public List<EntryTransferObject> getAll() throws SQLException{
+	public List<EntryTransferObject> getAll(){
 		List<EntryTransferObject> allEntryTransferObjects = new ArrayList<EntryTransferObject>();
 		String query = "SELECT * FROM miningsvn."+this.tableName;
-		java.sql.PreparedStatement ps = con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();
+		ResultSet rs = null;
+		java.sql.PreparedStatement ps = null;
 		try{
+			 ps = con.prepareStatement(query);
+			 rs = ps.executeQuery();
+
 			while (rs.next()) {
 				EntryTransferObject eto = new EntryTransferObject(
 						rs.getString("id"), 
@@ -57,22 +60,27 @@ public class EntryDAO extends GenericDAO<EntryTransferObject> {
 						rs.getString("comment"));
 				allEntryTransferObjects.add(eto);
 			}
-		}finally{
+			if(ps!=null)
+				ps.close();
+		} catch (SQLException e) {
+	      System.out.println(e);
+      }finally{
 			DBUtil.close(rs);
 		}
 		return allEntryTransferObjects;
 	}
-	
+
 	public void insertEntry(EntryTransferObject eto){
 		try {
-	      java.sql.PreparedStatement ps = con.prepareStatement(INSERT);
-	      ps.setString(1, eto.getId());
-	      ps.setString(2, eto.getAuthor());
-	      ps.setString(3, eto.getDate());
-	      ps.setString(4, eto.getComment());
-	      ps.execute();
-      } catch (SQLException e) {
-	      e.printStackTrace();
-      }
+			java.sql.PreparedStatement ps = con.prepareStatement(INSERT);
+			ps.setString(1, eto.getId());
+			ps.setString(2, eto.getAuthor());
+			ps.setString(3, eto.getDate());
+			ps.setString(4, eto.getComment());
+			ps.execute();
+		} catch (SQLException e) {
+			//	      e.printStackTrace();
+			System.out.println(e);
+		}
 	}
 }

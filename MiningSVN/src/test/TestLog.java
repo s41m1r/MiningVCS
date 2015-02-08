@@ -10,18 +10,13 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import model.Change;
 import model.Log;
 import model.LogEntry;
-
-import org.joda.time.DateTime;
-
+import reader.GITLogReader;
 import reader.LogReader;
-import reader.SVNLogReader;
 
 /**
  * @author Saimir Bala
@@ -34,20 +29,25 @@ public class TestLog {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+//		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/mysql-server.log");
+//		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/data.gov.log");
 //		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
+//		LogReader<LogEntry> lr = new GITLogReader("resources/20150205_GIT_LOG_FROM_ECSPI_PROPOSAL.log");
 		Log log = new Log(lr.readAll());
+		System.out.println("Read "+log.size()+" entries.");
+//		System.out.println(log);
 //		toFile();
-		System.out.println("Entries="+log.size());
-		System.out.println("Authors="+log.getAllAuthors());
-		LinkedList<DateTime> dates = new LinkedList<DateTime>(log.getAllDates());
-		Collections.sort(dates);
-		System.out.println("Dates="+dates);
-		Collection<List<Change>> changesDistinct = log.getGroupedChanges();
-		System.out.println("Grouped changes="+ changesDistinct.size());
-		Collection<Change> changesAll = log.getAllChanges(); 
-		System.out.println("All Changes="+ changesAll);
-		System.out.println("Distinct="+ log.getAllDistinctChanges());
+//		System.out.println("Entries="+log.size());
+//		System.out.println("Authors="+log.getAllAuthors());
+//		LinkedList<DateTime> dates = new LinkedList<DateTime>(log.getAllDates());
+//		Collections.sort(dates);
+//		System.out.println("Dates="+dates);
+//		Collection<List<Change>> changesDistinct = log.getGroupedChanges();
+//		System.out.println("Grouped changes="+ changesDistinct.size());
+//		Collection<Change> changesAll = log.getAllChanges(); 
+//		System.out.println("All Changes="+ changesAll);
+//		System.out.println("Distinct="+ log.getAllDistinctChanges());
 		lr.close();
 	}
 	

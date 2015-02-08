@@ -1,7 +1,8 @@
 package reader;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -19,29 +20,32 @@ import org.joda.time.format.DateTimeFormatter;
 public class GITLogReader implements LogReader<LogEntry>, Closeable{
 
 	private RandomAccessFile raf;
+//	private BufferedReader br;
+	//	private int lines = 0;
 
-//	public GITLogReader(BufferedReader reader) {
-//		br = reader;
-//	}
-//
-//	public GITLogReader(File file) throws FileNotFoundException {
-//		br = new BufferedReader(new FileReader(file));
-//	}
-//	/**
-//	 * @throws FileNotFoundException 
-//	 * 
-//	 */
-//	public GITLogReader(String fileName) throws FileNotFoundException {
-//		br = new BufferedReader(new FileReader(fileName));
-//	}
-	
+	//	public GITLogReader(BufferedReader reader) {
+	//		raf = reader;
+	//	}
+	//
+	//	public GITLogReader(File file) throws FileNotFoundException {
+	//		raf = new BufferedReader(new FileReader(file));
+	//	}
+	//	/**
+	//	 * @throws FileNotFoundException 
+	//	 * 
+	//	 */
+	//	public GITLogReader(String fileName) throws FileNotFoundException {
+	//		raf = new BufferedReader(new FileReader(fileName));
+	//	}
+
 	/**
-	 * @throws FileNotFoundException 
-    * 
-    */
-   public GITLogReader(String file) throws FileNotFoundException {
-   	raf = new RandomAccessFile(file, "r");
-   }
+	 * @throws IOException 
+	 * 
+	 */
+	public GITLogReader(String file) throws IOException {
+		raf = new RandomAccessFile(file, "r");
+//		br = new BufferedReader(new FileReader(raf.getFD()));
+	}
 
 	@Override
 	public List<LogEntry> readAll() throws IOException {
@@ -49,9 +53,11 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		List<LogEntry> logEntries = new ArrayList<LogEntry>();
 		LogEntry entry;
 
-		while((entry=readNext())!=null)
+		while((entry=readNext())!=null){
+			//			System.out.println(lines);
 			logEntries.add(entry);
-
+		}
+//		System.out.println("last entry = "+logEntries.get(logEntries.size()-1));
 		return logEntries;
 	}
 
@@ -60,31 +66,42 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 	 */
 	@Override
 	public LogEntry readNext() throws IOException {
-
+		boolean merge = false;
 		String line = raf.readLine();
-
+//		System.out.println("Merge="+merge+" Line:"+line);
 		if(line==null)
 			return null;
-		
+
 		while(!line.startsWith("commit"))
 			raf.readLine();
 
 		String revision = line.split("commit ")[1];
 		line = raf.readLine();
+
+		if(line.startsWith("Merge")){
+			merge = true;
+			line = raf.readLine();
+		}
+
 		String author = readAuthor(line);
+//		System.out.println("Merge="+merge+" Author:"+line);
 		line = raf.readLine().trim();
 		String dateString = line.split("Date: ")[1];
 		line = raf.readLine();
+		
 		String message = readMessage(line); 
 		
+//		System.out.println("Merge="+merge+" Message:"+message);
 		//When a merge happens, GIT automatically generates a message describing it. Plus, there is no change-list to be read.
-		List<Change> changeList = (message.startsWith("Merge"))? new ArrayList<Change>(): readChangeList();
+		List<Change> changeList = merge? new ArrayList<Change>(): readChangeList();
+		
+//		System.out.println("Merge="+merge+" Message:"+message);
 
-	   DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z");
+		DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z");
 		DateTime date = gitFmt.parseDateTime(dateString.trim());
 
 		LogEntry gitLogEntry = new GITLogEntry(revision,author,date,message,changeList);
-
+//		System.out.println("Merge="+merge+" Message:"+message);
 		return gitLogEntry;
 	}
 
@@ -93,20 +110,20 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 	 * @return
 	 * @throws IOException 
 	 */
-   private String readAuthor(String line) throws IOException {
-   	String author = "";
-   	
-   	if(line.equals(""))
-   		return author;
-   	
-   	if(line.startsWith("Author"))
-   		 author = line.split("Author: ")[1];
-   	
-   	else if(line.startsWith("Merge"))
-   		author = readAuthor(raf.readLine());
-   	
-	   return author;
-   }
+	private String readAuthor(String line) throws IOException {
+		String author = "";
+
+		if(line.equals(""))
+			return author;
+
+		if(line.startsWith("Author"))
+			author = line.split("Author: ")[1];
+
+		//   	else if(line.startsWith("Merge"))
+		//   		author = readAuthor(br.readLine());
+
+		return author;
+	}
 
 	private List<Change> readChangeList() throws IOException {
 		List<Change> changeList = new ArrayList<Change>();
@@ -114,6 +131,7 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		long fp = raf.getFilePointer();
 		String line = raf.readLine();
 		String start = line.trim().split("\\s+")[0];
+
 		switch (start) {
 		case GITFileChanges.ADDED:
 			break;
@@ -121,11 +139,14 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 			break;
 		case GITFileChanges.DELETED:
 			break;
-			
-		default: raf.seek(fp);
+
+		default:
+			//			System.out.println("seek");
+			raf.seek(fp);
+			//			System.out.println("seeked.");
 			return changeList;
-			
 		}
+
 		while(line!=null && !line.equals("")){
 			String[] changeLine = line.trim().split("\\s+");
 			Change ch = new Change(changeLine[0].trim(), changeLine[1].trim());

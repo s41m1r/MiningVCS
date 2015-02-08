@@ -4,6 +4,7 @@
 package db.dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 
 /**
  * @author Saimir Bala
@@ -11,7 +12,8 @@ import java.sql.SQLException;
  */
 public abstract class GenericDAO<T> {
 
-   public abstract int count() throws SQLException; 
+   public abstract int count() throws SQLException;
+   protected abstract Collection<T> getAll();
 
    //Protected
    protected final String tableName;

@@ -36,5 +36,8 @@
 			<attribute name="javadoc_location" value="file:/home/saimir/Downloads/mysql-connector-java-5.1.34/docs/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/saimir/Downloads/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/home/saimir/Downloads/commons-io-2.4/commons-io-2.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/saimir/Downloads/commons-io-2.4/commons-io-2.4-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

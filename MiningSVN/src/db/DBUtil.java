@@ -3,11 +3,9 @@
  */
 package db;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 /**
  * @author Saimir Bala
@@ -25,7 +23,7 @@ public class DBUtil {
 		}
 	}
 
-	public static void close(Statement statement) {
+	public static void close(java.sql.Statement statement) {
 		if (statement != null) {
 			try {
 				statement.close();
