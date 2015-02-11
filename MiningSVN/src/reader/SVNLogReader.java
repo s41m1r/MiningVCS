@@ -91,7 +91,7 @@ public class SVNLogReader implements LogReader<LogEntry>, Closeable {
 		
 		Locale locale = new Locale("de", "AT", "Austria");
 		DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
-	   DateTime date = germanFmt.parseDateTime(dateString);
+	    DateTime date = germanFmt.parseDateTime(dateString);
 	   
 		SVNLogEntry svnLogEntry = new SVNLogEntry(revision,author,date,message,changeList);
 		

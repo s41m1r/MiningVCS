@@ -8,8 +8,8 @@ package model;
  *
  */
 public class Change {
-	public String action;
-	public String path;
+	private String action;
+	private String path;
 	
 	/**
 	 * @param action
@@ -20,6 +20,34 @@ public class Change {
 	   this.action = action;
 	   this.path = path;
    }
+
+	/**
+	 * @return the action
+	 */
+	public String getAction() {
+		return action;
+	}
+
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	/**
+	 * @return the path
+	 */
+	public String getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public void setPath(String path) {
+		this.path = path;
+	}
 
 	@Override
    public String toString() {

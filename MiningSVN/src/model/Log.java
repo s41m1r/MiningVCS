@@ -57,7 +57,7 @@ public class Log {
 	}
 	
 	public Collection<List<Change>> getGroupedChanges(){
-		Collection<List<Change>> changes = new HashSet<List<Change>>();
+		Collection<List<Change>> changes = new ArrayList<List<Change>>();
 		for (LogEntry logEntry : entries) {
 	      changes.add(logEntry.getChangeList());
       }
