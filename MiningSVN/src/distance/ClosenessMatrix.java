@@ -3,9 +3,15 @@
  */
 package distance;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +43,7 @@ public class ClosenessMatrix {
     * 
     */
    public ClosenessMatrix() {
+   	headers = new ArrayList<String>();
    }
    
    /**
@@ -74,12 +81,12 @@ public class ClosenessMatrix {
    	return col;
    }
    
-   public void buildMatrix(Set<String> fileSet, double alpha1, double alpha2, Log log){
-   	String[] a = (String[]) fileSet.toArray();
+   public void buildMatrix(double alpha1, double alpha2, Log log){
+   	Set<String> fileSet = new HashSet<String>(log.getAllFiles());
+   	String[] a = fileSet.toArray(new String[0]);
    	Arrays.sort(a);
    	List<String> list = Arrays.asList(a);
-   	Collections.copy(headers, list);
-   	
+   	headers = new ArrayList<String>(list);
    	int dim = headers.size();
    	this.M = new double[dim][dim];
    	
@@ -87,19 +94,48 @@ public class ClosenessMatrix {
    	for (int i = 0; i < M.length; i++) 
 	      M[i][i] = 0;
    	
+   	int progress = 0; 
 //   	set the distances
    	for (int i = 0; i < headers.size(); i++) {
 	      for (int j = i+1; j < headers.size(); j++) {
-	         M[i][j] = M[j][i] = 1 -  
+	         M[i][j] = M[j][i] = 1 - ( 
 	         		alpha1 * TreeDistance.treeDistance(headers.get(i),headers.get(j), log) + 
-	         		alpha2 * CommitDistance.commitDistance(headers.get(i), headers.get(j), log);
+	         		alpha2 * CommitDistance.commitDistance(headers.get(i), headers.get(j), log));
          }
+	      if(progress<(i*dim)*100/(dim*dim)){
+	      	progress = (i*dim)*100/(dim*dim);
+	      	System.out.println(progress+"%");
+	      }
       }
    }
    
 	@Override
    public String toString() {
-	   return "ClosenessMatrix [M=" + Arrays.toString(M) + "]";
+		String m = "";
+		for (int i = 0; i < M.length; i++) {
+	      for (int j = 0; j < M[0].length; j++) {
+	         m+="\t"+ new DecimalFormat("#0.00").format(M[i][j]);
+         }
+	      m+="\n";
+      }
+	   return "ClosenessMatrix [M=\n" + m + "]";
+   }
+	
+   public void toCSV(File file) throws IOException{
+   	PrintWriter pw = new PrintWriter(file);
+   	BufferedWriter bw = new BufferedWriter(pw);
+   	String comma = ",";
+   	for (int i = 0; i < M.length; i++) {
+	      for (int j = 0; j < M[0].length; j++) {
+	      	if(j==M[0].length-1)
+	      		bw.write(new DecimalFormat("#0.00").format(M[i][j]));
+	      	else 
+	      		bw.write(new DecimalFormat("#0.00").format(M[i][j])+comma);
+         }
+	      bw.write("\n");
+      }
+   	bw.close();
+   	pw.close();
    }
 	
 }
