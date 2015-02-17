@@ -84,7 +84,7 @@ public class SVNLogReader implements LogReader<LogEntry>, Closeable {
 		List<Change> changeList = new ArrayList<Change>();
 		
 		while(!(line = br.readLine()).trim().equals("")){
-			String[] changeLine = line.split(":");
+			String[] changeLine = line.split(" : ");
 			Change ch = new Change(changeLine[0].trim(), changeLine[1].trim());
 			changeList.add(ch);
 		}

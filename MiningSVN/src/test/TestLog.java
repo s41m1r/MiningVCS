@@ -46,9 +46,9 @@ public class TestLog {
 //		System.out.println("Dates="+dates);
 //		Collection<List<Change>> changesDistinct = log.getGroupedChanges();
 //		System.out.println("Grouped changes="+ changesDistinct.size());
-		Collection<Change> changesAll = log.getAllChanges(); 
-		System.out.println("All Changes="+ changesAll);
-//		System.out.println("Distinct="+ log.getAllDistinctChanges());
+//		Collection<Change> changesAll = log.getAllChanges(); 
+//		System.out.println("All Changes="+ changesAll);
+		System.out.println("Distinct="+ log.getAllFiles().size());
 		lr.close();
 	}
 	

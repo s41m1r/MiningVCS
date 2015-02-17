@@ -72,10 +72,12 @@ public class Log {
 		return changes;
 	}
 	
-	public Collection<Change> getAllDistinctChanges(){
-		Set<Change> changes = new HashSet<Change>();
+	public Collection<String> getAllFiles(){
+		Set<String> changes = new HashSet<String>();
 		for (LogEntry logEntry : entries) {
-	      changes.addAll(logEntry.getChangeList());
+			for(Change ch : logEntry.getChangeList()){
+				changes.add(ch.getPath());
+			}
       }
 		return changes;
 	}

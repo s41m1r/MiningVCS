@@ -20,8 +20,14 @@ import model.Log;
 public final class CommitDistance {
 	
 	public static double commitDistance(String f1, String f2, Log log){
-		return 1 - ((double)timesOccurTogether(f1, f2, log) / 
-				(timesAtLeastOneOccurs(f1, f2, log)));
+		double timesTogether = timesOccurTogether(f1, f2, log);
+		
+		if(timesTogether == 0)
+			return 1;
+		
+		double timesAtLeastOne = timesAtLeastOneOccurs(f1, f2, log);
+		double cd = 1 - timesTogether / timesAtLeastOne;  
+		return cd;
 	}
 	
 	public static int timesOccurs(String filePath, Log log){
@@ -44,6 +50,7 @@ public final class CommitDistance {
 					containsFile(listChanges, filePath2))
 				count++;
 		}
+//		System.out.println(filePath1+" and "+filePath2+" occur together "+count+" times");
 		return count;
 	}
 	
@@ -56,13 +63,16 @@ public final class CommitDistance {
 					containsFile(listChanges, filePath2))
 				count++;
 		}
+//		System.out.println(filePath1+" and "+filePath2+" occur (at least one) "+count+" times");
 		return count;
 	}
 
 	public static boolean containsFile(List<Change> changeList, String filePath){
 		for (Change change : changeList) {
-			if(change.getPath().equals(filePath))
+			if(change.getPath().equals(filePath)){
+//				System.out.println(change.getPath()+"="+filePath);
 				return true;
+			}
 		}
 		return false;
 	}
