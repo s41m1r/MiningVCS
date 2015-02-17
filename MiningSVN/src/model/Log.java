@@ -83,7 +83,7 @@ public class Log {
 	public int size(){
 		return entries.size();
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Log [entries=" + entries + "]";

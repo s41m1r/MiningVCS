@@ -22,14 +22,16 @@ public class TestCommitDistance {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
+		String file1 = "/misc/hint_01_28v2.pdf";
+		String file2 = "/misc/reconcile_partA_090921_submission-final.pdf";
 		LogReader<LogEntry> lr = new SVNLogReader(
 				"resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 		Log log = new Log(lr.readAll());
-		int occurenceCnt = CommitDistance.timeOccurs(
-				"/example/ToyStation_0Loop.bpmn", log);
-		System.out.println(occurenceCnt);
-		System.out.println(CommitDistance.timesOccurTogether(
-				"/example/ToyStation_0Loop.bpmn", "/example/ToyStation_nLoop.bpmn", log));
+		System.out.println(CommitDistance.timesOccurTogether(file1, file2, log));
+		System.out.println(CommitDistance.timesOccurs(file1, log));
+		System.out.println(CommitDistance.timesOccurs(file2, log));
+		System.out.println(CommitDistance.commitDistance(
+				file1, file2, log));
 		lr.close();
 	}
 

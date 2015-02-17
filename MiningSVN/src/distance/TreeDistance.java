@@ -3,14 +3,17 @@
  */
 package distance;
 
+import java.util.Collection;
 import java.util.Scanner;
+
+import model.Change;
+import model.Log;
 
 /**
  * @author saimir
  *
  */
 public final class TreeDistance {
-
 
 	/**
 	 * Algorithm
@@ -28,7 +31,7 @@ public final class TreeDistance {
 	 * @param f2
 	 * @return
 	 */
-	public static int treeDistance(String f1, String f2){
+	public static double treeDistance(String f1, String f2, Log log){
 		String delimiter = "/";
 		Scanner s1 = new Scanner(f1);
 		Scanner s2 = new Scanner(f2);
@@ -37,7 +40,7 @@ public final class TreeDistance {
 		String path1 = f1;
 		String path2 = f2;
 		while(s1.hasNext() && s2.hasNext()){
-
+			
 			if(!s1.next().equals(s2.next()))
 				break;
 
@@ -51,14 +54,14 @@ public final class TreeDistance {
 		if(path1.equals(path2))
 			return 0;
 		
-		return levelsOf(path1)+levelsOf(path2)-1;
+		return (double)(levelOf(path1)+levelOf(path2)-1) / (2*treeLevel(log));
 	}
 
 	public static String removeFirstNode(String filePath) {
 		return filePath.substring(filePath.indexOf("/")+1);
 	}
 
-	public static int levelsOf(String t1){
+	public static int levelOf(String t1){
 		Scanner s = new Scanner(t1);
 		s.useDelimiter("/");
 		int lvCount = 0;
@@ -69,4 +72,17 @@ public final class TreeDistance {
 		s.close();
 		return lvCount;
 	}
+	
+	public static int treeLevel(Log log){
+		int maxL = 0;
+		int curL = 0;
+		Collection<Change> changes = log.getAllChanges();
+		for (Change change : changes) {
+			curL = levelOf(change.getPath());
+			if(maxL < curL)
+				maxL = curL;
+		}
+		return maxL;
+	}
+
 }
