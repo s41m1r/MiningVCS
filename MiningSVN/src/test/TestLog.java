@@ -17,6 +17,7 @@ import model.Log;
 import model.LogEntry;
 import reader.GITLogReader;
 import reader.LogReader;
+import reader.SVNLogReader;
 
 /**
  * @author Saimir Bala
@@ -29,8 +30,8 @@ public class TestLog {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-//		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/mysql-server.log");
+		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+//		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/mysql-server.log");
 //		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/data.gov.log");
 //		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
 //		LogReader<LogEntry> lr = new GITLogReader("resources/20150205_GIT_LOG_FROM_ECSPI_PROPOSAL.log");
@@ -45,8 +46,8 @@ public class TestLog {
 //		System.out.println("Dates="+dates);
 //		Collection<List<Change>> changesDistinct = log.getGroupedChanges();
 //		System.out.println("Grouped changes="+ changesDistinct.size());
-//		Collection<Change> changesAll = log.getAllChanges(); 
-//		System.out.println("All Changes="+ changesAll);
+		Collection<Change> changesAll = log.getAllChanges(); 
+		System.out.println("All Changes="+ changesAll);
 //		System.out.println("Distinct="+ log.getAllDistinctChanges());
 		lr.close();
 	}
