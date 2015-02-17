@@ -1,3 +1,4 @@
 # MiningSVN
 
-It should mine SVN logs
+It should mine SVN and GIT logs.
+Currently under development
