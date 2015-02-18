@@ -24,6 +24,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
@@ -96,7 +97,8 @@ public class TreeConnectorExample {
 		left.setGanttChart(chart);
 
 		// create the tree. As it goes onto our special composite that will align it, we don't have to do any special settings on it
-		final Tree tree = new Tree(left, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
+//		final Tree tree = new Tree(left, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
+		final Tree tree = new Tree(left,SWT.BORDER);
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
 
@@ -109,16 +111,16 @@ public class TreeConnectorExample {
 		});
 
 		// a few columns
-		TreeColumn tc1 = new TreeColumn(tree, SWT.NONE);
+		TreeColumn tc1 = new TreeColumn(tree, SWT.BORDER);
 		tc1.setText("Directory");
 		tc1.setWidth(100);
 		
-		TreeColumn tc2 = new TreeColumn(tree, SWT.NONE);
+		TreeColumn tc2 = new TreeColumn(tree, SWT.BORDER);
 		tc2.setText("File");
 		tc2.setWidth(300);
 		
 		// our root node that matches our scope
-		final TreeItem root = new TreeItem(tree, SWT.NONE);
+		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		root.setText(new String[] { "Scope", "Events" });
 		root.setExpanded(true);
 		
