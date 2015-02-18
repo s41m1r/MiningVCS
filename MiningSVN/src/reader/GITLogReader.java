@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import model.Change;
 import model.LogEntry;
@@ -94,8 +95,9 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		List<Change> changeList = merge? new ArrayList<Change>(): readChangeList();
 		
 //		System.out.println("Merge="+merge+" Message:"+message);
-
-		DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z");
+//		Locale locale = new Locale("de", "AT", "Austria");
+		DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z").withLocale(Locale.ENGLISH);
+//		System.out.println(new DateTime().toString(gitFmt));
 		DateTime date = gitFmt.parseDateTime(dateString.trim());
 
 		LogEntry gitLogEntry = new GITLogEntry(revision,author,date,message,changeList);
