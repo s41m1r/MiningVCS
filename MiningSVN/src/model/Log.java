@@ -15,23 +15,27 @@ import org.joda.time.DateTime;
  * @author Saimir Bala
  *
  */
-public class Log {
+public abstract class Log {
 
-	private Collection<LogEntry> entries;
+	public static String MODIFIED = "Modified";
+	public static String ADDED = "Added";
+	public static String DELETED = "Deleted";
 
-	/**
-	 * 
-	 */
-	public Log() {
-	}
+	protected Collection<LogEntry> entries;
 
-	/**
-	 * @param list
-	 */
-	public Log(List<LogEntry> list) {
-		super();
-		this.entries = list;
-	}
+//	/**
+//	 * 
+//	 */
+//	public Log() {
+//	}
+//
+//	/**
+//	 * @param list
+//	 */
+//	public Log(List<LogEntry> list) {
+//		super();
+//		this.entries = list;
+//	}
 
 	/**
 	 * @return all the entries
@@ -47,45 +51,45 @@ public class Log {
 		}
 		return authors;
 	}
-	
+
 	public Collection<DateTime> getAllDates(){
 		Set<DateTime> dates = new HashSet<DateTime>();
 		for (LogEntry logEntry : entries) {
-	      dates.add(logEntry.getDate());
-      }
+			dates.add(logEntry.getDate());
+		}
 		return dates;
 	}
-	
+
 	public Collection<List<Change>> getGroupedChanges(){
 		Collection<List<Change>> changes = new ArrayList<List<Change>>();
 		for (LogEntry logEntry : entries) {
-	      changes.add(logEntry.getChangeList());
-      }
+			changes.add(logEntry.getChangeList());
+		}
 		return changes;
 	}
-	
+
 	public Collection<Change> getAllChanges(){
 		ArrayList<Change> changes = new ArrayList<Change>();
 		for (LogEntry logEntry : entries) {
-	      changes.addAll(logEntry.getChangeList());
-      }
+			changes.addAll(logEntry.getChangeList());
+		}
 		return changes;
 	}
-	
+
 	public Collection<String> getAllFiles(){
 		Set<String> changes = new HashSet<String>();
 		for (LogEntry logEntry : entries) {
 			for(Change ch : logEntry.getChangeList()){
 				changes.add(ch.getPath());
 			}
-      }
+		}
 		return changes;
 	}
 
 	public int size(){
 		return entries.size();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Log [entries=" + entries + "]";

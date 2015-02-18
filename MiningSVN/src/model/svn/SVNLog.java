@@ -4,6 +4,7 @@
 package model.svn;
 
 import java.util.Collection;
+import java.util.List;
 
 import model.Log;
 import model.LogEntry;
@@ -14,22 +15,32 @@ import model.LogEntry;
  */
 public class SVNLog extends Log {
 
-	@Override
-   public Collection<LogEntry> getAllEntries() {
-	   // TODO Auto-generated method stub
-	   return super.getAllEntries();
+	public static final String MODIFIED = "Modified";
+	public static final String ADDED = "Added";
+	public static final String DELETED = "Deleted";
+	
+	/**
+	 * @param readAll
+	 */
+   public SVNLog(List<LogEntry> list) {
+   	this.entries = list;
    }
 
 	@Override
-   public int size() {
-	   // TODO Auto-generated method stub
-	   return super.size();
-   }
+	public Collection<LogEntry> getAllEntries() {
+		return super.getAllEntries();
+	}
 
 	@Override
-   public String toString() {
-	   // TODO Auto-generated method stub
-	   return super.toString();
-   }
+	public int size() {
+		// TODO Auto-generated method stub
+		return super.size();
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
 
 }

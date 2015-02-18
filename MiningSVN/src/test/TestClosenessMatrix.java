@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import model.Log;
 import model.LogEntry;
+import model.git.GITLog;
 import reader.GITLogReader;
 import reader.LogReader;
 import distance.ClosenessMatrix;
@@ -22,7 +23,7 @@ public class TestClosenessMatrix {
 	
 	public static void main(String[] args) throws IOException {
 		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
-		Log log = new Log(lr.readAll());
+		Log log = new GITLog(lr.readAll());
 		ClosenessMatrix cm = new ClosenessMatrix();
 		cm.buildMatrix(alpha1, alpha2, log);
 		System.out.println(cm);

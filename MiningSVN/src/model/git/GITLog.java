@@ -4,6 +4,7 @@
 package model.git;
 
 import java.util.Collection;
+import java.util.List;
 
 import model.Log;
 import model.LogEntry;
@@ -13,6 +14,16 @@ import model.LogEntry;
  *
  */
 public class GITLog extends Log {
+	/**
+	 * @param readAll
+	 */
+   public GITLog(List<LogEntry> list) {
+   	this.entries = list;
+   	MODIFIED = "M";
+   	ADDED = "A";
+   	DELETED = "D";
+
+   }
 
 	@Override
 	public Collection<LogEntry> getAllEntries() {

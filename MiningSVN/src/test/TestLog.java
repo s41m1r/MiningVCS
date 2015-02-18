@@ -15,6 +15,8 @@ import java.util.List;
 import model.Change;
 import model.Log;
 import model.LogEntry;
+import model.git.GITLog;
+import model.svn.SVNLog;
 import reader.GITLogReader;
 import reader.LogReader;
 import reader.SVNLogReader;
@@ -35,10 +37,11 @@ public class TestLog {
 //		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/data.gov.log");
 //		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
 //		LogReader<LogEntry> lr = new GITLogReader("resources/20150205_GIT_LOG_FROM_ECSPI_PROPOSAL.log");
-		Log log = new Log(lr.readAll());
+//		Log log = new GITLog(lr.readAll());
+		Log log = new SVNLog(lr.readAll());
 		System.out.println("Read "+log.size()+" entries.");
 //		System.out.println(log);
-//		toFile();
+//		toFile("/home/saimir/Downloads/out.txt");
 //		System.out.println("Entries="+log.size());
 //		System.out.println("Authors="+log.getAllAuthors());
 //		LinkedList<DateTime> dates = new LinkedList<DateTime>(log.getAllDates());
@@ -46,14 +49,14 @@ public class TestLog {
 //		System.out.println("Dates="+dates);
 //		Collection<List<Change>> changesDistinct = log.getGroupedChanges();
 //		System.out.println("Grouped changes="+ changesDistinct.size());
-//		Collection<Change> changesAll = log.getAllChanges(); 
-//		System.out.println("All Changes="+ changesAll);
+		Collection<Change> changesAll = log.getAllChanges(); 
+		System.out.println("All Changes="+ changesAll);
 		System.out.println("Distinct="+ log.getAllFiles().size());
 		lr.close();
 	}
 	
-	public static void toFile() throws FileNotFoundException{
-		File file = new File("/home/saimir/Downloads/out.txt");
+	public static void toFile(String filePath) throws FileNotFoundException{
+		File file = new File(filePath);
 		FileOutputStream fos = new FileOutputStream(file);
 		PrintStream ps = new PrintStream(fos);
 		System.setOut(ps);

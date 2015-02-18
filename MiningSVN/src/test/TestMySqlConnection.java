@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import model.Log;
 import model.LogEntry;
+import model.svn.SVNLog;
 import reader.LogReader;
 import reader.SVNLogReader;
 import db.dao.EntryDAO;
@@ -32,7 +33,7 @@ public class TestMySqlConnection {
 		
 		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 //		lr.close();
-		Log log = new Log(lr.readAll());
+		Log log = new SVNLog(lr.readAll());
 		ArrayList<LogEntry> entries = (ArrayList<LogEntry>) log.getAllEntries();
 		EntryDAO edao = null;
 		for (LogEntry logEntry : entries) {

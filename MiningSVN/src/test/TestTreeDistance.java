@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import model.Log;
 import model.LogEntry;
+import model.svn.SVNLog;
 import reader.LogReader;
 import reader.SVNLogReader;
 import distance.TreeDistance;
@@ -28,7 +29,7 @@ public class TestTreeDistance {
 		 */
 		LogReader<LogEntry> lr = new SVNLogReader(
 				"resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-		Log log = new Log(lr.readAll());
+		Log log = new SVNLog(lr.readAll());
 		System.out.println(TreeDistance.treeDistance(
 				"LaTeX/proposal.tex", "LaTeX/sections/JKU.tex",log));
 		System.out.println(TreeDistance.treeDistance(

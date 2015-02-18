@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import model.Log;
 import model.LogEntry;
-import reader.GITLogReader;
+import model.svn.SVNLog;
 import reader.LogReader;
 import reader.SVNLogReader;
 import distance.CommitDistance;
@@ -35,7 +35,7 @@ public class TestCommitDistance {
 //		LogReader<LogEntry> lr = new GITLogReader(
 //				"resources/20150205_GIT_LOG_FROM_ECSPI_PROPOSAL.log");
 		
-		Log log = new Log(lr.readAll());
+		Log log = new SVNLog(lr.readAll());
 		System.out.println("Loaded "+log.size()+" entries.");
 //		System.out.println(CommitDistance.timesOccurTogether(file1, file2, log));
 //		System.out.println(CommitDistance.timesOccurs(file1, log));
