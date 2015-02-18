@@ -5,7 +5,10 @@ package distance;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -124,7 +127,13 @@ public class ClosenessMatrix {
    	PrintWriter pw = new PrintWriter(file);
    	BufferedWriter bw = new BufferedWriter(pw);
    	String comma = ",";
+   	bw.write(" " + comma);
+   	for (int i = 0; i < headers.size(); i++) {
+	      bw.write(headers.get(i) + comma);
+      }
+   	bw.newLine();
    	for (int i = 0; i < M.length; i++) {
+   		bw.write(headers.get(i)+comma);
 	      for (int j = 0; j < M[0].length; j++) {
 	      	if(j==M[0].length-1)
 	      		bw.write(new DecimalFormat("#0.00").format(M[i][j]));
