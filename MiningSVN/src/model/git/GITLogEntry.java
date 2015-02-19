@@ -53,7 +53,6 @@ public class GITLogEntry extends LogEntry{
 	 */
 	@Override
 	public void setStartingToken(String startingToken) {
-		// TODO Auto-generated method stub
 		super.setStartingToken(startingToken);
 	}
 
