@@ -81,7 +81,7 @@ public class TreeConnectorExample {
 		// usually whether to draw certain things are fetched from the ISettings implementing class, but there are a few overrides available for setting
 		// non-default values, two of those are the options to draw horizontal and vertical lines. Here we flip the defaults to disable vertical lines but to show horizontal lines.
 		ganttComposite.setDrawHorizontalLinesOverride(true);
-		ganttComposite.setDrawVerticalLinesOverride(false);
+		ganttComposite.setDrawVerticalLinesOverride(true);
 
 		// set each item height on the chart to be the same height as one item in the tree. This call basically sets the fixed row height for each event instead of
 		// setting it programatically. It's just a convenience method.

@@ -37,7 +37,7 @@ public class TestFileEventMap {
 		//include also the files that were deleted
 		Map<String, List<Event>> historicalMap = FileEventMap.buildHistoricalFileEventMap(log);
 
-		System.out.println("Files: "+historicalMap.size());
+//		System.out.println("Files: "+historicalMap.size());
 		FileEventMap.printMap(historicalMap); 
 
 		Map<String, List<Event>> map = FileEventMap.buildFileEventMap(log);

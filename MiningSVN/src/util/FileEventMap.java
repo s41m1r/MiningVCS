@@ -85,7 +85,6 @@ public abstract class FileEventMap {
    }
 	
 	public static void printMap(Map<String, List<Event>> map) {
-		System.out.println("Files: "+ map.size());
 		Set<String> s = map.keySet();
 		for (String string : s) {
 			List<Event> events = map.get(string);
