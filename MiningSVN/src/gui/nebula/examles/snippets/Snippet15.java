@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package gui.nebula.examles;
+package gui.nebula.examles.snippets;
  
 /*
  * Tree example snippet: create a tree

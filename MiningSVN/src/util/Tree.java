@@ -31,6 +31,11 @@ class Tree
 
             return null;
         }
+
+		@Override
+      public String toString() {
+	      return "Node [data=" + data + ", children=" + children + "]";
+      }
     }
 
     private Node root;
@@ -64,27 +69,27 @@ class Tree
 
     public void print()
     {
-        print(this.root);
+        print(this.root, 0);
     }
 
-    private void print(Node n)
+    private void print(Node n, int level)
     {
         if(n==null)
             return;
         for(Node c : n.children)
         {
-            System.out.print(c.data + " ");
-            print(c);
+            System.out.print(level+" "+c.data + " ");
+            print(c, level+1);
         }
     }
 
     public static void main(String[] args)
     {
         Tree t = new Tree();
-        t.add("The World");
-        t.add("The World/Asia");
-        t.add("The World/Asia/Afghanistan");
+        t.add("/templates");
+        t.add("/slides");
         t.add("The World/Asia/Iran");
+        t.add("/templates/checkliste_kostenplan.doc");
         t.add("The World/Asia/China");    // Even if you insert only this statement.
                                           // You get the desired output, 
                                           // As any string not found is inserted
