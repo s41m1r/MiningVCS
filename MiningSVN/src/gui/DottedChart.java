@@ -89,8 +89,8 @@ public class DottedChart {
 		left.setGanttChart(chart);
 
 		// create the tree. As it goes onto our special composite that will align it, we don't have to do any special settings on it
-//		final Tree tree = new Tree(left, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
-		final Tree tree = new Tree(left,SWT.BORDER);
+		final Tree tree = new Tree(left, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
+//		final Tree tree = new Tree(left,SWT.BORDER);
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
 

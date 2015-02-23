@@ -4,6 +4,7 @@
 package test;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 import model.Log;
 import model.LogEntry;

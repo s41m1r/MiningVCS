@@ -60,7 +60,12 @@ public final class TreeDistance {
 	public static String removeFirstNode(String filePath) {
 		return filePath.substring(filePath.indexOf("/")+1);
 	}
-
+	
+	/**
+	 * Returns the number of levels of the current file path t1
+	 * @param t1
+	 * @return
+	 */
 	public static int levelOf(String t1){
 		Scanner s = new Scanner(t1);
 		s.useDelimiter("/");
