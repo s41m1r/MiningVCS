@@ -120,4 +120,15 @@ public class Node {
 		this.childList.addAll(children);
 	}
 
+	/**
+	 * @param str
+	 * @return
+	 */
+   public Node getChild(String data) {
+   	for(Node n : childList)
+			if(n.value.equals(data))
+				return n;
+	   return null;
+   }
+
 }

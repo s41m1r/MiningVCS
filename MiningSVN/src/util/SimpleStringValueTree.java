@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import model.Change;
 import model.Event;
@@ -24,7 +23,7 @@ import reader.SVNLogReader;
  * @author Saimir Bala
  *
  */
-class Tree
+class SimpleStringValueTree
 {
 	class Node
 	{
@@ -54,7 +53,7 @@ class Tree
 
 	private Node root;
 
-	public Tree()
+	public SimpleStringValueTree()
 	{
 		root = new Node("");
 	}
@@ -69,11 +68,15 @@ class Tree
 		Node current = root;
 		Scanner s = new Scanner(str);
 		s.useDelimiter("/");//no whitespace preceding "/"
-		s.skip("[Copy from path].*");
+//		s.skip("[Copy from path].*");
 		while(s.hasNext())
 		{
 			str = s.next();
-			
+			if(str.contains("(Copy from path")){
+				while(s.hasNext()){
+					str+=s.next();
+				}
+			}
 			Node child = current.getChild(str);
 			if(child==null)
 			{
@@ -106,7 +109,7 @@ class Tree
 
 	public static void main(String[] args) throws IOException
 	{
-		Tree t = new Tree();
+		SimpleStringValueTree t = new SimpleStringValueTree();
 		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 		Log log = new SVNLog(lr.readAll());
 //		TestLog.toFile("/home/saimir/out.txt");

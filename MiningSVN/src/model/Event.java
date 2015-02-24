@@ -62,7 +62,7 @@ public class Event {
 	   this.start = start;
 	   this.end = end;
 	   this.fileID = fileID;
-	   id = fileID;
+//	   id = fileID;
    }
 	/**
 	 * @param start
@@ -72,7 +72,7 @@ public class Event {
 	   super();
 	   this.start = start;
 	   this.fileID = fileID;
-	   id = fileID;
+//	   id = fileID;
    }
 	/**
 	 * @param start
@@ -81,7 +81,7 @@ public class Event {
 	 */
    public Event(DateTime start, String fileID, String type) {
 	   super();
-	   id = fileID;
+//	   id = fileID;
 	   this.start = start;
 	   this.fileID = fileID;
 	   this.type = type;
@@ -159,8 +159,8 @@ public class Event {
 	   this.author = author;
 	   this.commitID = commitID;
 	   this.comment = comment;
-	   end = start;
-	   id = fileID;
+//	   end = start;
+//	   id = fileID;
    }
 	public String getAuthor() {
 		return author;
@@ -207,9 +207,17 @@ public class Event {
 	
 	@Override
    public String toString() {
-	   return "Event [id=" + id + ", start=" + start + ", end=" + end
-	         + ", fileID=" + fileID + ", type=" + type + ", author=" + author
-	         + ", commitID=" + commitID + ", comment=" + comment + "]";
+		String s ="Event [";
+		s+=(id!=null)? "id=" + id:"";
+		s+=(start!=null)? ", start=" + start: "";
+		s+=(end!=null)? ", end=" + end: "";
+		s+=(fileID!=null)? ", fileID=" + fileID: "";
+		s+=(type!=null)? ", type=" + type: "";
+		s+=(author!=null)? ", author=" + author: "";
+		s+=(commitID!=null)? ", commitID=" + commitID:"";
+		s+=(comment!=null)? ", comment=" + comment:"";
+		s+="]";
+	   return s;
    }
    
 }
