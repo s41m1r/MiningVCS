@@ -3,19 +3,20 @@
  */
 package model.tree;
 
-import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
 import model.Event;
-import model.Log;
-import model.LogEntry;
-import model.git.GITLog;
-import reader.GITLogReader;
-import reader.LogReader;
-import test.TestLog;
+
+import org.eclipse.nebula.widgets.ganttchart.GanttChart;
+import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.TreeItem;
+
 import util.FileEventMap;
 
 /**
@@ -23,7 +24,7 @@ import util.FileEventMap;
  *
  */
 public class Tree {
-	
+
 	private Node root;
 
 	public Tree()
@@ -35,7 +36,7 @@ public class Tree {
 	{
 		return root==null;
 	}
-	
+
 	public Node getRoot() {
 		return root;
 	}
@@ -45,7 +46,7 @@ public class Tree {
 		Node current = root;
 		Scanner s = new Scanner(str);
 		s.useDelimiter("/");//no whitespace preceding "/"
-//		s.skip("[Copy from path].*");
+		//		s.skip("[Copy from path].*");
 		while(s.hasNext())
 		{
 			str = s.next();
@@ -65,7 +66,7 @@ public class Tree {
 		current.getEventList().addAll(eventList);
 		s.close();
 	}
-	
+
 	public void add(String str)
 	{
 		Node current = root;
@@ -94,7 +95,7 @@ public class Tree {
 	{
 		print(this.root, 1, false);
 	}
-	
+
 	public void printWithEvents()
 	{
 		print(this.root, 1, true);
@@ -113,11 +114,11 @@ public class Tree {
 			print(c, level+1, withEvents);
 		}
 	}
-	
+
 	public void printEventTypes(){
 		printEventTypes(root,0);
 	}
-	
+
 	private void printEventTypes(Node n, int level)
 	{
 		if(n==null)
@@ -128,45 +129,60 @@ public class Tree {
 				System.out.print(" ");
 			System.out.print("+-");
 			List<Event> eList = c.getEventList();
-			
+
 			String s = "";
 			for (Event event : eList) {
-	         s+=" "+event.getType();
-         }
+				s+=" "+event.getType();
+			}
 			System.out.println("["+level+"] "+c.getValue() + " "+s);
 			printEventTypes(c, level+1);
 		}
 	}
-	
-	public static void main(String[] args) throws IOException
-	{
-		Tree t = new Tree();
-//		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-//		Log log = new SVNLog(lr.readAll());
-		LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
-		Log log = new GITLog(lr.readAll());
-		TestLog.toFile("/home/saimir/out.txt");
-//		System.out.println("Read "+log.size()+" entries.");
-		Map<String, List<Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
-		lr.close();
-//		System.out.println(fem);
-//		Collection<Change> c = log.getAllChanges();
-//		for (Change ch : c) {
-//	      System.out.println(ch.getPath());
-//      }
-		Set<String> files = fem.keySet();
-		for (String string : files) {
-			t.add(string, fem.get(string));
+
+	public void fillInGanttTree(org.eclipse.swt.widgets.Tree tree, GanttChart chart, GanttEvent scopeEvent){
+		final TreeItem root = new TreeItem(tree, SWT.BORDER);
+		// our root node that matches our scope
+		root.setText("Project structure");
+		root.setExpanded(true);
+		fillInGanttTree(root, chart, this.root, scopeEvent);		
+	}
+
+	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent){
+
+		if(n==null)
+			return;
+
+		GanttEvent ge = null;
+		TreeItem ti = null;
+
+		for(Node c : n.getChildList()){
+
+			Calendar start = Calendar.getInstance();
+			Calendar end = Calendar.getInstance();
+
+			List<Event> events = c.getEventList();
+			System.out.println(events);
+			for (Event event : events) {
+				start = event.getStart().toCalendar(Locale.ENGLISH);
+				end = event.getEnd()==null? start: event.getEnd().toCalendar(Locale.ENGLISH);
+				ge = new GanttEvent(chart, event.getAuthor()+" "+event.getType(),start, end,100);
+				ge.setVerticalEventAlignment(SWT.CENTER);
+				ti = new TreeItem(root, SWT.NONE);
+				ti.setExpanded(true);
+				ti.setText(c.getValue());
+				// note how we set the data to be the event for easy access in the tree listeners later on
+				ti.setData(ge);
+				scopeEvent.addScopeEvent(ge);
+			}
+
+			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
-//		t.add("/templates");
-//		t.add("/slides");
-//		t.add("The World/Asia/Iran");
-//		t.add("/templates/checkliste_kostenplan.doc");
-//		t.add("The World/Asia/China");    // Even if you insert only this statement.
-//		// You get the desired output, 
-//		// As any string not found is inserted
-//		t.print();
-//		t.printWithEvents();
-		t.printEventTypes();	
+
+		//		ti = new TreeItem(root, SWT.NONE);
+		//		ti.setExpanded(true);
+		//		ti.setText(n.getValue());
+		//		// note how we set the data to be the event for easy access in the tree listeners later on
+		//		ti.setData(ge);
+
 	}
 }

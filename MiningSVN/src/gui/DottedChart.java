@@ -4,8 +4,18 @@ package gui;
  * @author Saimir Bala
  */
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.EventListener;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import model.Log;
+import model.LogEntry;
+import model.svn.SVNLog;
+
+import org.eclipse.nebula.widgets.ganttchart.ColorCache;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
 import org.eclipse.nebula.widgets.ganttchart.GanttControlParent;
@@ -14,6 +24,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -22,6 +33,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
+
+import reader.LogReader;
+import reader.SVNLogReader;
+import test.TestLog;
+import util.FileEventMap;
+
+import com.sun.javafx.scene.paint.GradientUtils;
 
 /**
  * This Snippet shows how to create a Tree on the left and a GanttChart widget on the right where the row heights match for both the tree and the chart. It also shows some simple
@@ -90,7 +108,7 @@ public class DottedChart {
 
 		// create the tree. As it goes onto our special composite that will align it, we don't have to do any special settings on it
 		final Tree tree = new Tree(left, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
-//		final Tree tree = new Tree(left,SWT.BORDER);
+		//		final Tree tree = new Tree(left,SWT.BORDER);
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
 
@@ -105,46 +123,67 @@ public class DottedChart {
 		// a few columns
 		TreeColumn tc1 = new TreeColumn(tree, SWT.BORDER);
 		tc1.setText("Directory");
-		tc1.setWidth(100);
-		
-		TreeColumn tc2 = new TreeColumn(tree, SWT.BORDER);
-		tc2.setText("File");
-		tc2.setWidth(300);
-		
-		// our root node that matches our scope
-		final TreeItem root = new TreeItem(tree, SWT.BORDER);
-		root.setText(new String[] { "Scope", "Events" });
-		root.setExpanded(true);
-		
-		final TreeItem dir1 = new TreeItem(root, SWT.NONE);
-		dir1.setText(new String[]{"Dir1","Files"});
-		
+		tc1.setWidth(300);
+
+		//		TreeColumn tc2 = new TreeColumn(tree, SWT.BORDER);
+		//		tc2.setText("File");
+		//		tc2.setWidth(300);
+
 		// this matches the "root" item
 		GanttEvent scopeEvent = new GanttEvent(chart, "Scope");
 		scopeEvent.setVerticalEventAlignment(SWT.CENTER);
 
-		// create 20 events, and 20 tree items that go under "root", dates don't really matter as we're an example
-		for (int i = 1; i < 21; i++) {
-			Calendar start = Calendar.getInstance();
-			Calendar end = Calendar.getInstance();
-			start.add(Calendar.DATE, 0);
-			end.add(Calendar.DATE, i + 5);
-			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i * 5);
-			ge.setVerticalEventAlignment(SWT.CENTER);
-			TreeItem ti = (Math.random()>0.5)? new TreeItem(root, SWT.NONE): new TreeItem(dir1, SWT.NONE);
-			ti.setText(new String[] { "Event " + i, "" + start.getTime() + " - " + end.getTime() });
-			
-			// note how we set the data to be the event for easy access in the tree listeners later on
-			ti.setData(ge);
-
-			// add the event to the scope
-			scopeEvent.addScopeEvent(ge);
+		// our root node that matches our scope
+		final TreeItem root = new TreeItem(tree, SWT.BORDER);
+//		root.setText(new String[] { "Dir", "Events" });
+//		root.setExpanded(true);
+//
+//		// create 20 events, and 20 tree items that go under "root", dates don't really matter as we're an example
+//		for (int i = 1; i < 21; i++) {
+//			Calendar start = Calendar.getInstance();
+//			Calendar end = Calendar.getInstance();
+//			start.add(Calendar.DATE, 0);
+//			end.add(Calendar.DATE, i + 5);
+//			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i * 5);
+//			ge.setVerticalEventAlignment(SWT.CENTER);
+//			TreeItem ti = new TreeItem(root, SWT.NONE);
+//			ti.setExpanded(true);
+//			ti.setText(new String[] { "Event " + i, "" + start.getTime() + " - " + end.getTime() });
+//
+//			// note how we set the data to be the event for easy access in the tree listeners later on
+//			ti.setData(ge);
+//
+//			// add the event to the scope
+//			scopeEvent.addScopeEvent(ge);
+//		}
+//
+//		// root node needs the scope event as data
+//		root.setData(scopeEvent);
+//		root.setExpanded(true);
+		
+		Log log = null; 
+		try {
+			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+	      log = new SVNLog(lr.readAll());
+	      lr.close();
+      } catch (IOException e1) {
+	      // TODO Auto-generated catch block
+	      e1.printStackTrace();
+      }
+		
+		Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
+		
+		model.tree.Tree t = new model.tree.Tree();
+		Set<String> files = fem.keySet();
+		for (String string : files) {
+			t.add(string, fem.get(string));
 		}
-
-		// root node needs the scope event as data
+		
+		t.fillInGanttTree(tree, chart, scopeEvent);
+		//root node needs the scope event as data
 		root.setData(scopeEvent);
 		root.setExpanded(true);
-
+		
 		// sashform sizes
 		sf.setWeights(new int[] { 30, 70 });
 
@@ -165,12 +204,15 @@ public class DottedChart {
 			}
 
 			public void widgetSelected(SelectionEvent e) {
+
 				if (tree.getSelectionCount() == 0)
 					return;
 
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
 				GanttEvent ge = (GanttEvent) sel.getData();
+				if(ge!=null)
+					ge.setStatusColor(ColorCache.getRandomColor());
 				ganttComposite.setSelection(ge);
 			}
 
