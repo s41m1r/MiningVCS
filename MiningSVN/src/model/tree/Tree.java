@@ -4,6 +4,7 @@
 package model.tree;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -14,8 +15,10 @@ import model.Event;
 
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
+import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TreeItem;
+import org.joda.time.DateTime;
 
 import util.FileEventMap;
 
@@ -151,38 +154,38 @@ public class Tree {
 
 		if(n==null)
 			return;
-
 		GanttEvent ge = null;
-		TreeItem ti = null;
-
 		for(Node c : n.getChildList()){
-
-			Calendar start = Calendar.getInstance();
-			Calendar end = Calendar.getInstance();
-
 			List<Event> events = c.getEventList();
 			System.out.println(events);
+			GanttGroup group = new GanttGroup(chart);
 			for (Event event : events) {
+				Calendar start = Calendar.getInstance();
+				Calendar end = new DateTime(0).toCalendar(Locale.ENGLISH);
 				start = event.getStart().toCalendar(Locale.ENGLISH);
 				end = event.getEnd()==null? start: event.getEnd().toCalendar(Locale.ENGLISH);
 				ge = new GanttEvent(chart, event.getAuthor()+" "+event.getType(),start, end,100);
+				group.addEvent(ge);
+//				ge.setCheckpoint(true);
 				ge.setVerticalEventAlignment(SWT.CENTER);
-				ti = new TreeItem(root, SWT.NONE);
-				ti.setExpanded(true);
-				ti.setText(c.getValue());
-				// note how we set the data to be the event for easy access in the tree listeners later on
-				ti.setData(ge);
+//				ti = new TreeItem(root, SWT.NONE);
+//				ti.setExpanded(true);
+//				ti.setText(c.getValue());
+				//				 note how we set the data to be the event for easy access in the tree listeners later on
+//				ti.setData(ge);
 				scopeEvent.addScopeEvent(ge);
 			}
 
+			//			ge = new GanttEvent(chart, "actions", start, end,100);
+			//			ge.setCheckpoint(true);
+			//			ti = new TreeItem(root, SWT.NONE);
+			
+			TreeItem ti = new TreeItem(root, SWT.NONE);
+			ti.setText(c.getValue());
+			ti.setExpanded(true);
+//			// note how we set the data to be the event for easy access in the tree listeners later on
+			ti.setData(group);
 			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
-
-		//		ti = new TreeItem(root, SWT.NONE);
-		//		ti.setExpanded(true);
-		//		ti.setText(n.getValue());
-		//		// note how we set the data to be the event for easy access in the tree listeners later on
-		//		ti.setData(ge);
-
-	}
+	}	
 }

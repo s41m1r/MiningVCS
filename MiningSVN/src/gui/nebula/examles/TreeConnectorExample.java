@@ -24,7 +24,6 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
@@ -135,15 +134,18 @@ public class TreeConnectorExample {
 		for (int i = 1; i < 21; i++) {
 			Calendar start = Calendar.getInstance();
 			Calendar end = Calendar.getInstance();
+			Calendar end2 = Calendar.getInstance();
 			start.add(Calendar.DATE, 0);
 			end.add(Calendar.DATE, i + 5);
 			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i * 5);
+			GanttEvent ge2 = new GanttEvent(chart, "Event " + i, end, end2, i * 5);
 			ge.setVerticalEventAlignment(SWT.CENTER);
 			TreeItem ti = (Math.random()>0.5)? new TreeItem(root, SWT.NONE): new TreeItem(dir1, SWT.NONE);
 			ti.setText(new String[] { "Event " + i, "" + start.getTime() + " - " + end.getTime() });
 			
 			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(ge);
+			ti.setData(ge2);
 
 			// add the event to the scope
 			scopeEvent.addScopeEvent(ge);

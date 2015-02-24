@@ -20,6 +20,7 @@ import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
 import org.eclipse.nebula.widgets.ganttchart.GanttControlParent;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
+import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
@@ -210,10 +211,16 @@ public class DottedChart {
 
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
-				GanttEvent ge = (GanttEvent) sel.getData();
+				Object data = sel.getData();
+				if(data instanceof GanttEvent){
+				GanttEvent ge = (GanttEvent) data;
 				if(ge!=null)
 					ge.setStatusColor(ColorCache.getRandomColor());
 				ganttComposite.setSelection(ge);
+				}
+				else{
+					ganttComposite.setSelection((GanttEvent) ((GanttGroup)data).getEventMembers().get(0));
+				}
 			}
 
 		});
@@ -232,9 +239,11 @@ public class DottedChart {
 				}
 			}
 		};
-
+		
 		tree.addListener(SWT.Collapse, expandCollapseListener);
 		tree.addListener(SWT.Expand, expandCollapseListener);
+		
+		chart.getGanttComposite().jumpToEarliestEvent();
 
 		shell.open();
 		while (!shell.isDisposed()) {
