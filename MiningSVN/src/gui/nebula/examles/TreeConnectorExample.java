@@ -17,6 +17,7 @@ import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
 import org.eclipse.nebula.widgets.ganttchart.GanttControlParent;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
+import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
@@ -137,15 +138,22 @@ public class TreeConnectorExample {
 			Calendar end2 = Calendar.getInstance();
 			start.add(Calendar.DATE, 0);
 			end.add(Calendar.DATE, i + 5);
+			end2.add(Calendar.DATE, i + 10);
 			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i * 5);
+			end.add(Calendar.DATE, 1);
 			GanttEvent ge2 = new GanttEvent(chart, "Event " + i, end, end2, i * 5);
-			ge.setVerticalEventAlignment(SWT.CENTER);
-			TreeItem ti = (Math.random()>0.5)? new TreeItem(root, SWT.NONE): new TreeItem(dir1, SWT.NONE);
+			GanttGroup group =  new GanttGroup(chart);
+			group.setVerticalEventAlignment(SWT.CENTER);
+			group.addEvent(ge);
+			group.addEvent(ge2);
+//			ge.setVerticalEventAlignment(SWT.CENTER);
+			ge2.setVerticalEventAlignment(SWT.CENTER);
+			group.setVerticalEventAlignment(SWT.CENTER);
+			TreeItem ti = new TreeItem(root, SWT.NONE);
 			ti.setText(new String[] { "Event " + i, "" + start.getTime() + " - " + end.getTime() });
 			
 			// note how we set the data to be the event for easy access in the tree listeners later on
-			ti.setData(ge);
-			ti.setData(ge2);
+			ti.setData(group);
 
 			// add the event to the scope
 			scopeEvent.addScopeEvent(ge);
