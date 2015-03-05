@@ -5,8 +5,6 @@ package gui;
  */
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.EventListener;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,7 +23,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -35,12 +32,9 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 
+import reader.GITLogReader;
 import reader.LogReader;
-import reader.SVNLogReader;
-import test.TestLog;
 import util.FileEventMap;
-
-import com.sun.javafx.scene.paint.GradientUtils;
 
 /**
  * This Snippet shows how to create a Tree on the left and a GanttChart widget on the right where the row heights match for both the tree and the chart. It also shows some simple
@@ -164,7 +158,8 @@ public class DottedChart {
 		
 		Log log = null; 
 		try {
-			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+			LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
 	      log = new SVNLog(lr.readAll());
 	      lr.close();
       } catch (IOException e1) {
