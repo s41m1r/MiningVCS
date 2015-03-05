@@ -163,8 +163,10 @@ public class Tree {
 				Calendar start = Calendar.getInstance();
 				Calendar end = new DateTime(0).toCalendar(Locale.ENGLISH);
 				start = event.getStart().toCalendar(Locale.ENGLISH);
+				System.out.println(start.getTime());
 				end = event.getEnd()==null? start: event.getEnd().toCalendar(Locale.ENGLISH);
-				ge = new GanttEvent(chart, event.getAuthor()+" "+event.getType(),start, end,100);
+				ge = new GanttEvent(chart, "["+event.getAuthor()+" - "+event.getFileID()+" - "+event.getType()+"]",start, end,0);
+				
 				group.addEvent(ge);
 //				ge.setCheckpoint(true);
 				ge.setVerticalEventAlignment(SWT.CENTER);

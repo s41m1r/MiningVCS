@@ -194,7 +194,10 @@ public class DottedChart {
 				TreeItem ti = tree.getTopItem();
 				// this will put the chart right where the event starts. There is also a method call setTopItem(GanttEvent, yOffset) where
 				// you can fine-tune the scroll location if you need to.
-				ganttComposite.setTopItem((GanttEvent) ti.getData(), SWT.LEFT);
+				if(ti!=null && ti.getData()!=null){
+					if(ti.getData() instanceof GanttEvent)
+						ganttComposite.setTopItem((GanttEvent) ti.getData(), SWT.LEFT);
+					}
 			}
 		});
 
@@ -231,7 +234,7 @@ public class DottedChart {
 				GanttEvent ge = (GanttEvent) root.getData();
 
 				if (event.type == SWT.Collapse) {
-					ge.hideAllChildren();
+//					ge.hideAllChildren();
 					chart.redrawGanttChart();
 				} else {
 					ge.showAllChildren();
