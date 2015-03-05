@@ -11,8 +11,8 @@ import model.Event;
 import model.Log;
 import model.LogEntry;
 import model.git.GITLog;
-import reader.GITLogReader;
 import reader.LogReader;
+import reader.SVNLogReader;
 import util.FileEventMap;
 
 /**
@@ -27,8 +27,8 @@ public class TestFileEventMap {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		//		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
+		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+//		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
 		//		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/ownCloud/project mining/data/data.gov.log");
 		Log log = new GITLog(lr.readAll());
 		//		Log log = new SVNLog(lr.readAll());

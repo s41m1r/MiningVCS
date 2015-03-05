@@ -38,5 +38,16 @@
 			<artifactId>weka-dev</artifactId>
 			<version>3.7.12</version>
 		</dependency>
+		<dependency>
+			<groupId>swt</groupId>
+			<artifactId>jface</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>swt</artifactId>
+			<version>3.3.0-v3346</version>
+		</dependency>
+
 	</dependencies>
 </project>

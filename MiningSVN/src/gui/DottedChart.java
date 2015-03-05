@@ -34,7 +34,9 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import reader.GITLogReader;
 import reader.LogReader;
+import reader.SVNLogReader;
 import util.FileEventMap;
+import weka.classifiers.bayes.net.search.fixed.FromFile;
 
 /**
  * This Snippet shows how to create a Tree on the left and a GanttChart widget on the right where the row heights match for both the tree and the chart. It also shows some simple
@@ -91,7 +93,7 @@ public class DottedChart {
 		// set each item height on the chart to be the same height as one item in the tree. This call basically sets the fixed row height for each event instead of
 		// setting it programatically. It's just a convenience method.
 		// we take off the spacer as we're setting the row height which doesn't account for spacing, spacing is between rows, not in rows.
-		ganttComposite.setFixedRowHeightOverride(oneRowHeight-spacer);
+//		ganttComposite.setFixedRowHeightOverride(oneRowHeight-spacer);
 
 		// if you zoom in closely on the tree you'll see that the horizontal lines (that we activated) take up 2 in space (one at top, one at bottom)
 		// so we space the events using that value
@@ -109,11 +111,11 @@ public class DottedChart {
 
 		// normally a tree item height on XP is 16 pixels. This is rather tight for a GANTT chart as it leaves little space for connecting lines etc.
 		// As we want some air, we force each item height to be 24 pixels.
-		tree.addListener(SWT.MeasureItem, new Listener() {
-			public void handleEvent(Event event) {
-				event.height = oneRowHeight;
-			}
-		});
+//		tree.addListener(SWT.MeasureItem, new Listener() {
+//			public void handleEvent(Event event) {
+//				event.height = oneRowHeight;
+//			}
+//		});
 
 		// a few columns
 		TreeColumn tc1 = new TreeColumn(tree, SWT.BORDER);
@@ -159,7 +161,7 @@ public class DottedChart {
 		Log log = null; 
 		try {
 //			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-			LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
+			LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
 	      log = new SVNLog(lr.readAll());
 	      lr.close();
       } catch (IOException e1) {
@@ -210,14 +212,23 @@ public class DottedChart {
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
 				Object data = sel.getData();
-				if(data instanceof GanttEvent){
-				GanttEvent ge = (GanttEvent) data;
-				if(ge!=null)
-					ge.setStatusColor(ColorCache.getRandomColor());
-				ganttComposite.setSelection(ge);
+				if(!(data instanceof GanttGroup)){
+					GanttEvent ge = (GanttEvent) data;
+					if(ge!=null)
+						ge.setStatusColor(ColorCache.getRandomColor());
+					ganttComposite.setSelection(ge);
+					System.out.println(ge);
 				}
 				else{
-					ganttComposite.setSelection((GanttEvent) ((GanttGroup)data).getEventMembers().get(0));
+					GanttGroup group = (GanttGroup)data;
+					List<GanttEvent> events = group.getEventMembers();
+					for (GanttEvent ganttEvent : events) {
+	               ganttEvent.setStatusColor(ColorCache.getBlack());
+//	               chart	              
+               }
+					ganttComposite.setSelection(events);
+					ganttComposite.refresh();
+//					ganttComposite.setSelection((GanttEvent) ((GanttGroup)data).getEventMembers().get(0));
 				}
 			}
 
@@ -231,6 +242,7 @@ public class DottedChart {
 				if (event.type == SWT.Collapse) {
 //					ge.hideAllChildren();
 					chart.redrawGanttChart();
+//					GanttGroup group = new GanttGroup(root.getData(key));
 				} else {
 					ge.showAllChildren();
 					chart.redrawGanttChart();
