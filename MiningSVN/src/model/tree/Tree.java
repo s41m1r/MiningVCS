@@ -157,16 +157,17 @@ public class Tree {
 		GanttEvent ge = null;
 		for(Node c : n.getChildList()){
 			List<Event> events = c.getEventList();
-			System.out.println(events);
+//			System.out.println(events);
 			GanttGroup group = new GanttGroup(chart);
 			for (Event event : events) {
 				Calendar start = Calendar.getInstance();
 				Calendar end = new DateTime(0).toCalendar(Locale.ENGLISH);
 				start = event.getStart().toCalendar(Locale.ENGLISH);
-				System.out.println(start.getTime());
+//				System.out.println(start.getTime());
 				end = event.getEnd()==null? start: event.getEnd().toCalendar(Locale.ENGLISH);
-				ge = new GanttEvent(chart, "["+event.getAuthor()+" - "+event.getFileID()+" - "+event.getType()+"]",start, end,0);
-				
+				ge = new GanttEvent(chart, "["+event.getAuthor().split("@|<")[0]+
+						//" - "+event.getFileID()+
+						" - "+event.getType()+"]",start, end,5);
 				group.addEvent(ge);
 //				ge.setCheckpoint(true);
 				ge.setVerticalEventAlignment(SWT.CENTER);
@@ -176,17 +177,18 @@ public class Tree {
 				//				 note how we set the data to be the event for easy access in the tree listeners later on
 //				ti.setData(ge);
 				scopeEvent.addScopeEvent(ge);
+//				ge.hideAllChildren();
 			}
 
 			//			ge = new GanttEvent(chart, "actions", start, end,100);
 			//			ge.setCheckpoint(true);
-			//			ti = new TreeItem(root, SWT.NONE);
-			
+			//			ti = new TreeItem(root, SWT.NONE);		
 			TreeItem ti = new TreeItem(root, SWT.NONE);
 			ti.setText(c.getValue());
 			ti.setExpanded(true);
 //			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(group);
+			System.out.println("set data: to "+ti+" group "+group);
 			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
 	}	

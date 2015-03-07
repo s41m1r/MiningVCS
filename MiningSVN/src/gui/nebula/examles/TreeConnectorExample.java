@@ -144,11 +144,11 @@ public class TreeConnectorExample {
 		firstItem.setData(firstNode);
 
 		// create 20 events, and 20 tree items that go under "root", dates don't really matter as we're an example
-		for (int i = 1, j=2; i < 21; i++, j=i+1) {
+		for (int i = 1, j=i+1; i < 21; i++, j+=2) {
 			Calendar start = Calendar.getInstance();
 			Calendar end = Calendar.getInstance();
-			start.add(Calendar.DATE, i+j+2);
-			end.add(Calendar.DATE, i+j + 3);
+			start.add(Calendar.DATE, i+j+1);
+			end.add(Calendar.DATE, j+i + 2);
 			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i+5);
 			end.add(Calendar.DATE, 1);
 			ge.setVerticalEventAlignment(SWT.CENTER);
@@ -182,9 +182,6 @@ public class TreeConnectorExample {
 		tree.addSelectionListener(new SelectionListener() {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
-				System.out.println("widgetDefaultSelected");
-				TreeItem ti = (TreeItem) e.item.getData();
-				System.out.println("ti.getItemCount()"+ti.getItemCount());
 			}
 
 			public void widgetSelected(SelectionEvent e) {
@@ -233,26 +230,31 @@ public class TreeConnectorExample {
 
 			@Override
 			public void treeExpanded(TreeEvent arg0) {
-//				System.out.println("expanded "+arg0);
+				System.out.println("expanded "+arg0);
 				TreeItem ti = (TreeItem) arg0.item;
 				System.out.println("childs="+ti.getItemCount());
-				System.out.println(ti);
+				System.out.println(ti.getData());
 				Object data = ti.getData();
 				if(data instanceof GanttGroup){
-					GanttGroup gg = (GanttGroup) ti.getData();
-					List<GanttEvent> list = gg.getEventMembers();
-					System.out.println("events "+list.get(0));
+					GanttGroup gg = (GanttGroup) data;
+					List<GanttEvent> list = (List<GanttEvent>) gg.getEventMembers();
+					if (list==null || list.isEmpty())
+						return;
+//					System.out.println("events "+list.get(0));
 					TreeItem[] tis = ti.getItems();
+					if(tis==null)
+						return;
 					for (int i = 0; i < tis.length; i++) {
 						tis[i].setData(list.get(i));
-						
+//						list.get(i).hideAllChildren();
 					}
 					gg.dispose();
 					ganttComposite.redraw();
 				}
 				else { 
 					if(data instanceof GanttEvent){
-						
+						GanttEvent ge = (GanttEvent) data;
+						System.out.println("expanded GanttEvent:"+ge);
 					}
 				}
 			}
@@ -260,7 +262,7 @@ public class TreeConnectorExample {
 			public void treeCollapsed(TreeEvent arg0) {
 				System.out.println("collapsed");
 				TreeItem ti = (TreeItem) arg0.item;
-//				System.out.println(ti.getData().getClass());
+				System.out.println(ti.getData().getClass());
 				if(ti.getData() instanceof GanttEvent){
 					GanttEvent g = (GanttEvent)ti.getData();
 					g.dispose();
@@ -269,7 +271,7 @@ public class TreeConnectorExample {
 					GanttGroup ganttGroup = new GanttGroup(chart);
 					for (int i = 0; i < tis.length; i++) {
 						if(tis[i].getData() instanceof GanttGroup){
-							System.out.println(tis[i].getData() + "is GanttGroup");
+//							System.out.println(tis[i].getData() + "is GanttGroup");
 							continue;
 						}
 						events[i] = (GanttEvent) tis[i].getData();
