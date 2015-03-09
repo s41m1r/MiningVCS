@@ -26,11 +26,11 @@ public class CVS2CSV {
 			for (Change change : changeList) {
 				String fileId = change.getPath();
 				String editType = change.getAction();
-				System.out.println(fileId + ", " 
-						+ logEntry.getAuthor() + "," 
-						+ editType + ","
-						+ logEntry.getDate() + "," 
-						+ logEntry.getComment());
+				System.out.println("'"+fileId + "', " 
+						+ "'"+logEntry.getAuthor() + "'," 
+						+ "'"+editType + "',"
+						+ "'"+logEntry.getDate() + "'," 
+						+ "'"+logEntry.getComment()+"'");
 			}
 		}	
 	} 
