@@ -6,6 +6,11 @@ package gui;
 
 import java.io.IOException;
 import java.nio.channels.GatheringByteChannel;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +41,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
+import org.joda.time.DateTimeComparator;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import reader.GITLogReader;
 import reader.LogReader;
@@ -59,6 +67,8 @@ import weka.classifiers.bayes.net.search.fixed.FromFile;
  * - Setting a vertical alignment is supported individually on both global row height overrides and normal fixed row height settings.<br>
  */
 public class DottedChart {
+	
+	public static final int NUM_OF_DAYS_THRESHOLD = 7;
 
 	public static void main(String[] args) {
 		// standard display and shell etc
@@ -98,7 +108,7 @@ public class DottedChart {
 		// set each item height on the chart to be the same height as one item in the tree. This call basically sets the fixed row height for each event instead of
 		// setting it programatically. It's just a convenience method.
 		// we take off the spacer as we're setting the row height which doesn't account for spacing, spacing is between rows, not in rows.
-		//		ganttComposite.setFixedRowHeightOverride(oneRowHeight-spacer);
+		ganttComposite.setFixedRowHeightOverride(oneRowHeight-spacer);
 
 		// if you zoom in closely on the tree you'll see that the horizontal lines (that we activated) take up 2 in space (one at top, one at bottom)
 		// so we space the events using that value
@@ -132,8 +142,10 @@ public class DottedChart {
 		//		tc2.setWidth(300);
 
 		// this matches the "root" item
+		GanttGroup rootGroup = new GanttGroup(chart);
 		final GanttEvent scopeEvent = new GanttEvent(chart, "Scope");
 		scopeEvent.setVerticalEventAlignment(SWT.CENTER);
+		rootGroup.addEvent(scopeEvent);
 
 		// our root node that matches our scope
 		final TreeItem root = new TreeItem(tree, SWT.BORDER);
@@ -182,11 +194,12 @@ public class DottedChart {
 		for (String string : files) {
 			t.add(string, fem.get(string));
 		}
+		
+		
 
-
-		t.fillInGanttTree(tree, chart, scopeEvent, log);
+		t.fillInGanttTree(root, chart, scopeEvent, log);
 		//root node needs the scope event as data
-		root.setData(scopeEvent);
+		root.setData(new OurTreeData(rootGroup));
 		root.setExpanded(true);
 		chart.redrawGanttChart();
 
@@ -199,8 +212,9 @@ public class DottedChart {
 				TreeItem ti = tree.getTopItem();
 				// this will put the chart right where the event starts. There is also a method call setTopItem(GanttEvent, yOffset) where
 				// you can fine-tune the scroll location if you need to.
-				if(!(ti.getData()==null || ti.getData() instanceof GanttGroup)){
-					GanttEvent ge = (GanttEvent) ti.getData();
+				if(!(ti.getData()==null || ((OurTreeData)ti.getData()).getGanttGroup() instanceof GanttGroup)){
+					GanttGroup gg = ((OurTreeData)ti.getData()).getGanttGroup();
+					GanttEvent ge = (GanttEvent) gg.getEventMembers().get(0);
 					ganttComposite.setTopItem(ge, ge.getY(), SWT.LEFT);
 					ganttComposite.setDate(ge.getActualEndDate());
 				}
@@ -213,11 +227,10 @@ public class DottedChart {
 			public void widgetDefaultSelected(SelectionEvent e) {
 				System.out.println("default selected");
 				GanttEvent ge = null;
-				if(tree.getSelection()[0].getData() instanceof GanttGroup){
-					ge = (GanttEvent) ((GanttGroup) tree.getSelection()[0].getData()).getEventMembers().get(0);
-				}
-				else
-					ge = (GanttEvent) tree.getSelection()[0].getData();
+				OurTreeData data = (OurTreeData) tree.getSelection()[0].getData();
+				
+				ge = (GanttEvent) ((GanttGroup) data.getGanttGroup()).getEventMembers().get(0);
+				
 				if(ge!=null)
 //					ganttComposite.setTopItem(ge, -100, SWT.CENTER);
 					ganttComposite.showEvent(ge, SWT.CENTER);
@@ -230,32 +243,23 @@ public class DottedChart {
 
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
-				Object data = sel.getData();
+				OurTreeData data = (OurTreeData) sel.getData();
 //				System.out.println(e);
-				if(!(data instanceof GanttGroup)){
-					GanttEvent ge = (GanttEvent) data;
-					if(ge!=null)
-						ge.setStatusColor(ColorCache.getRandomColor());
-					ganttComposite.setSelection(ge);
-//					ganttComposite.setFocus();
-//					ganttComposite.refresh();
-					//					System.out.println(ge);
+				if (data == null){
+					return;
 				}
-				else{
-					GanttGroup group = (GanttGroup)data;
-					List<GanttEvent> events = group.getEventMembers();
-					for (GanttEvent ganttEvent : events) {
-						Color c = null;
+				GanttGroup group = (GanttGroup)data.getGanttGroup();
+				List<GanttEvent> events = group.getEventMembers();
+				for (GanttEvent ganttEvent : events) {
+					Color c = null;
 //						if(ganttEvent.getStatusColor().equals(ColorCache.getBlack()))
 //							c = ganttComposite.get
-						ganttEvent.setStatusColor(ColorCache.getWhite());
-						//	               chart	              
-					}
-					ganttComposite.setSelection(events);
-					ganttComposite.refresh();
-					//					ganttComposite.setSelection((GanttEvent) ((GanttGroup)data).getEventMembers().get(0));
+					ganttEvent.setStatusColor(ColorCache.getWhite());
+					//	               chart	              
 				}
-				
+//					ganttComposite.setSelection(events);
+				ganttComposite.refresh();
+				//					ganttComposite.setSelection((GanttEvent) ((GanttGroup)data).getEventMembers().get(0));
 			}
 
 		});
@@ -285,6 +289,40 @@ public class DottedChart {
 
 			@Override
 			public void treeExpanded(TreeEvent arg0) {
+				TreeItem ti =  (TreeItem) arg0.item;
+				if (ti.getData() != null){
+					for (GanttEvent e : ((OurTreeData)ti.getData()).getCollapsedEvents()){
+						e.setHidden(false);
+					}
+					for (GanttEvent e : ((OurTreeData)ti.getData()).getSuperEvents()){
+						e.setHidden(true);
+					}
+				}
+//				TreeItem[] items = ti.getItems();
+//				GanttGroup data = (GanttGroup) ti.getData();
+//				for (int i = 0; i < items.length; i++) {
+//					System.out.println(" data "+items[i].getData());
+//					if(items[i].getData() instanceof GanttGroup){
+//						GanttGroup gg = (GanttGroup) items[i].getData();
+////						GanttGroup gg =  new GanttGroup(chart);
+//						List<GanttEvent> eList = gg.getEventMembers();
+//						eList.sort(new GanttEventComparator());
+//						Iterator<GanttEvent> iter = eList.iterator();
+//						while(iter.hasNext()){
+//							GanttEvent ganttEvent = iter.next();
+////							iter.remove();
+////							gg.removeEvent(ganttEvent);
+////							ganttComposite.removeEvent(ganttEvent);
+////							scopeEvent.removeScopeEvent(ganttEvent);
+//							ganttEvent.setHidden(false);
+//						}
+////						ganttComposite.removeGroup(gg);
+//					}
+//				}
+				ganttComposite.refresh();
+				ganttComposite.redraw();
+				ganttComposite.update();
+				
 //				System.out.println("expanded "+arg0);
 //				TreeItem ti = (TreeItem) arg0.item;
 //				System.out.println("childs="+ti.getItemCount());
@@ -316,53 +354,235 @@ public class DottedChart {
 //					}
 //				}
 			}
+			
+//			@Override
+//			public void treeCollapsed(TreeEvent arg0) {
+//				TreeItem ti = (TreeItem) arg0.item;
+//				TreeItem[] items = ti.getItems();
+//				
+//				GanttGroup ganttGroup = (GanttGroup) ti.getData();
+////				List<GanttEvent> oldEvents = new ArrayList<GanttEvent>(1000);
+////				for (Object e : ganttGroup.getEventMembers()){
+////					oldEvents.add((GanttEvent) e);
+////				}
+//				
+//				List<GanttEvent> subEvents = new LinkedList<GanttEvent>();
+//				for (int i = 0; i < items.length; i++) {
+//					System.out.println(" data "+items[i].getData());
+//					if(items[i].getData() instanceof GanttGroup){
+//						GanttGroup gg = (GanttGroup) items[i].getData();
+////						GanttGroup gg =  new GanttGroup(chart);
+//						List<GanttEvent> eList = gg.getEventMembers();
+//						eList.sort(new GanttEventComparator());
+//						Iterator<GanttEvent> iter = eList.iterator();
+//						while(iter.hasNext()){
+//							GanttEvent ganttEvent = iter.next();
+//							subEvents.add(ganttEvent);
+////							iter.remove();
+////							gg.removeEvent(ganttEvent);
+////							ganttComposite.removeEvent(ganttEvent);
+//						}
+////						ganttComposite.removeGroup(gg);
+//					}
+//				}
+//				
+//				for (GanttEvent ganttEvent : subEvents){
+//					ganttGroup.addEvent(ganttEvent);
+////					Calendar date = (Calendar) currentEndDate.clone();
+////					date.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
+////					if (date.before(ganttEvent.getActualEndDate())){
+////						// start a new one
+////						addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, "");
+////						currentStartDate = ganttEvent.getActualStartDate();
+////						currentEndDate = ganttEvent.getActualEndDate();
+////					} else {
+////						// extend thresholds
+////						//ganttGroup.addEvent(new GanttEvent(chart, "", currentStartDate, currentEndDate, 50));
+////						currentEndDate = (Calendar) ganttEvent.getActualEndDate().clone();
+////					}
+//				}
+//				ganttComposite.redraw();
+//				chart.update();
+//			}
+			
+			
 			@Override
 			public void treeCollapsed(TreeEvent arg0) {
 				TreeItem ti = (TreeItem) arg0.item;
+				OurTreeData data = (OurTreeData) ti.getData();
+				
 				TreeItem[] items = ti.getItems();
-				GanttGroup ganttGroup = new GanttGroup(chart);
-				List<GanttEvent> events = ganttGroup.getEventMembers();
-				for (int i = 0; i < items.length; i++) {
-					System.out.println(" data "+items[i].getData());
-					if(items[i].getData() instanceof GanttGroup){
-						GanttGroup gg = (GanttGroup) items[i].getData();
-						List<GanttEvent> eList = gg.getEventMembers();
-						for (GanttEvent ganttEvent : eList) {
-							ganttGroup.addEvent(ganttEvent);
-							ganttEvent.hideAllChildren();
-							ganttEvent.setName(ti.getText());
-							ganttEvent.setGradientStatusColor(ColorCache.getColor(240, 120, 50));
-						}
+				if (data.getCollapsedEvents().isEmpty()){ 
+					GanttGroup ganttGroup = (GanttGroup) data.getGanttGroup();
+					int index = ganttComposite.getGroups().indexOf(ganttGroup);
+							
+					GanttGroup newGroup = ganttGroup;// new GanttGroup(chart);
+					 
+					List<GanttEvent> oldEvents = new ArrayList<GanttEvent>(1000);
+					for (Object e : ganttGroup.getEventMembers()){
+						oldEvents.add((GanttEvent) e);
 					}
+					
+					//ganttGroup.getEventMembers().remove(0);
+	//				while(iter.hasNext()){
+	//					GanttEvent event = iter.next();
+	//					ganttGroup.removeEvent(event);
+	//				}
+					
+	//				List<GanttEvent> events = ganttGroup.getEventMembers();
+	//				
+	//				java.util.Collections.sort(events, new GanttEventComparator());
+					
+					List<GanttEvent> subEvents = setSubEventsVisible(items, oldEvents, false);
+					data.setCollapsedEvents(subEvents);
+					
+					List<GanttEvent> superEvents = new LinkedList<GanttEvent>();
+					
+					subEvents.sort(new GanttEventComparator());
+					if (subEvents.size() > 0){
+						Calendar currentStartDate = subEvents.get(0).getActualStartDate();
+						Calendar currentEndDate = subEvents.get(0).getActualEndDate();
+						
+						for (GanttEvent ganttEvent : subEvents){
+							Calendar date = (Calendar) currentEndDate.clone();
+							date.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
+							if (date.before(ganttEvent.getActualEndDate())){
+								// start a new one
+								superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, ""));
+								currentStartDate = ganttEvent.getActualStartDate();
+								currentEndDate = ganttEvent.getActualEndDate();
+							} else {
+								// extend thresholds
+								//ganttGroup.addEvent(new GanttEvent(chart, "", currentStartDate, currentEndDate, 50));
+								currentEndDate = (Calendar) ganttEvent.getActualEndDate().clone();
+							}
+						}
+						superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, ""));
+						
+						data.setSuperEvents(superEvents);
+						//ganttComposite.removeGroup(ganttGroup);
+						
+						//ganttComposite.getGroups().remove(newGroup);
+						//ganttComposite.getGroups().add(index, newGroup);
+						assert ganttComposite.getGroups().indexOf(newGroup) == index;
+						
+						ganttComposite.refresh();
+						ganttComposite.redraw();
+						chart.update();
+						try {
+		               Thread.sleep(100);
+	               } catch (InterruptedException e1) {
+		               // TODO Auto-generated catch block
+		               e1.printStackTrace();
+	               }
+						
+						chart.redrawGanttChart();
+						
+						
+		//				ti.setData(ganttGroup);
+						for (GanttEvent event: oldEvents){
+	//						event.dispose();
+	//						scopeEvent.removeScopeEvent(event);
+	//						event.setHidden(true);
+						}
+	//					ganttGroup.removeEvent((GanttEvent) ganttGroup.getEventMembers().get(0));
+						
+		//				ganttComposite.heavyRedraw();
+		//				ganttComposite.refresh();
+		//				ganttComposite.redraw();
+		//				ganttComposite.update();
+		//				
+		////				ganttComposite.heavyRedraw();
+						ganttComposite.refresh();
+						ganttComposite.redraw();
+						ganttComposite.update();
+
+		//				ganttComposite.redraw();
+						
+		//				System.out.println("collapsed");
+		//				TreeItem ti = (TreeItem) arg0.item;
+		//				if(ti.getData() instanceof GanttEvent){
+		//					GanttEvent g = (GanttEvent)ti.getData();
+		//					g.dispose();
+		//					TreeItem[] tis = ti.getItems();
+		//					GanttEvent[] events = new GanttEvent[tis.length];
+		//					GanttGroup ganttGroup = new GanttGroup(chart);
+		//					for (int i = 0; i < tis.length; i++) {
+		//						if(tis[i].getData() instanceof GanttGroup){
+		//							System.out.println(tis[i].getData() + "is GanttGroup");
+		//							continue;
+		//						}
+		//						events[i] = (GanttEvent) tis[i].getData();
+		//						ganttGroup.addEvent(events[i]);
+		//					}
+		//					ganttComposite.redraw();
+		//					ti.setData(ganttGroup);
+		//				}
+		//				else{
+		//					GanttGroup gr = (GanttGroup) ti.getData();
+		//					if(gr!=null)
+		//						gr.dispose();
+		//				}
+		//				//				System.out.println("events="+events.length);
+					}
+				} else {
+					for (GanttEvent e : data.getCollapsedEvents()){
+						e.setHidden(true);
+					}
+					for (GanttEvent e : data.getSuperEvents()){
+						e.setHidden(false);
+					}
+					setSubEventsVisible(ti.getItems(), new LinkedList<GanttEvent>(),false);
+					ganttComposite.refresh();
+					ganttComposite.redraw();
+					ganttComposite.update();
 				}
-				ti.setData(ganttGroup);
-				ganttComposite.redraw();
-//				System.out.println("collapsed");
-//				TreeItem ti = (TreeItem) arg0.item;
-//				if(ti.getData() instanceof GanttEvent){
-//					GanttEvent g = (GanttEvent)ti.getData();
-//					g.dispose();
-//					TreeItem[] tis = ti.getItems();
-//					GanttEvent[] events = new GanttEvent[tis.length];
-//					GanttGroup ganttGroup = new GanttGroup(chart);
-//					for (int i = 0; i < tis.length; i++) {
-//						if(tis[i].getData() instanceof GanttGroup){
-//							System.out.println(tis[i].getData() + "is GanttGroup");
-//							continue;
-//						}
-//						events[i] = (GanttEvent) tis[i].getData();
-//						ganttGroup.addEvent(events[i]);
-//					}
-//					ganttComposite.redraw();
-//					ti.setData(ganttGroup);
-//				}
-//				else{
-//					GanttGroup gr = (GanttGroup) ti.getData();
-//					if(gr!=null)
-//						gr.dispose();
-//				}
-//				//				System.out.println("events="+events.length);
 			}
+
+			/**
+			 * @param items
+			 * @param oldEvents
+			 * @return
+			 */
+         private List<GanttEvent> setSubEventsVisible(TreeItem[] items,
+               List<GanttEvent> oldEvents, boolean visible) {
+	         List<GanttEvent> subEvents = new LinkedList<GanttEvent>(oldEvents);
+	         for (int i = 0; i < items.length; i++) {
+	         	System.out.println(" data "+items[i].getData());
+	         	Object object = ((OurTreeData)items[i].getData()).getGanttGroup();
+	         	if(object instanceof GanttGroup){
+	         		GanttGroup gg = (GanttGroup) object;
+//						GanttGroup gg =  new GanttGroup(chart);
+	         		List<GanttEvent> eList = gg.getEventMembers();
+	         		eList.sort(new GanttEventComparator());
+	         		Iterator<GanttEvent> iter = eList.iterator();
+	         		while(iter.hasNext()){
+	         			GanttEvent ganttEvent = iter.next();
+	         			subEvents.add(ganttEvent);
+//							iter.remove();
+//							gg.removeEvent(ganttEvent);
+//							ganttComposite.removeEvent(ganttEvent);
+//							scopeEvent.removeScopeEvent(ganttEvent);
+	         			ganttEvent.setHidden(!visible);
+	         		}
+//						ganttComposite.removeGroup(gg);
+	         	}
+	         }
+	         return subEvents;
+         }
+			private GanttEvent addNewGanttEvent(GanttChart parent, GanttGroup gg,
+            Calendar currentStartDate, Calendar currentEndDate, String name) {
+				currentEndDate.add(Calendar.DATE, 0);
+				GanttEvent ganttEvent = new GanttEvent(parent, name, (Calendar)currentStartDate.clone(), (Calendar)currentEndDate.clone(), 100);
+//				ganttEvent.hideAllChildren();
+//				ganttEvent.setName(name);
+				ganttEvent.setGradientStatusColor(ColorCache.getColor(240, 120, 50));
+				gg.addEvent(ganttEvent);
+				ganttEvent.setVerticalEventAlignment(SWT.CENTER);
+				scopeEvent.addScopeEvent(ganttEvent);
+				return ganttEvent;
+	         
+         }
 		};
 
 		tree.addTreeListener(treeListener);

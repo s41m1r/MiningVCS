@@ -3,6 +3,8 @@
  */
 package model.tree;
 
+import gui.OurTreeData;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import java.util.Set;
 import model.Event;
 import model.Log;
 
+import org.eclipse.nebula.widgets.ganttchart.AdvancedTooltip;
 import org.eclipse.nebula.widgets.ganttchart.ColorCache;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
@@ -155,10 +158,10 @@ public class Tree {
 		return resultMap;
 	}
 
-	public void fillInGanttTree(org.eclipse.swt.widgets.Tree tree, GanttChart chart, GanttEvent scopeEvent, Log log){
-		final TreeItem root = new TreeItem(tree, SWT.BORDER);
+	public void fillInGanttTree(TreeItem root, GanttChart chart, GanttEvent scopeEvent, Log log){
+//		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		// our root node that matches our scope
-		root.setText("Project structure");
+		root.setText("Project structure");		
 		root.setExpanded(true);
 		Map<String, Color> commitColorMap = mapCommitToColor(FileEventMap.buildCommitFileMap(log));
 		System.out.println(commitColorMap);
@@ -186,6 +189,14 @@ public class Tree {
 //						" - "+event.getType()+"]",
 						start, end,5);
 				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
+				AdvancedTooltip att = new AdvancedTooltip(
+						"Commit ID: "+event.getCommitID(), 
+						"Author:"+event.getAuthor().split("@|<")[0]+
+						"\n"+event.getType()+
+						"\n"+event.getFileID()+
+						"\nTimestamp: "+event.getStart());
+				
+				ge.setAdvancedTooltip(att);
 				group.addEvent(ge);
 //				ge.setCheckpoint(true);
 				ge.setVerticalEventAlignment(SWT.CENTER);
@@ -205,7 +216,7 @@ public class Tree {
 			ti.setText(c.getValue());
 			ti.setExpanded(true);
 //			// note how we set the data to be the event for easy access in the tree listeners later on
-			ti.setData(group);
+			ti.setData(new OurTreeData(group));
 			ti.setBackground(commitFileMap.get(c.getValue()));
 //			System.out.println("set data: to "+ti+" group "+group);
 			fillInGanttTree(ti, chart, c, scopeEvent, commitFileMap);
