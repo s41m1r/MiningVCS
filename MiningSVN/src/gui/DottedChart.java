@@ -211,6 +211,7 @@ public class DottedChart {
 		tree.addSelectionListener(new SelectionListener() {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
+				System.out.println("default selected");
 				GanttEvent ge = null;
 				if(tree.getSelection()[0].getData() instanceof GanttGroup){
 					ge = (GanttEvent) ((GanttGroup) tree.getSelection()[0].getData()).getEventMembers().get(0);
@@ -223,7 +224,7 @@ public class DottedChart {
 			}
 
 			public void widgetSelected(SelectionEvent e) {
-
+				System.out.println("specific selected");
 				if (tree.getSelectionCount() == 0)
 					return;
 
@@ -254,6 +255,7 @@ public class DottedChart {
 					ganttComposite.refresh();
 					//					ganttComposite.setSelection((GanttEvent) ((GanttGroup)data).getEventMembers().get(0));
 				}
+				
 			}
 
 		});
