@@ -5,6 +5,7 @@ package model.tree;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -12,11 +13,14 @@ import java.util.Scanner;
 import java.util.Set;
 
 import model.Event;
+import model.Log;
 
+import org.eclipse.nebula.widgets.ganttchart.ColorCache;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
 import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.TreeItem;
 import org.joda.time.DateTime;
 
@@ -141,16 +145,27 @@ public class Tree {
 			printEventTypes(c, level+1);
 		}
 	}
+	
+	public static Map<String, Color> mapCommitToColor(Map<String, List<String>> commitFileMap){
+		Map<String, Color> resultMap = new HashMap<String, Color>();
+		Set<String> keys = commitFileMap.keySet();
+		for (String key : keys) {
+	      resultMap.put(key, ColorCache.getRandomColor());
+      }
+		return resultMap;
+	}
 
-	public void fillInGanttTree(org.eclipse.swt.widgets.Tree tree, GanttChart chart, GanttEvent scopeEvent){
+	public void fillInGanttTree(org.eclipse.swt.widgets.Tree tree, GanttChart chart, GanttEvent scopeEvent, Log log){
 		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		// our root node that matches our scope
 		root.setText("Project structure");
 		root.setExpanded(true);
-		fillInGanttTree(root, chart, this.root, scopeEvent);		
+		Map<String, Color> commitColorMap = mapCommitToColor(FileEventMap.buildCommitFileMap(log));
+		System.out.println(commitColorMap);
+		fillInGanttTree(root, chart, this.root, scopeEvent, commitColorMap);
 	}
 
-	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent){
+	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent, Map<String, Color> commitFileMap){
 
 		if(n==null)
 			return;
@@ -165,9 +180,12 @@ public class Tree {
 				start = event.getStart().toCalendar(Locale.ENGLISH);
 //				System.out.println(start.getTime());
 				end = event.getEnd()==null? start: event.getEnd().toCalendar(Locale.ENGLISH);
-				ge = new GanttEvent(chart, "["+event.getAuthor().split("@|<")[0]+
+				ge = new GanttEvent(chart, "",
+//						"["+event.getAuthor().split("@|<")[0]+
 						//" - "+event.getFileID()+
-						" - "+event.getType()+"]",start, end,5);
+//						" - "+event.getType()+"]",
+						start, end,5);
+				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
 				group.addEvent(ge);
 //				ge.setCheckpoint(true);
 				ge.setVerticalEventAlignment(SWT.CENTER);
@@ -188,8 +206,9 @@ public class Tree {
 			ti.setExpanded(true);
 //			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(group);
-			System.out.println("set data: to "+ti+" group "+group);
-			fillInGanttTree(ti, chart, c, scopeEvent);
+			ti.setBackground(commitFileMap.get(c.getValue()));
+//			System.out.println("set data: to "+ti+" group "+group);
+			fillInGanttTree(ti, chart, c, scopeEvent, commitFileMap);
 		}
 	}	
 }

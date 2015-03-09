@@ -26,6 +26,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -182,7 +184,7 @@ public class DottedChart {
 		}
 
 
-		t.fillInGanttTree(tree, chart, scopeEvent);
+		t.fillInGanttTree(tree, chart, scopeEvent, log);
 		//root node needs the scope event as data
 		root.setData(scopeEvent);
 		root.setExpanded(true);
@@ -198,7 +200,9 @@ public class DottedChart {
 				// this will put the chart right where the event starts. There is also a method call setTopItem(GanttEvent, yOffset) where
 				// you can fine-tune the scroll location if you need to.
 				if(!(ti.getData()==null || ti.getData() instanceof GanttGroup)){
-					ganttComposite.setTopItem((GanttEvent) ti.getData(), SWT.LEFT);
+					GanttEvent ge = (GanttEvent) ti.getData();
+					ganttComposite.setTopItem(ge, ge.getY(), SWT.LEFT);
+					ganttComposite.setDate(ge.getActualEndDate());
 				}
 			}
 		});
@@ -207,6 +211,15 @@ public class DottedChart {
 		tree.addSelectionListener(new SelectionListener() {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
+				GanttEvent ge = null;
+				if(tree.getSelection()[0].getData() instanceof GanttGroup){
+					ge = (GanttEvent) ((GanttGroup) tree.getSelection()[0].getData()).getEventMembers().get(0);
+				}
+				else
+					ge = (GanttEvent) tree.getSelection()[0].getData();
+				if(ge!=null)
+//					ganttComposite.setTopItem(ge, -100, SWT.CENTER);
+					ganttComposite.showEvent(ge, SWT.CENTER);
 			}
 
 			public void widgetSelected(SelectionEvent e) {
@@ -217,21 +230,24 @@ public class DottedChart {
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
 				Object data = sel.getData();
-				System.out.println(e);
+//				System.out.println(e);
 				if(!(data instanceof GanttGroup)){
 					GanttEvent ge = (GanttEvent) data;
 					if(ge!=null)
 						ge.setStatusColor(ColorCache.getRandomColor());
 					ganttComposite.setSelection(ge);
-					ganttComposite.setFocus();
-					ganttComposite.refresh();
+//					ganttComposite.setFocus();
+//					ganttComposite.refresh();
 					//					System.out.println(ge);
 				}
 				else{
 					GanttGroup group = (GanttGroup)data;
 					List<GanttEvent> events = group.getEventMembers();
 					for (GanttEvent ganttEvent : events) {
-						ganttEvent.setStatusColor(ColorCache.getBlack());
+						Color c = null;
+//						if(ganttEvent.getStatusColor().equals(ColorCache.getBlack()))
+//							c = ganttComposite.get
+						ganttEvent.setStatusColor(ColorCache.getWhite());
 						//	               chart	              
 					}
 					ganttComposite.setSelection(events);

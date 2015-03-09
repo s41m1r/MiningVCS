@@ -36,13 +36,15 @@ public class TestFileEventMap {
 		//		TestLog.toFile("/home/saimir/out.txt");
 		lr.close();
 		//include also the files that were deleted
-		Map<String, List<Event>> historicalMap = FileEventMap.buildHistoricalFileEventMap(log);
+//		Map<String, List<Event>> historicalMap = FileEventMap.buildHistoricalFileEventMap(log);
 
 //		System.out.println("Files: "+historicalMap.size());
-		FileEventMap.printMap(historicalMap); 
+//		FileEventMap.printMap(historicalMap); 
 
-		Map<String, List<Event>> map = FileEventMap.buildFileEventMap(log);
-		FileEventMap.printMap(map);
+//		Map<String, List<Event>> map = FileEventMap.buildFileEventMap(log);
+//		FileEventMap.printMap(map);
+		
+		System.out.println(FileEventMap.buildCommitFileMap(log));
 	}
 
 }
