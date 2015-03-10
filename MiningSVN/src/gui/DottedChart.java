@@ -76,7 +76,7 @@ public class DottedChart {
 		// see the source of the GanttControlParent for an idea, it's not overly difficult and could possibly be done using a normal
 		// layout manager where you set the top margin to the height of the
 		// calculated GANTT header
-		final GanttControlParent left = new GanttControlParent(sf, SWT.MULTI);
+		final GanttControlParent left = new GanttControlParent(sf, SWT.NONE);
 
 		// our GANTT chart, will end up on the right in the sash
 		final GanttChart chart = new GanttChart(sf, SWT.NONE);
@@ -198,29 +198,30 @@ public class DottedChart {
 //					System.out.println(tree.getSelection()[0].getBounds());
 					ganttComposite.showEvent(ge, SWT.CENTER);
 //					ganttComposite.setTopItem(ge, SWT.CENTER);
-					//					ganttComposite.scroll(SWT.CENTER, SWT.CENTER , ge.getX(), ge.getY(), ge.getWidth(), ge.getHeight(), true);
+//					ganttComposite.scroll(SWT.CENTER, SWT.CENTER , ge.getX(), ge.getY(), ge.getWidth(), ge.getHeight(), true);
 //					ganttComposite.jumpToEvent(ge, true, SWT.CENTER);
 					ganttComposite.refresh();
 				}
 			}
 
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("specific selected");
+				
 				if (tree.getSelectionCount() == 0)
 					return;
 
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
 				OurTreeData data = (OurTreeData) sel.getData();
-				//				System.out.println(e);
+				
 				if (data == null){
 					return;
 				}
-				GanttGroup group = (GanttGroup)data.getGanttGroup();
+				GanttGroup group = (GanttGroup) data.getGanttGroup();
 				List<GanttEvent> events = group.getEventMembers();
+				
 				for (GanttEvent ganttEvent : events) {
 //					Color c = null;
-					ganttEvent.setStatusColor(ColorCache.getWhite());	              
+					ganttEvent.setStatusColor(ColorCache.getWhite());
 				}
 				ganttComposite.refresh();
 			}
@@ -300,7 +301,6 @@ public class DottedChart {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-
 				}
 				ganttComposite.heavyRedraw();
 			}
@@ -328,7 +328,6 @@ public class DottedChart {
 						subEvents.add(ganttEvent);
 						ganttEvent.setHidden(!visible);
 					}
-
 					setSubEventsVisible(items[i].getItems(), visible, subEvents);
 				}
 			}
@@ -339,13 +338,12 @@ public class DottedChart {
 				//				ganttEvent.hideAllChildren();
 				//				ganttEvent.setName(name);
 				ganttEvent.setGradientStatusColor(ColorCache.getColor(240, 120, 50));
-				ganttEvent.setStatusColor(ColorCache.getColor(240, 120, 50));
+//				ganttEvent.setStatusColor(ColorCache.getColor(240, 120, 50));
 				ganttEvent.setTextDisplayFormat("");
 				gg.addEvent(ganttEvent);
 				ganttEvent.setVerticalEventAlignment(SWT.CENTER);
 				scopeEvent.addScopeEvent(ganttEvent);
 				return ganttEvent;
-
 			}
 		};
 

@@ -215,7 +215,7 @@ public class Tree {
 				
 				ge.setAdvancedTooltip(att);
 				group.addEvent(ge);
-//				ge.setVerticalEventAlignment(SWT.CENTER);
+				ge.setVerticalEventAlignment(SWT.CENTER);
 				scopeEvent.addScopeEvent(ge);
 //				ge.hideAllChildren();
 			}
