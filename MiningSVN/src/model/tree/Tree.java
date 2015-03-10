@@ -6,7 +6,7 @@ package model.tree;
 import gui.OurTreeData;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -164,7 +164,7 @@ public class Tree {
 		root.setText("Project structure");		
 		root.setExpanded(true);
 		Map<String, Color> commitColorMap = mapCommitToColor(FileEventMap.buildCommitFileMap(log));
-		System.out.println(commitColorMap);
+//		System.out.println(commitColorMap);
 		fillInGanttTree(root, chart, this.root, scopeEvent, commitColorMap);
 	}
 
@@ -173,6 +173,22 @@ public class Tree {
 		if(n==null)
 			return;
 		GanttEvent ge = null;
+		
+		n.getChildList().sort(new Comparator<Node>() {
+			@Override
+         public int compare(Node o1, Node o2) {
+				if (o1.hasChildren() && o2.hasChildren() || !o1.hasChildren() && !o2.hasChildren()){
+					return o1.getValue().compareTo(o2.getValue());
+				} else {
+					if (o1.hasChildren()){
+						return 1;
+					} else {
+						return -1;
+					}
+				}
+         }
+		});
+		
 		for(Node c : n.getChildList()){
 			List<Event> events = c.getEventList();
 //			System.out.println(events);
@@ -188,6 +204,7 @@ public class Tree {
 						//" - "+event.getFileID()+
 //						" - "+event.getType()+"]",
 						start, end,5);
+				ge.setTextDisplayFormat("");
 				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
 				AdvancedTooltip att = new AdvancedTooltip(
 						"Commit ID: "+event.getCommitID(), 
@@ -198,27 +215,18 @@ public class Tree {
 				
 				ge.setAdvancedTooltip(att);
 				group.addEvent(ge);
-//				ge.setCheckpoint(true);
-				ge.setVerticalEventAlignment(SWT.CENTER);
-//				ti = new TreeItem(root, SWT.NONE);
-//				ti.setExpanded(true);
-//				ti.setText(c.getValue());
-				//				 note how we set the data to be the event for easy access in the tree listeners later on
-//				ti.setData(ge);
+//				ge.setVerticalEventAlignment(SWT.CENTER);
 				scopeEvent.addScopeEvent(ge);
 //				ge.hideAllChildren();
 			}
 
-			//			ge = new GanttEvent(chart, "actions", start, end,100);
-			//			ge.setCheckpoint(true);
-			//			ti = new TreeItem(root, SWT.NONE);		
 			TreeItem ti = new TreeItem(root, SWT.NONE);
 			ti.setText(c.getValue());
 			ti.setExpanded(true);
 //			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(new OurTreeData(group));
-			ti.setBackground(commitFileMap.get(c.getValue()));
-//			System.out.println("set data: to "+ti+" group "+group);
+//			ti.setBackground(commitFileMap.get(c.getValue()));
+
 			fillInGanttTree(ti, chart, c, scopeEvent, commitFileMap);
 		}
 	}	

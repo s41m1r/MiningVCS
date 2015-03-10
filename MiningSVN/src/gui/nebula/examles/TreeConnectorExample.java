@@ -1,5 +1,6 @@
 package gui.nebula.examles;
 
+
 /*******************************************************************************
  * Copyright (c) Emil Crumhorn - Hexapixel.com - emil.crumhorn@gmail.com
  * All rights reserved. This program and the accompanying materials
@@ -11,23 +12,16 @@ package gui.nebula.examles;
  *    emil.crumhorn@gmail.com - initial API and implementation
  *******************************************************************************/
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
-import org.eclipse.nebula.widgets.ganttchart.GanttControlParent;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
-import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
+import org.eclipse.nebula.widgets.ganttchart.GanttControlParent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.events.TraverseEvent;
-import org.eclipse.swt.events.TraverseListener;
-import org.eclipse.swt.events.TreeEvent;
-import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -39,18 +33,18 @@ import org.eclipse.swt.widgets.TreeItem;
 
 /**
  * This Snippet shows how to create a Tree on the left and a GanttChart widget on the right where the row heights match for both the tree and the chart. It also shows some simple
- * examples of how to tie some listeners with method calls to the GANTT chart. <br>
- * <br>
- * Important:<br>
+ * examples of how to tie some listeners with method calls to the GANTT chart. &lt;br&gt;
+ * &lt;br&gt;
+ * Important:&lt;br&gt;
  * Please note that this is a "Best attempt" at matching a tree and events in the chart. Some aspects may not be perfect as it's hard to sync two completely different widgets in
  * general, and even harder when one is a native widget that can look different in many different ways, and one is a GANTT chart that can look different as well.
- * <br><br>
+ * &lt;br&gt;&lt;br&gt;
  * Also, please note that this is an Example. There are probably a thousand ways of accomplishing something, so if this does not suit your needs, make the necessary changes.
- * <br><br>
- * Some notes:<br><br>
- * - Setting a fixed row height to a lesser value than the minimum row height in the tree/table will cause events not to line up. The GANTT chart supports tighter rows than the table/tree.<br>
- * - If you use a global fixed row override, individual fixed row heights are ignored. If you want different-height rows, set them manually.<br>
- * - Setting a vertical alignment is supported individually on both global row height overrides and normal fixed row height settings.<br>
+ * &lt;br&gt;&lt;br&gt;
+ * Some notes:&lt;br&gt;&lt;br&gt;
+ * - Setting a fixed row height to a lesser value than the minimum row height in the tree/table will cause events not to line up. The GANTT chart supports tighter rows than the table/tree.&lt;br&gt;
+ * - If you use a global fixed row override, individual fixed row heights are ignored. If you want different-height rows, set them manually.&lt;br&gt;
+ * - Setting a vertical alignment is supported individually on both global row height overrides and normal fixed row height settings.&lt;br&gt;
  */
 public class TreeConnectorExample {
 
@@ -80,14 +74,14 @@ public class TreeConnectorExample {
 
 		// values we will be using further down (see comments in related sections)
 		// row height
-		final int oneRowHeight = 62;
+		final int oneRowHeight = 24;
 		// spacer between each event, in this case 2 pixels as the horizontal lines in the tree take up 2 pixels per section (1 top, 1 bottom)
 		final int spacer = 2;
 
 		// usually whether to draw certain things are fetched from the ISettings implementing class, but there are a few overrides available for setting
 		// non-default values, two of those are the options to draw horizontal and vertical lines. Here we flip the defaults to disable vertical lines but to show horizontal lines.
 		ganttComposite.setDrawHorizontalLinesOverride(true);
-		ganttComposite.setDrawVerticalLinesOverride(true);
+		ganttComposite.setDrawVerticalLinesOverride(false);
 
 		// set each item height on the chart to be the same height as one item in the tree. This call basically sets the fixed row height for each event instead of
 		// setting it programatically. It's just a convenience method.
@@ -96,15 +90,14 @@ public class TreeConnectorExample {
 
 		// if you zoom in closely on the tree you'll see that the horizontal lines (that we activated) take up 2 in space (one at top, one at bottom)
 		// so we space the events using that value
-		//		ganttComposite.setEventSpacerOverride(spacer);
-
+		ganttComposite.setEventSpacerOverride(spacer*40);
+		
 		// as we want the chart to be created on the right side, we created the TreeControlParent without the chart as a parameter
 		// but as that control needs the chart to operate, we set it here (this is a must or you won't see a thing!)
 		left.setGanttChart(chart);
 
 		// create the tree. As it goes onto our special composite that will align it, we don't have to do any special settings on it
 		final Tree tree = new Tree(left, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
-		//		final Tree tree = new Tree(left,SWT.BORDER);
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
 
@@ -112,49 +105,39 @@ public class TreeConnectorExample {
 		// As we want some air, we force each item height to be 24 pixels.
 		tree.addListener(SWT.MeasureItem, new Listener() {
 			public void handleEvent(Event event) {
-				event.height = oneRowHeight;
+				event.height = oneRowHeight-spacer;
 			}
 		});
-
+		
 		// a few columns
-		TreeColumn tc1 = new TreeColumn(tree, SWT.BORDER);
-		tc1.setText("Directory");
+		TreeColumn tc1 = new TreeColumn(tree, SWT.NONE);
+		tc1.setText("Name");
 		tc1.setWidth(100);
-
-		TreeColumn tc2 = new TreeColumn(tree, SWT.BORDER);
-		tc2.setText("File");
+		
+		TreeColumn tc2 = new TreeColumn(tree, SWT.NONE);
+		tc2.setText("Type");
 		tc2.setWidth(300);
-
+		
 		// our root node that matches our scope
-		final TreeItem root = new TreeItem(tree, SWT.BORDER);
-		root.setText(new String[] { "Scope", "Events" });
-		root.setExpanded(false);
-
+		final TreeItem root = new TreeItem(tree, SWT.NONE);
+		root.setText(new String[] { "Scope", "Various Events" });
+		root.setExpanded(true);
+		
 		// this matches the "root" item
 		GanttEvent scopeEvent = new GanttEvent(chart, "Scope");
 		scopeEvent.setVerticalEventAlignment(SWT.CENTER);
 
-		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, 1);
-//		GanttEvent firstNode = new GanttEvent(chart, "First node", Calendar.getInstance(), c, 1);
-		GanttEvent firstNode = new GanttEvent(chart, "First node");
-		scopeEvent.addScopeEvent(firstNode);
-		TreeItem firstItem = new TreeItem(root, SWT.NONE);
-		firstItem.setText("First directory.");
-		firstItem.setData(firstNode);
-
 		// create 20 events, and 20 tree items that go under "root", dates don't really matter as we're an example
-		for (int i = 1, j=i+1; i < 21; i++, j+=2) {
+		for (int i = 1; i < 21;  i++) {
 			Calendar start = Calendar.getInstance();
 			Calendar end = Calendar.getInstance();
-			start.add(Calendar.DATE, i+j+1);
-			end.add(Calendar.DATE, j+i + 2);
-			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i+5);
-			end.add(Calendar.DATE, 1);
+			start.add(Calendar.DATE, 0);
+			end.add(Calendar.DATE, i + 5);
+			GanttEvent ge = new GanttEvent(chart, "Event " + i, start, end, i * 5);
 			ge.setVerticalEventAlignment(SWT.CENTER);
-			TreeItem ti = new TreeItem(firstItem, SWT.NONE);
+			TreeItem ti = new TreeItem(root, SWT.NONE);
 			ti.setText(new String[] { "Event " + i, "" + start.getTime() + " - " + end.getTime() });
-
+			
 			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(ge);
 
@@ -164,6 +147,7 @@ public class TreeConnectorExample {
 
 		// root node needs the scope event as data
 		root.setData(scopeEvent);
+		root.setExpanded(true);
 
 		// sashform sizes
 		sf.setWeights(new int[] { 30, 70 });
@@ -174,7 +158,7 @@ public class TreeConnectorExample {
 				TreeItem ti = tree.getTopItem();
 				// this will put the chart right where the event starts. There is also a method call setTopItem(GanttEvent, yOffset) where
 				// you can fine-tune the scroll location if you need to.
-				ganttComposite.setTopItem((GanttEvent) ti.getData(), SWT.LEFT);
+				ganttComposite.setTopItem((GanttEvent) ti.getData(), SWT.NONE);
 			}
 		});
 
@@ -185,110 +169,34 @@ public class TreeConnectorExample {
 			}
 
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("widgetSelected: "+e.item);
-				TreeItem ti = (TreeItem) e.item;
-//				if(ti.getData() instanceof GanttEvent){
-//					GanttEvent g = (GanttEvent)ti.getData();
-//					TreeItem[] tis = ti.getItems();
-//					GanttEvent[] events = new GanttEvent[tis.length];
-//					for (int i = 0; i < tis.length; i++) {
-//						events[i] = (GanttEvent) tis[i].getData();
-//					}
-//					System.out.println("events="+events.length);
-//					//				System.out.println("ti.getItemCount()"+ti.getItemCount()+" parent "+ti.getParentItem()+" height "+ti.getBounds());
-//					if (tree.getSelectionCount() == 0)
-//						return;
-//
-//					// set the selection
-//					TreeItem sel = tree.getSelection()[0];
-//					GanttEvent ge = (GanttEvent) sel.getData();
-//					ganttComposite.setSelection(ge);
-//				}
-				System.out.println("childs "+ti.getItemCount());
+				if (tree.getSelectionCount() == 0)
+					return;
+
+				// set the selection
+				TreeItem sel = tree.getSelection()[0];
+				GanttEvent ge = (GanttEvent) sel.getData();
+				ganttComposite.setSelection(ge);
 			}
 
 		});
 
 		// when a root node is collapsed/expanded, we collapse the entire scope in a similar fashion
-		//		Listener expandCollapseListener = new Listener() {
-		//			public void handleEvent(Event event) {
-		//				GanttEvent ge = (GanttEvent) root.getData();
-		//
-		//				if (event.type == SWT.Collapse) {
-		//					ge.hideAllChildren();
-		//					chart.redrawGanttChart();
-		//				} else {
-		//					ge.showAllChildren();
-		//					chart.redrawGanttChart();
-		//				}
-		//			}
-		//		};
+		Listener expandCollapseListener = new Listener() {
+			public void handleEvent(Event event) {
+				GanttEvent ge = (GanttEvent) root.getData();
 
-		//		tree.addListener(SWT.Collapse, expandCollapseListener);
-		//		tree.addListener(SWT.Expand, expandCollapseListener);
-		TreeListener treeListener = new TreeListener() {
-
-			@Override
-			public void treeExpanded(TreeEvent arg0) {
-				System.out.println("expanded "+arg0);
-				TreeItem ti = (TreeItem) arg0.item;
-				System.out.println("childs="+ti.getItemCount());
-				System.out.println(ti.getData());
-				Object data = ti.getData();
-				if(data instanceof GanttGroup){
-					GanttGroup gg = (GanttGroup) data;
-					List<GanttEvent> list = (List<GanttEvent>) gg.getEventMembers();
-					if (list==null || list.isEmpty())
-						return;
-//					System.out.println("events "+list.get(0));
-					TreeItem[] tis = ti.getItems();
-					if(tis==null)
-						return;
-					for (int i = 0; i < tis.length; i++) {
-						tis[i].setData(list.get(i));
-//						list.get(i).hideAllChildren();
-					}
-					gg.dispose();
-					ganttComposite.redraw();
+				if (event.type == SWT.Collapse) {
+					ge.hideAllChildren();
+					chart.redrawGanttChart();
+				} else {
+					ge.showAllChildren();
+					chart.redrawGanttChart();
 				}
-				else { 
-					if(data instanceof GanttEvent){
-						GanttEvent ge = (GanttEvent) data;
-						System.out.println("expanded GanttEvent:"+ge);
-					}
-				}
-			}
-			@Override
-			public void treeCollapsed(TreeEvent arg0) {
-				System.out.println("collapsed");
-				TreeItem ti = (TreeItem) arg0.item;
-				System.out.println(ti.getData().getClass());
-				if(ti.getData() instanceof GanttEvent){
-					GanttEvent g = (GanttEvent)ti.getData();
-					g.dispose();
-					TreeItem[] tis = ti.getItems();
-					GanttEvent[] events = new GanttEvent[tis.length];
-					GanttGroup ganttGroup = new GanttGroup(chart);
-					for (int i = 0; i < tis.length; i++) {
-						if(tis[i].getData() instanceof GanttGroup){
-//							System.out.println(tis[i].getData() + "is GanttGroup");
-							continue;
-						}
-						events[i] = (GanttEvent) tis[i].getData();
-						ganttGroup.addEvent(events[i]);
-					}
-					ganttComposite.redraw();
-					ti.setData(ganttGroup);
-				}
-				else{
-					GanttGroup gr = (GanttGroup) ti.getData();
-					gr.dispose();
-				}
-//				System.out.println("events="+events.length);
 			}
 		};
 
-		tree.addTreeListener(treeListener);
+		tree.addListener(SWT.Collapse, expandCollapseListener);
+		tree.addListener(SWT.Expand, expandCollapseListener);
 
 		shell.open();
 		while (!shell.isDisposed()) {
