@@ -121,7 +121,8 @@ public abstract class FileEventMap {
 			List<Event> events = map.get(string);
 			String st = "";
 			for (Event event : events) {
-				st+=event.getType()+" ";
+//				st+=event.getType()+" ";
+				st+=event;
 			}
 			System.out.println("["+string + " -> "+ st+"]");
 		}

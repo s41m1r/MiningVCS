@@ -23,6 +23,8 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -90,7 +92,7 @@ public class TreeConnectorExample {
 
 		// if you zoom in closely on the tree you'll see that the horizontal lines (that we activated) take up 2 in space (one at top, one at bottom)
 		// so we space the events using that value
-		ganttComposite.setEventSpacerOverride(spacer*40);
+		ganttComposite.setEventSpacerOverride(spacer);
 		
 		// as we want the chart to be created on the right side, we created the TreeControlParent without the chart as a parameter
 		// but as that control needs the chart to operate, we set it here (this is a must or you won't see a thing!)

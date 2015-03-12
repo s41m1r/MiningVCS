@@ -15,7 +15,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 import model.Event;
-import model.Log;
 
 import org.eclipse.nebula.widgets.ganttchart.AdvancedTooltip;
 import org.eclipse.nebula.widgets.ganttchart.ColorCache;
@@ -26,8 +25,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.TreeItem;
 import org.joda.time.DateTime;
-
-import util.FileEventMap;
 
 /**
  * @author Saimir Bala
@@ -153,22 +150,21 @@ public class Tree {
 		Map<String, Color> resultMap = new HashMap<String, Color>();
 		Set<String> keys = commitFileMap.keySet();
 		for (String key : keys) {
-	      resultMap.put(key, ColorCache.getRandomColor());
+	      resultMap.put(key.trim(), ColorCache.getRandomColor());
       }
 		return resultMap;
 	}
 
-	public void fillInGanttTree(TreeItem root, GanttChart chart, GanttEvent scopeEvent, Log log){
+	public void fillInGanttTree(TreeItem root, GanttChart chart, GanttEvent scopeEvent){
 //		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		// our root node that matches our scope
 		root.setText("Project structure");		
 		root.setExpanded(true);
-		Map<String, Color> commitColorMap = mapCommitToColor(FileEventMap.buildCommitFileMap(log));
 //		System.out.println(commitColorMap);
-		fillInGanttTree(root, chart, this.root, scopeEvent, commitColorMap);
+		fillInGanttTree(root, chart, this.root, scopeEvent);
 	}
 
-	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent, Map<String, Color> commitFileMap){
+	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent){
 
 		if(n==null)
 			return;
@@ -205,7 +201,8 @@ public class Tree {
 //						" - "+event.getType()+"]",
 						start, end,5);
 				ge.setTextDisplayFormat("");
-				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
+				ge.setData(event);
+//				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
 				AdvancedTooltip att = new AdvancedTooltip(
 						"Commit ID: "+event.getCommitID(), 
 						"Author:"+event.getAuthor().split("@|<")[0]+
@@ -226,8 +223,33 @@ public class Tree {
 //			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(new OurTreeData(group));
 //			ti.setBackground(commitFileMap.get(c.getValue()));
-
-			fillInGanttTree(ti, chart, c, scopeEvent, commitFileMap);
+			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
-	}	
+	}
+
+	/**
+	 * @param root2
+	 * @param commitColorMap
+	 * @param root3
+	 */
+   public void colorEvents(TreeItem ti, Map<String, Color> commitColorMap) {
+   	
+   	OurTreeData data = (OurTreeData) ti.getData();
+   	GanttGroup group = data.getGanttGroup();
+   	List<GanttEvent> geList = group.getEventMembers();
+   	geList.sort(new Comparator<GanttEvent>() {
+   		public int compare(GanttEvent o1, GanttEvent o2) {
+   			Event e1 = (Event) o1.getData();
+   			Event e2 = (Event) o2.getData();
+   			return -1*e1.getCommitID().compareTo(e2.getCommitID());
+   		};
+		});
+   	for(GanttEvent ge : geList){
+   		Event e = (Event) ge.getData();
+   		ge.setGradientStatusColor(commitColorMap.get(e.getCommitID()));
+   	}
+   	
+   	for(TreeItem child: ti.getItems())
+   		colorEvents(child, commitColorMap);
+   }
 }
