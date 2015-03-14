@@ -27,7 +27,7 @@ public class TestFileEventMap {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+		LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
 		//		LogReader<LogEntry> lr = new GITLogReader("resources/MiningSvn.log");
 		//		LogReader<LogEntry> lr = new GITLogReader("/home/saimir/ownCloud/project mining/data/data.gov.log");
 		Log log = new GITLog(lr.readAll());
@@ -44,7 +44,7 @@ public class TestFileEventMap {
 		Map<String, List<Event>> map = FileEventMap.buildFileEventMap(log);
 		FileEventMap.printMap(map);
 
-		System.out.println(FileEventMap.buildCommitFileMap(log));
+//		System.out.println(FileEventMap.buildCommitFileMap(log));
 	}
 
 }

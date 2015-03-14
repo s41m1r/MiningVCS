@@ -68,12 +68,25 @@ public class SVNLogReader implements LogReader<LogEntry>, Closeable {
 
 		if(line==null)
 			return null;
+		
+		while (line.equals("")) 
+	      line = br.readLine();
 
 		String revision = line.split("Revision: ")[1];
 		line = br.readLine();
-		String author = line.split("Author: ")[1];
+		System.out.println(revision);
+		String[] l = line.split("Author: "); 
+		String author = (l.length>1)? l[1] : "";
 		line = br.readLine();
 		String dateString = line.split("Date: ")[1];
+		Locale locale = new Locale("de", "AT", "Austria");
+		DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
+		DateTime date = null;
+		try {
+			date = germanFmt.parseDateTime(dateString);
+      } catch (Exception e) {
+      }
+		
 		line = br.readLine().trim();
 		if(!line.equals("Message:")){
 			br.close();
@@ -88,10 +101,6 @@ public class SVNLogReader implements LogReader<LogEntry>, Closeable {
 			Change ch = new Change(changeLine[0].trim(), changeLine[1].trim());
 			changeList.add(ch);
 		}
-
-		Locale locale = new Locale("de", "AT", "Austria");
-		DateTimeFormatter germanFmt = DateTimeFormat.forPattern("EEEE, dd. MMMM yyyy HH:mm:ss").withLocale(locale);
-		DateTime date = germanFmt.parseDateTime(dateString);
 
 		SVNLogEntry svnLogEntry = new SVNLogEntry(revision,author,date,message,changeList);
 
