@@ -13,13 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.text.Caret;
-
 import model.Log;
 import model.LogEntry;
 import model.svn.SVNLog;
-import model.tree.Node;
 
+import org.eclipse.nebula.widgets.ganttchart.AdvancedTooltip;
 import org.eclipse.nebula.widgets.ganttchart.ColorCache;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
@@ -28,19 +26,15 @@ import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
 import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.graphics.Region;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -147,6 +141,9 @@ public class DottedChart {
 		try {
 //			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 			LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
+//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Study_new.log");
+//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
+//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/out.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/abc.log");
@@ -157,8 +154,11 @@ public class DottedChart {
 			e1.printStackTrace();
 		}
 
-		Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
-
+//		Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
+		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
+		
+		System.out.println(fem.size());
+		
 		model.tree.Tree t = new model.tree.Tree();
 		Set<String> files = fem.keySet();
 		for (String string : files) {
@@ -260,8 +260,11 @@ public class DottedChart {
 				OurTreeData data = (OurTreeData) ti.getData();
 				
 				if (data != null){	
-					GanttEvent ge = (GanttEvent) data.getGanttGroup().getEventMembers().get(0);
-					ge.setHidden(false);
+					
+//					List<GanttEvent> listGanttEvents = (ArrayList<GanttEvent>) data.getGanttGroup().getEventMembers();
+//					for (GanttEvent ge : listGanttEvents)
+//						ge.setHidden(true);
+					
 					for (GanttEvent e : data.getCollapsedEvents()){
 						e.setHidden(false);
 					}
@@ -318,7 +321,7 @@ public class DottedChart {
 						}
 					}
 					superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
-
+					
 					data.setSuperEvents(superEvents);
 
 //					assert ganttComposite.getGroups().indexOf(newGroup) == index;
@@ -364,6 +367,7 @@ public class DottedChart {
 //				currentEndDate.add(Calendar.DATE, 0);
 				GanttEvent ganttEvent = new GanttEvent(parent, name, (Calendar)currentStartDate.clone(), (Calendar)currentEndDate.clone(), 100);
 				//				ganttEvent.hideAllChildren();
+				
 				ganttEvent.setName(name);
 				ganttEvent.setGradientStatusColor(ColorCache.getColor(240, 120, 50));
 //				ganttEvent.setStatusColor(ColorCache.getColor(240, 120, 50));
