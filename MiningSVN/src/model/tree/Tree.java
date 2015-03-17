@@ -23,6 +23,8 @@ import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
 import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.TreeItem;
 import org.joda.time.DateTime;
 
@@ -223,6 +225,7 @@ public class Tree {
 //			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(new OurTreeData(group));
 //			ti.setBackground(commitFileMap.get(c.getValue()));
+			ti.setFont(new Font(ti.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
 			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
 	}

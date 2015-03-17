@@ -17,13 +17,15 @@ import model.Log;
 import model.LogEntry;
 import model.svn.SVNLog;
 
-import org.eclipse.nebula.widgets.ganttchart.AdvancedTooltip;
 import org.eclipse.nebula.widgets.ganttchart.ColorCache;
+import org.eclipse.nebula.widgets.ganttchart.DefaultColorManager;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
 import org.eclipse.nebula.widgets.ganttchart.GanttControlParent;
 import org.eclipse.nebula.widgets.ganttchart.GanttEvent;
+import org.eclipse.nebula.widgets.ganttchart.GanttFlags;
 import org.eclipse.nebula.widgets.ganttchart.GanttGroup;
+import org.eclipse.nebula.widgets.ganttchart.ISettings;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
@@ -31,6 +33,8 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -61,6 +65,7 @@ import util.FileEventMap;
 public class DottedChart {
 
 	public static final int NUM_OF_DAYS_THRESHOLD = 7;
+//	private static final IPaintManager MyPaintManager = null;
 
 	public static void main(String[] args) {
 		// standard display and shell etc
@@ -81,7 +86,11 @@ public class DottedChart {
 		final GanttControlParent left = new GanttControlParent(sf, SWT.NONE);
 
 		// our GANTT chart, will end up on the right in the sash
-		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+//		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		ISettings settings = new MySettings();
+		settings.lockHeaderOnVerticalScroll();
+		final GanttChart chart = new GanttChart(sf, GanttFlags.H_SCROLL_FIXED_RANGE, 
+				settings, new DefaultColorManager(), new MyPaintManager(), null);
 //		final ScrolledComposite sc2 = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 
 		// we will be using method calls straight onto the chart itself, so we set it to a variable
@@ -89,7 +98,7 @@ public class DottedChart {
 
 		// values we will be using further down (see comments in related sections)
 		// row height
-		final int oneRowHeight = 24;
+		final int oneRowHeight = 36;
 		// spacer between each event, in this case 2 pixels as the horizontal lines in the tree take up 2 pixels per section (1 top, 1 bottom)
 		final int spacer = 2;
 
@@ -133,7 +142,8 @@ public class DottedChart {
 		scopeEvent.setVerticalEventAlignment(SWT.CENTER);
 		scopeEvent.setTextDisplayFormat("");
 		scopeGroup.addEvent(scopeEvent);
-//		scopeEvent.setMoveable(false);
+		scopeEvent.setMoveable(false);
+		scopeEvent.setLocked(true);
 
 		// our root node that matches our scope
 		final TreeItem root = new TreeItem(tree, SWT.BORDER);
@@ -165,8 +175,6 @@ public class DottedChart {
 			t.add(string, fem.get(string));
 		}
 
-
-
 		t.fillInGanttTree(root, chart, scopeEvent);
 		//root node needs the scope event as data
 		Map<String, Color> commitColorMap = model.tree.Tree.mapCommitToColor(FileEventMap.buildCommitFileMap(log));
@@ -176,6 +184,11 @@ public class DottedChart {
 		t.colorEvents(root, commitColorMap);
 		// sashform sizes
 		sf.setWeights(new int[] { 30, 70 });
+		
+		for (FontData fd : root.getFont().getFontData())
+			System.out.println("Font = "+fd);
+		
+		root.setFont(new Font(root.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
 
 		// when the tree scrolls, we want to set the top visible item in the gantt chart to the top most item in the tree
 //		tree.getVerticalBar().addListener(SWT.Selection, new Listener() {
@@ -193,18 +206,18 @@ public class DottedChart {
 ////				ganttComposite.jumpToEvent(ge, true, SWT.CENTER);
 //			}
 //		});
-		
-		ganttComposite.getVerticalBar().addListener(SWT.SCROLL_LINE, new Listener() {
-			
-			@Override
-			public void handleEvent(Event event) {
-				// TODO Auto-generated method stub
-				TreeItem ti = tree.getTopItem();
-				OurTreeData data = (OurTreeData) ti.getData();
-				GanttEvent ge = (GanttEvent) data.getGanttGroup().getEventMembers().get(0);
-				ganttComposite.setTopItem(ge, SWT.CENTER);
-			}
-		});
+//		
+//		ganttComposite.getVerticalBar().addListener(SWT.SCROLL_LINE, new Listener() {
+//			
+//			@Override
+//			public void handleEvent(Event event) {
+//				// TODO Auto-generated method stub
+//				TreeItem ti = tree.getTopItem();
+//				OurTreeData data = (OurTreeData) ti.getData();
+//				GanttEvent ge = (GanttEvent) data.getGanttGroup().getEventMembers().get(0);
+//				ganttComposite.setTopItem(ge, SWT.CENTER);
+//			}
+//		});
 
 		// when an item is selected in the tree, we highlight it by setting it selected in the chart as well
 		tree.addSelectionListener(new SelectionListener() {
@@ -222,9 +235,10 @@ public class DottedChart {
 				if(ge!=null){
 					//					ganttComposite.setTopItem(ge, -100, SWT.CENTER);
 //					System.out.println(tree.getSelection()[0].getBounds());
-//					ganttComposite.showEvent(ge, SWT.CENTER);
-//					ganttComposite.setTopItem(ge, SWT.CENTER);
+//					ganttComposite.showEvent(scopeEvent, SWT.CENTER);
+//					ganttComposite.setTopItem(scopeEvent, SWT.CENTER);
 					ganttComposite.jumpToEvent(ge, true, SWT.CENTER);	
+					ganttComposite.heavyRedraw();
 				}
 			}
 
@@ -333,7 +347,7 @@ public class DottedChart {
 //						e1.printStackTrace();
 //					}
 				}
-				ganttComposite.heavyRedraw();
+//				ganttComposite.heavyRedraw();
 			}
 
 			/**
@@ -378,11 +392,14 @@ public class DottedChart {
 				return ganttEvent;
 			}
 		};
-
+		
+//		System.out.println(ganttComposite.getListeners(0));
 		tree.addTreeListener(treeListener);
 		
-		chart.getGanttComposite().jumpToEarliestEvent();
-
+		ganttComposite.jumpToEarliestEvent();
+//		ganttComposite.setShowDaysOnEvents(true);
+//		ganttComposite.setFixedRowHeightOverride(70);
+				
 		shell.open();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())
@@ -400,4 +417,3 @@ public class DottedChart {
 		}
 	}
 }
-
