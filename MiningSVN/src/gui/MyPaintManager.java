@@ -28,5 +28,6 @@ public class MyPaintManager extends DefaultPaintManager{
 //		System.out.println("quiiiiiiii");
 	   super.drawEvent(ganttComposite, settings, colorManager, event, gc, isSelected,
 	         threeDee, dayWidth, xStart, y-24, eventWidth, new Rectangle(bounds.x, bounds.y, bounds.width+24, bounds.width+24));
-	}	
+	}
+	
 }

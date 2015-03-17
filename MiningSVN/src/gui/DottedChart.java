@@ -86,16 +86,17 @@ public class DottedChart {
 		final GanttControlParent left = new GanttControlParent(sf, SWT.NONE);
 
 		// our GANTT chart, will end up on the right in the sash
-//		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		ISettings settings = new MySettings();
 		settings.lockHeaderOnVerticalScroll();
-		final GanttChart chart = new GanttChart(sf, GanttFlags.H_SCROLL_FIXED_RANGE, 
-				settings, new DefaultColorManager(), new MyPaintManager(), null);
+//		final GanttChart chart = new GanttChart(sf, GanttFlags.H_SCROLL_FIXED_RANGE, 
+//				settings, new DefaultColorManager(), new MyPaintManager(), null);
+		
 //		final ScrolledComposite sc2 = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 
 		// we will be using method calls straight onto the chart itself, so we set it to a variable
 		final GanttComposite ganttComposite = chart.getGanttComposite();
-
+		//ganttComposite.setFont(new Font(ganttComposite.getDisplay(), new FontData("Arial", 18, SWT.NONE)));
 		// values we will be using further down (see comments in related sections)
 		// row height
 		final int oneRowHeight = 36;
@@ -164,8 +165,8 @@ public class DottedChart {
 			e1.printStackTrace();
 		}
 
-//		Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
-		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
+		Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
+//		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
 		
 		System.out.println(fem.size());
 		
@@ -185,10 +186,10 @@ public class DottedChart {
 		// sashform sizes
 		sf.setWeights(new int[] { 30, 70 });
 		
-		for (FontData fd : root.getFont().getFontData())
-			System.out.println("Font = "+fd);
+//		for (FontData fd : root.getFont().getFontData())
+//			System.out.println("Font = "+fd);
 		
-		root.setFont(new Font(root.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
+//		root.setFont(new Font(root.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
 
 		// when the tree scrolls, we want to set the top visible item in the gantt chart to the top most item in the tree
 //		tree.getVerticalBar().addListener(SWT.Selection, new Listener() {
@@ -263,7 +264,6 @@ public class DottedChart {
 				}
 				ganttComposite.refresh();
 			}
-
 		});
 
 		TreeListener treeListener = new TreeListener() {
@@ -273,7 +273,7 @@ public class DottedChart {
 				TreeItem ti =  (TreeItem) arg0.item;
 				OurTreeData data = (OurTreeData) ti.getData();
 				
-				if (data != null){	
+				if (data != null){
 					
 //					List<GanttEvent> listGanttEvents = (ArrayList<GanttEvent>) data.getGanttGroup().getEventMembers();
 //					for (GanttEvent ge : listGanttEvents)
@@ -287,6 +287,13 @@ public class DottedChart {
 					}
 				}
 				ganttComposite.heavyRedraw();
+				GanttGroup gg = data.getGanttGroup();
+				System.out.println("Events in group are:");
+				for(GanttEvent ge : (List<GanttEvent>) gg.getEventMembers())
+					
+					System.out.println(ge.getName()+" ["+ge.getActualStartDate().get(Calendar.DATE)+
+							","+ge.getActualEndDate().get(Calendar.DATE)+"]");
+				
 			}
 
 			@Override
@@ -370,12 +377,14 @@ public class DottedChart {
 					Iterator<GanttEvent> iter = eList.iterator();
 					while(iter.hasNext()){
 						GanttEvent ganttEvent = iter.next();
-						subEvents.add(ganttEvent);
+						if(!subEvents.contains(ganttEvent))
+							subEvents.add(ganttEvent);
 						ganttEvent.setHidden(!visible);
 					}
 					setSubEventsVisible(items[i].getItems(), visible, subEvents);
 				}
 			}
+			
 			private GanttEvent addNewGanttEvent(GanttChart parent, GanttGroup gg,
 					Calendar currentStartDate, Calendar currentEndDate, String name) {
 //				currentEndDate.add(Calendar.DATE, 0);
@@ -393,6 +402,7 @@ public class DottedChart {
 			}
 		};
 		
+		
 //		System.out.println(ganttComposite.getListeners(0));
 		tree.addTreeListener(treeListener);
 		
@@ -408,12 +418,15 @@ public class DottedChart {
 		display.dispose();
 	}
 
-
 	private static void printStructure(TreeItem root) {
 		System.out.println("Data="+root.getData()+" Text="+root.getText());
 		TreeItem[] tis = root.getItems();
 		for (int i = 0; i < tis.length; i++) {
 			printStructure(tis[i]);
 		}
+	}
+	
+	private static void printIdleTimes(TreeItem root) {
+		
 	}
 }
