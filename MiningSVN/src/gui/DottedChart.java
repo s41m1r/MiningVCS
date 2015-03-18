@@ -420,7 +420,6 @@ public class DottedChart {
 				
 				data.collapse();
 				
-				Set<GanttEvent> hiddenEvents = new HashSet<GanttEvent>();
 				GanttGroup gg = (GanttGroup) data.getGanttGroup();
 				
 				System.out.println(data.getGanttGroup().getEventMembers().size()+ 
@@ -428,15 +427,17 @@ public class DottedChart {
 						" hidden "+data.getHiddenEvents().size());
 				
 				
-				for(GanttEvent e : (List<GanttEvent>)gg.getEventMembers()){
-					hiddenEvents.add(e);
-				}
-				data.setHiddenEvents(hiddenEvents);
+//				for(GanttEvent e : (List<GanttEvent>)gg.getEventMembers()){
+//					data.getHiddenEvents().add(e);
+//				}
+
 				Iterator<GanttEvent> it = data.getHiddenEvents().iterator();
 				while (it.hasNext()) {
 					System.out.println(it.next());
 				}
-				collapse(ti);
+				//hide events on children
+				collapse(ti.getItems());
+				ganttComposite.redraw();
          }
 
 			@Override
@@ -444,12 +445,14 @@ public class DottedChart {
 				
          }
 			
-			private void collapse(TreeItem root){
-				TreeData data = (TreeData) root.getData();
-				data.collapse();
-				TreeItem[] childs = root.getItems();
-				for (int i = 0; i < childs.length; i++) {
-					collapse(childs[i]);
+			private void collapse(TreeItem[] treeItems){
+				for (int i = 0; i < treeItems.length; i++) {
+					TreeData data = (TreeData) treeItems[i].getData();
+					GanttGroup group = data.getGanttGroup();
+					for (GanttEvent e : (List<GanttEvent>)group.getEventMembers()) {
+	               e.setHidden(true);
+               }
+					collapse(treeItems[i].getItems());
 				}
 			}
 		};
