@@ -271,7 +271,8 @@ public class DottedChart {
 						e.setHidden(true);
 					}
 				}
-				printNumberOfIdleTimes(ti);
+				Object[][] d = new Object[fem.size()][ti.getItems().length];
+				printNumberOfIdleTimes(ti, d);
 				ganttComposite.heavyRedraw();
 			}
 
@@ -333,7 +334,8 @@ public class DottedChart {
 							//						e1.printStackTrace();
 							//					}
 						}
-						printNumberOfIdleTimes(ti);
+						Object[][] d = new Object[fem.size()][ti.getItems().length];
+						printNumberOfIdleTimes(ti,d);
 						ganttComposite.heavyRedraw();
 			}
 
@@ -424,13 +426,15 @@ public class DottedChart {
 	/*
 	 * number of identified idle times
 	 */
-	public static void printNumberOfIdleTimes(TreeItem root){
+	public static void printNumberOfIdleTimes(TreeItem root, Object[][] data){
 		//		System.out.println("============================================================================");
 		//		System.out.println("Level \t\t File \t\t Idle periods \t\t Through periods");
-		String[] columnNames = { "File", "Level", "Idle periods", "Through periods"};
+		System.out.println();
+		final Object[] columnNames = { "File", "Level", "Idle periods", "Through periods"};
 		System.out.format("%-5s%-36s%15s %15s\n", columnNames);
-		System.out.println("============================================================================");
-		Object[][] data = new Object[1000][root.getItems().length];
+		System.out.println("==========================================================================");
+		
+		
 		numberOfIdleTimesToTabularForm(root, 0, data, 0);
 		for (final Object[] row : data) {
 			if(row[0]==null)
@@ -439,7 +443,8 @@ public class DottedChart {
 		}
 		//		TextTable tt = new TextTable(columnNames, data);
 		//		tt.printTable();
-		System.out.println("============================================================================");
+//		System.out.println("==========================================================================");
+		System.out.println();
 	}
 
 	public static void numberOfIdleTimesToTabularForm(TreeItem root, int level, Object[][] data2, int row){
