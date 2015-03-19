@@ -74,7 +74,7 @@ public class SVNLogReader implements LogReader<LogEntry>, Closeable {
 
 		String revision = line.split("Revision: ")[1];
 		line = br.readLine();
-		System.out.println(revision);
+//		System.out.println(revision);
 		String[] l = line.split("Author: "); 
 		String author = (l.length>1)? l[1] : "";
 		line = br.readLine();

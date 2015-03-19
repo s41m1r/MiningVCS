@@ -10,14 +10,17 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Change;
 import model.Log;
 import model.LogEntry;
-import model.git.GITLog;
 import model.svn.SVNLog;
-import reader.GITLogReader;
+
+import org.joda.time.DateTime;
+
 import reader.LogReader;
 import reader.SVNLogReader;
 
@@ -43,10 +46,10 @@ public class TestLog {
 //		System.out.println(log);
 //		toFile("/home/saimir/Downloads/out.txt");
 //		System.out.println("Entries="+log.size());
-//		System.out.println("Authors="+log.getAllAuthors());
-//		LinkedList<DateTime> dates = new LinkedList<DateTime>(log.getAllDates());
-//		Collections.sort(dates);
-//		System.out.println("Dates="+dates);
+		System.out.println("Authors="+log.getAllAuthors().size());
+		LinkedList<DateTime> dates = new LinkedList<DateTime>(log.getAllDates());
+		Collections.sort(dates);
+		System.out.println("Dates="+dates);
 //		Collection<List<Change>> changesDistinct = log.getGroupedChanges();
 //		System.out.println("Grouped changes="+ changesDistinct.size());
 		Collection<Change> changesAll = log.getAllChanges(); 

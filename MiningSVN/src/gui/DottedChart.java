@@ -17,7 +17,6 @@ import model.Log;
 import model.LogEntry;
 import model.svn.SVNLog;
 
-import org.eclipse.nebula.widgets.ganttchart.AdvancedTooltip;
 import org.eclipse.nebula.widgets.ganttchart.ColorCache;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
@@ -39,6 +38,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
+import dnl.utils.text.table.TextTable;
 import reader.LogReader;
 import reader.SVNLogReader;
 import util.FileEventMap;
@@ -64,7 +64,7 @@ public class DottedChart {
 
 	public static void main(String[] args) {
 		// standard display and shell etc
-		Display display = new Display();
+		final Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setText("Gantt Chart");
 		shell.setSize(900, 500);
@@ -82,7 +82,7 @@ public class DottedChart {
 
 		// our GANTT chart, will end up on the right in the sash
 		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-//		final ScrolledComposite sc2 = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		//		final ScrolledComposite sc2 = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 
 		// we will be using method calls straight onto the chart itself, so we set it to a variable
 		final GanttComposite ganttComposite = chart.getGanttComposite();
@@ -125,7 +125,6 @@ public class DottedChart {
 			}
 		});
 
-		
 		GanttGroup scopeGroup = new GanttGroup(chart);
 
 		GanttGroup rootGroup = new GanttGroup(chart);
@@ -133,17 +132,17 @@ public class DottedChart {
 		scopeEvent.setVerticalEventAlignment(SWT.CENTER);
 		scopeEvent.setTextDisplayFormat("");
 		scopeGroup.addEvent(scopeEvent);
-//		scopeEvent.setMoveable(false);
+		//		scopeEvent.setMoveable(false);
 
 		// our root node that matches our scope
 		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		Log log = null; 
 		try {
-//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 			LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
-//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Study_new.log");
-//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
-//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
+			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Study_new.log");
+			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
+			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/out.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/abc.log");
@@ -154,11 +153,11 @@ public class DottedChart {
 			e1.printStackTrace();
 		}
 
-//		Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
-		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
-		
-		System.out.println(fem.size());
-		
+		final Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
+		//		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
+
+		System.out.println("Loaded "+fem.size()+" objects (files).");
+
 		model.tree.Tree t = new model.tree.Tree();
 		Set<String> files = fem.keySet();
 		for (String string : files) {
@@ -178,24 +177,24 @@ public class DottedChart {
 		sf.setWeights(new int[] { 30, 70 });
 
 		// when the tree scrolls, we want to set the top visible item in the gantt chart to the top most item in the tree
-//		tree.getVerticalBar().addListener(SWT.Selection, new Listener() {
-//			public void handleEvent(Event event) {
-//				TreeItem ti = tree.getTopItem();
-//				// this will put the chart right where the event starts. There is also a method call setTopItem(GanttEvent, yOffset) where
-//				// you can fine-tune the scroll location if you need to.
-//				GanttGroup gg = ((OurTreeData)ti.getData()).getGanttGroup();
-//				if(gg.getEventMembers().size()==0)
-//					return;
-//				GanttEvent ge = (GanttEvent) gg.getEventMembers().get(0);
-////				ganttComposite.setTopItem(ge, SWT.NONE);
-////				ganttComposite.setTopItem(ge, ti.getBounds().y, SWT.CENTER);
-////				ganttComposite.setDate(ge.getActualEndDate());
-////				ganttComposite.jumpToEvent(ge, true, SWT.CENTER);
-//			}
-//		});
-		
+		//		tree.getVerticalBar().addListener(SWT.Selection, new Listener() {
+		//			public void handleEvent(Event event) {
+		//				TreeItem ti = tree.getTopItem();
+		//				// this will put the chart right where the event starts. There is also a method call setTopItem(GanttEvent, yOffset) where
+		//				// you can fine-tune the scroll location if you need to.
+		//				GanttGroup gg = ((OurTreeData)ti.getData()).getGanttGroup();
+		//				if(gg.getEventMembers().size()==0)
+		//					return;
+		//				GanttEvent ge = (GanttEvent) gg.getEventMembers().get(0);
+		////				ganttComposite.setTopItem(ge, SWT.NONE);
+		////				ganttComposite.setTopItem(ge, ti.getBounds().y, SWT.CENTER);
+		////				ganttComposite.setDate(ge.getActualEndDate());
+		////				ganttComposite.jumpToEvent(ge, true, SWT.CENTER);
+		//			}
+		//		});
+
 		ganttComposite.getVerticalBar().addListener(SWT.SCROLL_LINE, new Listener() {
-			
+
 			@Override
 			public void handleEvent(Event event) {
 				// TODO Auto-generated method stub
@@ -210,41 +209,41 @@ public class DottedChart {
 		tree.addSelectionListener(new SelectionListener() {
 
 			public void widgetDefaultSelected(SelectionEvent e) {
-//				System.out.println("default selected");
+				//				System.out.println("default selected");
 				GanttEvent ge = null;
 				OurTreeData data = (OurTreeData) tree.getSelection()[0].getData();
-				
+
 				if(data.getGanttGroup().getEventMembers().size()==0)
 					return;
-				
+
 				ge = (GanttEvent) data.getGanttGroup().getEventMembers().get(0);
 
 				if(ge!=null){
 					//					ganttComposite.setTopItem(ge, -100, SWT.CENTER);
-//					System.out.println(tree.getSelection()[0].getBounds());
-//					ganttComposite.showEvent(ge, SWT.CENTER);
-//					ganttComposite.setTopItem(ge, SWT.CENTER);
+					//					System.out.println(tree.getSelection()[0].getBounds());
+					//					ganttComposite.showEvent(ge, SWT.CENTER);
+					//					ganttComposite.setTopItem(ge, SWT.CENTER);
 					ganttComposite.jumpToEvent(ge, true, SWT.CENTER);	
 				}
 			}
 
 			public void widgetSelected(SelectionEvent e) {
-				
+
 				if (tree.getSelectionCount() == 0)
 					return;
 
 				// set the selection
 				TreeItem sel = tree.getSelection()[0];
 				OurTreeData data = (OurTreeData) sel.getData();
-				
+
 				if (data == null){
 					return;
 				}
 				GanttGroup group = (GanttGroup) data.getGanttGroup();
 				List<GanttEvent> events = group.getEventMembers();
-				
+
 				for (GanttEvent ganttEvent : events) {
-//					Color c = null;
+					//					Color c = null;
 					ganttEvent.setStatusColor(ColorCache.getWhite());
 				}
 				ganttComposite.refresh();
@@ -258,13 +257,13 @@ public class DottedChart {
 			public void treeExpanded(TreeEvent arg0) {
 				TreeItem ti =  (TreeItem) arg0.item;
 				OurTreeData data = (OurTreeData) ti.getData();
-				
+
 				if (data != null){	
-					
-//					List<GanttEvent> listGanttEvents = (ArrayList<GanttEvent>) data.getGanttGroup().getEventMembers();
-//					for (GanttEvent ge : listGanttEvents)
-//						ge.setHidden(true);
-					
+
+					//					List<GanttEvent> listGanttEvents = (ArrayList<GanttEvent>) data.getGanttGroup().getEventMembers();
+					//					for (GanttEvent ge : listGanttEvents)
+					//						ge.setHidden(true);
+
 					for (GanttEvent e : data.getCollapsedEvents()){
 						e.setHidden(false);
 					}
@@ -272,6 +271,7 @@ public class DottedChart {
 						e.setHidden(true);
 					}
 				}
+				printNumberOfIdleTimes(ti);
 				ganttComposite.heavyRedraw();
 			}
 
@@ -284,56 +284,57 @@ public class DottedChart {
 				//				if (data.getCollapsedEvents().isEmpty()){ 
 
 				GanttGroup ganttGroup = (GanttGroup) data.getGanttGroup();
-//				int index = ganttComposite.getGroups().indexOf(ganttGroup);
+				//				int index = ganttComposite.getGroups().indexOf(ganttGroup);
 
 				GanttGroup newGroup = ganttGroup;// new GanttGroup(chart);
 
-//				List<GanttEvent> oldEvents = new ArrayList<GanttEvent>();
-//				for (Object e : ganttGroup.getEventMembers()){
-//					oldEvents.add((GanttEvent) e);
-//				}
+				//				List<GanttEvent> oldEvents = new ArrayList<GanttEvent>();
+				//				for (Object e : ganttGroup.getEventMembers()){
+				//					oldEvents.add((GanttEvent) e);
+				//				}
 
 				List<GanttEvent> subEvents = new ArrayList<GanttEvent>();
-//				List<GanttEvent> subEvents = new LinkedList<GanttEvent>(oldEvents);
+				//				List<GanttEvent> subEvents = new LinkedList<GanttEvent>(oldEvents);
 				setSubEventsVisible(items, false, subEvents);
 				data.setCollapsedEvents(subEvents);
 
 				List<GanttEvent> superEvents = new LinkedList<GanttEvent>();
 				String fatherName = (ganttGroup.getEventMembers().size()>0)? 
 						((GanttEvent)ganttGroup.getEventMembers().get(0)).getName(): "Project";
-				subEvents.sort(new GanttEventComparator());
-				if (subEvents.size() > 0){
-					Calendar currentStartDate = subEvents.get(0).getActualStartDate();
-					Calendar currentEndDate = subEvents.get(0).getActualEndDate();
+						subEvents.sort(new GanttEventComparator());
+						if (subEvents.size() > 0){
+							Calendar currentStartDate = subEvents.get(0).getActualStartDate();
+							Calendar currentEndDate = subEvents.get(0).getActualEndDate();
 
-					for (GanttEvent ganttEvent : subEvents){
-						Calendar date = (Calendar) currentEndDate.clone();
-						date.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
-						if (date.before(ganttEvent.getActualEndDate())){
-							// start a new one
+							for (GanttEvent ganttEvent : subEvents){
+								Calendar date = (Calendar) currentEndDate.clone();
+								date.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
+								if (date.before(ganttEvent.getActualEndDate())){
+									// start a new one
+									superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
+									currentStartDate = ganttEvent.getActualStartDate();
+									currentEndDate = ganttEvent.getActualEndDate();
+								} else {
+									// extend thresholds
+									//ganttGroup.addEvent(new GanttEvent(chart, "", currentStartDate, currentEndDate, 50));
+									currentEndDate = (Calendar) ganttEvent.getActualEndDate().clone();
+								}
+							}
 							superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
-							currentStartDate = ganttEvent.getActualStartDate();
-							currentEndDate = ganttEvent.getActualEndDate();
-						} else {
-							// extend thresholds
-							//ganttGroup.addEvent(new GanttEvent(chart, "", currentStartDate, currentEndDate, 50));
-							currentEndDate = (Calendar) ganttEvent.getActualEndDate().clone();
-						}
-					}
-					superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
-					
-					data.setSuperEvents(superEvents);
 
-//					assert ganttComposite.getGroups().indexOf(newGroup) == index;
-//
-//					try {
-//						Thread.sleep(100);
-//					} catch (InterruptedException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-				}
-				ganttComposite.heavyRedraw();
+							data.setSuperEvents(superEvents);
+
+							//					assert ganttComposite.getGroups().indexOf(newGroup) == index;
+							//
+							//					try {
+							//						Thread.sleep(100);
+							//					} catch (InterruptedException e1) {
+							//						// TODO Auto-generated catch block
+							//						e1.printStackTrace();
+							//					}
+						}
+						printNumberOfIdleTimes(ti);
+						ganttComposite.heavyRedraw();
 			}
 
 			/**
@@ -364,13 +365,13 @@ public class DottedChart {
 			}
 			private GanttEvent addNewGanttEvent(GanttChart parent, GanttGroup gg,
 					Calendar currentStartDate, Calendar currentEndDate, String name) {
-//				currentEndDate.add(Calendar.DATE, 0);
+				//				currentEndDate.add(Calendar.DATE, 0);
 				GanttEvent ganttEvent = new GanttEvent(parent, name, (Calendar)currentStartDate.clone(), (Calendar)currentEndDate.clone(), 100);
 				//				ganttEvent.hideAllChildren();
-				
+
 				ganttEvent.setName(name);
 				ganttEvent.setGradientStatusColor(ColorCache.getColor(240, 120, 50));
-//				ganttEvent.setStatusColor(ColorCache.getColor(240, 120, 50));
+				//				ganttEvent.setStatusColor(ColorCache.getColor(240, 120, 50));
 				ganttEvent.setTextDisplayFormat("");
 				gg.addEvent(ganttEvent);
 				ganttEvent.setVerticalEventAlignment(SWT.CENTER);
@@ -380,7 +381,27 @@ public class DottedChart {
 		};
 
 		tree.addTreeListener(treeListener);
-		
+		//		tree.addListener(SWT.MouseDown, new Listener() {
+		//
+		//			@Override
+		//			public void handleEvent(Event arg0) {
+		//				// TODO Auto-generated method stub
+		//				if(arg0.button==3){//right click
+		//
+		//					//	c1 = new 
+		//					//c1.setLayoutData(new GridData(300, 300));
+		//					final Text text = new Text(tree, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		//					text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		//					text.setText("");
+		//					Composite c1 = new Composite(tree, SWT.NONE);
+		//					Decorations d = new Decorations(c1, SWT.NONE);
+		//					Menu menu = new Menu (d, SWT.POP_UP);
+		//					MenuItem item = new MenuItem (menu, SWT.PUSH);
+		//					item.setText ("Popup");
+		//				}
+		//			}
+		//		});
+
 		chart.getGanttComposite().jumpToEarliestEvent();
 
 		shell.open();
@@ -399,5 +420,113 @@ public class DottedChart {
 			printStructure(tis[i]);
 		}
 	}
+
+	/*
+	 * number of identified idle times
+	 */
+	public static void printNumberOfIdleTimes(TreeItem root){
+		//		System.out.println("============================================================================");
+		//		System.out.println("Level \t\t File \t\t Idle periods \t\t Through periods");
+		String[] columnNames = { "File", "Level", "Idle periods", "Through periods"};
+		System.out.format("%-5s%-36s%15s %15s\n", columnNames);
+		System.out.println("============================================================================");
+		Object[][] data = new Object[1000][root.getItems().length];
+		numberOfIdleTimesToTabularForm(root, 0, data, 0);
+		for (final Object[] row : data) {
+			if(row[0]==null)
+				break;
+			System.out.format("%-5s%-30s%15s%15s\n", row);
+		}
+		//		TextTable tt = new TextTable(columnNames, data);
+		//		tt.printTable();
+		System.out.println("============================================================================");
+	}
+
+	public static void numberOfIdleTimesToTabularForm(TreeItem root, int level, Object[][] data2, int row){
+
+		OurTreeData data = (OurTreeData) root.getData();
+		List<GanttEvent> events = (List<GanttEvent>) data.getGanttGroup().getEventMembers();
+
+		ArrayList<GanttEvent> distinctEvents = new ArrayList<GanttEvent>();
+		for (GanttEvent ganttEvent : events) {
+			if(!containsEvent(distinctEvents,ganttEvent) && !ganttEvent.isHidden()){
+				distinctEvents.add(ganttEvent);
+			}
+		}
+		if(distinctEvents.size()==0)
+			return;
+
+		String s = "";
+
+		int c = countIdleTimes(distinctEvents);
+
+		//		for(int j=level; j>0; j--)
+		//			System.out.print(" ");
+
+		//		s+="\t\t "+c;
+		//		s+="\t\t "+(c+1);
+		//		System.out.println("+-["+level+"] \t"+root.getText()+" "+s);
+		data2[row][0] = level;
+		data2[row][1] = root.getText();
+		data2[row][2] = c;
+		data2[row][3] = c+1;
+
+		TreeItem[] tis = root.getItems();
+		for (int i = 0; i < tis.length; i++) {
+			numberOfIdleTimesToTabularForm(tis[i], level+1, data2, row+1);
+		}
+	}
+
+	/**
+	 * @param distinctEvents
+	 * @return number of idle times
+	 */
+	private static int countIdleTimes(ArrayList<GanttEvent> distinctEvents) {
+		distinctEvents.sort(new GanttEventComparator());
+		int res = 0;
+		for (int i=0; i<distinctEvents.size()-1; i++) {
+			Calendar end = (Calendar) distinctEvents.get(i).getActualEndDate().clone();
+			Calendar start = (Calendar) distinctEvents.get(i+1).getActualStartDate().clone();
+			end.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
+			if(end.before(start)){
+				//distinct groups
+				res++;
+			}
+		}
+		return res;
+	}
+
+
+	/**
+	 * @param distinctEvents
+	 * @param ganttEvent
+	 * @return
+	 */
+	private static boolean containsEvent(ArrayList<GanttEvent> distinctEvents,
+			GanttEvent ganttEvent) {
+		for (GanttEvent ge : distinctEvents) {
+			if(sameStartAndEnd(ge, ganttEvent))
+				return true;
+		}
+		return false;
+	}
+
+
+	/*
+	 * number of through-going work periods
+	 */
+	public static int numberOfThroughGoingPeriods() {
+		int res=0;
+		return res;
+	}
+
+	/*
+	 * Simplification: if they have same start and end dates, then they are the same GanttEvent
+	 */
+	public static boolean sameStartAndEnd(GanttEvent e1, GanttEvent e2){
+		return e1.getActualStartDate().compareTo(e2.getActualStartDate()) == 0 
+				&& e1.getActualEndDate().compareTo(e2.getActualEndDate()) == 0;
+	}
+
 }
 

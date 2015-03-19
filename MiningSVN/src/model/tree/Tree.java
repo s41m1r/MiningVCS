@@ -3,6 +3,7 @@
  */
 package model.tree;
 
+import gui.GanttEventComparator;
 import gui.OurTreeData;
 
 import java.util.Calendar;
@@ -199,7 +200,7 @@ public class Tree {
 //						"["+event.getAuthor().split("@|<")[0]+
 						//" - "+event.getFileID()+
 //						" - "+event.getType()+"]",
-						start, end,5);
+				start, end,5);
 				ge.setTextDisplayFormat("");
 				ge.setData(event);
 //				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
