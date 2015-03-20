@@ -3,11 +3,15 @@
  */
 package model.tree;
 
+import gui.GanttEventPayLoad;
 import gui.OurTreeData;
+import gui.TreeData;
 
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -102,12 +106,12 @@ public class Tree {
 
 	public void print()
 	{
-		print(this.root, 1, false);
+		print(this.root, 0, false);
 	}
 
 	public void printWithEvents()
 	{
-		print(this.root, 1, true);
+		print(this.root, 0, true);
 	}
 
 	private void print(Node n, int level, boolean withEvents)
@@ -203,7 +207,8 @@ public class Tree {
 //						" - "+event.getType()+"]",
 						start, end,5);
 				ge.setTextDisplayFormat("");
-				ge.setData(event);
+				ge.setData(new GanttEventPayLoad(root, event));
+				
 //				ge.setGradientStatusColor(commitFileMap.get(event.getCommitID()));
 				AdvancedTooltip att = new AdvancedTooltip(
 						"Commit ID: "+event.getCommitID(), 
@@ -213,7 +218,7 @@ public class Tree {
 						"\nTimestamp: "+event.getStart());
 				
 				ge.setAdvancedTooltip(att);
-				group.addEvent(ge);
+				group.addEvent(ge);				
 				ge.setVerticalEventAlignment(SWT.CENTER);
 				scopeEvent.addScopeEvent(ge);
 //				ge.hideAllChildren();
@@ -223,7 +228,15 @@ public class Tree {
 			ti.setText(c.getValue());
 			ti.setExpanded(true);
 //			// note how we set the data to be the event for easy access in the tree listeners later on
-			ti.setData(new OurTreeData(group));
+//			ti.setData(new OurTreeData(group));
+			TreeData data = new TreeData(group);
+			Iterator<GanttEvent> it = (Iterator<GanttEvent>) group.getEventMembers().iterator();
+			while (it.hasNext()) {
+	         GanttEvent ganttEvent = (GanttEvent) it.next();
+	         data.getShownEvents().add(ganttEvent);
+         }
+			ti.setData(data);
+//			System.out.println(ti.getData()+" "+ ti.getText());
 //			ti.setBackground(commitFileMap.get(c.getValue()));
 			ti.setFont(new Font(ti.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
 			fillInGanttTree(ti, chart, c, scopeEvent);
@@ -237,18 +250,20 @@ public class Tree {
 	 */
    public void colorEvents(TreeItem ti, Map<String, Color> commitColorMap) {
    	
-   	OurTreeData data = (OurTreeData) ti.getData();
+//   	OurTreeData data = (OurTreeData) ti.getData();
+   	TreeData data = (TreeData) ti.getData();
    	GanttGroup group = data.getGanttGroup();
    	List<GanttEvent> geList = group.getEventMembers();
    	geList.sort(new Comparator<GanttEvent>() {
    		public int compare(GanttEvent o1, GanttEvent o2) {
-   			Event e1 = (Event) o1.getData();
-   			Event e2 = (Event) o2.getData();
+   			Event e1 = ((GanttEventPayLoad)o1.getData()).getEventData();
+   			Event e2 = ((GanttEventPayLoad) o2.getData()).getEventData();
    			return -1*e1.getCommitID().compareTo(e2.getCommitID());
    		};
 		});
    	for(GanttEvent ge : geList){
-   		Event e = (Event) ge.getData();
+   		GanttEventPayLoad gep = (GanttEventPayLoad) ge.getData();
+   		Event e = gep.getEventData();
    		ge.setGradientStatusColor(commitColorMap.get(e.getCommitID()));
    	}
    	
