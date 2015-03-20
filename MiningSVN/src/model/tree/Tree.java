@@ -225,7 +225,7 @@ public class Tree {
 //			// note how we set the data to be the event for easy access in the tree listeners later on
 			ti.setData(new OurTreeData(group));
 //			ti.setBackground(commitFileMap.get(c.getValue()));
-//			ti.setFont(new Font(ti.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
+			ti.setFont(new Font(ti.getDisplay(), new FontData("Arial", 16, SWT.NONE)));
 			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
 	}

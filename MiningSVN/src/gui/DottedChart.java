@@ -86,17 +86,17 @@ public class DottedChart {
 		final GanttControlParent left = new GanttControlParent(sf, SWT.NONE);
 
 		// our GANTT chart, will end up on the right in the sash
-		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+//		final GanttChart chart = new GanttChart(sf, SWT.NONE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		ISettings settings = new MySettings();
 		settings.lockHeaderOnVerticalScroll();
-//		final GanttChart chart = new GanttChart(sf, GanttFlags.H_SCROLL_FIXED_RANGE, 
-//				settings, new DefaultColorManager(), new MyPaintManager(), null);
+		final GanttChart chart = new GanttChart(sf, GanttFlags.H_SCROLL_FIXED_RANGE, 
+				settings, new DefaultColorManager(), new MyPaintManager(), null);
 		
 //		final ScrolledComposite sc2 = new ScrolledComposite(shell, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 
 		// we will be using method calls straight onto the chart itself, so we set it to a variable
 		final GanttComposite ganttComposite = chart.getGanttComposite();
-		//ganttComposite.setFont(new Font(ganttComposite.getDisplay(), new FontData("Arial", 18, SWT.NONE)));
+		ganttComposite.setFont(new Font(ganttComposite.getDisplay(), new FontData("Arial", 18, SWT.NONE)));
 		// values we will be using further down (see comments in related sections)
 		// row height
 		final int oneRowHeight = 36;
