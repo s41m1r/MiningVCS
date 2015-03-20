@@ -38,7 +38,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
-import dnl.utils.text.table.TextTable;
 import reader.LogReader;
 import reader.SVNLogReader;
 import util.FileEventMap;
@@ -141,8 +140,8 @@ public class DottedChart {
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 			LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Study_new.log");
-			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
-			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
+//						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
+//						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/out.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/abc.log");
@@ -157,14 +156,13 @@ public class DottedChart {
 		//		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
 
 		System.out.println("Loaded "+fem.size()+" objects (files).");
+		System.out.println("Extracted "+log.getAllChanges().size()+ " total changes.");
 
 		model.tree.Tree t = new model.tree.Tree();
 		Set<String> files = fem.keySet();
 		for (String string : files) {
 			t.add(string, fem.get(string));
 		}
-
-
 
 		t.fillInGanttTree(root, chart, scopeEvent);
 		//root node needs the scope event as data
@@ -271,7 +269,7 @@ public class DottedChart {
 						e.setHidden(true);
 					}
 				}
-				Object[][] d = new Object[fem.size()][ti.getItems().length];
+				Object[][] d = new Object[fem.size()][4];
 				printNumberOfIdleTimes(ti, d);
 				ganttComposite.heavyRedraw();
 			}
@@ -334,7 +332,7 @@ public class DottedChart {
 							//						e1.printStackTrace();
 							//					}
 						}
-						Object[][] d = new Object[fem.size()][ti.getItems().length];
+						Object[][] d = new Object[fem.size()][4];
 						printNumberOfIdleTimes(ti,d);
 						ganttComposite.heavyRedraw();
 			}
@@ -430,16 +428,15 @@ public class DottedChart {
 		//		System.out.println("============================================================================");
 		//		System.out.println("Level \t\t File \t\t Idle periods \t\t Through periods");
 		System.out.println();
-		final Object[] columnNames = { "File", "Level", "Idle periods", "Through periods"};
-		System.out.format("%-5s%-36s%15s %15s\n", columnNames);
-		System.out.println("==========================================================================");
-		
+		final Object[] columnNames = { "SubLvl", "Time-disjoint events in file", "Idle periods", "Through periods"};
+		System.out.format("%-5s %50s %15s %15s\n", columnNames);
+		System.out.println("==============================================================================================");
 		
 		numberOfIdleTimesToTabularForm(root, 0, data, 0);
 		for (final Object[] row : data) {
 			if(row[0]==null)
 				break;
-			System.out.format("%-5s%-30s%15s%15s\n", row);
+			System.out.format("%-5s %50s %10s %15s\n", row);
 		}
 		//		TextTable tt = new TextTable(columnNames, data);
 		//		tt.printTable();
@@ -448,6 +445,9 @@ public class DottedChart {
 	}
 
 	public static void numberOfIdleTimesToTabularForm(TreeItem root, int level, Object[][] data2, int row){
+		
+//		if(row >= data2.length || data2[row] == null || data2[row].length!=4)
+//			return;
 
 		OurTreeData data = (OurTreeData) root.getData();
 		List<GanttEvent> events = (List<GanttEvent>) data.getGanttGroup().getEventMembers();
@@ -458,11 +458,12 @@ public class DottedChart {
 				distinctEvents.add(ganttEvent);
 			}
 		}
+		
 		if(distinctEvents.size()==0)
 			return;
 
 		String s = "";
-
+		
 		int c = countIdleTimes(distinctEvents);
 
 		//		for(int j=level; j>0; j--)
@@ -470,13 +471,18 @@ public class DottedChart {
 
 		//		s+="\t\t "+c;
 		//		s+="\t\t "+(c+1);
-		//		System.out.println("+-["+level+"] \t"+root.getText()+" "+s);
+//		System.out.println("+-["+level+"] \t"+root.getText()+" "+s);
+		
+		while(data2[row][0]!=null) //getting to the next free row
+			row++;
+		
 		data2[row][0] = level;
 		data2[row][1] = root.getText();
 		data2[row][2] = c;
 		data2[row][3] = c+1;
 
 		TreeItem[] tis = root.getItems();
+		
 		for (int i = 0; i < tis.length; i++) {
 			numberOfIdleTimesToTabularForm(tis[i], level+1, data2, row+1);
 		}
