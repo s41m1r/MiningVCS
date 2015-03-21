@@ -48,6 +48,12 @@
 			<artifactId>j-text-utils</artifactId>
 			<version>0.3.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>2.0</version>
+		</dependency>
+
 	</dependencies>
 	<repositories>
 		<repository>

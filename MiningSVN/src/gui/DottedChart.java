@@ -12,11 +12,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import model.Log;
 import model.LogEntry;
 import model.svn.SVNLog;
 
+import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 import org.eclipse.nebula.widgets.ganttchart.ColorCache;
 import org.eclipse.nebula.widgets.ganttchart.GanttChart;
 import org.eclipse.nebula.widgets.ganttchart.GanttComposite;
@@ -129,7 +131,8 @@ public class DottedChart {
 		GanttGroup rootGroup = new GanttGroup(chart);
 		final GanttEvent scopeEvent = new GanttEvent(chart, "Scope");
 		scopeEvent.setVerticalEventAlignment(SWT.CENTER);
-		scopeEvent.setTextDisplayFormat("");
+		scopeEvent.setTextDisplayFormat("#name#");
+		scopeEvent.setName("");
 		scopeGroup.addEvent(scopeEvent);
 		//		scopeEvent.setMoveable(false);
 
@@ -138,7 +141,8 @@ public class DottedChart {
 		Log log = null; 
 		try {
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-			LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
+//			LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
+			LogReader<LogEntry> lr = new SVNLogReader("resources/running_example.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Study_new.log");
 //						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
 //						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
@@ -153,7 +157,7 @@ public class DottedChart {
 		}
 
 		final Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
-		//		Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
+//		final Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
 
 		System.out.println("Loaded "+fem.size()+" objects (files).");
 		System.out.println("Extracted "+log.getAllChanges().size()+ " total changes.");
@@ -300,41 +304,66 @@ public class DottedChart {
 				List<GanttEvent> superEvents = new LinkedList<GanttEvent>();
 				String fatherName = (ganttGroup.getEventMembers().size()>0)? 
 						((GanttEvent)ganttGroup.getEventMembers().get(0)).getName(): "Project";
-						subEvents.sort(new GanttEventComparator());
-						if (subEvents.size() > 0){
-							Calendar currentStartDate = subEvents.get(0).getActualStartDate();
-							Calendar currentEndDate = subEvents.get(0).getActualEndDate();
+				subEvents.sort(new GanttEventComparator());
+				
+				DescriptiveStatistics commitDistances = new DescriptiveStatistics(); // stores busy commit distances in millis
+				
+				if (subEvents.size() > 0){
+					Calendar currentStartDate = subEvents.get(0).getActualStartDate();
+					Calendar currentEndDate = subEvents.get(0).getActualEndDate();
 
-							for (GanttEvent ganttEvent : subEvents){
-								Calendar date = (Calendar) currentEndDate.clone();
-								date.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
-								if (date.before(ganttEvent.getActualEndDate())){
-									// start a new one
-									superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
-									currentStartDate = ganttEvent.getActualStartDate();
-									currentEndDate = ganttEvent.getActualEndDate();
-								} else {
-									// extend thresholds
-									//ganttGroup.addEvent(new GanttEvent(chart, "", currentStartDate, currentEndDate, 50));
-									currentEndDate = (Calendar) ganttEvent.getActualEndDate().clone();
-								}
-							}
+					for (GanttEvent ganttEvent : subEvents){
+						Calendar date = (Calendar) currentEndDate.clone();
+						date.add(Calendar.DATE, NUM_OF_DAYS_THRESHOLD);
+						if (date.before(ganttEvent.getActualEndDate())){
+							// start a new one
 							superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
-
-							data.setSuperEvents(superEvents);
-
-							//					assert ganttComposite.getGroups().indexOf(newGroup) == index;
-							//
-							//					try {
-							//						Thread.sleep(100);
-							//					} catch (InterruptedException e1) {
-							//						// TODO Auto-generated catch block
-							//						e1.printStackTrace();
-							//					}
+							currentStartDate = ganttEvent.getActualStartDate();
+							currentEndDate = ganttEvent.getActualEndDate();
+						} else {
+							// extend thresholds
+							//ganttGroup.addEvent(new GanttEvent(chart, "", currentStartDate, currentEndDate, 50));
+							if (currentEndDate.compareTo(ganttEvent.getActualEndDate())!=0){
+								commitDistances.addValue((double)(ganttEvent.getActualEndDate().getTimeInMillis() - currentEndDate.getTimeInMillis()));	
+							}
+							currentEndDate = (Calendar) ganttEvent.getActualEndDate().clone();
 						}
-						Object[][] d = new Object[fem.size()][4];
-						printNumberOfIdleTimes(ti,d);
-						ganttComposite.heavyRedraw();
+					}
+					superEvents.add(addNewGanttEvent(chart, newGroup, currentStartDate, currentEndDate, fatherName));
+					
+					// extend superEvents with an additional start time
+					
+					long sumActivityDuration = 0;
+					
+					if (commitDistances.getN() > 0){
+						double mean = commitDistances.getMean();
+						for (GanttEvent superE : superEvents){
+							Calendar adjustedStartDate = (Calendar) superE.getActualStartDate().clone();
+							adjustedStartDate.add(Calendar.MILLISECOND, -(int)mean);
+//							superE.setStartDate(adjustedStartDate);
+							sumActivityDuration += superE.getActualEndDate().getTimeInMillis() - superE.getActualStartDate().getTimeInMillis();
+						}
+					}
+					
+					long totalDuration = superEvents.get(superEvents.size()-1).getActualEndDate().getTimeInMillis() - 
+							superEvents.get(0).getActualStartDate().getTimeInMillis();
+					String ratioString = String.format("%,.0f%%", 100*sumActivityDuration / (double)totalDuration);
+					scopeEvent.setName("coverage "+ratioString);
+					scopeEvent.setTextDisplayFormat("#name#");
+					data.setSuperEvents(superEvents);
+
+					//					assert ganttComposite.getGroups().indexOf(newGroup) == index;
+					//
+					//					try {
+					//						Thread.sleep(100);
+					//					} catch (InterruptedException e1) {
+					//						// TODO Auto-generated catch block
+					//						e1.printStackTrace();
+					//					}
+				}
+				Object[][] d = new Object[fem.size()][4];
+				printNumberOfIdleTimes(ti,d);
+				ganttComposite.heavyRedraw();
 			}
 
 			/**
@@ -381,7 +410,6 @@ public class DottedChart {
 		};
 
 		tree.addTreeListener(treeListener);
-		//		tree.addListener(SWT.MouseDown, new Listener() {
 		//
 		//			@Override
 		//			public void handleEvent(Event arg0) {
