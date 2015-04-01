@@ -16,7 +16,7 @@ import test.TestLog;
 public class CVS2CSV {
 
 	public static void toCSV() throws IOException{
-		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+		LogReader<LogEntry> lr = new SVNLogReader("resources/running_example.log");
 		Log log = new SVNLog(lr.readAll());
 		Collection<LogEntry> entryList = log.getAllEntries();
 		System.out.println("fileID, Author, Change, Timestamp, Comment");

@@ -6,13 +6,16 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import model.Log;
 import model.LogEntry;
@@ -39,7 +42,12 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
+import org.joda.time.Hours;
+import org.joda.time.Interval;
 
+import reader.GITLogReader;
 import reader.LogReader;
 import reader.SVNLogReader;
 import util.FileEventMap;
@@ -62,6 +70,9 @@ import util.FileEventMap;
 public class DottedChart {
 
 	public static final int NUM_OF_DAYS_THRESHOLD = 7;
+	private static final String gitLogFileName =  "resources/adobe.log";
+	private static final String svnLogFileName = null;//"resources/20150302_SNV_LOG_FROM_Papers_new.log";
+	private static String fileName = null;
 
 	public static void main(String[] args) {
 		// standard display and shell etc
@@ -139,15 +150,27 @@ public class DottedChart {
 		// our root node that matches our scope
 		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		Log log = null; 
+		LogReader<LogEntry> lr = null;
 		try {
+			
+			if(gitLogFileName!=null){
+				lr = new GITLogReader(gitLogFileName);
+				fileName = gitLogFileName;
+			}
+			
+			else if(svnLogFileName!=null){
+				lr = new SVNLogReader(svnLogFileName);
+				fileName = svnLogFileName;
+			}
+			
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
 //			LogReader<LogEntry> lr = new SVNLogReader("resources/shape_proposal.log");
-			LogReader<LogEntry> lr = new SVNLogReader("resources/running_example.log");
+//			LogReader<LogEntry> lr = new SVNLogReader("resources/running_example.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Study_new.log");
 //						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_TRAC_new.log");
 //						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/out.log");
-			//			LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
+//						LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
 			//			LogReader<LogEntry> lr = new GITLogReader("resources/abc.log");
 			log = new SVNLog(lr.readAll());
 			lr.close();
@@ -158,17 +181,26 @@ public class DottedChart {
 
 		final Map<String, List<model.Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
 //		final Map<String, List<model.Event>> fem = FileEventMap.buildFileEventMap(log);
-
+		
 		System.out.println("Loaded "+fem.size()+" objects (files).");
 		System.out.println("Extracted "+log.getAllChanges().size()+ " total changes.");
+		System.out.println("Commits = "+log.getAllEntries().size());
+		Object[] dates = (Object[]) log.getAllDates().toArray();
+		Arrays.sort(dates,DateTimeComparator.getInstance());
+		DateTime startD = (DateTime)dates[0];
+		DateTime endD = (DateTime)dates[dates.length-1];
+//		System.out.println(new Interval(startD.getMillis(), endD.getMillis()));
 
 		model.tree.Tree t = new model.tree.Tree();
 		Set<String> files = fem.keySet();
 		for (String string : files) {
 			t.add(string, fem.get(string));
 		}
-
+		
+		root.setText(fileName.split("/")[1]);
+		
 		t.fillInGanttTree(root, chart, scopeEvent);
+//		System.out.println(new DateTime(diff)-);
 		//root node needs the scope event as data
 		Map<String, Color> commitColorMap = model.tree.Tree.mapCommitToColor(FileEventMap.buildCommitFileMap(log));
 		root.setData(new OurTreeData(rootGroup));
@@ -177,6 +209,7 @@ public class DottedChart {
 		t.colorEvents(root, commitColorMap);
 		// sashform sizes
 		sf.setWeights(new int[] { 30, 70 });
+		
 
 		// when the tree scrolls, we want to set the top visible item in the gantt chart to the top most item in the tree
 		//		tree.getVerticalBar().addListener(SWT.Selection, new Listener() {
@@ -268,9 +301,11 @@ public class DottedChart {
 
 					for (GanttEvent e : data.getCollapsedEvents()){
 						e.setHidden(false);
+						e.setTextDisplayFormat("");
 					}
 					for (GanttEvent e : data.getSuperEvents()){
 						e.setHidden(true);
+						e.setTextDisplayFormat("");
 					}
 				}
 				Object[][] d = new Object[fem.size()][4];
@@ -334,22 +369,38 @@ public class DottedChart {
 					// extend superEvents with an additional start time
 					
 					long sumActivityDuration = 0;
-					
+					Interval interval;
 					if (commitDistances.getN() > 0){
 						double mean = commitDistances.getMean();
 						for (GanttEvent superE : superEvents){
 							Calendar adjustedStartDate = (Calendar) superE.getActualStartDate().clone();
-							adjustedStartDate.add(Calendar.MILLISECOND, -(int)mean);
-//							superE.setStartDate(adjustedStartDate);
+							adjustedStartDate.add(Calendar.MILLISECOND, -1*(int)mean);
+							interval = new Interval(
+									superE.getActualStartDate().getTimeInMillis()- (int)mean,
+									superE.getActualStartDate().getTimeInMillis());
+							
+							superE.setStartDate(adjustedStartDate);
+							
+									
 							sumActivityDuration += superE.getActualEndDate().getTimeInMillis() - superE.getActualStartDate().getTimeInMillis();
 						}
 					}
 					
 					long totalDuration = superEvents.get(superEvents.size()-1).getActualEndDate().getTimeInMillis() - 
 							superEvents.get(0).getActualStartDate().getTimeInMillis();
+					
 					String ratioString = String.format("%,.0f%%", 100*sumActivityDuration / (double)totalDuration);
-					scopeEvent.setName("coverage "+ratioString);
-					scopeEvent.setTextDisplayFormat("#name#");
+					
+					//String idleTimeAverage = String.format("%,.0f%%", (totalDuration- sumActivityDuration) / (superEvents.size()-1));
+					String idleTimeAverage = String.format("%,.1f%% days average idle time", ((totalDuration- sumActivityDuration) / (double)(superEvents.size()-1)) / (24*1000*3600) );
+					System.out.println(idleTimeAverage);
+					
+//					scopeEvent.setName("coverage "+ratioString);
+					GanttEvent ge = ((GanttEvent)ganttGroup.getEventMembers().get(ganttGroup.getEventMembers().size()-1));
+					ge.setName("coverage "+ratioString);
+					ge.setTextDisplayFormat("#name#");
+//					scopeEvent.setTextDisplayFormat("#name#");
+					System.out.println("coverage = "+ratioString);
 					data.setSuperEvents(superEvents);
 
 					//					assert ganttComposite.getGroups().indexOf(newGroup) == index;

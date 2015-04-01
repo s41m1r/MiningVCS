@@ -159,7 +159,7 @@ public class Tree {
 	public void fillInGanttTree(TreeItem root, GanttChart chart, GanttEvent scopeEvent){
 //		final TreeItem root = new TreeItem(tree, SWT.BORDER);
 		// our root node that matches our scope
-		root.setText("Project structure");		
+//		root.setText("Project structure");		
 		root.setExpanded(true);
 //		System.out.println(commitColorMap);
 		fillInGanttTree(root, chart, this.root, scopeEvent);

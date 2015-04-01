@@ -53,7 +53,7 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		LogEntry entry;
 
 		while((entry=readNext())!=null){
-			//			System.out.println(lines);
+						System.out.println(entry.getStartingToken());
 			logEntries.add(entry);
 		}
 //		System.out.println("last entry = "+logEntries.get(logEntries.size()-1));
@@ -130,6 +130,8 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		//read the first line
 		long fp = raf.getFilePointer();
 		String line = raf.readLine();
+		if(line==null)
+			return changeList;
 		String start = line.trim().split("\\s+")[0];
 
 		switch (start) {
