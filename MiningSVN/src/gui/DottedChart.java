@@ -70,7 +70,8 @@ import util.FileEventMap;
 public class DottedChart {
 
 	public static final int NUM_OF_DAYS_THRESHOLD = 7;
-	private static final String gitLogFileName =  "resources/adobe.log";
+//	private static final String gitLogFileName =  "/home/saimir/git/MiningCVS/MiningSVN.log";
+	private static final String gitLogFileName =  "/home/saimir/git/MiningCVS/MiningSVN/resources/commitlog123.log";
 	private static final String svnLogFileName = null;//"resources/20150302_SNV_LOG_FROM_Papers_new.log";
 	private static String fileName = null;
 
@@ -171,7 +172,7 @@ public class DottedChart {
 //						LogReader<LogEntry> lr = new SVNLogReader("resources/20150302_SNV_LOG_FROM_Papers_new.log");
 			//			LogReader<LogEntry> lr = new SVNLogReader("resources/out.log");
 //						LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
-			//			LogReader<LogEntry> lr = new GITLogReader("resources/abc.log");
+//			LogReader<LogEntry> lr = new GITLogReader("resources/abc.log");
 			log = new SVNLog(lr.readAll());
 			lr.close();
 		} catch (IOException e1) {
