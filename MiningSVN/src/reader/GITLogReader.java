@@ -53,7 +53,7 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		LogEntry entry;
 
 		while((entry=readNext())!=null){
-						System.out.println(entry.getStartingToken());
+//			System.out.println(entry.getStartingToken());
 			logEntries.add(entry);
 		}
 //		System.out.println("last entry = "+logEntries.get(logEntries.size()-1));

@@ -1,0 +1,922 @@
+commit db74ce7965b160862196a473d6d4545b91870486
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Jan 31 12:16:51 2015 +0100
+
+    Initial commit
+
+A	README.md
+
+commit ebe5b21a3ab5dfd55f5fa74fd85bf62580365670
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Jan 31 12:24:42 2015 +0100
+
+    First (real) commit
+
+A	MiningSVN/.classpath
+A	MiningSVN/.gitignore
+A	MiningSVN/.project
+A	MiningSVN/.settings/org.eclipse.jdt.core.prefs
+A	MiningSVN/src/model/LogEntry.java
+
+commit f0619ee91abde1922a44b2743b62cbc938ea383b
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Jan 31 12:52:23 2015 +0100
+
+    Second commit
+
+M	MiningSVN/.gitignore
+
+commit 228db2e4737da5dbf998171a8d5bd1d0e8dbdb15
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Jan 31 19:03:08 2015 +0100
+
+    First class that model a Log entry
+
+M	MiningSVN/src/model/LogEntry.java
+
+commit 06df817951790a4fc566312e7ffc92b22ec82f33
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 2 20:36:18 2015 +0100
+
+    Handled dates. Encoding.
+
+M	MiningSVN/.classpath
+M	MiningSVN/.gitignore
+M	MiningSVN/.project
+M	MiningSVN/.settings/org.eclipse.jdt.core.prefs
+A	MiningSVN/.settings/org.eclipse.m2e.core.prefs
+A	MiningSVN/TODOs
+A	MiningSVN/pom.xml
+A	MiningSVN/src/test/Test1.java
+
+commit 7bb102730e6214822410f2433804bae8f1513a5d
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 2 21:03:12 2015 +0100
+
+    Now works with Austrian locale
+
+M	MiningSVN/src/test/Test1.java
+
+commit 39d037662285a0ca1e5a40bbc6cd20fb9db1320e
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 11:28:05 2015 +0100
+
+    Update README.md
+
+M	README.md
+
+commit fea7f45751565dc996e858fb5e38cbb1c4c998b0
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 13:18:19 2015 +0100
+
+    Changed the structure of packages
+
+D	MiningSVN/src/model/LogEntry.java
+A	MiningSVN/src/model/general/Log.java
+A	MiningSVN/src/model/general/LogEntry.java
+A	MiningSVN/src/model/svn/SVNLog.java
+A	MiningSVN/src/model/svn/SVNLogEntry.java
+M	MiningSVN/src/test/Test1.java
+A	MiningSVN/src/test/TestReadSVNLog.java
+
+commit 82f68c2dad16e3d1f1086732f0a69612b87c15ac
+Merge: fea7f45 39d0376
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 13:22:06 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 1a447fb5c9a376d8b3b05fd50ed4ac0088825085
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 17:52:48 2015 +0100
+
+    Can read from SVN logs
+
+M	MiningSVN/.classpath
+M	MiningSVN/.project
+A	MiningSVN/src/model/Log.java
+A	MiningSVN/src/model/LogEntry.java
+D	MiningSVN/src/model/general/Log.java
+D	MiningSVN/src/model/general/LogEntry.java
+M	MiningSVN/src/model/svn/SVNLog.java
+M	MiningSVN/src/model/svn/SVNLogEntry.java
+D	MiningSVN/src/test/Test1.java
+A	MiningSVN/src/test/TestReadDate.java
+M	MiningSVN/src/test/TestReadSVNLog.java
+
+commit 2bc29bf2ce912146b9cbd09d771f3b97bc4cf4e8
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 18:15:29 2015 +0100
+
+    Can read correctly an SVN log entry
+
+A	MiningSVN/src/model/Change.java
+M	MiningSVN/src/model/LogEntry.java
+A	MiningSVN/src/model/svn/SVNFSOperations.java
+M	MiningSVN/src/model/svn/SVNLogEntry.java
+A	MiningSVN/src/reader/LogReader.java
+A	MiningSVN/src/reader/SVNLogReader.java
+M	MiningSVN/src/test/TestReadSVNLog.java
+
+commit 00bac34512dfc8e3382a2708f3b0db0649c60a1c
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 20:47:20 2015 +0100
+
+    Completed SVNLogReader
+
+M	MiningSVN/TODOs
+M	MiningSVN/src/model/svn/SVNLogEntry.java
+M	MiningSVN/src/reader/LogReader.java
+M	MiningSVN/src/reader/SVNLogReader.java
+M	MiningSVN/src/test/TestReadSVNLog.java
+
+commit 932c902c99553f73c72c61bf86d7e60ba0834928
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 3 23:02:28 2015 +0100
+
+    First classes that deal with GIT
+
+M	MiningSVN/.classpath
+A	MiningSVN/src/model/git/GITLog.java
+A	MiningSVN/src/model/git/GITLogEntry.java
+A	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/test/TestReadSVNLog.java
+
+commit f056987831647a181805b914e85c473e44adc326
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 01:23:57 2015 +0100
+
+    GITLogReader still incomplete
+
+M	MiningSVN/TODOs
+M	MiningSVN/src/reader/GITLogReader.java
+
+commit b0346a47df142394da820e1e5d0f7e31b41a70d3
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 13:05:14 2015 +0100
+
+    Deleted TODOs
+
+D	MiningSVN/TODOs
+M	MiningSVN/src/reader/GITLogReader.java
+
+commit 91c0972d7d55e764ee7cac49877e708d9f762769
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 13:07:08 2015 +0100
+
+    Todo or not to do? This is the plight.
+
+A	MiningSVN/TODOorNot2Do
+
+commit 30c5e536e88501295aa3f226645953c69e8f3947
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 15:31:05 2015 +0100
+
+    Works with GIT (hopefully)
+
+M	MiningSVN/src/model/git/GITLogEntry.java
+M	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/reader/LogReader.java
+M	MiningSVN/src/test/TestReadDate.java
+A	MiningSVN/src/test/TestReadGIT.java
+M	MiningSVN/src/test/TestReadSVNLog.java
+
+commit a3e471fbfd72a46597716ecc76fa6f4826175751
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 18:26:13 2015 +0100
+
+    Drawn an empty Gantt chart
+
+M	MiningSVN/.classpath
+M	MiningSVN/.project
+A	MiningSVN/src/gui/MyFirstGanttChart.java
+
+commit 635548151d4ad16f7441432c1d72d51ffe50fb71
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 18:28:02 2015 +0100
+
+    Renamed.
+
+M	MiningSVN/.project
+
+commit 3ec14c85c629685e4bd1e8d268cf72e53aecf106
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 4 20:15:37 2015 +0100
+
+    Striving to understand the library for drawing charts
+
+D	MiningSVN/src/gui/MyFirstGanttChart.java
+A	MiningSVN/src/gui/test/MyFirstGanttChart.java
+A	MiningSVN/src/gui/tutorial/TutorialAircraftFlight.java
+
+commit 1fd1eecf51e2cd692d6b6307bb2d6844dc7121a2
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 12:05:20 2015 +0100
+
+    Considered SWT. Run example with Glib-CRITICAL error messages. Still an
+    alternative to the trial version of FlexGanttFX
+
+M	MiningSVN/.classpath
+A	MiningSVN/src/gui/nebula/GanttSectionExample.java
+A	MiningSVN/src/gui/test/Flight.java
+M	MiningSVN/src/gui/test/MyFirstGanttChart.java
+M	MiningSVN/src/gui/tutorial/TutorialAircraftFlight.java
+A	MiningSVN/src/model/git/GITFileChanges.java
+M	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/test/TestReadGIT.java
+
+commit 10d59ff1b853c41fa18f03fd7eb1a37c4e7c0571
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 19:10:12 2015 +0100
+
+    Integrating a DB. Not finished yet. Missing DAOs
+
+M	MiningSVN/.classpath
+M	MiningSVN/src/gui/nebula/GanttSectionExample.java
+A	MiningSVN/src/jdbc/ConnectionFactory.java
+A	MiningSVN/src/jdbc/MySQLAccess.java
+A	MiningSVN/src/jdbc/TestMySqlConnection.java
+M	MiningSVN/src/model/Log.java
+M	MiningSVN/src/model/git/GITLog.java
+M	MiningSVN/src/model/svn/SVNLog.java
+A	MiningSVN/src/test/TestLog.java
+M	MiningSVN/src/test/TestReadGIT.java
+M	MiningSVN/src/test/TestReadSVNLog.java
+A	MiningSVN/src/to/ChangesTranferObject.java
+A	MiningSVN/src/to/EntryTransferObject.java
+A	MiningSVN/src/to/PathTransferObject.java
+
+commit 7f073f12a8ea6ea052e0ed2da1bbdedf2d0f47fc
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 19:14:11 2015 +0100
+
+    Renamed some packages
+
+A	MiningSVN/src/db/DBUtil.java
+A	MiningSVN/src/db/jdbc/ConnectionFactory.java
+A	MiningSVN/src/db/jdbc/MySQLAccess.java
+A	MiningSVN/src/db/jdbc/TestMySqlConnection.java
+A	MiningSVN/src/db/to/ChangesTranferObject.java
+A	MiningSVN/src/db/to/EntryTransferObject.java
+A	MiningSVN/src/db/to/PathTransferObject.java
+D	MiningSVN/src/jdbc/ConnectionFactory.java
+D	MiningSVN/src/jdbc/MySQLAccess.java
+D	MiningSVN/src/jdbc/TestMySqlConnection.java
+D	MiningSVN/src/to/ChangesTranferObject.java
+D	MiningSVN/src/to/EntryTransferObject.java
+D	MiningSVN/src/to/PathTransferObject.java
+
+commit 72d39177c0780db0e8f65e1330020fa3415abf5e
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 19:31:03 2015 +0100
+
+    Two DAOs
+
+A	MiningSVN/src/db/dao/EntryDAO.java
+A	MiningSVN/src/db/dao/GenericDAO.java
+
+commit d1b249598567ee4c11e9ef27b28c5fe967ac595f
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 20:58:00 2015 +0100
+
+    First class to write forth and back to DB (according to the DAO/TO best
+    practices)
+
+M	MiningSVN/src/db/dao/EntryDAO.java
+M	MiningSVN/src/db/jdbc/TestMySqlConnection.java
+M	MiningSVN/src/db/to/EntryTransferObject.java
+
+commit 97a2eb07f895dfbd9868ac5ec9b03076304ea28a
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 21:00:37 2015 +0100
+
+    Moved a file
+
+D	MiningSVN/src/db/jdbc/TestMySqlConnection.java
+A	MiningSVN/src/test/TestMySqlConnection.java
+
+commit b5461075eb74e0dfa15686f2e15f421a7b4316f2
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 5 21:28:38 2015 +0100
+
+    Fixed bug for long comments
+
+M	MiningSVN/src/db/dao/EntryDAO.java
+M	MiningSVN/src/test/TestLog.java
+M	MiningSVN/src/test/TestMySqlConnection.java
+
+commit 26139f9519053fc0f6d9c150d8da5f51bde23bdb
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sun Feb 8 11:16:00 2015 +0100
+
+    Correctly deals with DB. Still missing some DAOs though
+
+M	MiningSVN/.classpath
+M	MiningSVN/src/db/DBUtil.java
+M	MiningSVN/src/db/dao/EntryDAO.java
+M	MiningSVN/src/db/dao/GenericDAO.java
+M	MiningSVN/src/db/jdbc/ConnectionFactory.java
+M	MiningSVN/src/db/jdbc/MySQLAccess.java
+M	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/test/TestLog.java
+M	MiningSVN/src/test/TestMySqlConnection.java
+
+commit d51017435b556ce5d49dfa3a66bcbcd85434976f
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sun Feb 8 13:27:13 2015 +0100
+
+    put lib folder
+
+M	MiningSVN/.classpath
+M	MiningSVN/.project
+A	MiningSVN/lib/controlsfx-8.20.9-20141210.085506-1221.jar
+A	MiningSVN/lib/flexganttfx-core-1.2.0.jar
+A	MiningSVN/lib/flexganttfx-extras-1.2.0.jar
+A	MiningSVN/lib/flexganttfx-model-1.2.0.jar
+A	MiningSVN/lib/flexganttfx-view-1.2.0.jar
+A	MiningSVN/lib/license4j-1.4.0.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-javadoc.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-sources.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY.jar
+A	MiningSVN/lib/org.eclipse.swt.gtk.linux.x86_64_3.103.1.v20140903-1947.jar
+A	MiningSVN/lib/org.eclipse.swt_3.103.1.v20140903-1938.jar
+M	MiningSVN/pom.xml
+
+commit 39564868456071c51ab6399093031d0e88cdbf13
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sun Feb 8 13:35:06 2015 +0100
+
+    Fixed classpath problems. Maybe.
+
+M	MiningSVN/.classpath
+
+commit a5d34e4157a47db3c4df63d2647570d0a6e0d19f
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 11 11:19:23 2015 +0100
+
+    Implemented Tree distance
+
+A	.gitignore
+M	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/test/TestLog.java
+
+commit 408ff70757db7c100ca23b5d98b30fe48891579d
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 11 14:44:12 2015 +0100
+
+    commit
+
+M	MiningSVN/.classpath
+M	MiningSVN/src/model/Change.java
+M	MiningSVN/src/model/Log.java
+M	MiningSVN/src/reader/SVNLogReader.java
+
+commit 52f809cc53dea2584a0fe3694128959967f58207
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 11 14:47:17 2015 +0100
+
+    Distance commit 2
+
+D	.gitignore
+A	MiningSVN/src/distance/CommitDistance.java
+A	MiningSVN/src/distance/TreeDistance.java
+A	MiningSVN/src/test/TestCommitDistance.java
+A	MiningSVN/src/test/TestTreeDistance.java
+
+commit 49b05a976378c5fd4e92424c7b6d709ea51d40d1
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 17 01:08:01 2015 +0100
+
+    Downloaded WEKA
+
+M	MiningSVN/.classpath
+M	MiningSVN/pom.xml
+M	MiningSVN/src/distance/CommitDistance.java
+M	MiningSVN/src/distance/TreeDistance.java
+M	MiningSVN/src/model/Log.java
+M	MiningSVN/src/test/TestCommitDistance.java
+M	MiningSVN/src/test/TestTreeDistance.java
+A	MiningSVN/src/test/TestWeka.java
+
+commit 5d539834e7fab40113b77d3281ce4261f1d5256f
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 17 10:42:04 2015 +0100
+
+    Classpath commit
+
+M	MiningSVN/.classpath
+
+commit 99a63391b29a98f0e583303c3ad1057e1d091359
+Merge: 5d53983 49b05a9
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 17 10:42:17 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 26cde8bc8d54142d51098073cf3b7cd6044dfa4f
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 17 20:12:52 2015 +0100
+
+    First attempt to build a closeness matrix
+
+A	MiningSVN/src/distance/ClosenessMatrix.java
+M	MiningSVN/src/distance/CommitDistance.java
+A	MiningSVN/src/distance/Distance.java
+A	MiningSVN/src/distance/DistanceMap.java
+M	MiningSVN/src/model/Log.java
+M	MiningSVN/src/reader/SVNLogReader.java
+A	MiningSVN/src/test/TestClosenessMatrix.java
+M	MiningSVN/src/test/TestCommitDistance.java
+M	MiningSVN/src/test/TestLog.java
+M	MiningSVN/src/test/TestWeka.java
+
+commit c162d84b7806a56eea57d816006cb7282f28b78b
+Author: Saimir Bala <s41m1r@users.noreply.github.com>
+Date:   Tue Feb 17 20:14:56 2015 +0100
+
+    Update README.md
+
+M	README.md
+
+commit 360adcdc2892bbdba382d2ed7f20771012e769f8
+Author: Saimir Bala <s41m1r@users.noreply.github.com>
+Date:   Tue Feb 17 20:15:11 2015 +0100
+
+    Update README.md
+
+M	README.md
+
+commit 9f08b8cb90875a64500450d8033fc7e7c2ae1aea
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 17 21:47:23 2015 +0100
+
+    Build distance matrix and tested on a small file
+
+M	MiningSVN/src/distance/ClosenessMatrix.java
+M	MiningSVN/src/test/TestClosenessMatrix.java
+
+commit dd6bee1a934e1cae09072687d35319c6e33c673b
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 17 21:49:40 2015 +0100
+
+    Commit and tested again closeness matrix
+
+M	MiningSVN/src/distance/ClosenessMatrix.java
+
+commit f413eb848905f7f2cb4b3f28c60652b1ad8be5af
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 18 15:58:27 2015 +0100
+
+    Closeness matrix finished for the momenent. To be reviewed in the
+    future.
+
+M	MiningSVN/src/distance/ClosenessMatrix.java
+
+commit ac60ae2a458cb2c83add24f8de2b243d9c9de601
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 18 18:50:20 2015 +0100
+
+    Some visualization
+
+M	MiningSVN/src/distance/ClosenessMatrix.java
+A	MiningSVN/src/gui/nebula/TreeConnectorExample.java
+A	MiningSVN/src/gui/nebula/examles/EverythingExample.java
+A	MiningSVN/src/gui/nebula/examles/GanttSectionExample.java
+A	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+A	MiningSVN/src/gui/test/TreeViewTest.java
+
+commit e9235834f15ee21256c5c4e78ab363d5eaf3a740
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 18 20:29:39 2015 +0100
+
+    Event model class
+
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+A	MiningSVN/src/model/Event.java
+
+commit c6793706bdd384961c4250924b9388077a7deb13
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 18 22:32:25 2015 +0100
+
+    Build file-to-events mapping
+
+M	MiningSVN/src/model/Event.java
+M	MiningSVN/src/model/Log.java
+M	MiningSVN/src/model/git/GITLog.java
+M	MiningSVN/src/model/svn/SVNLog.java
+M	MiningSVN/src/test/TestClosenessMatrix.java
+M	MiningSVN/src/test/TestCommitDistance.java
+A	MiningSVN/src/test/TestFileEventMap.java
+M	MiningSVN/src/test/TestLog.java
+M	MiningSVN/src/test/TestMySqlConnection.java
+M	MiningSVN/src/test/TestTreeDistance.java
+A	MiningSVN/src/util/FileEventMap.java
+
+commit 245bf15be86cb836699f19d0f182ca5121ff00bb
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Feb 18 23:04:53 2015 +0100
+
+    Fine tuning on laptop
+
+M	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/test/TestFileEventMap.java
+
+commit 9a4897aeb2ac59dc5deb4d7b11dfe03ebed328f0
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 14:52:18 2015 +0100
+
+    Fixed File - events mapping
+
+D	MiningSVN/src/gui/nebula/GanttSectionExample.java
+D	MiningSVN/src/gui/nebula/TreeConnectorExample.java
+M	MiningSVN/src/test/TestFileEventMap.java
+M	MiningSVN/src/util/FileEventMap.java
+
+commit 80abd8b029345bafcb1be7b60be6a84f98721c25
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 14:53:23 2015 +0100
+
+    Small change
+
+M	MiningSVN/src/model/git/GITLogEntry.java
+
+commit 4257041f097ffb7f7375911b24430a2668e1e68c
+Merge: 80abd8b 9a4897a
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 14:54:59 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 7eb901179cd26e476649204a9b49ebb5340cc1fb
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 15:07:19 2015 +0100
+
+    Removed flexgantt
+
+M	MiningSVN/.classpath
+D	MiningSVN/lib/controlsfx-8.20.9-20141210.085506-1221.jar
+D	MiningSVN/lib/flexganttfx-core-1.2.0.jar
+D	MiningSVN/lib/flexganttfx-extras-1.2.0.jar
+D	MiningSVN/lib/flexganttfx-model-1.2.0.jar
+D	MiningSVN/lib/flexganttfx-view-1.2.0.jar
+D	MiningSVN/lib/license4j-1.4.0.jar
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+D	MiningSVN/src/gui/test/Flight.java
+D	MiningSVN/src/gui/test/MyFirstGanttChart.java
+D	MiningSVN/src/gui/tutorial/TutorialAircraftFlight.java
+M	MiningSVN/src/test/TestFileEventMap.java
+M	MiningSVN/src/util/FileEventMap.java
+
+commit b0f2da2ab88ab3f86ce985a0c9fbb26147ef4e21
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 15:17:23 2015 +0100
+
+    small build path change
+
+M	MiningSVN/.classpath
+
+commit ce23b9068c41db3ef161b4057e268375e2cab1e1
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 17:45:13 2015 +0100
+
+    Class DottedChart created.
+
+A	MiningSVN/lib/org.eclipse.swt.gtk.linux.x86_3.103.0.v20140605-2012.jar
+A	MiningSVN/lib/org.eclipse.swt_3.103.0.v20140605-2008.jar
+A	MiningSVN/src/gui/DottedChart.java
+
+commit 994c3819c61c76d52826b466c4cf25175f45b43f
+Author: Saimir Bala <s41m1r@users.noreply.github.com>
+Date:   Thu Feb 19 17:47:29 2015 +0100
+
+    Update .gitignore
+
+M	MiningSVN/.gitignore
+
+commit 07fd757f59b2f6e9d27b736cb6c35038cf6f5f79
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 17:49:26 2015 +0100
+
+    Classpath change
+
+M	MiningSVN/.classpath
+
+commit 32ad1a9f3c219c2cbbf68a57b728691d32e5349e
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Feb 19 17:52:56 2015 +0100
+
+    gitignore
+
+M	MiningSVN/.gitignore
+
+commit cbb5a14e515d13b171bd42f74fef24ba515a47fa
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 11:15:48 2015 +0100
+
+    Tree utils. To be finished.
+
+M	MiningSVN/src/distance/TreeDistance.java
+M	MiningSVN/src/gui/DottedChart.java
+A	MiningSVN/src/model/tree/Node.java
+M	MiningSVN/src/test/TestFileEventMap.java
+M	MiningSVN/src/test/TestTreeDistance.java
+A	MiningSVN/src/test/TestTreeImpl.java
+M	MiningSVN/src/util/FileEventMap.java
+A	MiningSVN/src/util/FileTable.java
+A	MiningSVN/src/util/TreeUtils.java
+
+commit a6e8cd93f5efe0e89ea83ef65d0fdb988b1f7855
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 13:35:03 2015 +0100
+
+    changed gitignore to ignore .classpath
+
+M	MiningSVN/.classpath
+A	MiningSVN/src/gui/nebula/examles/Snippet15.java
+A	MiningSVN/src/util/Tree.java
+
+commit 9706c05a8254a93039d2108b0513a68059221ea3
+Author: Saimir Bala <s41m1r@users.noreply.github.com>
+Date:   Mon Feb 23 13:47:41 2015 +0100
+
+    Update .gitignore
+
+M	MiningSVN/.gitignore
+
+commit 74c3ed81f128c1e2e6fb052d843567fe393e72d6
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 14:08:06 2015 +0100
+
+    rm --cached ...
+
+D	MiningSVN/.classpath
+D	MiningSVN/.project
+D	MiningSVN/.settings/org.eclipse.jdt.core.prefs
+D	MiningSVN/.settings/org.eclipse.m2e.core.prefs
+
+commit 1e2b3284c0328c7448e760e77b0922b29efe4b80
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 14:28:26 2015 +0100
+
+    Commit with .project
+
+M	MiningSVN/.gitignore
+A	MiningSVN/.project
+A	MiningSVN/.settings/org.eclipse.jdt.core.prefs
+A	MiningSVN/.settings/org.eclipse.m2e.core.prefs
+
+commit 0dd319a13cc503492846e4d3c6db64fe5c400ba2
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 14:48:22 2015 +0100
+
+    TreeView commit
+
+M	MiningSVN/src/gui/test/TreeViewTest.java
+
+commit 84edf644dbf4db68330fe4daeb9543b475fe6267
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 15:12:38 2015 +0100
+
+    snippet
+
+D	MiningSVN/src/gui/nebula/examles/Snippet15.java
+A	MiningSVN/src/gui/nebula/examles/snippets/Snippet15.java
+A	MiningSVN/src/gui/nebula/examles/snippets/Snippet8.java
+M	MiningSVN/src/util/Tree.java
+
+commit 418091d904a142dfd0e933d1102c93876a49c0b3
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Feb 23 17:03:32 2015 +0100
+
+    class util.Tree to be modified
+
+M	MiningSVN/src/reader/SVNLogReader.java
+M	MiningSVN/src/util/Tree.java
+
+commit 3dd84c2a6430b279c9ca41819491956188da5b53
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 24 15:17:02 2015 +0100
+
+    Tree working
+
+M	MiningSVN/src/model/Event.java
+M	MiningSVN/src/model/tree/Node.java
+A	MiningSVN/src/model/tree/Tree.java
+M	MiningSVN/src/test/TestTreeImpl.java
+A	MiningSVN/src/util/SimpleStringValueTree.java
+D	MiningSVN/src/util/Tree.java
+
+commit 3555d52d5df7b025883d23e17ad38c89dbeb10a1
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 24 17:55:36 2015 +0100
+
+    Events
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/model/tree/Tree.java
+
+commit 7d185d9630438eb27cab16800103dbc3c95e5f17
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Feb 24 19:30:38 2015 +0100
+
+    commit...
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+A	MiningSVN/src/gui/nebula/examles/snippets/EventTextAlignmentExample.java
+A	MiningSVN/src/gui/nebula/examles/snippets/GanttGroupExample.java
+M	MiningSVN/src/model/tree/Tree.java
+
+commit ce47908ecdb37dc232278a88d78824ba8b25d358
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 5 00:22:50 2015 +0100
+
+    Added jaret libraries
+
+A	MiningSVN/lib/jaretutil-0.32.jar
+A	MiningSVN/lib/timebars-1.49.jar
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+
+commit c7cd8440cb33a39a384cd16e6378119ede406455
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 5 10:37:28 2015 +0100
+
+    commit to resolve conflict
+
+M	MiningSVN/src/gui/DottedChart.java
+A	MiningSVN/src/gui/nebula/examles/snippets/GanttTester.java
+M	MiningSVN/src/model/tree/Tree.java
+
+commit e4db8c005bb2b4e3e777ccefe315cfa2da6e95cd
+Merge: c7cd844 ce47908
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 5 10:37:47 2015 +0100
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 8335d44113affee409c0c985d8fb66a733262903
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 5 20:24:06 2015 +0100
+
+    almost done grouping
+
+M	MiningSVN/pom.xml
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+A	MiningSVN/src/gui/nebula/examles/snippets/LayersExample.java
+A	MiningSVN/src/gui/test/TimelineExample.java
+M	MiningSVN/src/test/TestFileEventMap.java
+
+commit 807005c4c43c6d1c39eba8a1a834cf2e7946beab
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Mar 7 19:10:10 2015 +0100
+
+    added a method to flatten the logs into CSV
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+M	MiningSVN/src/model/tree/Tree.java
+A	MiningSVN/src/util/CVS2CSV.java
+
+commit 6dea2caabf8cc83f3274723b4ae953f9a121f943
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Mar 9 13:52:51 2015 +0100
+
+    vcs2csv
+
+M	MiningSVN/src/util/CVS2CSV.java
+
+commit eda0e57a7eba4929197aac3f16d0db014a5fb669
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Mar 9 17:06:15 2015 +0100
+
+    Colored events belonging to the same commit
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/model/tree/Tree.java
+M	MiningSVN/src/test/TestFileEventMap.java
+M	MiningSVN/src/util/FileEventMap.java
+
+commit b1f64258514e93bca91693abcd2cc127b8ce4d11
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Mon Mar 9 17:57:51 2015 +0100
+
+    coloring
+
+M	MiningSVN/src/gui/DottedChart.java
+
+commit c861df2e658c976dd0711160251048d5fa7c1c2a
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Mar 10 00:25:24 2015 +0100
+
+    committtttttttt
+
+A	MiningSVN/lib/jaretutil-0.32-src.zip
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-docs.jar
+D	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-javadoc.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-javadoc_.jar
+D	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-sources.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY-sources_.jar
+D	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-NIGHTLY_.jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0-sources(1).jar
+A	MiningSVN/lib/org.eclipse.nebula.widgets.ganttchart-2.0.jar
+A	MiningSVN/lib/swt-src.zip
+A	MiningSVN/lib/swt.jar
+A	MiningSVN/lib/timebars-1.49-src.zip
+M	MiningSVN/pom.xml
+M	MiningSVN/src/gui/DottedChart.java
+A	MiningSVN/src/gui/GanttEventComparator.java
+A	MiningSVN/src/gui/OurTreeData.java
+M	MiningSVN/src/model/tree/Tree.java
+
+commit bd902618f5cd9585a9545f3b68c15c65dc632699
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Mar 10 17:33:10 2015 +0100
+
+    Some cleanup
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/gui/OurTreeData.java
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+M	MiningSVN/src/model/tree/Tree.java
+
+commit 30aea63624e5c70eeb8f1b2854a89278cf98b1a1
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Tue Mar 10 19:13:02 2015 +0100
+
+    colors
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/model/tree/Tree.java
+
+commit f9b4a950cdadfb83bbac47b39a1c198f758a3811
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 12 19:37:51 2015 +0100
+
+    slight modifications
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/gui/nebula/examles/TreeConnectorExample.java
+M	MiningSVN/src/model/tree/Tree.java
+M	MiningSVN/src/test/TestFileEventMap.java
+M	MiningSVN/src/util/FileEventMap.java
+
+commit bd8c505c8ec4de682955fc50b74388a8f6f5140e
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Mar 14 18:55:35 2015 +0100
+
+    slight change 2
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/reader/SVNLogReader.java
+M	MiningSVN/src/test/TestFileEventMap.java
+
+commit 5422ac0ccdf88e243e54e16ba62fb8105e228896
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 19 20:05:17 2015 +0100
+
+    Metrics ok.
+
+M	MiningSVN/pom.xml
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/model/tree/Tree.java
+M	MiningSVN/src/reader/SVNLogReader.java
+M	MiningSVN/src/test/TestLog.java
+
+commit c0bcea3aba04d68009d93306210b0f2fd85f122e
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Thu Mar 19 20:20:24 2015 +0100
+
+    Committed measure
+
+M	MiningSVN/src/gui/DottedChart.java
+
+commit 0a07b0beaea12ab7648e0b9a42cf21cf726f7f13
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Fri Mar 20 18:22:05 2015 +0100
+
+    Dotted chart with idle times count
+
+M	MiningSVN/src/gui/DottedChart.java
+
+commit 717cdf05954da904065cde032f04b7d8c30b7667
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Sat Mar 21 01:07:46 2015 +0100
+
+    dsadsa
+
+M	MiningSVN/pom.xml
+M	MiningSVN/src/gui/DottedChart.java
+
+commit 7daab3ec3bbf054166fea26d5902adfd1cb56e60
+Author: s41m1r <saimir.bala@gmail.com>
+Date:   Wed Apr 1 13:16:19 2015 +0200
+
+    Version of the BPM15 Paper
+
+M	MiningSVN/src/gui/DottedChart.java
+M	MiningSVN/src/model/tree/Tree.java
+M	MiningSVN/src/reader/GITLogReader.java
+M	MiningSVN/src/util/CVS2CSV.java

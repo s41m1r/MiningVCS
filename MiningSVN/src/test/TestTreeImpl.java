@@ -17,19 +17,25 @@ import reader.GITLogReader;
 import reader.LogReader;
 import reader.SVNLogReader;
 import util.FileEventMap;
+import util.Opts;
 import util.TreeUtils;
 
 public class TestTreeImpl {
 
 	public static void main(String[] args) throws IOException {
-//		LogReader<LogEntry> lr = new GITLogReader("resources/MiningCVS.log");
-//		Log log = new GITLog(lr.readAll());
-		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-		Log log = new SVNLog(lr.readAll());
+		String in = Opts.getInputFile(args);
+		
+		if(in==null) 
+			System.exit(-1);
+		
+		LogReader<LogEntry> lr = new GITLogReader(in);
+		Log log = new GITLog(lr.readAll());
+//		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
+//		Log log = new SVNLog(lr.readAll());
 		lr.close();
 		Map<String, List<Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
 //		Node n = TreeUtils.toTree(fem);
-		TestLog.toFile("/home/saimir/out.txt");
+		TestLog.toFile("/home/saimir/out2.txt");
 		Tree t = new Tree();
 		
 		Set<String> files = fem.keySet();
@@ -37,8 +43,8 @@ public class TestTreeImpl {
 			t.add(string, fem.get(string));
 		}
 //		t.print();
-//		t.printWithEvents();
-		t.printEventTypes();	
+		t.printWithEvents();
+//		t.printEventTypes();	
 	}
 	
 //	public static Node l1l2Tre(){
