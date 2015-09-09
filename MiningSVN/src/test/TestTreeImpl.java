@@ -1,10 +1,19 @@
 package test;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import model.Event;
 import model.Log;
@@ -21,6 +30,7 @@ import util.Opts;
 import util.TreeUtils;
 
 public class TestTreeImpl {
+	final static String outFile = "/home/saimir/directory-tree.txt";
 
 	public static void main(String[] args) throws IOException {
 		String in = Opts.getInputFile(args);
@@ -34,18 +44,43 @@ public class TestTreeImpl {
 //		Log log = new SVNLog(lr.readAll());
 		lr.close();
 		Map<String, List<Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
-//		Node n = TreeUtils.toTree(fem);
-		TestLog.toFile("/home/saimir/out2.txt");
-		Tree t = new Tree();
+		
+		Tree t = new Tree(); 
+//		
+//		System.out.println("Output written to "+outFile);
+//		TestLog.toFile(outFile);
 		
 		Set<String> files = fem.keySet();
 		for (String string : files) {
 			t.add(string, fem.get(string));
 		}
-//		t.print();
-		t.printWithEvents();
-//		t.printEventTypes();	
+		
+		t.printEventTypes();
+		ArrayList<Integer> path = new ArrayList<Integer>();
+		path.add(0); 
+		path.add(1);
+		Node node = t.getNodeByPath(path);
+		System.out.println(node);
+		
 	}
+	
+	public static Collection<Event> collectSubEvents(Node root){
+		Collection<Event> c = new ArrayList<Event>();
+		c.addAll(root.getEventList());
+		collectSubEvents(root, c);
+		return c;
+	}
+	
+	private static void collectSubEvents(Node root, Collection<Event> collectedEvents){
+		if(root==null)
+			return;
+		List<Node> children = root.getChildList();
+		for (Node ch : children) {
+			collectedEvents.addAll(ch.getEventList());
+			collectSubEvents(ch,collectedEvents);
+		}
+	}
+	
 	
 //	public static Node l1l2Tre(){
 //		Node a = new Node("a"); //root
@@ -69,6 +104,6 @@ public class TestTreeImpl {
 //		System.out.println(childsOfA);
 //		
 //		return a;
-//	}
+//	} 
 	
 }

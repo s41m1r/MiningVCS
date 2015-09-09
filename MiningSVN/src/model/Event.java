@@ -159,7 +159,7 @@ public class Event {
 	   this.author = author;
 	   this.commitID = commitID;
 	   this.comment = comment;
-//	   end = start;
+	   this.end = start;
 //	   id = fileID;
    }
 	public String getAuthor() {
@@ -205,17 +205,26 @@ public class Event {
 		this.type = type;
 	}
 	
+	/**
+	 * 
+	 * @param e -- an event
+	 * @return true if this event starts before the event e
+	 */
+	public boolean startsBefore(Event e){
+		return this.start.isBefore(e.getStart().getMillis());
+	}
+	
 	@Override
    public String toString() {
 		String s ="Event [";
-		s+=(id!=null)? "id=" + id:"";
-		s+=(start!=null)? ", start=" + start: "";
-		s+=(end!=null)? ", end=" + end: "";
-		s+=(fileID!=null)? ", fileID=" + fileID: "";
-		s+=(type!=null)? ", type=" + type: "";
-		s+=(author!=null)? ", author=" + author: "";
-		s+=(commitID!=null)? ", commitID=" + commitID:"";
-		s+=(comment!=null)? ", comment=" + comment:"";
+		s+=(id!=null)? "id=" + id +",":"";
+		s+=(start!=null)? "start=" + start + ",": "";
+		s+=(end!=null)? "end=" + end + ",": "";
+		s+=(fileID!=null)? "fileID=" + fileID + ",": "";
+		s+=(type!=null)? "type=" + type + ",": "";
+		s+=(author!=null)? "author=" + author + ",": "";
+		s+=(commitID!=null)? "commitID=" + commitID + ",":"";
+		s+=(comment!=null)? "comment=" + comment:"";
 		s+="]";
 	   return s;
    }

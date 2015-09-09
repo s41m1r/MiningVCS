@@ -71,8 +71,9 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		if(line==null)
 			return null;
 
-		while(!line.startsWith("commit"))
-			raf.readLine();
+		while(!line.startsWith("commit") && (line=raf.readLine())!=null);
+		if(line == null)
+			return null;
 
 		String revision = line.split("commit ")[1];
 		line = raf.readLine();
@@ -97,9 +98,10 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 //		System.out.println("Merge="+merge+" Message:"+message);
 //		Locale locale = new Locale("de", "AT", "Austria");
 		DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy Z").withLocale(Locale.ENGLISH);
+//		DateTimeFormatter gitFmt = DateTimeFormat.forPattern("EEE MMM dd HH:mm:ss yyyy ZZ").withOffsetParsed();
 //		System.out.println(new DateTime().toString(gitFmt));
 		DateTime date = gitFmt.parseDateTime(dateString.trim());
-
+//		System.out.println(date);
 		LogEntry gitLogEntry = new GITLogEntry(revision,author,date,message,changeList);
 //		System.out.println("Merge="+merge+" Message:"+message);
 		return gitLogEntry;

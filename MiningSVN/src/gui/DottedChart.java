@@ -320,20 +320,9 @@ public class DottedChart {
 				OurTreeData data = (OurTreeData) ti.getData();
 
 				TreeItem[] items = ti.getItems();
-				//				if (data.getCollapsedEvents().isEmpty()){ 
-
 				GanttGroup ganttGroup = (GanttGroup) data.getGanttGroup();
-				//				int index = ganttComposite.getGroups().indexOf(ganttGroup);
-
 				GanttGroup newGroup = ganttGroup;// new GanttGroup(chart);
-
-				//				List<GanttEvent> oldEvents = new ArrayList<GanttEvent>();
-				//				for (Object e : ganttGroup.getEventMembers()){
-				//					oldEvents.add((GanttEvent) e);
-				//				}
-
 				List<GanttEvent> subEvents = new ArrayList<GanttEvent>();
-				//				List<GanttEvent> subEvents = new LinkedList<GanttEvent>(oldEvents);
 				setSubEventsVisible(items, false, subEvents);
 				data.setCollapsedEvents(subEvents);
 

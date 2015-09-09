@@ -84,6 +84,11 @@ public abstract class FileEventMap {
 		return fem;
 	}
 	
+	/**
+	 * 
+	 * @param log
+	 * @return mapping of each commit to file that was affected
+	 */
 	public static Map<String, List<String>> buildCommitFileMap(Log log){
 		HashMap<String, List<String>> res = new HashMap<String, List<String>>();
 		Collection<LogEntry> entries = log.getAllEntries();
