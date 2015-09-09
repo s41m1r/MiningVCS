@@ -3,9 +3,13 @@ package test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.joda.time.Days;
 
 import model.Activity;
 import model.Event;
@@ -21,9 +25,13 @@ import util.Opts;
 
 public class TestTreeImpl {
 	final static String outFile = "/home/saimir/directory-tree.txt";
+	static int threshold = 0; //number of days
 
 	public static void main(String[] args) throws IOException {
+		
 		String in = Opts.getInputFile(args);
+		String thresholdString = Opts.getThreshold(args);
+		threshold = Integer.parseInt(thresholdString);
 		
 		if(in==null) 
 			System.exit(-1);
@@ -37,8 +45,8 @@ public class TestTreeImpl {
 		
 		Tree t = new Tree(); 
 //		
-//		System.out.println("Output written to "+outFile);
-//		TestLog.toFile(outFile);
+		System.out.println("Output written to "+outFile);
+		TestLog.toFile(outFile);
 		
 		Set<String> files = fem.keySet();
 		for (String string : files) {
@@ -48,9 +56,15 @@ public class TestTreeImpl {
 		t.printEventTypes();
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		path.add(0); 
-		path.add(1);
+//		path.add(0);
 		Node node = t.getNodeByPath(path);
 		System.out.println(node);
+		Activity a = aggregate(node);
+		Collection<ArrayList<Event>> col = a.getEventsCollections();
+		int i=0;
+		for (ArrayList<Event> chunk : col) {
+			System.out.println(++i+"-chunk: ["+chunk.get(0).getStart()+","+chunk.get(chunk.size()-1).getStart()+"]");
+		}
 		
 	}
 	
@@ -73,14 +87,32 @@ public class TestTreeImpl {
 	
 	public static Activity aggregate(Node n){
 		Collection<Event> allEvents = collectSubEvents(n);
-		Collection<Collection<Event>> activites = aggregateFromEventList(allEvents);
-		Activity a = new Activity(activites);
+		Activity a = aggregateFromEventList(allEvents);
 		return a;
 	}
 
-	private static Collection<Collection<Event>> aggregateFromEventList(
+	private static Activity aggregateFromEventList(
 			Collection<Event> allEvents) {
-		return null;
+		
+		List<Event> all = new ArrayList<Event>(allEvents);
+		all.sort(new EventComparator());
+		Activity result = new Activity();
+		Event lastEvent = all.get(0);
+		ArrayList<Event> chunk = new ArrayList<Event>();
+		for (Iterator<Event> it = all.iterator(); it.hasNext();) {
+			Event thisEvent = it.next();
+			if(Days.daysBetween(lastEvent.getStart(), thisEvent.getStart()).getDays() < threshold){
+				chunk.add(thisEvent);
+			}
+			else{
+				result.addChunk(chunk);
+				chunk = new ArrayList<Event>();
+				chunk.add(thisEvent);
+			}
+			lastEvent = thisEvent;
+		}
+		result.addChunk(chunk);
+		return result;
 	}
 	
 	

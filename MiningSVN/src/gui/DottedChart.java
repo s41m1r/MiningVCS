@@ -71,7 +71,8 @@ public class DottedChart {
 
 	public static final int NUM_OF_DAYS_THRESHOLD = 7;
 //	private static final String gitLogFileName =  "/home/saimir/git/MiningCVS/MiningSVN.log";
-	private static final String gitLogFileName =  "/home/saimir/git/MiningCVS/MiningSVN/resources/commitlog123_20150902.log";
+//	private static final String gitLogFileName =  "/home/saimir/git/MiningCVS/MiningSVN/resources/commitlog123_20150902.log";
+	private static final String gitLogFileName =  "resources/commitlog123.log";
 	private static final String svnLogFileName = null;//"resources/20150302_SNV_LOG_FROM_Papers_new.log";
 	private static String fileName = null;
 

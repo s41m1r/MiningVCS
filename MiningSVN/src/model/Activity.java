@@ -12,22 +12,27 @@ import java.util.Collection;
  */
 
 public class Activity {
-	private Collection<Collection<Event>> eventsCollections;
+	private Collection<ArrayList<Event>> eventsCollections;
 	
 	public Activity() {
-		eventsCollections = new ArrayList<Collection<Event>>();
+		eventsCollections = new ArrayList<ArrayList<Event>>();
 	}
 	
-	public Activity(Collection<Collection<Event>> newCollections){
-		eventsCollections = newCollections;
+	public Activity(Collection<ArrayList<Event>> activites){
+		eventsCollections = activites;
 	}
 
-	public Collection<Collection<Event>> getEventsCollections() {
+	public Collection<ArrayList<Event>> getEventsCollections() {
 		return eventsCollections;
 	}
 	
-	public void addChunk(Collection<Event> chunk){
+	public void addChunk(ArrayList<Event> chunk){
 		eventsCollections.add(chunk);
+	}
+
+	@Override
+	public String toString() {
+		return "Activity [eventsCollections=" + eventsCollections + "]";
 	}
 	
 }
