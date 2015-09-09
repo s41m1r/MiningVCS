@@ -1,33 +1,23 @@
 package test;
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-
-import com.mysql.fabric.xmlrpc.base.Array;
-
+import model.Activity;
 import model.Event;
 import model.Log;
 import model.LogEntry;
 import model.git.GITLog;
-import model.svn.SVNLog;
 import model.tree.Node;
 import model.tree.Tree;
 import reader.GITLogReader;
 import reader.LogReader;
-import reader.SVNLogReader;
 import util.FileEventMap;
 import util.Opts;
-import util.TreeUtils;
 
 public class TestTreeImpl {
 	final static String outFile = "/home/saimir/directory-tree.txt";
@@ -79,6 +69,18 @@ public class TestTreeImpl {
 			collectedEvents.addAll(ch.getEventList());
 			collectSubEvents(ch,collectedEvents);
 		}
+	}
+	
+	public static Activity aggregate(Node n){
+		Collection<Event> allEvents = collectSubEvents(n);
+		Collection<Collection<Event>> activites = aggregateFromEventList(allEvents);
+		Activity a = new Activity(activites);
+		return a;
+	}
+
+	private static Collection<Collection<Event>> aggregateFromEventList(
+			Collection<Event> allEvents) {
+		return null;
 	}
 	
 	
