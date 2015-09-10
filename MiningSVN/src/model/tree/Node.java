@@ -4,8 +4,10 @@
 package model.tree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import model.Activity;
 import model.Event;
 
 /**
@@ -17,6 +19,8 @@ public class Node {
 	private List<Event> eventList;
 	private Node parent;
 	private List<Node> childList;
+	private boolean isAggreated;
+	private Activity activity;
 
 	public Node() {
 		this.eventList = new ArrayList<Event>();
@@ -29,12 +33,12 @@ public class Node {
 		this.childList = new ArrayList<Node>();
 	}
 
-	public Node(String value, List<Event> eventList, Node previous,
+	public Node(String value, List<Event> eventList, Node parent,
 			List<Node> childList) {
 		super();
 		this.value = value;
 		this.eventList = eventList;
-		this.parent = previous;
+		this.parent = parent;
 		this.childList = childList;
 	}
 	/**
@@ -119,6 +123,10 @@ public class Node {
 	public void addChildren(List<Node> children){
 		this.childList.addAll(children);
 	}
+	
+	public void addChild(Node child){
+		this.childList.add(child);
+	}
 
 	/**
 	 * @param str
@@ -130,5 +138,42 @@ public class Node {
 				return n;
 	   return null;
    }
+
+	public boolean isAggreated() {
+		return isAggreated;
+	}
+
+	public void setAggregated(boolean isAggreated) {
+		this.isAggreated = isAggreated;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+	
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	public Node copy(Node aggreNode, Activity a) {
+		Node n = null;
+		if(this!=aggreNode){
+			n = new Node(new String(this.getValue()),new ArrayList<Event>(this.getEventList()),
+					this.getParent(), new ArrayList<Node>(this.getChildList()));
+			n.setAggregated(false);
+			List<Node> children = this.getChildList();
+			for (Iterator<Node> iterator = children.iterator(); iterator.hasNext();) {
+				Node ch = (Node) iterator.next();
+				n.addChild(ch.copy(aggreNode,a));
+			}
+		}
+		else{
+			n = new Node(new String(this.getValue()),new ArrayList<Event>(),
+					this.getParent(), new ArrayList<Node>());
+			n.setActivity(a);
+			n.setAggregated(true);
+		}
+	    return n;
+	}
 
 }

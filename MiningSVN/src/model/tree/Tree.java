@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import model.Activity;
 import model.Event;
 
 import org.eclipse.nebula.widgets.ganttchart.AdvancedTooltip;
@@ -28,7 +29,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.TreeItem;
 import org.joda.time.DateTime;
 
-import util.TreeUtils;
+import test.TestTreeImpl;
 
 /**
  * @author Saimir Bala
@@ -38,13 +39,15 @@ public class Tree {
 
 	private Node root;
 
-	public Tree()
-	{
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+
+	public Tree(){
 		root = new Node("");
 	}
 
-	public boolean isEmpty()
-	{
+	public boolean isEmpty(){
 		return root==null;
 	}
 
@@ -52,8 +55,7 @@ public class Tree {
 		return root;
 	}
 
-	public void add(String str, List<Event> eventList)
-	{
+	public void add(String str, List<Event> eventList){
 		Node current = root;
 		Scanner s = new Scanner(str);
 		s.useDelimiter("/");//no whitespace preceding "/"
@@ -78,8 +80,7 @@ public class Tree {
 		s.close();
 	}
 
-	public void add(String str)
-	{
+	public void add(String str) {
 		Node current = root;
 		Scanner s = new Scanner(str);
 		s.useDelimiter("/");//no whitespace preceding "/"
@@ -102,14 +103,35 @@ public class Tree {
 		s.close();
 	}
 
-	public void print()
-	{
+	public void print(){
 		print(this.root, 1, false);
 	}
 
-	public void printWithEvents()
-	{
+	public void printWithEvents(){
 		print(this.root, 1, true);
+	}
+	
+	public void printWithActivitiesOrEvents(){
+		printWithActivitiesOrEvents(root, 0);
+	}
+
+	private void printWithActivitiesOrEvents(Node n, int level) {
+		if(n==null)
+			return;
+		for (Node c : n.getChildList()) {
+			for(int l=level;l>0;l--)
+				System.out.print(" ");
+			System.out.print("+-");
+			String events = "";
+			String activity = "";
+			String out = "["+level+"] "+c.getValue() + " "+events + ""+ activity;
+			if(!n.isAggreated())
+				events += c.getEventList().toString();
+			else activity += c.getActivity().toString();
+			System.out.println(out);
+			printWithActivitiesOrEvents(c, level+1);
+
+		}
 	}
 
 	private void print(Node n, int level, boolean withEvents)
@@ -155,7 +177,6 @@ public class Tree {
 		}
 		
 	}
-	
 	
 	private void printEventTypes(Node n, int level, int stopLevel)
 	{
@@ -296,7 +317,45 @@ public class Tree {
 	private Node getNodeByPath(Node root, ArrayList<Integer> path) {
 		if(path.size()==0)
 			return root;
-		Node nextChild = root.getChildList().get(path.remove(0)); //get the first and remove it
+		Node nextChild = null;
+		try{
+			nextChild = root.getChildList().get(path.remove(0)); //get the first and remove it
+		}
+		catch(IndexOutOfBoundsException e){
+			System.err.println("Path not valid.");
+			return null;
+		}
 		return getNodeByPath(nextChild, path);
 	}
+	
+	public Tree aggregateAt(Node n){
+		Activity a = TestTreeImpl.aggregate(n);
+		return this.copy(n, a);
+	}
+
+	private void createAggregatedTree(Node resultTree, Node root, Node aggregatedNode, Activity a) {
+		if(aggregatedNode==null)
+			return;
+		if(root == aggregatedNode){
+			resultTree = new Node(root.getValue(), root.getEventList(), null, new ArrayList<Node>());
+			resultTree.setAggregated(true);
+			resultTree.setActivity(a); 
+		}
+		else{//not aggregated. just copy the remaining subtree.
+			resultTree = new Node(root.getValue(), root.getEventList(), null, root.getChildList());
+			resultTree.setAggregated(false);
+			List<Node> children = root.getChildList();
+			for (int i = 0; i < children.size(); i++) {
+				createAggregatedTree(resultTree.getChildList().get(i), 
+						children.get(i), aggregatedNode, a);
+			} 
+		}
+	}
+	
+	public Tree copy(Node n, Activity a){
+		Tree t = new Tree();
+		t.setRoot(root.copy(n, a));
+		return t;
+	}
+	
 }
