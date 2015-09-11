@@ -1,0 +1,37 @@
+commit 6f3668d34114758df2ae11ffc5c3d86c37c1a884
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Mon Aug 31 22:02:40 2015 +0200
+
+    Initial Commit
+
+A	/project/wp2/test/factory/SignalMappingProvider
+A	/project/wp2/renderer/CarCollectionModule
+
+commit 7ad255b6c05ad50c84c276f17fc826f74271cd69
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Wed Dec 09 07:01:17 2015 +0100
+
+    Bugfix
+
+A	/project/wp2/renderer/serializer/access/TrainRulesModule
+M	/project/wp2/renderer/mapping/ApplicationCollectionFactory
+A	/project/wp2/test/factory/manager/TurnDisplayRef
+
+commit a8f86f9ea4a266ac760e5e8a4679b158fa965808
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Wed Jan 27 03:24:54 2016 +0100
+
+    Bugfix
+
+M	/project/wp2/renderer/mapping/TrackHandlerProvider
+M	/project/wp2/test/factory/qualifier/SystemVerifierTest
+
+
+commit c93f31f5c93b9177dff00fc0716601e274029232
+Author: Cesare Manzella <cesare.manzella@siemens.com>
+Date: Sun Oct 04 09:29:01 2015 +0200
+
+    Initial Commit
+
+A	/project/wp1/rules/CounterWriterProvider
+A	/project/wp1/rules/StationManagerFactoryTest
