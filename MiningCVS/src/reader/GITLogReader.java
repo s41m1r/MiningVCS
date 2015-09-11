@@ -36,10 +36,8 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		LogEntry entry;
 
 		while((entry=readNext())!=null){
-//			System.out.println(entry.getStartingToken());
 			logEntries.add(entry);
 		}
-//		System.out.println("last entry = "+logEntries.get(logEntries.size()-1));
 		return logEntries;
 	}
 
@@ -50,7 +48,6 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 	public LogEntry readNext() throws IOException {
 		boolean merge = false;
 		String line = raf.readLine();
-//		System.out.println("Merge="+merge+" Line:"+line);
 		if(line==null)
 			return null;
 
@@ -67,7 +64,6 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 		}
 
 		String author = readAuthor(line);
-//		System.out.println("Merge="+merge+" Author:"+line);
 		line = raf.readLine().trim();
 		String dateString = line.split("Date: ")[1];
 		line = raf.readLine();
@@ -119,20 +115,20 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 			return changeList;
 		String start = line.trim().split("\\s+")[0];
 
-		switch (start) {
-		case GITFileChanges.ADDED:
-			break;
-		case GITFileChanges.MODIFIED:
-			break;
-		case GITFileChanges.DELETED:
-			break;
-
-		default:
-			//			System.out.println("seek");
-			raf.seek(fp);
-			//			System.out.println("seeked.");
-			return changeList;
-		}
+//		switch (start) {
+//		case GITFileChanges.ADDED:
+//			break;
+//		case GITFileChanges.MODIFIED:
+//			break;
+//		case GITFileChanges.DELETED:
+//			break;
+//
+//		default:
+//			//			System.out.println("seek");
+//			raf.seek(fp);
+//			//			System.out.println("seeked.");
+//			return changeList;
+//		}
 
 		while(line!=null && !line.equals("")){
 			String[] changeLine = line.trim().split("\\s+");

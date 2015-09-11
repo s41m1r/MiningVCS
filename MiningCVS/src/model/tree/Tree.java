@@ -207,7 +207,7 @@ public class Tree {
 		for(int l=level;l>0;l--)
 			res+=" ";
 		for(Node c: n.getChildList()){
-			res+=c+"\n";
+			res+="["+level+"] "+c+"\n";
 			res+=toString(c,level+1);
 		}
 		return res;

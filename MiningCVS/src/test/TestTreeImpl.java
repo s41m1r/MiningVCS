@@ -15,6 +15,7 @@ import reader.GITLogReader;
 import reader.LogReader;
 import util.FileEventMap;
 import util.Opts;
+import util.TreeUtils;
 
 public class TestTreeImpl {
 	final static String outFile = "/home/saimir/directory-tree.txt";
@@ -42,43 +43,9 @@ public class TestTreeImpl {
 		for (String string : files) {
 			t.add(string, fem.get(string));
 		}
-		
-		System.out.println("Tree written to "+outFile);
-		TestLog.toFile(outFile);
-		t.printEventTypes();
-//		TestLog.toConsole();
-		TestLog.toFile(outFile+"2");
+		TestLog.toFile("/home/saimir/out.txt");
 		Tree aggregatedCopy = t.copyWithAggregationListsInNodes(threshold);
-//		System.out.println(aggregatedCopy.toStringAll());
-//		aggregatedCopy.printAll();
 		System.out.println(aggregatedCopy);
-//		ArrayList<Integer> path = new ArrayList<Integer>();
-//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//		
-//		String inp = "";
-//		while(true){
-//			TestLog.toConsole();
-//			System.out.print("Enter a path to the node to aggregate (e.g 0/0/1): ");
-//			inp=br.readLine();
-//			if(inp==null || inp.equals("quit")){
-//				System.out.println("Bye.");
-//				break;
-//			}
-//			path = toPath(inp);
-//			Node node = t.getNodeByPath(path);
-//			System.out.println(node);
-//			Activity a = TreeUtils.aggregate(node);
-//			Collection<ArrayList<Event>> col = a.getEventsCollections();
-//			int i=0;
-//			for (ArrayList<Event> chunk : col) {
-//				System.out.println(++i+"-chunk: ["+chunk.get(0).getStart()+
-//						","+chunk.get(chunk.size()-1).getStart()+"], "+chunk.size()+
-//						" events.");
-//			}
-//			Tree aggregated = t.aggregateAt(node);
-//			TestLog.toFile(outFile+"2");
-//			System.out.println(aggregated.getRoot().treeToString());
-//		}
 	}
 	
 	private static ArrayList<Integer> toPath(String inp) {

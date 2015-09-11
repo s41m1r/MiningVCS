@@ -1,0 +1,167 @@
+commit 6f3668d34114758df2ae11ffc5c3d86c37c1a884
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Mon Aug 31 22:02:40 2015 +0200
+
+    Initial Commit
+
+A	/project/wp2/test/factory/SignalMappingProvider
+A	/project/wp2/renderer/CarCollectionModule
+
+commit 7ad255b6c05ad50c84c276f17fc826f74271cd69
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Wed Dec 09 07:01:17 2015 +0100
+
+    Bugfix
+
+A	/project/wp2/renderer/serializer/access/TrainRulesModule
+M	/project/wp2/renderer/mapping/ApplicationCollectionFactory
+A	/project/wp2/test/factory/manager/TurnDisplayRef
+
+commit a8f86f9ea4a266ac760e5e8a4679b158fa965808
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Wed Jan 27 03:24:54 2016 +0100
+
+    Bugfix
+
+M	/project/wp2/renderer/mapping/TrackHandlerProvider
+M	/project/wp2/test/factory/qualifier/SystemVerifierTest
+
+
+commit c93f31f5c93b9177dff00fc0716601e274029232
+Author: Cesare Manzella <cesare.manzella@siemens.com>
+Date: Sun Oct 04 09:29:01 2015 +0200
+
+    Initial Commit
+
+A	/project/wp1/rules/CounterWriterProvider
+A	/project/wp1/rules/StationManagerFactoryTest
+A	/project/wp1/loader/WindowManagerAccess
+A	/project/wp1/loader/loader/ref/ICarReaderModule
+A	/project/wp1/loader/loader/ref/TurnRendererRef
+
+commit 9cf6e667c02b0d07a7ecc741e80125b0ecc3d403
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Sat Nov 21 18:12:34 2015 +0100
+
+    Bugfix
+
+M	/project/wp2/renderer/dao/access/CarConfigLoader
+M	/project/wp2/renderer/serializer/TrainRuleAccess
+
+commit 3d9ffa847761aa3d55a93bbce701761b039d7cac
+Author: Cesare Manzella <cesare.manzella@siemens.com>
+Date: Tue Aug 11 07:58:43 2015 +0200
+
+    Bugfix
+
+A	/project/wp1/loader/loader/TrainReaderProvider
+M	/project/wp1/rules/CounterWriterProvider
+A	/project/wp1/loader/SystemRulesWriterModuleDAO
+M	/project/wp1/loader/loader/ref/SystemElementAccess
+
+commit 2022af879987204ea56519283c56a8896d5191cf
+Author: Salvatore Interos <salvatore.interos@siemens.com>
+Date: Sun Nov 15 15:45:32 2015 +0100
+
+    Bugfix
+
+M	/project/wp2/test/factory/TrainRendererModuleLoader
+M	/project/wp2/test/factory/qualifier/StationConfigModule
+M	/project/wp2/renderer/serializer/access/CounterListFactoryImpl
+D	/project/wp2/renderer/mapping/ApplicationManagerListFactory
+
+commit 31afb46394bae3e2477d0ad12967008a2287512a
+Author: Michelle Navarra <michelle.navarra@siemens.com>
+Date: Fri Nov 13 10:35:29 2015 +0100
+
+    Bugfix
+
+A	/project/wp1/dao/StationManagerRef
+M	/project/wp1/loader/loader/ref/ApplicationDisplayFactory
+
+commit 49a4c5cfded34cde0e703ac570865c96997a71bf
+Author: Cesare Manzella <cesare.manzella@siemens.com>
+Date: Mon Jun 29 16:47:34 2015 +0200
+
+    Feature Added
+
+M	/project/wp1/loader/loader/ref/StationMappingAccess
+M	/project/wp1/provider/CarVerifierModuleImpl
+
+commit 7af89189a96eac9c82a0d6106b0e3e4083170ede
+Author: Cesare Manzella <cesare.manzella@siemens.com>
+Date: Mon Oct 05 22:05:10 2015 +0200
+
+    Bugfix
+
+M	/project/wp1/rules/CounterWriterProvider
+A	/project/wp1/loader/loader/config/TrackWindowFactory
+A	/project/wp1/provider/dao/StationLocaleModuleImpl
+
+commit 63d6640c2d5cf0fd181dd240d20265cc463d24cf
+Author: Luciano Leggio <luciano.leggio@siemens.com>
+Date: Fri Jul 29 16:47:30 2016 +0200
+
+    Feature Added
+
+A	/project/wp3/provider/impl/provider/TrackListModule
+A	/project/wp3/element/rules/test/CounterMappingImpl
+M	/project/wp3/provider/CounterReaderTest
+M	/project/wp3/provider/dao/StationCodeRef
+
+commit f0c6c79b99932464424b5b8ed25642acee8fa437
+Author: Antonio Salvo <antonio.salvo@siemens.com>
+Date: Thu Jun 09 20:02:10 2016 +0200
+
+    Bugfix
+
+M	/project/wp3/element/ref/ApplicationMapAccess
+M	/project/wp3/provider/impl/provider/ApplicationManagerModuleDAO
+A	/project/wp3/provider/impl/StationManagerDescriptorSerializerModuleLoader
+M	/project/wp3/verifier/SignalManagerFactory
+M	/project/wp3/provider/impl/element/TrainQualifierDAOImpl
+M	/project/wp3/provider/dao/SystemMappingProvider
+M	/project/wp3/provider/dao/dao/StationLocaleProvider
+M	/project/wp3/provider/dao/SignalSettingsWriterModule
+
+commit d98bbae4b5eec489f8f8755998bdd45660998108
+Author: Antonio Salvo <antonio.salvo@siemens.com>
+Date: Sun May 29 19:51:15 2016 +0200
+
+    Feature Added
+
+A	/project/wp3/provider/dao/dao/CounterLocaleRendererDAO
+M	/project/wp3/provider/dao/ManagerMappingLoader
+M	/project/wp3/provider/impl/provider/DescriptorHandlerModuleRef
+
+commit 2b51eee74319d31b7e5e028c945f14815d807a82
+Author: Cesare Manzella <cesare.manzella@siemens.com>
+Date: Sun Apr 17 03:48:47 2016 +0200
+
+    Bugfix
+
+M	/project/wp1/rules/SignalHandlerLoaderTest
+M	/project/wp1/provider/handler/SystemQualifierMappingModuleDAO
+
+commit 32402c6fee70e9a3bb5374693e1f4389c7c9049b
+Author: Luciano Leggio <luciano.leggio@siemens.com>
+Date: Mon Jul 25 05:39:43 2016 +0200
+
+    Bugfix
+
+M	/project/wp1/rules/StationManagerFactoryTest
+M	/project/wp1/provider/ApplicationElementVisualizationProvider
+M	/project/wp1/provider/dao/mapping/CarCodeRef
+M	/project/wp1/provider/dao/StationCollectionLoader
+
+commit 63ced3970777484ff5fa4ef8556c4dff804919be
+Author: Michelle Navarra <michelle.navarra@siemens.com>
+Date: Sat May 21 13:58:14 2016 +0200
+
+    Feature Added
+
+A	/project/wp1/loader/loader/ref/SystemVerifierRef
+D	/project/wp1/provider/handler/locale/StationDisplayLoader
+D	/project/wp1/provider/ApplicationElementVisualizationProvider
+M	/project/wp1/provider/CarVerifierModuleImpl
+D	/project/wp1/VerifierCodeFactory
