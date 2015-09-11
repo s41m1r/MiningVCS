@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import util.TreeUtils;
 import model.Activity;
 import model.Event;
 
@@ -16,11 +17,11 @@ import model.Event;
  */
 public class Node {
 	private String value;
+	private boolean isAggreated;
+	private Activity activity;
 	private List<Event> eventList;
 	private Node parent;
 	private List<Node> childList;
-	private boolean isAggreated;
-	private Activity activity;
 
 	public Node() {
 		this.eventList = new ArrayList<Event>();
@@ -102,20 +103,14 @@ public class Node {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	
 	@Override
 	public String toString() {
-		String st = "Node [";
-		st+= value==null? "" : value;
-		st+= eventList==null || eventList.isEmpty()? "" : eventList;
-		st+= parent==null? "" : parent;
-		st+= childList==null || eventList.isEmpty()? "" : childList;
-		st+="]";
-		return st;
+		return "Node [value=" + value + ", isAggreated=" + isAggreated
+				+ ", activity=" + activity + ", eventList=" + eventList
+				+ ", parent=" + parent + ", childList=" + childList + "]";
 	}
-	
+
 	public boolean hasChildren(){
 		return this.childList==null || this.childList.isEmpty();
 	}
@@ -159,7 +154,7 @@ public class Node {
 		Node n = null;
 		if(this!=aggreNode){
 			n = new Node(new String(this.getValue()),new ArrayList<Event>(this.getEventList()),
-					this.getParent(), new ArrayList<Node>(this.getChildList()));
+					this.getParent(), new ArrayList<Node>());
 			n.setAggregated(false);
 			List<Node> children = this.getChildList();
 			for (Iterator<Node> iterator = children.iterator(); iterator.hasNext();) {
@@ -172,6 +167,53 @@ public class Node {
 					this.getParent(), new ArrayList<Node>());
 			n.setActivity(a);
 			n.setAggregated(true);
+		}
+	    return n;
+	}
+	
+	public String treeToString(){
+		String res = this.toString();
+		res+="\n";
+		for(Node n: childList){
+			res+=n.treeToString();
+		}
+		return res;
+	}
+	
+	/**
+	 * 
+	 * @return a string with all the values unconditionally
+	 */
+	public String toStringAll(){
+		return toStringAll(0);
+	}
+	public String toStringAll(int level){
+		String res = "Node ["+ this.getValue()+
+				", isAggregated="+this.isAggreated()+
+				", "+this.getActivity()+
+				", "+this.getEventList()+
+				", parent="+this.getParent()+
+				", "+this.getChildList();
+		res+="\n";
+		for(Node n: childList){
+			for(int l=level;l>0;l--)
+				res+=" ";
+			res+="+-";
+			res+="["+level+"] "+n.toStringAll(level+1);
+		}
+		return res;
+	}
+
+	public Node copyWithAggregationLists(Node rootNode) {
+		Node n = new Node(new String(this.getValue()),new ArrayList<Event>(this.getEventList()),
+				this.getParent(), new ArrayList<Node>());
+		n.setAggregated(false);
+		Activity a = TreeUtils.aggregate(rootNode);
+		n.setActivity(a);
+		List<Node> children = this.getChildList();
+		for (Iterator<Node> iterator = children.iterator(); iterator.hasNext();) {
+			Node ch = (Node) iterator.next();
+			n.addChild(ch.copyWithAggregationLists(rootNode));
 		}
 	    return n;
 	}

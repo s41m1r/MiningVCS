@@ -29,7 +29,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.TreeItem;
 import org.joda.time.DateTime;
 
-import test.TestTreeImpl;
+import util.TreeUtils;
 
 /**
  * @author Saimir Bala
@@ -37,22 +37,42 @@ import test.TestTreeImpl;
  */
 public class Tree {
 
-	private Node root;
-
-	public void setRoot(Node root) {
-		this.root = root;
+	public static Map<String, Color> mapCommitToColor(Map<String, List<String>> commitFileMap){
+		Map<String, Color> resultMap = new HashMap<String, Color>();
+		Set<String> keys = commitFileMap.keySet();
+		for (String key : keys) {
+			resultMap.put(key.trim(), ColorCache.getRandomColor());
+		}
+		return resultMap;
 	}
+
+	private Node root;
 
 	public Tree(){
 		root = new Node("");
 	}
 
-	public boolean isEmpty(){
-		return root==null;
-	}
-
-	public Node getRoot() {
-		return root;
+	public void add(String str) {
+		Node current = root;
+		Scanner s = new Scanner(str);
+		s.useDelimiter("/");//no whitespace preceding "/"
+		while(s.hasNext())
+		{
+			str = s.next();
+			if(str.contains("(Copy from path")){
+				while(s.hasNext()){
+					str+=s.next();
+				}
+			}
+			Node child = current.getChild(str);
+			if(child==null)
+			{
+				current.getChildList().add(new Node(str));
+				child = current.getChild(str);
+			}
+			current = child;
+		}
+		s.close();
 	}
 
 	public void add(String str, List<Event> eventList){
@@ -80,146 +100,58 @@ public class Tree {
 		s.close();
 	}
 
-	public void add(String str) {
-		Node current = root;
-		Scanner s = new Scanner(str);
-		s.useDelimiter("/");//no whitespace preceding "/"
-		while(s.hasNext())
-		{
-			str = s.next();
-			if(str.contains("(Copy from path")){
-				while(s.hasNext()){
-					str+=s.next();
-				}
-			}
-			Node child = current.getChild(str);
-			if(child==null)
-			{
-				current.getChildList().add(new Node(str));
-				child = current.getChild(str);
-			}
-			current = child;
+	public Tree aggregateAt(Node n){
+		Activity a = TreeUtils.aggregate(n);
+		return this.copy(n, a);
+	}
+
+	/**
+	 * @param root2
+	 * @param commitColorMap
+	 * @param root3
+	 */
+	public void colorEvents(TreeItem ti, Map<String, Color> commitColorMap) {
+
+		OurTreeData data = (OurTreeData) ti.getData();
+		GanttGroup group = data.getGanttGroup();
+		List<GanttEvent> geList = group.getEventMembers();
+		geList.sort(new Comparator<GanttEvent>() {
+			public int compare(GanttEvent o1, GanttEvent o2) {
+				Event e1 = (Event) o1.getData();
+				Event e2 = (Event) o2.getData();
+				return -1*e1.getCommitID().compareTo(e2.getCommitID());
+			};
+		});
+		for(GanttEvent ge : geList){
+			Event e = (Event) ge.getData();
+			ge.setGradientStatusColor(commitColorMap.get(e.getCommitID()));
 		}
-		s.close();
+
+		for(TreeItem child: ti.getItems())
+			colorEvents(child, commitColorMap);
 	}
 
-	public void print(){
-		print(this.root, 1, false);
+	public Tree copy(Node n, Activity a){
+		Tree t = new Tree();
+		t.setRoot(root.copy(n, a));
+		return t;
 	}
 
-	public void printWithEvents(){
-		print(this.root, 1, true);
+	public Tree copyWithAggregationListsInNodes() {
+		return copyWithAggregationListsInNodes(this.root);
+	}
+
+	public Tree copyWithAggregationListsInNodes(Node n){
+		Tree t = new Tree();
+		t.setRoot(root.copyWithAggregationLists(n));
+		return t;
 	}
 	
-	public void printWithActivitiesOrEvents(){
-		printWithActivitiesOrEvents(root, 0);
-	}
-
-	private void printWithActivitiesOrEvents(Node n, int level) {
-		if(n==null)
-			return;
-		for (Node c : n.getChildList()) {
-			for(int l=level;l>0;l--)
-				System.out.print(" ");
-			System.out.print("+-");
-			String events = "";
-			String activity = "";
-			String out = "["+level+"] "+c.getValue() + " "+events + ""+ activity;
-			if(!n.isAggreated())
-				events += c.getEventList().toString();
-			else activity += c.getActivity().toString();
-			System.out.println(out);
-			printWithActivitiesOrEvents(c, level+1);
-
-		}
-	}
-
-	private void print(Node n, int level, boolean withEvents)
-	{
-		if(n==null)
-			return;
-		for(Node c : n.getChildList())
-		{
-			for(int l=level;l>0;l--)
-				System.out.print(" ");
-			System.out.print("+-");
-			System.out.println("["+level+"] "+c.getValue() + " "+(withEvents? c.getEventList(): ""));
-			print(c, level+1, withEvents);
-		}
-	}
-
-	public void printEventTypes(){
-		printEventTypes(root,0);
-	}
-
-	public void printEventTypes(int level){
-		printEventTypes(root,0,level);
-	}
-
-	private void printEventTypes(Node n, int level)
-	{
-		if(n==null)
-			return;
-				
-		for(Node c : n.getChildList())
-		{
-			for(int l=level;l>0;l--)
-				System.out.print(" ");
-			System.out.print("+-");
-			List<Event> eList = c.getEventList();
-
-			String s = "";
-			for (Event event : eList) {
-				s+=" "+event.getType();
-			}
-			System.out.println("["+level+"] "+c.getValue() + " "+s);
-			printEventTypes(c, level+1);
-		}
-		
-	}
-	
-	private void printEventTypes(Node n, int level, int stopLevel)
-	{
-		if(n==null)
-			return;
-
-		for(Node c : n.getChildList())
-		{
-			if(level==stopLevel){
-
-				for(int l=level;l>0;l--)
-					System.out.print(" ");
-				System.out.print("+-");
-				List<Event> eList = c.getEventList();
-
-				String s = "";
-				for (Event event : eList) {
-					s+=" "+event.getType();
-				}
-				System.out.println("["+level+"] "+c.getValue() + " "+s);
-			}
-			printEventTypes(c, level+1, stopLevel);
-		}
-	}
-
-	public static Map<String, Color> mapCommitToColor(Map<String, List<String>> commitFileMap){
-		Map<String, Color> resultMap = new HashMap<String, Color>();
-		Set<String> keys = commitFileMap.keySet();
-		for (String key : keys) {
-			resultMap.put(key.trim(), ColorCache.getRandomColor());
-		}
-		return resultMap;
-	}
-
 	public void fillInGanttTree(TreeItem root, GanttChart chart, GanttEvent scopeEvent){
-		//		final TreeItem root = new TreeItem(tree, SWT.BORDER);
-		// our root node that matches our scope
-		//		root.setText("Project structure");		
 		root.setExpanded(true);
-		//		System.out.println(commitColorMap);
 		fillInGanttTree(root, chart, this.root, scopeEvent);
 	}
-
+	
 	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent){
 
 		if(n==null)
@@ -282,37 +214,11 @@ public class Tree {
 			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
 	}
-
-	/**
-	 * @param root2
-	 * @param commitColorMap
-	 * @param root3
-	 */
-	public void colorEvents(TreeItem ti, Map<String, Color> commitColorMap) {
-
-		OurTreeData data = (OurTreeData) ti.getData();
-		GanttGroup group = data.getGanttGroup();
-		List<GanttEvent> geList = group.getEventMembers();
-		geList.sort(new Comparator<GanttEvent>() {
-			public int compare(GanttEvent o1, GanttEvent o2) {
-				Event e1 = (Event) o1.getData();
-				Event e2 = (Event) o2.getData();
-				return -1*e1.getCommitID().compareTo(e2.getCommitID());
-			};
-		});
-		for(GanttEvent ge : geList){
-			Event e = (Event) ge.getData();
-			ge.setGradientStatusColor(commitColorMap.get(e.getCommitID()));
-		}
-
-		for(TreeItem child: ti.getItems())
-			colorEvents(child, commitColorMap);
-	}
-	
 	
 	public Node getNodeByPath(Collection<Integer> path){
 		return getNodeByPath(root, new ArrayList<Integer>(path));
 	}
+
 
 	private Node getNodeByPath(Node root, ArrayList<Integer> path) {
 		if(path.size()==0)
@@ -327,35 +233,129 @@ public class Tree {
 		}
 		return getNodeByPath(nextChild, path);
 	}
-	
-	public Tree aggregateAt(Node n){
-		Activity a = TestTreeImpl.aggregate(n);
-		return this.copy(n, a);
+
+//	private void printEventTypes(int level){
+//		printEventTypes(root,0,level);
+//	}
+
+	public Node getRoot() {
+		return root;
 	}
 
-	private void createAggregatedTree(Node resultTree, Node root, Node aggregatedNode, Activity a) {
-		if(aggregatedNode==null)
+	public boolean isEmpty(){
+		return root==null;
+	}
+
+	public void print(){
+		print(this.root, 1, false);
+	}
+
+	private void print(Node n, int level, boolean withEvents)
+	{
+		if(n==null)
 			return;
-		if(root == aggregatedNode){
-			resultTree = new Node(root.getValue(), root.getEventList(), null, new ArrayList<Node>());
-			resultTree.setAggregated(true);
-			resultTree.setActivity(a); 
-		}
-		else{//not aggregated. just copy the remaining subtree.
-			resultTree = new Node(root.getValue(), root.getEventList(), null, root.getChildList());
-			resultTree.setAggregated(false);
-			List<Node> children = root.getChildList();
-			for (int i = 0; i < children.size(); i++) {
-				createAggregatedTree(resultTree.getChildList().get(i), 
-						children.get(i), aggregatedNode, a);
-			} 
+		for(Node c : n.getChildList())
+		{
+			for(int l=level;l>0;l--)
+				System.out.print(" ");
+			System.out.print("+-");
+			System.out.println("["+level+"] "+c.getValue() + " "+(withEvents? c.getEventList(): ""));
+			print(c, level+1, withEvents);
 		}
 	}
+
+	public void printAll(){
+		printAll(this.getRoot(),0);
+	}
 	
-	public Tree copy(Node n, Activity a){
-		Tree t = new Tree();
-		t.setRoot(root.copy(n, a));
-		return t;
+	
+	private void printAll(Node n, int level)
+	{
+		if(n==null)
+			return;
+		for(Node c : n.getChildList())
+		{
+			for(int l=level;l>0;l--)
+				System.out.print(" ");
+			System.out.print("+-");
+			System.out.println("["+level+"] "+c.getValue() + 
+					" "+c.getActivity()+" eventList: "+c.getEventList());
+			printAll(c, level+1);
+		}
+	}
+
+	public void printEventTypes(){
+		printEventTypes(root,0);
+	}
+	
+	private void printEventTypes(Node n, int level)
+	{
+		if(n==null)
+			return;
+				
+		for(Node c : n.getChildList())
+		{
+			for(int l=level;l>0;l--)
+				System.out.print(" ");
+			System.out.print("+-");
+			List<Event> eList = c.getEventList();
+
+			String s = "";
+			for (Event event : eList) {
+				s+=" "+event.getType();
+			}
+			System.out.println("["+level+"] "+c.getValue() + " "+s);
+			printEventTypes(c, level+1);
+		}		
+	}
+
+//	private void createAggregatedTree(Node resultTree, Node root, Node aggregatedNode, Activity a) {
+//		if(aggregatedNode==null)
+//			return;
+//		if(root == aggregatedNode){
+//			resultTree = new Node(root.getValue(), root.getEventList(), null, new ArrayList<Node>());
+//			resultTree.setAggregated(true);
+//			resultTree.setActivity(a); 
+//		}
+//		else{//not aggregated. just copy the remaining subtree.
+//			resultTree = new Node(root.getValue(), root.getEventList(), null, root.getChildList());
+//			resultTree.setAggregated(false);
+//			List<Node> children = root.getChildList();
+//			for (int i = 0; i < children.size(); i++) {
+//				createAggregatedTree(resultTree.getChildList().get(i), 
+//						children.get(i), aggregatedNode, a);
+//			} 
+//		}
+//	}
+	
+	public void printWithEvents(){
+		print(this.root, 1, true);
+	}
+
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+	
+	@Override
+	public String toString() {
+		return "Tree "+toString(this.getRoot(),0);
+	}
+	
+	private String toString(Node n, int level) {
+		if(n==null)
+			return null;
+		String res = "";
+		for(int l=level;l>0;l--)
+			res+=" ";
+		for(Node c: n.getChildList()){
+			res+=c+"\n";
+			res+=toString(c,level+1);
+		}
+		return res;
+	}
+
+	public String toStringAll(){
+		return this.getRoot().toStringAll();
 	}
 	
 }

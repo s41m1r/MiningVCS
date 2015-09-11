@@ -2,24 +2,15 @@ package test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-
-import model.Activity;
 import model.Event;
 import model.Log;
 import model.LogEntry;
 import model.git.GITLog;
-import model.tree.Node;
 import model.tree.Tree;
-
-import org.joda.time.Days;
-
 import reader.GITLogReader;
 import reader.LogReader;
 import util.FileEventMap;
@@ -27,7 +18,7 @@ import util.Opts;
 
 public class TestTreeImpl {
 	final static String outFile = "/home/saimir/directory-tree.txt";
-	static int threshold = 0; //number of days
+	public static int threshold = 0; //number of days
 
 	public static void main(String[] args) throws IOException {
 		
@@ -42,8 +33,6 @@ public class TestTreeImpl {
 		
 		LogReader<LogEntry> lr = new GITLogReader(in);
 		Log log = new GITLog(lr.readAll());
-//		LogReader<LogEntry> lr = new SVNLogReader("resources/20150129_SNV_LOG_FROM_SHAPE_PROPOSAL_new.log");
-//		Log log = new SVNLog(lr.readAll());
 		lr.close();
 		Map<String, List<Event>> fem = FileEventMap.buildHistoricalFileEventMap(log);
 		
@@ -57,29 +46,39 @@ public class TestTreeImpl {
 		System.out.println("Tree written to "+outFile);
 		TestLog.toFile(outFile);
 		t.printEventTypes();
-		TestLog.toConsole();
-		
-		ArrayList<Integer> path = new ArrayList<Integer>();
-		
-		String inp = "";
-		while(true){
-			inp=JOptionPane.showInputDialog("Write down the path to the node to aggregate. e.g. 1/1/0");
-			if(inp==null)
-				break;
-			path = toPath(inp);
-			Node node = t.getNodeByPath(path);
-			System.out.println(node);
-			Activity a = aggregate(node);
-			Collection<ArrayList<Event>> col = a.getEventsCollections();
-			int i=0;
-			for (ArrayList<Event> chunk : col) {
-				System.out.println(++i+"-chunk: ["+chunk.get(0).getStart()+
-						","+chunk.get(chunk.size()-1).getStart()+"], "+chunk.size()+
-						" events.");
-			}
-			Tree aggregated = t.aggregateAt(node);
-			aggregated.printEventTypes();
-		}
+//		TestLog.toConsole();
+		TestLog.toFile(outFile+"2");
+		Tree aggregatedCopy = t.copyWithAggregationListsInNodes();
+//		System.out.println(aggregatedCopy.toStringAll());
+//		aggregatedCopy.printAll();
+		System.out.println(aggregatedCopy);
+//		ArrayList<Integer> path = new ArrayList<Integer>();
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		
+//		String inp = "";
+//		while(true){
+//			TestLog.toConsole();
+//			System.out.print("Enter a path to the node to aggregate (e.g 0/0/1): ");
+//			inp=br.readLine();
+//			if(inp==null || inp.equals("quit")){
+//				System.out.println("Bye.");
+//				break;
+//			}
+//			path = toPath(inp);
+//			Node node = t.getNodeByPath(path);
+//			System.out.println(node);
+//			Activity a = TreeUtils.aggregate(node);
+//			Collection<ArrayList<Event>> col = a.getEventsCollections();
+//			int i=0;
+//			for (ArrayList<Event> chunk : col) {
+//				System.out.println(++i+"-chunk: ["+chunk.get(0).getStart()+
+//						","+chunk.get(chunk.size()-1).getStart()+"], "+chunk.size()+
+//						" events.");
+//			}
+//			Tree aggregated = t.aggregateAt(node);
+//			TestLog.toFile(outFile+"2");
+//			System.out.println(aggregated.getRoot().treeToString());
+//		}
 	}
 	
 	private static ArrayList<Integer> toPath(String inp) {
@@ -90,53 +89,6 @@ public class TestTreeImpl {
 			path.add(Integer.parseInt(stringPath));
 		}
 		return path;
-	}
-
-	public static Collection<Event> collectSubEvents(Node root){
-		Collection<Event> c = new ArrayList<Event>();
-		c.addAll(root.getEventList());
-		collectSubEvents(root, c);
-		return c;
-	}
-	
-	private static void collectSubEvents(Node root, Collection<Event> collectedEvents){
-		if(root==null)
-			return;
-		List<Node> children = root.getChildList();
-		for (Node ch : children) {
-			collectedEvents.addAll(ch.getEventList());
-			collectSubEvents(ch,collectedEvents);
-		}
-	}
-	
-	public static Activity aggregate(Node n){
-		Collection<Event> allEvents = collectSubEvents(n);
-		Activity a = aggregateFromEventList(allEvents);
-		return a;
-	}
-
-	private static Activity aggregateFromEventList(
-			Collection<Event> allEvents) {
-		
-		List<Event> all = new ArrayList<Event>(allEvents);
-		all.sort(new EventComparator());
-		Activity result = new Activity();
-		Event lastEvent = all.get(0);
-		ArrayList<Event> chunk = new ArrayList<Event>();
-		for (Iterator<Event> it = all.iterator(); it.hasNext();) {
-			Event thisEvent = it.next();
-			if(Days.daysBetween(lastEvent.getStart(), thisEvent.getStart()).getDays() < threshold){
-				chunk.add(thisEvent);
-			}
-			else{
-				result.addChunk(chunk);
-				chunk = new ArrayList<Event>();
-				chunk.add(thisEvent);
-			}
-			lastEvent = thisEvent;
-		}
-		result.addChunk(chunk);
-		return result;
 	}
 	
 	

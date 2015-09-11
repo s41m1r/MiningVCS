@@ -4,11 +4,18 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.joda.time.Days;
+
+import test.EventComparator;
+import test.TestTreeImpl;
+import model.Activity;
 import model.Event;
 import model.tree.Node;
 
@@ -119,6 +126,53 @@ public abstract class TreeUtils {
 				seen.add(node);
 			}
 		}
+	}
+
+	public static Collection<Event> collectSubEvents(Node root){
+		Collection<Event> c = new ArrayList<Event>();
+		c.addAll(root.getEventList());
+		collectSubEvents(root, c);
+		return c;
+	}
+
+	public static void collectSubEvents(Node root, Collection<Event> collectedEvents){
+		if(root==null)
+			return;
+		List<Node> children = root.getChildList();
+		for (Node ch : children) {
+			collectedEvents.addAll(ch.getEventList());
+			collectSubEvents(ch,collectedEvents);
+		}
+	}
+
+	public static Activity aggregate(Node n){
+		Collection<Event> allEvents = collectSubEvents(n);
+		Activity a = aggregateFromEventList(allEvents);
+		return a;
+	}
+
+	private static Activity aggregateFromEventList(
+			Collection<Event> allEvents) {
+		
+		List<Event> all = new ArrayList<Event>(allEvents);
+		all.sort(new EventComparator());
+		Activity result = new Activity();
+		Event lastEvent = all.get(0);
+		ArrayList<Event> chunk = new ArrayList<Event>();
+		for (Iterator<Event> it = all.iterator(); it.hasNext();) {
+			Event thisEvent = it.next();
+			if(Days.daysBetween(lastEvent.getStart(), thisEvent.getStart()).getDays() < TestTreeImpl.threshold){
+				chunk.add(thisEvent);
+			}
+			else{
+				result.addChunk(chunk);
+				chunk = new ArrayList<Event>();
+				chunk.add(thisEvent);
+			}
+			lastEvent = thisEvent;
+		}
+		result.addChunk(chunk);
+		return result;
 	}
 	
 //	private static Node toTree(Node n1, Node n2){
