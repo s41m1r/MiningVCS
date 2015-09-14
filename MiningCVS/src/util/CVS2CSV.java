@@ -11,7 +11,6 @@ import model.LogEntry;
 import model.svn.SVNLog;
 import reader.LogReader;
 import reader.SVNLogReader;
-import test.TestLog;
 
 public class CVS2CSV {
 
@@ -20,7 +19,7 @@ public class CVS2CSV {
 		Log log = new SVNLog(lr.readAll());
 		Collection<LogEntry> entryList = log.getAllEntries();
 		System.out.println("fileID, Author, Change, Timestamp, Comment");
-		for (Iterator iterator = entryList.iterator(); iterator.hasNext();) {
+		for (Iterator<LogEntry> iterator = entryList.iterator(); iterator.hasNext();) {
 			LogEntry logEntry = (LogEntry) iterator.next();
 			List<Change> changeList = logEntry.getChangeList();
 			for (Change change : changeList) {
@@ -32,11 +31,12 @@ public class CVS2CSV {
 						+ "'"+logEntry.getDate() + "'," 
 						+ "'"+logEntry.getComment()+"'");
 			}
-		}	
+		}
+		lr.close();
 	} 
 
 	public static void main(String[] args) throws IOException {
-		TestLog.toFile("/home/saimir/out.csv");
+		SysUtils.toFile("/home/saimir/out.csv");
 		toCSV();
 	}
 

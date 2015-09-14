@@ -27,7 +27,7 @@ public abstract class Opts {
 	public static String USESVNLOG = "useSvnLog";
 	
 	
-	public static Options initOpts() {
+	private static Options initOpts() {
 		Options opts = new Options();
 		
 		Option logfile   = new Option("f", "logFile", true, "use given file for log");  
@@ -67,41 +67,41 @@ public abstract class Opts {
 	    
 	} 
 	
-	public static String getInputFile(String[] args) {
-		CommandLineParser parser = new DefaultParser();
-		Options options = Opts.initOpts();
-		CommandLine line = null;
-		
-	    try {
-	        // parse the command line arguments
-	        line = parser.parse(options, args );
-	    }
-	    catch(ParseException exp ) {
-	        // oops, something went wrong
-	        System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
-	    }
-		
-	    String input = null;
-	    input = line.getOptionValue("f");
-		return input;
-	}
-	
-	public static String getThreshold(String[] args) {
-		CommandLineParser parser = new DefaultParser();
-		Options options = Opts.initOpts();
-		CommandLine line = null;
-		
-	    try {
-	        // parse the command line arguments
-	        line = parser.parse(options, args );
-	    }
-	    catch(ParseException exp ) {
-	        // oops, something went wrong
-	        System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
-	    }
-		
-	    String input = null;
-	    input = line.getOptionValue("t");
-		return input;
-	}
+//	public static String getInputFile(String[] args) {
+//		CommandLineParser parser = new DefaultParser();
+//		Options options = Opts.initOpts();
+//		CommandLine line = null;
+//		
+//	    try {
+//	        // parse the command line arguments
+//	        line = parser.parse(options, args );
+//	    }
+//	    catch(ParseException exp ) {
+//	        // oops, something went wrong
+//	        System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
+//	    }
+//		
+//	    String input = null;
+//	    input = line.getOptionValue("f");
+//		return input;
+//	}
+//	
+//	public static String getThreshold(String[] args) {
+//		CommandLineParser parser = new DefaultParser();
+//		Options options = Opts.initOpts();
+//		CommandLine line = null;
+//		
+//	    try {
+//	        // parse the command line arguments
+//	        line = parser.parse(options, args );
+//	    }
+//	    catch(ParseException exp ) {
+//	        // oops, something went wrong
+//	        System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
+//	    }
+//		
+//	    String input = null;
+//	    input = line.getOptionValue("t");
+//		return input;
+//	}
 }

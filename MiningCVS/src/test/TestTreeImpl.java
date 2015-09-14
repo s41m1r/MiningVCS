@@ -1,7 +1,6 @@
 package test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +14,7 @@ import reader.GITLogReader;
 import reader.LogReader;
 import util.FileEventMap;
 import util.Opts;
-import util.TreeUtils;
+import util.SysUtils;
 
 public class TestTreeImpl {
 	final static String outFile = "/home/saimir/directory-tree.txt";
@@ -43,20 +42,20 @@ public class TestTreeImpl {
 		for (String string : files) {
 			t.add(string, fem.get(string));
 		}
-		TestLog.toFile("/home/saimir/out.txt");
+		SysUtils.toFile("/home/saimir/out.txt");
 		Tree aggregatedCopy = t.copyWithAggregationListsInNodes(threshold);
 		System.out.println(aggregatedCopy);
 	}
 	
-	private static ArrayList<Integer> toPath(String inp) {
-		String[] pathStringArray = inp.split("/");
-		ArrayList<Integer> path = new ArrayList<Integer>();
-		for (int i = 0; i < pathStringArray.length; i++) {
-			String stringPath = pathStringArray[i];
-			path.add(Integer.parseInt(stringPath));
-		}
-		return path;
-	}
+//	private static ArrayList<Integer> toPath(String inp) {
+//		String[] pathStringArray = inp.split("/");
+//		ArrayList<Integer> path = new ArrayList<Integer>();
+//		for (int i = 0; i < pathStringArray.length; i++) {
+//			String stringPath = pathStringArray[i];
+//			path.add(Integer.parseInt(stringPath));
+//		}
+//		return path;
+//	}
 	
 	
 //	public static Node l1l2Tre(){

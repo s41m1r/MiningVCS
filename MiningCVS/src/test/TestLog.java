@@ -3,11 +3,7 @@
  */
 package test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,7 +25,6 @@ import reader.SVNLogReader;
  *
  */
 public class TestLog {
-	static PrintStream console = System.out;
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -58,16 +53,7 @@ public class TestLog {
 		lr.close();
 	}
 	
-	public static void toFile(String filePath) throws FileNotFoundException{
-		File file = new File(filePath);
-		FileOutputStream fos = new FileOutputStream(file);
-		PrintStream ps = new PrintStream(fos);
-		System.setOut(ps);
-	}
 	
-	public static void toConsole(){
-		System.setOut(console);
-	}
 	
 //	Doesn't make sense
 //	public static Collection<Change> diff(Collection<Change> a, Collection<Change> b){

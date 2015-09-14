@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.math.stat.descriptive.AggregateSummaryStatistics;
+
 import util.TreeUtils;
 import model.Activity;
 import model.Event;
@@ -120,6 +122,8 @@ public class Node {
 	}
 	
 	public void addChild(Node child){
+		if(this.childList == null)
+			this.childList = new ArrayList<Node>();
 		this.childList.add(child);
 	}
 
@@ -204,18 +208,41 @@ public class Node {
 		return res;
 	}
 
-	public Node copyWithAggregationLists(Node rootNode, int threshold) {
+	public Node copyWithAggregationLists(int threshold) {
 		Node n = new Node(new String(this.getValue()),new ArrayList<Event>(this.getEventList()),
 				this.getParent(), new ArrayList<Node>());
-		n.setAggregated(false);
-		Activity a = TreeUtils.aggregate(rootNode, threshold);
-		n.setActivity(a);
 		List<Node> children = this.getChildList();
 		for (Iterator<Node> iterator = children.iterator(); iterator.hasNext();) {
 			Node ch = (Node) iterator.next();
-			n.addChild(ch.copyWithAggregationLists(rootNode, threshold));
+			Activity a = TreeUtils.aggregate(ch, threshold);
+			n.setActivity(a);
+			n.setAggregated(false);
+			n.addChild(ch.copyWithAggregationLists(threshold));
 		}
 	    return n;
 	}
+
+	public Node aggr(int threshold) {
+		Node n = new Node(new String(this.getValue()),new ArrayList<Event>(this.getEventList()),
+				this.getParent(), new ArrayList<Node>());
+		ArrayList<Event> allEvents = new ArrayList<Event>(this.getEventList());
+		ArrayList<Event> childsEvents = collectChildsEvents(this);
+		allEvents.addAll(childsEvents);
+		Activity a = TreeUtils.aggregateFromEventList(allEvents, threshold);
+		n.setActivity(a);
+		for(Node ch: this.getChildList())
+			n.addChild(ch.aggr(threshold));
+		return n;
+	}
+
+	private static ArrayList<Event> collectChildsEvents(Node node) {
+		ArrayList<Event> res = new ArrayList<Event>();
+		res.addAll(node.getEventList());
+		for(Node ch: node.getChildList())
+			res.addAll(collectChildsEvents(ch));
+		return res;
+	}
+	
+	
 
 }

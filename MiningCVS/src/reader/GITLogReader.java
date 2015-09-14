@@ -9,7 +9,6 @@ import java.util.Locale;
 
 import model.Change;
 import model.LogEntry;
-import model.git.GITFileChanges;
 import model.git.GITLogEntry;
 
 import org.joda.time.DateTime;
@@ -109,11 +108,11 @@ public class GITLogReader implements LogReader<LogEntry>, Closeable{
 	private List<Change> readChangeList() throws IOException {
 		List<Change> changeList = new ArrayList<Change>();
 		//read the first line
-		long fp = raf.getFilePointer();
+//		long fp = raf.getFilePointer();
 		String line = raf.readLine();
 		if(line==null)
 			return changeList;
-		String start = line.trim().split("\\s+")[0];
+//		String start = line.trim().split("\\s+")[0];
 
 //		switch (start) {
 //		case GITFileChanges.ADDED:

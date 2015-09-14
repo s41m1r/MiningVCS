@@ -129,7 +129,7 @@ public abstract class TreeUtils {
 
 	public static Collection<Event> collectSubEvents(Node root){
 		Collection<Event> c = new ArrayList<Event>();
-		c.addAll(root.getEventList());
+//		c.addAll(root.getEventList());
 		collectSubEvents(root, c);
 		return c;
 	}
@@ -139,7 +139,9 @@ public abstract class TreeUtils {
 			return;
 		List<Node> children = root.getChildList();
 		for (Node ch : children) {
-			collectedEvents.addAll(ch.getEventList());
+			List<Event> childsEvents = ch.getEventList();
+			if(childsEvents!=null)
+				collectedEvents.addAll(childsEvents);
 			collectSubEvents(ch,collectedEvents);
 		}
 	}
@@ -149,12 +151,15 @@ public abstract class TreeUtils {
 		Activity a = aggregateFromEventList(allEvents, threshold);
 		return a;
 	}
+	
 
-	private static Activity aggregateFromEventList(
+	public static Activity aggregateFromEventList(
 			Collection<Event> allEvents, int threshold) {
 		
 		List<Event> all = new ArrayList<Event>(allEvents);
-		all.sort(new EventComparator());
+		if(all.size()==0)
+			return null;
+		all.sort(new EventComparator()); //events are sorted
 		Activity result = new Activity();
 		Event lastEvent = all.get(0);
 		ArrayList<Event> chunk = new ArrayList<Event>();
@@ -172,6 +177,16 @@ public abstract class TreeUtils {
 		}
 		result.addChunk(chunk);
 		return result;
+	}
+	
+	public static Activity aggregateFromActivityList(Collection<Activity> allActivities, int threshold){
+		List<Event> allEvents = new ArrayList<Event>();
+		for (Activity activity : allActivities) {
+			for(ArrayList<Event> chunk : activity.getEventsCollections()){
+				allEvents.addAll(chunk);
+			}
+		}
+		return aggregateFromEventList(allEvents, threshold);
 	}
 	
 //	private static Node toTree(Node n1, Node n2){

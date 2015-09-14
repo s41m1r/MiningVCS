@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegrator;
+
 import model.Activity;
 import model.Event;
 import util.TreeUtils;
@@ -89,7 +91,13 @@ public class Tree {
 
 	public Tree copyWithAggregationListsInNodes(Node n, int threshold){
 		Tree t = new Tree();
-		t.setRoot(root.copyWithAggregationLists(n, threshold));
+		t.setRoot(n.copyWithAggregationLists(threshold));
+		return t;
+	}
+	
+	public Tree aggr(int threshold){
+		Tree t = new Tree();
+		t.setRoot(this.getRoot().aggr(threshold));;
 		return t;
 	}
 	
@@ -187,6 +195,31 @@ public class Tree {
 		}		
 	}
 	
+	public void printWithActivites(){
+		printWithActivites(root,0);
+	}
+	
+	private void printWithActivites(Node n, int level){
+		if(n==null)
+			return;
+				
+		for(Node c : n.getChildList()){
+			for(int l=level;l>0;l--)
+				System.out.print(" ");
+			System.out.print("+-");
+			
+			Activity a = c.getActivity();
+			Collection<ArrayList<Event>> chunkList = a.getEventsCollections(); //events are also sorted
+			String s = "";
+			for(ArrayList<Event> chunk : chunkList){
+				s+=" chunk ["+chunk.get(0).getStart().toDate() + "," + 
+					chunk.get(chunk.size()-1).getEnd().toDate() + "]";
+			}
+			System.out.println("["+level+"] "+c.getValue() + " "+s);
+			printWithActivites(c, level+1);
+		}		
+	}
+	
 	public void printWithEvents(){
 		print(this.root, 1, true);
 	}
@@ -197,17 +230,18 @@ public class Tree {
 	
 	@Override
 	public String toString() {
-		return "Tree "+toString(this.getRoot(),0);
+		return "Tree \r\n"+toString(this.getRoot(),0);
 	}
 	
 	private String toString(Node n, int level) {
 		if(n==null)
 			return null;
 		String res = "";
+		String dashes = "";
 		for(int l=level;l>0;l--)
-			res+=" ";
+			dashes+="-";
 		for(Node c: n.getChildList()){
-			res+="["+level+"] "+c+"\n";
+			res+=dashes+"+["+level+"] "+c+"\n";
 			res+=toString(c,level+1);
 		}
 		return res;
