@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.math.stat.descriptive.AggregateSummaryStatistics;
-
-import util.TreeUtils;
 import model.Activity;
 import model.Event;
+import util.TreeUtils;
 
 /**
  * @author Saimir Bala
@@ -229,7 +227,14 @@ public class Node {
 		ArrayList<Event> childsEvents = collectChildsEvents(this);
 		allEvents.addAll(childsEvents);
 		Activity a = TreeUtils.aggregateFromEventList(allEvents, threshold);
-		n.setActivity(a);
+		Activity adjusted = null;
+		try {
+			adjusted = TreeUtils.adjust(a);
+		} catch (CloneNotSupportedException e) {
+			adjusted=a;
+			e.printStackTrace();
+		}
+		n.setActivity(adjusted);
 		for(Node ch: this.getChildList())
 			n.addChild(ch.aggr(threshold));
 		return n;

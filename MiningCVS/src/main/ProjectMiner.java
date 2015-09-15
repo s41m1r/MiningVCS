@@ -19,13 +19,14 @@ import reader.GitStreamReader;
 import util.FileEventMap;
 import util.Opts;
 import util.SysUtils;
+import util.TreeUtils;
 
 /**
  * @author saimir
  *
  */
 public class ProjectMiner {
-	public static Tree getTree(InputStream in, int threshold) throws IOException{
+	public static Tree getTree(InputStream in, int threshold) throws IOException, CloneNotSupportedException{
 		Tree result = null;
 		GitStreamReader gsr = new GitStreamReader(in);
 		List<LogEntry> logEntries =  gsr.readAll();
@@ -40,11 +41,12 @@ public class ProjectMiner {
 			t.add(string, fem.get(string));
 		}
 		result = t.aggr(threshold);
-		result.printWithActivites();
+//		result.printWithActivites();
+//		TreeUtils.adjust(result.getRoot().getActivity());
 		return result;
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 //		String logString = "commit 6f3668d34114758df2ae11ffc5c3d86c37c1a884\n" + 
 //				"Author: Salvatore Interos <salvatore.interos@siemens.com>\n" + 
 //				"Date: Mon Aug 31 22:02:40 2015 +0200\n" + 
@@ -88,7 +90,7 @@ public class ProjectMiner {
 		Opts.parseArgs(args);
 		String inputFile = Opts.optionValueMap.get(Opts.LOGFILE);
 		int threshold = Integer.parseInt(Opts.optionValueMap.get(Opts.THRESHOLD));
-		System.out.println(inputFile);
+		System.out.println("Input is "+inputFile);
 		InputStream is = new FileInputStream(inputFile);
 		SysUtils.toFile(SysUtils.DEFAULT_OUTPUT_FILE);
 		System.out.println(getTree(is, threshold));

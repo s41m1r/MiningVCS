@@ -8,8 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.commons.math.ode.nonstiff.ThreeEighthesIntegrator;
-
 import model.Activity;
 import model.Event;
 import util.TreeUtils;

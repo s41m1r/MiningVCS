@@ -11,12 +11,15 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.joda.time.Days;
-
-import test.EventComparator;
 import model.Activity;
 import model.Event;
 import model.tree.Node;
+
+import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
+import test.EventComparator;
 
 /**
  * @author Saimir Bala
@@ -152,6 +155,42 @@ public abstract class TreeUtils {
 		return a;
 	}
 	
+	public static Activity adjust(Activity a) throws CloneNotSupportedException{
+		Activity adjusted = new Activity(a.getEventsCollections());
+		DescriptiveStatistics commitDistances = new DescriptiveStatistics(); // stores busy commit distances in millis
+		
+		Collection<ArrayList<Event>> eventCollection = new ArrayList<ArrayList<Event>>();
+		eventCollection.addAll(a.getEventsCollections()); 
+		for (ArrayList<Event> chunk : eventCollection) {
+			chunk.sort(new EventComparator());
+			Event lastEvent = chunk.get(0);
+			Event thisEvent;
+			for (Iterator<Event> it = chunk.iterator(); it.hasNext();lastEvent=thisEvent.clone()) {
+				thisEvent = it.next();
+				commitDistances.addValue(thisEvent.getStart().getMillis()-lastEvent.getStart().getMillis());
+			}
+		}	
+		double mean = commitDistances.getMean();
+//		System.out.println("countDifferentStartEnd="+countDifferentStartEnd);
+//		System.out.println("mean is "+mean+ " a date with mean is "+new DateTime((long)mean));
+		for (ArrayList<Event> chunk : eventCollection) {
+			Event e = chunk.get(0);
+			DateTime eDateTime = new DateTime(e.getStart());
+			DateTime newDateTime = new DateTime(eDateTime.minus((long) mean));
+//			System.out.println("Event="+e.getFileID()+" Old date="+eDateTime+" adjustedDate="+newDateTime);
+			Event adjustedFirstEvent = new Event(e.getId(), 
+					newDateTime,
+					e.getEnd(), e.getFileID(), e.getType(), 
+					e.getAuthor());
+			ArrayList<Event> adjustedChunk = new ArrayList<Event>();
+			adjustedChunk.add(adjustedFirstEvent);
+			for (int i = 1; i < chunk.size()-1; i++) {
+				adjustedChunk.add(chunk.get(i));
+			}
+			adjusted.addChunk(adjustedChunk);
+		}
+		return adjusted;
+	}
 
 	public static Activity aggregateFromEventList(
 			Collection<Event> allEvents, int threshold) {

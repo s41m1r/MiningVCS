@@ -9,8 +9,25 @@ import org.joda.time.DateTime;
  * @author Saimir Bala
  *
  */
-public class Event {
+public class Event implements Cloneable {
 	
+	@Override
+	public Event clone() throws CloneNotSupportedException {
+		Event e = new Event();
+		if(this.id!=null)
+			e.id = new String(this.id);
+		e.start = new DateTime(this.start);
+		e.end = new DateTime(this.end);
+		e.fileID = new String(this.fileID);
+		e.type = new String(this.type);
+		e.author = new String(this.author);
+		if(commitID!=null)
+			e.commitID = new String(commitID);
+		if(comment!=null)
+			e.comment = new String(comment);
+		return e;
+	}
+
 	private String id;
 	private DateTime start;
 	private DateTime end;
