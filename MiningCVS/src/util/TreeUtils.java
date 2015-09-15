@@ -171,7 +171,6 @@ public abstract class TreeUtils {
 			}
 		}	
 		double mean = commitDistances.getMean();
-//		System.out.println("countDifferentStartEnd="+countDifferentStartEnd);
 //		System.out.println("mean is "+mean+ " a date with mean is "+new DateTime((long)mean));
 		for (ArrayList<Event> chunk : eventCollection) {
 			Event e = chunk.get(0);
