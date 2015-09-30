@@ -5,6 +5,7 @@ package util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -162,7 +163,8 @@ public abstract class TreeUtils {
 		Collection<ArrayList<Event>> eventCollection = new ArrayList<ArrayList<Event>>();
 		eventCollection.addAll(a.getEventsCollections()); 
 		for (ArrayList<Event> chunk : eventCollection) {
-			chunk.sort(new EventComparator());
+			Collections.sort(chunk,new EventComparator());
+//			chunk.sort(new EventComparator());
 			Event lastEvent = chunk.get(0);
 			Event thisEvent;
 			for (Iterator<Event> it = chunk.iterator(); it.hasNext();lastEvent=thisEvent.clone()) {
@@ -197,7 +199,8 @@ public abstract class TreeUtils {
 		List<Event> all = new ArrayList<Event>(allEvents);
 		if(all.size()==0)
 			return null;
-		all.sort(new EventComparator()); //events are sorted
+		Collections.sort(all, new EventComparator());
+//		all.sort(new EventComparator()); //events are sorted
 		Activity result = new Activity();
 		Event lastEvent = all.get(0);
 		ArrayList<Event> chunk = new ArrayList<Event>();
