@@ -17,7 +17,7 @@ import util.TreeUtils;
  */
 public class Node {
 	private String value;
-	private boolean isAggreated;
+	private boolean isAggregated;
 	private Activity activity;
 	private List<Event> eventList;
 	private Node parent;
@@ -106,7 +106,7 @@ public class Node {
 	
 	@Override
 	public String toString() {
-		return "Node [value=" + value + ", isAggreated=" + isAggreated
+		return "Node [value=" + value + ", isAggreated=" + isAggregated
 				+ ", activity=" + activity + ", eventList=" + eventList
 				+ ", parent=" + parent + ", childList=" + childList + "]";
 	}
@@ -137,11 +137,11 @@ public class Node {
    }
 
 	public boolean isAggreated() {
-		return isAggreated;
+		return isAggregated;
 	}
 
 	public void setAggregated(boolean isAggreated) {
-		this.isAggreated = isAggreated;
+		this.isAggregated = isAggreated;
 	}
 
 	public Activity getActivity() {

@@ -19,7 +19,6 @@ import reader.GitStreamReader;
 import util.FileEventMap;
 import util.Opts;
 import util.SysUtils;
-import util.TreeUtils;
 
 /**
  * @author saimir
@@ -93,6 +92,7 @@ public class ProjectMiner {
 		System.out.println("Input is "+inputFile);
 		InputStream is = new FileInputStream(inputFile);
 		SysUtils.toFile(SysUtils.DEFAULT_OUTPUT_FILE);
-		System.out.println(getTree(is, threshold));
+//		System.out.println(getTree(is, threshold));
+		getTree(is, threshold).printWithActivites();
 	}
 }
