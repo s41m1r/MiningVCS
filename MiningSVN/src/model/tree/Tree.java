@@ -8,6 +8,7 @@ import gui.OurTreeData;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -115,7 +116,7 @@ public class Tree {
 		OurTreeData data = (OurTreeData) ti.getData();
 		GanttGroup group = data.getGanttGroup();
 		List<GanttEvent> geList = group.getEventMembers();
-		geList.sort(new Comparator<GanttEvent>() {
+		Collections.sort(geList, new Comparator<GanttEvent>() {
 			public int compare(GanttEvent o1, GanttEvent o2) {
 				Event e1 = (Event) o1.getData();
 				Event e2 = (Event) o2.getData();
@@ -146,19 +147,19 @@ public class Tree {
 		t.setRoot(root.copyWithAggregationLists(n));
 		return t;
 	}
-	
+
 	public void fillInGanttTree(TreeItem root, GanttChart chart, GanttEvent scopeEvent){
 		root.setExpanded(true);
 		fillInGanttTree(root, chart, this.root, scopeEvent);
 	}
-	
+
 	public void fillInGanttTree(TreeItem root, GanttChart chart, Node n, GanttEvent scopeEvent){
 
 		if(n==null)
 			return;
 		GanttEvent ge = null;
 
-		n.getChildList().sort(new Comparator<Node>() {
+		Collections.sort(n.getChildList(), new Comparator<Node>() {
 			@Override
 			public int compare(Node o1, Node o2) {
 				if (o1.hasChildren() && o2.hasChildren() || !o1.hasChildren() && !o2.hasChildren()){
@@ -214,7 +215,7 @@ public class Tree {
 			fillInGanttTree(ti, chart, c, scopeEvent);
 		}
 	}
-	
+
 	public Node getNodeByPath(Collection<Integer> path){
 		return getNodeByPath(root, new ArrayList<Integer>(path));
 	}
@@ -234,9 +235,9 @@ public class Tree {
 		return getNodeByPath(nextChild, path);
 	}
 
-//	private void printEventTypes(int level){
-//		printEventTypes(root,0,level);
-//	}
+	//	private void printEventTypes(int level){
+	//		printEventTypes(root,0,level);
+	//	}
 
 	public Node getRoot() {
 		return root;
@@ -267,8 +268,8 @@ public class Tree {
 	public void printAll(){
 		printAll(this.getRoot(),0);
 	}
-	
-	
+
+
 	private void printAll(Node n, int level)
 	{
 		if(n==null)
@@ -287,12 +288,12 @@ public class Tree {
 	public void printEventTypes(){
 		printEventTypes(root,0);
 	}
-	
+
 	private void printEventTypes(Node n, int level)
 	{
 		if(n==null)
 			return;
-				
+
 		for(Node c : n.getChildList())
 		{
 			for(int l=level;l>0;l--)
@@ -309,25 +310,25 @@ public class Tree {
 		}		
 	}
 
-//	private void createAggregatedTree(Node resultTree, Node root, Node aggregatedNode, Activity a) {
-//		if(aggregatedNode==null)
-//			return;
-//		if(root == aggregatedNode){
-//			resultTree = new Node(root.getValue(), root.getEventList(), null, new ArrayList<Node>());
-//			resultTree.setAggregated(true);
-//			resultTree.setActivity(a); 
-//		}
-//		else{//not aggregated. just copy the remaining subtree.
-//			resultTree = new Node(root.getValue(), root.getEventList(), null, root.getChildList());
-//			resultTree.setAggregated(false);
-//			List<Node> children = root.getChildList();
-//			for (int i = 0; i < children.size(); i++) {
-//				createAggregatedTree(resultTree.getChildList().get(i), 
-//						children.get(i), aggregatedNode, a);
-//			} 
-//		}
-//	}
-	
+	//	private void createAggregatedTree(Node resultTree, Node root, Node aggregatedNode, Activity a) {
+	//		if(aggregatedNode==null)
+	//			return;
+	//		if(root == aggregatedNode){
+	//			resultTree = new Node(root.getValue(), root.getEventList(), null, new ArrayList<Node>());
+	//			resultTree.setAggregated(true);
+	//			resultTree.setActivity(a); 
+	//		}
+	//		else{//not aggregated. just copy the remaining subtree.
+	//			resultTree = new Node(root.getValue(), root.getEventList(), null, root.getChildList());
+	//			resultTree.setAggregated(false);
+	//			List<Node> children = root.getChildList();
+	//			for (int i = 0; i < children.size(); i++) {
+	//				createAggregatedTree(resultTree.getChildList().get(i), 
+	//						children.get(i), aggregatedNode, a);
+	//			} 
+	//		}
+	//	}
+
 	public void printWithEvents(){
 		print(this.root, 1, true);
 	}
@@ -335,12 +336,12 @@ public class Tree {
 	public void setRoot(Node root) {
 		this.root = root;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Tree "+toString(this.getRoot(),0);
 	}
-	
+
 	private String toString(Node n, int level) {
 		if(n==null)
 			return null;
@@ -357,5 +358,5 @@ public class Tree {
 	public String toStringAll(){
 		return this.getRoot().toStringAll();
 	}
-	
+
 }

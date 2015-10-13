@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -326,7 +327,7 @@ public class DottedChart {
 				List<GanttEvent> superEvents = new LinkedList<GanttEvent>();
 				String fatherName = (ganttGroup.getEventMembers().size()>0)? 
 						((GanttEvent)ganttGroup.getEventMembers().get(0)).getName(): "Project";
-				subEvents.sort(new GanttEventComparator());
+				Collections.sort(subEvents, new GanttEventComparator());		
 				
 				DescriptiveStatistics commitDistances = new DescriptiveStatistics(); // stores busy commit distances in millis
 				
@@ -420,7 +421,7 @@ public class DottedChart {
 					List<GanttEvent> eList = gg.getEventMembers();
 					eList.addAll(data.getSuperEvents());
 
-					eList.sort(new GanttEventComparator());
+					Collections.sort(eList, new GanttEventComparator());
 					Iterator<GanttEvent> iter = eList.iterator();
 					while(iter.hasNext()){
 						GanttEvent ganttEvent = iter.next();
@@ -559,7 +560,7 @@ public class DottedChart {
 	 * @return number of idle times
 	 */
 	private static int countIdleTimes(ArrayList<GanttEvent> distinctEvents) {
-		distinctEvents.sort(new GanttEventComparator());
+		Collections.sort(distinctEvents, new GanttEventComparator());
 		int res = 0;
 		for (int i=0; i<distinctEvents.size()-1; i++) {
 			Calendar end = (Calendar) distinctEvents.get(i).getActualEndDate().clone();
