@@ -23,7 +23,7 @@ public class GITLogEntry extends LogEntry{
    }
    
    /**
-	 * @param startingToken
+	 * @param commitID
 	 * @param author
 	 * @param date
 	 * @param comment
@@ -32,7 +32,7 @@ public class GITLogEntry extends LogEntry{
    public GITLogEntry(String commit, String author, DateTime date,
          String comment, List<Change> changeList) {
    	
-	   this.startingToken = commit;
+	   this.commitID = commit;
 	   this.author = author;
 	   this.date = date;
 	   this.comment = comment;
@@ -43,17 +43,17 @@ public class GITLogEntry extends LogEntry{
 	 * @see model.LogEntry#getStartingToken()
 	 */
 	@Override
-	public String getStartingToken() {
+	public String getCommitID() {
 		// TODO Auto-generated method stub
-		return super.getStartingToken();
+		return super.getCommitID();
 	}
 
 	/* (non-Javadoc)
 	 * @see model.LogEntry#setStartingToken(java.lang.String)
 	 */
 	@Override
-	public void setStartingToken(String startingToken) {
-		super.setStartingToken(startingToken);
+	public void setCommitID(String startingToken) {
+		super.setCommitID(startingToken);
 	}
 
 	/* (non-Javadoc)
@@ -133,7 +133,7 @@ public class GITLogEntry extends LogEntry{
 	 */
 	@Override
 	public String toString() {
-		return "LogEntry [commit=" + startingToken + ", author="
+		return "LogEntry [commit=" + commitID + ", author="
 				+ author + ", date=" + date + ", comment=" + comment
 				+ ", changeList=" + changeList + "]";
 	}

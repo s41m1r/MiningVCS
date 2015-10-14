@@ -33,7 +33,7 @@ public class SVNLogEntry extends LogEntry {
    public SVNLogEntry(String startingToken, String author, DateTime date,
          String comment, List<Change> changeList) {
 //	   super();
-	   this.startingToken = startingToken;
+	   this.commitID = startingToken;
 	   this.author = author;
 	   this.date = date;
 	   this.comment = comment;
@@ -44,15 +44,15 @@ public class SVNLogEntry extends LogEntry {
    
 
 	@Override
-   public String getStartingToken() {
+   public String getCommitID() {
 	   // TODO Auto-generated method stub
-	   return super.getStartingToken();
+	   return super.getCommitID();
    }
 
 	@Override
-   public void setStartingToken(String startingToken) {
+   public void setCommitID(String startingToken) {
 	   // TODO Auto-generated method stub
-	   super.setStartingToken(startingToken);
+	   super.setCommitID(startingToken);
    }
 
 	@Override
@@ -106,7 +106,7 @@ public class SVNLogEntry extends LogEntry {
 
 	@Override
    public String toString() {
-	   return "LogEntry [revision=" + startingToken + ", author=" + author
+	   return "LogEntry [revision=" + commitID + ", author=" + author
 	         + ", date=" + date + ", comment=" + comment + ", changeList="
 	         + changeList + "]";
    }

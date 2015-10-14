@@ -45,4 +45,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<scm>
+		<developerConnection>Saimir Bala</developerConnection>
+		<url>https://github.com/s41m1r/MiningCVS.git</url>
+	</scm>
 </project>

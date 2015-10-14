@@ -9,18 +9,18 @@ import org.joda.time.DateTime;
  *
  */
 public abstract class LogEntry {
-	protected String startingToken;
+	protected String commitID;
 	protected String author;
 	protected DateTime date;
 	protected String comment;
 	protected List<Change> changeList; //changed, modified, added, etc
 
-	public String getStartingToken() {
-		return startingToken;
+	public String getCommitID() {
+		return commitID;
 	}
 
-	public void setStartingToken(String startingToken) {
-		this.startingToken = startingToken;
+	public void setCommitID(String startingToken) {
+		this.commitID = startingToken;
 	}
 
 	public String getAuthor() {
@@ -57,7 +57,7 @@ public abstract class LogEntry {
 
 	@Override
    public String toString() {
-	   return "LogEntry [startingToken=" + startingToken + ", author=" + author
+	   return "LogEntry [startingToken=" + commitID + ", author=" + author
 	         + ", date=" + date + ", comment=" + comment + ", changeList="
 	         + changeList + "]";
    }

@@ -5,8 +5,10 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.joda.time.DateTime;
@@ -75,7 +77,10 @@ public abstract class Log {
 		}
 		return changes;
 	}
-
+	/**
+	 * 
+	 * @return all file paths
+	 */
 	public Collection<String> getAllFiles(){
 		Set<String> changes = new HashSet<String>();
 		for (LogEntry logEntry : entries) {
@@ -84,6 +89,13 @@ public abstract class Log {
 			}
 		}
 		return changes;
+	}
+	
+	public Map<String,String> getAllComments(){
+		Map<String, String> allComments = new HashMap<String, String>();
+		for(LogEntry logEntry : this.entries)
+			allComments.put(logEntry.getCommitID(), logEntry.getComment());
+		return allComments;
 	}
 
 	public int size(){

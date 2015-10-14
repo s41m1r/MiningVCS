@@ -30,7 +30,7 @@ public abstract class FileEventMap {
 		for (LogEntry logEntry : entries) {
 			String author = logEntry.getAuthor();
 			DateTime date = logEntry.getDate();
-			String commitID = logEntry.getStartingToken()+"";
+			String commitID = logEntry.getCommitID()+"";
 			String comment = logEntry.getComment();
 			List<Change> changeList = logEntry.getChangeList();
 			//	      add each event into the list
@@ -57,7 +57,7 @@ public abstract class FileEventMap {
 		for (LogEntry logEntry : entries) {
 			String author = logEntry.getAuthor();
 			DateTime date = logEntry.getDate();
-			String commitID = logEntry.getStartingToken()+"";
+			String commitID = logEntry.getCommitID()+"";
 			String comment = logEntry.getComment();
 			List<Change> changeList = logEntry.getChangeList();
 			//	      add each event into the list
@@ -93,7 +93,7 @@ public abstract class FileEventMap {
 		HashMap<String, List<String>> res = new HashMap<String, List<String>>();
 		Collection<LogEntry> entries = log.getAllEntries();
 		for (LogEntry logEntry : entries) {
-			String comment = logEntry.getStartingToken();//commit or revision
+			String comment = logEntry.getCommitID();//commit or revision
 			List<Change> changeList = logEntry.getChangeList();
 	      if(res.containsKey(comment)){
 	      	List<String> fileList = res.get(comment);
