@@ -5,8 +5,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -92,7 +92,7 @@ public abstract class Log {
 	}
 	
 	public Map<String,String> getAllComments(){
-		Map<String, String> allComments = new HashMap<String, String>();
+		Map<String, String> allComments = new LinkedHashMap<String, String>();
 		for(LogEntry logEntry : this.entries)
 			allComments.put(logEntry.getCommitID(), logEntry.getComment());
 		return allComments;
