@@ -1,7 +1,7 @@
 /**
  * 
  */
-package test;
+package test.git;
 
 import java.io.IOException;
 import java.util.List;
