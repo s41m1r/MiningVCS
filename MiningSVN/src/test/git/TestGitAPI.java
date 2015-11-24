@@ -14,7 +14,7 @@ public class TestGitAPI {
 	public static void main(String[] args) {
 		try {
 			Repository repo = new FileRepositoryBuilder()
-			.setGitDir(new File("/home/saimir/git/hoosegow/.git"))
+			.setGitDir(new File("/home/saimir/git/MiningCVS/MiningSVN/.git"))
 			.build();
 			
 			// Get a reference
@@ -25,7 +25,7 @@ public class TestGitAPI {
 
 			// Rev-parse
 			ObjectId obj = repo.resolve("HEAD^{tree}");
-
+			
 			// Load raw object contents
 			ObjectLoader loader = repo.open(masterTip);
 			loader.copyTo(System.out);
