@@ -22,7 +22,7 @@ public class Edit {
 	@ManyToOne(cascade={CascadeType.ALL})
 	private Commit commit;
 	
-	@ManyToOne(cascade={CascadeType.MERGE})
+	@ManyToOne(cascade={CascadeType.ALL})
 	private File file;
 	
 	@Column

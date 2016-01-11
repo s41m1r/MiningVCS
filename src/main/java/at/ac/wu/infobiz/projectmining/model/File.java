@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -18,7 +19,7 @@ public class File implements Serializable {
 	private static final long serialVersionUID = 5044129239587030486L;
 	@Id()
 	private String path;
-	@OneToMany(mappedBy="file")
+	@OneToMany(mappedBy="file", cascade={CascadeType.ALL})
 	public Collection<Edit> edits;
 	@OneToMany(mappedBy="from")
 	public Collection<Rename> renameFrom;

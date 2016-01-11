@@ -7852,6 +7852,29 @@ index 0000000..413bd51
 +}
 
 §§--§§
+commit b58a1865e5cb27c59d478fb0940bf172dc18ab90 786b4e863ec046d62de2e2a321826b71c0b06946
+Author: Peter LaValle <peter.lavalle@gmail.com>
+Date: Wed Dec 11 17:24:49 2013 +0000 
+Message: Update CommitFile.java
+---§
+
+1	1	src/main/java/org/dstadler/jgit/porcelain/CommitFile.java
+
+diff --git a/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java b/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java
+index 87fab90..c8d22b7 100644
+--- a/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java
++++ b/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java
+@@ -11,7 +11,7 @@ import org.eclipse.jgit.lib.Repository;
+ 
+ 
+ /**
+- * Simple snippet which shows how to list all Tags
++ * Simple snippet which shows how to commit a file
+  * 
+  * @author dominik.stadler@gmx.at
+  */
+
+§§--§§
 commit 93686e5c8b9f61f73126d6691be899d2cba0fc0b f148a699e8330b95263e560a56353bf81bc57670
 Author: Dominik Stadler <dominik.stadler@gmx.at>
 Date: Fri Jan 17 08:22:23 2014 +0100 
@@ -7944,6 +7967,105 @@ index 0000000..e8707b6
 +
 +        repository.close();
 +    }
++}
+
+§§--§§
+commit 1e153d3261b5929212b1ecbd3173ead76ade2036 aa31703b65774e4a06010824601e56375a70078c
+Author: Cuong Tran <cuong.tran@service-now.com>
+Date: Mon Feb 24 14:28:16 2014 -0800 
+Message: Add an example for "git update-index --assume-changed"
+---§
+
+83	0	src/main/java/org/dstadler/jgit/unfinished/UpdateIndex.java
+
+diff --git a/src/main/java/org/dstadler/jgit/unfinished/UpdateIndex.java b/src/main/java/org/dstadler/jgit/unfinished/UpdateIndex.java
+new file mode 100644
+index 0000000..ddd540d
+--- /dev/null
++++ b/src/main/java/org/dstadler/jgit/unfinished/UpdateIndex.java
+@@ -0,0 +1,83 @@
++package org.dstadler.jgit.unfinished;
++
++import java.io.File;
++import java.io.IOException;
++import java.util.Date;
++import java.util.Set;
++
++import org.apache.commons.io.FileUtils;
++import org.dstadler.jgit.helper.CookbookHelper;
++import org.eclipse.jgit.api.Git;
++import org.eclipse.jgit.api.GitCommand;
++import org.eclipse.jgit.api.Status;
++import org.eclipse.jgit.api.errors.GitAPIException;
++import org.eclipse.jgit.api.errors.JGitInternalException;
++import org.eclipse.jgit.dircache.DirCache;
++import org.eclipse.jgit.dircache.DirCacheEntry;
++import org.eclipse.jgit.errors.NoWorkTreeException;
++import org.eclipse.jgit.lib.Repository;
++
++/**
++ * Snippet which shows how to mark files as assumed-unchanged (git update-index --assume-unchanged)
++ */
++public class UpdateIndex {
++
++	public static void main(String[] args) throws IOException, GitAPIException {
++		final Repository repo = CookbookHelper.openJGitCookbookRepository();
++		final Git git = new Git(repo);
++		final String testFile = "README.md";
++		
++		try {
++			// Modify the file
++			FileUtils.write(new File(testFile), new Date().toString());			
++			System.out.println("Modified files: " + getModifiedFiles(git));
++			
++			new AssumeChangedCommand(repo, testFile, true).call();
++			System.out.println("Modified files after assume-changed: " + getModifiedFiles(git));
++
++			new AssumeChangedCommand(repo, testFile, false).call();
++			System.out.println("Modified files after no-assume-changed: " + getModifiedFiles(git));
++
++			git.checkout().addPath(testFile).call();
++			System.out.println("Modified files after reset: " + getModifiedFiles(git));
++		} finally {
++			repo.close();
++		}
++	}
++
++	private static Set<String> getModifiedFiles(Git git) throws NoWorkTreeException, GitAPIException {
++		Status status = git.status().call();
++		return status.getModified();
++	}
++
++	static class AssumeChangedCommand extends GitCommand<String> {
++		private final String fileName;
++		private final boolean assumeUnchanged;
++
++		AssumeChangedCommand(Repository repository, String fileName, boolean assumedUnchanged) {
++			super(repository);
++
++			this.fileName = fileName;
++			this.assumeUnchanged = assumedUnchanged;
++		}
++
++		@Override
++		public String call() throws GitAPIException {
++			try {
++				DirCache index = repo.lockDirCache();
++				DirCacheEntry entry = index.getEntry(fileName);
++
++				if (entry != null) {
++					entry.setAssumeValid(assumeUnchanged);
++					index.write();
++					index.commit();
++					return entry.getPathString();
++				}
++			} catch (IOException e) {
++				throw new JGitInternalException(e.getMessage(), e);
++			}
++
++			return null;
++		}
++	}
 +}
 
 §§--§§
@@ -16016,6 +16138,669 @@ index fd22f63..8a61cea 100644
  }
 
 §§--§§
+commit 2e1d65e4cf6c5e267e109aa20fd68ae119fa5ec9 a837a9c5563ddb01ebd121f85d9d64cf3c1823cb
+Author: matthew-white <mwhite@poverty-action.org>
+Date: Fri Oct 24 14:29:33 2014 -0400 
+Message: Modify and rename the readme for example purposes
+---§
+
+0	123	README.md
+125	0	jgit-cookbook README.md
+
+diff --git a/README.md b/README.md
+deleted file mode 100644
+index a94bcc8..0000000
+--- a/README.md
++++ /dev/null
+@@ -1,123 +0,0 @@
+-jgit-cookbook
+-=============
+-[![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
+-
+-Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
+-
+-The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. 
+-
+-This project tries to provide a collection of ready-to-run snippets which try to augment the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide)
+-
+-#### Getting started
+-
+-##### Grab it
+-
+-    git clone git://github.com/centic9/jgit-cookbook
+-
+-##### Build it and create Eclipse project files
+-
+-	mvn dependency:sources eclipse:eclipse package
+-
+-#### Run it
+-
+-    Import the project into an Eclipse workspace and execute the snippets there.
+-
+-#### Currently the following snippets are available
+-
+-##### General Repository handling
+-
+-* [Open an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/OpenRepository.java)
+-* [Create a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/CreateNewRepository.java)
+-
+-##### Porcelain commands
+-
+-* [Initialize a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/InitRepository.java)
+-* [Add a new file to the index](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddFile.java)
+-* [Commit a file to an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java)
+-* [Commit all changes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitAll.java)
+-* [List commits (i.e. Log)](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowLog.java)
+-* [List all tags in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListTags.java)
+-* [List all branches in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListBranches.java)
+-* [List all commits in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/WalkAllCommits.java)
+-* [Create and delete branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteBranch.java)
+-* [Create and delete tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteTag.java)
+-* [Return diff between two branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBranchDiff.java)
+-* [Show diff of changes to a file between two revs](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowFileDiff.java)
+-* [Show diff of changes to a file between two commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowChangedFilesBetweenCommits.java)
+-* [Show Status](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowStatus.java)
+-* [Store contents of branch into a compressed file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateArchive.java)
+-* [Write contents of branch into a compressed file using a custom archive format](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateCustomFormatArchive.java)
+-* [Blame, i.e. find out which commit changed specific lines in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBlame.java)
+-* [Add and list Notes attached to commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddAndListNoteOfCommit.java)
+-* [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
+-* [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
+-* [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
+-* [Run garbage collection](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CollectGarbage.java)
+-
+-##### Commands working with remote repositories
+-
+-* [Clone a remote reppository into a new local directory](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java)
+-* [Iterate remote references in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemotes.java)
+-* [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
+-* [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
+-
+-##### Low-level API
+-
+-* [Get the SHA-1 ref from a name, e.g. refs/heads/master](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRefFromName.java)
+-* [Get the commit-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java)
+-* [Get the commit-message](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetCommitMessage.java)
+-* [Get the tree-object from a commit-object, name or SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevTreeFromObjectId.java)
+-* [Read the contents of a file/blob](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadBlobContents.java)
+-* [Get the tag-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadTagFromName.java)
+-* [Resolve complex references, e.g. HEAD^^ to a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ResolveRef.java)
+-* [Iterate over the commits on a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkRev.java)
+-* [Read contents of a specific file from a specific commit](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java)
+-* [List remotes configured for the current repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/PrintRemotes.java)
+-* [Print out user information from Git](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadUserConfig.java)
+-* [Read file attributes, e.g. executeable state, file or directory, size, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetFileAttributes.java)
+-* [Use class BranchTrackingStatus to retrieve number of commits ahead/behind compared to remote branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ShowBranchTrackingStatus.java)
+-
+-#### Missing snippets
+-
+-* Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
+-* Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
+-* Add/Remove/Read Notes
+-* SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules
+-* Diffing: http://stackoverflow.com/questions/12987364/how-to-diff-with-two-files-by-jgit-without-creating-repo
+-* Ammend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
+-* Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
+-* Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
+-* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
+-* CherryPick
+-* Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
+-
+-#### Sources
+-
+-The following sources were used to build the snippets
+-
+-* [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
+-* [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
+-* [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
+-* [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
+-* [JGit main page](http://www.eclipse.org/jgit/)
+-
+-#### Contribute
+-
+-Please note that the list of snippets is not yet complete, probably never will. If you are missing things or have suggestions how to improve or add snippets, please either send pull requests or create [issues](https://github.com/centic9/jgit-cookbook/issues).
+-
+-#### Licensing
+-
+-   Copyright 2013, 2014 Dominik Stadler
+-
+-   Licensed under the Apache License, Version 2.0 (the "License");
+-   you may not use this file except in compliance with the License.
+-   You may obtain a copy of the License at
+-
+-     http://www.apache.org/licenses/LICENSE-2.0
+-
+-   Unless required by applicable law or agreed to in writing, software
+-   distributed under the License is distributed on an "AS IS" BASIS,
+-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-   See the License for the specific language governing permissions and
+-   limitations under the License.
+-some more text
+diff --git a/jgit-cookbook README.md b/jgit-cookbook README.md
+new file mode 100644
+index 0000000..219d61f
+--- /dev/null
++++ b/jgit-cookbook README.md	
+@@ -0,0 +1,125 @@
++jgit-cookbook
++=============
++[![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
++
++Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
++
++The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. 
++
++This project tries to provide a collection of ready-to-run snippets which try to augment the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide)
++
++#### Getting started
++
++##### Grab it
++
++    git clone git://github.com/centic9/jgit-cookbook
++
++##### Build it and create Eclipse project files
++
++	mvn dependency:sources eclipse:eclipse package
++
++#### Run it
++
++    Import the project into an Eclipse workspace and execute the snippets there.
++
++#### Currently the following snippets are available
++
++##### General Repository handling
++
++* [Open an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/OpenRepository.java)
++* [Create a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/CreateNewRepository.java)
++
++##### Porcelain commands
++
++* [Initialize a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/InitRepository.java)
++* [Add a new file to the index](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddFile.java)
++* [Commit a file to an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java)
++* [Commit all changes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitAll.java)
++* [List commits (i.e. Log)](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowLog.java)
++* [List all tags in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListTags.java)
++* [List all branches in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListBranches.java)
++* [List all commits in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/WalkAllCommits.java)
++* [Create and delete branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteBranch.java)
++* [Create and delete tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteTag.java)
++* [Return diff between two branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBranchDiff.java)
++* [Show diff of changes to a file between two revs](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowFileDiff.java)
++* [Show diff of changes to a file between two commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowChangedFilesBetweenCommits.java)
++* [Show Status](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowStatus.java)
++* [Store contents of branch into a compressed file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateArchive.java)
++* [Write contents of branch into a compressed file using a custom archive format](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateCustomFormatArchive.java)
++* [Blame, i.e. find out which commit changed specific lines in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBlame.java)
++* [Add and list Notes attached to commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddAndListNoteOfCommit.java)
++* [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
++* [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
++* [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
++* [Run garbage collection](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CollectGarbage.java)
++
++##### Commands working with remote repositories
++
++* [Clone a remote reppository into a new local directory](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java)
++* [Iterate remote references in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemotes.java)
++* [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
++* [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
++
++##### Low-level API
++
++* [Get the SHA-1 ref from a name, e.g. refs/heads/master](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRefFromName.java)
++* [Get the commit-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java)
++* [Get the commit-message](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetCommitMessage.java)
++* [Get the tree-object from a commit-object, name or SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevTreeFromObjectId.java)
++* [Read the contents of a file/blob](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadBlobContents.java)
++* [Get the tag-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadTagFromName.java)
++* [Resolve complex references, e.g. HEAD^^ to a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ResolveRef.java)
++* [Iterate over the commits on a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkRev.java)
++* [Read contents of a specific file from a specific commit](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java)
++* [List remotes configured for the current repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/PrintRemotes.java)
++* [Print out user information from Git](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadUserConfig.java)
++* [Read file attributes, e.g. executeable state, file or directory, size, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetFileAttributes.java)
++* [Use class BranchTrackingStatus to retrieve number of commits ahead/behind compared to remote branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ShowBranchTrackingStatus.java)
++
++#### Missing snippets
++
++* Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
++* Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
++* Add/Remove/Read Notes
++* SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules
++* Diffing: http://stackoverflow.com/questions/12987364/how-to-diff-with-two-files-by-jgit-without-creating-repo
++* Ammend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
++* Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
++* Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
++* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
++* CherryPick
++* Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
++
++#### Sources
++
++The following sources were used to build the snippets
++
++* [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
++* [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
++* [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
++* [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
++* [JGit main page](http://www.eclipse.org/jgit/)
++
++#### Contribute
++
++Please note that the list of snippets is not yet complete, probably never will. If you are missing things or have suggestions how to improve or add snippets, please either send pull requests or create [issues](https://github.com/centic9/jgit-cookbook/issues).
++
++Added line
++
++#### Licensing
++
++   Copyright 2013, 2014 Dominik Stadler
++
++   Licensed under the Apache License, Version 2.0 (the "License");
++   you may not use this file except in compliance with the License.
++   You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++   Unless required by applicable law or agreed to in writing, software
++   distributed under the License is distributed on an "AS IS" BASIS,
++   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++   See the License for the specific language governing permissions and
++   limitations under the License.
++some more text
+
+§§--§§
+commit 5a10bd6ee431e362facb03cfe763b9a3d9dfd02d 2e1d65e4cf6c5e267e109aa20fd68ae119fa5ec9
+Author: matthew-white <mwhite@poverty-action.org>
+Date: Fri Oct 24 14:29:41 2014 -0400 
+Message: Revert "Modify and rename the readme for example purposes"
+---§
+
+123	0	README.md
+0	125	jgit-cookbook README.md
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..a94bcc8
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,123 @@
++jgit-cookbook
++=============
++[![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
++
++Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
++
++The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. 
++
++This project tries to provide a collection of ready-to-run snippets which try to augment the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide)
++
++#### Getting started
++
++##### Grab it
++
++    git clone git://github.com/centic9/jgit-cookbook
++
++##### Build it and create Eclipse project files
++
++	mvn dependency:sources eclipse:eclipse package
++
++#### Run it
++
++    Import the project into an Eclipse workspace and execute the snippets there.
++
++#### Currently the following snippets are available
++
++##### General Repository handling
++
++* [Open an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/OpenRepository.java)
++* [Create a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/CreateNewRepository.java)
++
++##### Porcelain commands
++
++* [Initialize a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/InitRepository.java)
++* [Add a new file to the index](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddFile.java)
++* [Commit a file to an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java)
++* [Commit all changes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitAll.java)
++* [List commits (i.e. Log)](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowLog.java)
++* [List all tags in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListTags.java)
++* [List all branches in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListBranches.java)
++* [List all commits in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/WalkAllCommits.java)
++* [Create and delete branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteBranch.java)
++* [Create and delete tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteTag.java)
++* [Return diff between two branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBranchDiff.java)
++* [Show diff of changes to a file between two revs](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowFileDiff.java)
++* [Show diff of changes to a file between two commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowChangedFilesBetweenCommits.java)
++* [Show Status](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowStatus.java)
++* [Store contents of branch into a compressed file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateArchive.java)
++* [Write contents of branch into a compressed file using a custom archive format](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateCustomFormatArchive.java)
++* [Blame, i.e. find out which commit changed specific lines in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBlame.java)
++* [Add and list Notes attached to commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddAndListNoteOfCommit.java)
++* [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
++* [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
++* [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
++* [Run garbage collection](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CollectGarbage.java)
++
++##### Commands working with remote repositories
++
++* [Clone a remote reppository into a new local directory](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java)
++* [Iterate remote references in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemotes.java)
++* [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
++* [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
++
++##### Low-level API
++
++* [Get the SHA-1 ref from a name, e.g. refs/heads/master](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRefFromName.java)
++* [Get the commit-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java)
++* [Get the commit-message](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetCommitMessage.java)
++* [Get the tree-object from a commit-object, name or SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevTreeFromObjectId.java)
++* [Read the contents of a file/blob](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadBlobContents.java)
++* [Get the tag-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadTagFromName.java)
++* [Resolve complex references, e.g. HEAD^^ to a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ResolveRef.java)
++* [Iterate over the commits on a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkRev.java)
++* [Read contents of a specific file from a specific commit](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java)
++* [List remotes configured for the current repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/PrintRemotes.java)
++* [Print out user information from Git](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadUserConfig.java)
++* [Read file attributes, e.g. executeable state, file or directory, size, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetFileAttributes.java)
++* [Use class BranchTrackingStatus to retrieve number of commits ahead/behind compared to remote branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ShowBranchTrackingStatus.java)
++
++#### Missing snippets
++
++* Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
++* Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
++* Add/Remove/Read Notes
++* SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules
++* Diffing: http://stackoverflow.com/questions/12987364/how-to-diff-with-two-files-by-jgit-without-creating-repo
++* Ammend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
++* Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
++* Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
++* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
++* CherryPick
++* Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
++
++#### Sources
++
++The following sources were used to build the snippets
++
++* [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
++* [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
++* [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
++* [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
++* [JGit main page](http://www.eclipse.org/jgit/)
++
++#### Contribute
++
++Please note that the list of snippets is not yet complete, probably never will. If you are missing things or have suggestions how to improve or add snippets, please either send pull requests or create [issues](https://github.com/centic9/jgit-cookbook/issues).
++
++#### Licensing
++
++   Copyright 2013, 2014 Dominik Stadler
++
++   Licensed under the Apache License, Version 2.0 (the "License");
++   you may not use this file except in compliance with the License.
++   You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++   Unless required by applicable law or agreed to in writing, software
++   distributed under the License is distributed on an "AS IS" BASIS,
++   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++   See the License for the specific language governing permissions and
++   limitations under the License.
++some more text
+diff --git a/jgit-cookbook README.md b/jgit-cookbook README.md
+deleted file mode 100644
+index 219d61f..0000000
+--- a/jgit-cookbook README.md	
++++ /dev/null
+@@ -1,125 +0,0 @@
+-jgit-cookbook
+-=============
+-[![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
+-
+-Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
+-
+-The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. 
+-
+-This project tries to provide a collection of ready-to-run snippets which try to augment the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide)
+-
+-#### Getting started
+-
+-##### Grab it
+-
+-    git clone git://github.com/centic9/jgit-cookbook
+-
+-##### Build it and create Eclipse project files
+-
+-	mvn dependency:sources eclipse:eclipse package
+-
+-#### Run it
+-
+-    Import the project into an Eclipse workspace and execute the snippets there.
+-
+-#### Currently the following snippets are available
+-
+-##### General Repository handling
+-
+-* [Open an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/OpenRepository.java)
+-* [Create a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/CreateNewRepository.java)
+-
+-##### Porcelain commands
+-
+-* [Initialize a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/InitRepository.java)
+-* [Add a new file to the index](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddFile.java)
+-* [Commit a file to an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitFile.java)
+-* [Commit all changes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CommitAll.java)
+-* [List commits (i.e. Log)](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowLog.java)
+-* [List all tags in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListTags.java)
+-* [List all branches in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListBranches.java)
+-* [List all commits in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/WalkAllCommits.java)
+-* [Create and delete branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteBranch.java)
+-* [Create and delete tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteTag.java)
+-* [Return diff between two branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBranchDiff.java)
+-* [Show diff of changes to a file between two revs](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowFileDiff.java)
+-* [Show diff of changes to a file between two commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowChangedFilesBetweenCommits.java)
+-* [Show Status](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowStatus.java)
+-* [Store contents of branch into a compressed file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateArchive.java)
+-* [Write contents of branch into a compressed file using a custom archive format](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateCustomFormatArchive.java)
+-* [Blame, i.e. find out which commit changed specific lines in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBlame.java)
+-* [Add and list Notes attached to commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddAndListNoteOfCommit.java)
+-* [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
+-* [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
+-* [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
+-* [Run garbage collection](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CollectGarbage.java)
+-
+-##### Commands working with remote repositories
+-
+-* [Clone a remote reppository into a new local directory](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java)
+-* [Iterate remote references in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemotes.java)
+-* [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
+-* [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
+-
+-##### Low-level API
+-
+-* [Get the SHA-1 ref from a name, e.g. refs/heads/master](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRefFromName.java)
+-* [Get the commit-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java)
+-* [Get the commit-message](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetCommitMessage.java)
+-* [Get the tree-object from a commit-object, name or SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetRevTreeFromObjectId.java)
+-* [Read the contents of a file/blob](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadBlobContents.java)
+-* [Get the tag-object from a name or a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadTagFromName.java)
+-* [Resolve complex references, e.g. HEAD^^ to a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ResolveRef.java)
+-* [Iterate over the commits on a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkRev.java)
+-* [Read contents of a specific file from a specific commit](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java)
+-* [List remotes configured for the current repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/PrintRemotes.java)
+-* [Print out user information from Git](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadUserConfig.java)
+-* [Read file attributes, e.g. executeable state, file or directory, size, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetFileAttributes.java)
+-* [Use class BranchTrackingStatus to retrieve number of commits ahead/behind compared to remote branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ShowBranchTrackingStatus.java)
+-
+-#### Missing snippets
+-
+-* Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
+-* Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
+-* Add/Remove/Read Notes
+-* SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules
+-* Diffing: http://stackoverflow.com/questions/12987364/how-to-diff-with-two-files-by-jgit-without-creating-repo
+-* Ammend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
+-* Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
+-* Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
+-* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
+-* CherryPick
+-* Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
+-
+-#### Sources
+-
+-The following sources were used to build the snippets
+-
+-* [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
+-* [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
+-* [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
+-* [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
+-* [JGit main page](http://www.eclipse.org/jgit/)
+-
+-#### Contribute
+-
+-Please note that the list of snippets is not yet complete, probably never will. If you are missing things or have suggestions how to improve or add snippets, please either send pull requests or create [issues](https://github.com/centic9/jgit-cookbook/issues).
+-
+-Added line
+-
+-#### Licensing
+-
+-   Copyright 2013, 2014 Dominik Stadler
+-
+-   Licensed under the Apache License, Version 2.0 (the "License");
+-   you may not use this file except in compliance with the License.
+-   You may obtain a copy of the License at
+-
+-     http://www.apache.org/licenses/LICENSE-2.0
+-
+-   Unless required by applicable law or agreed to in writing, software
+-   distributed under the License is distributed on an "AS IS" BASIS,
+-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-   See the License for the specific language governing permissions and
+-   limitations under the License.
+-some more text
+
+§§--§§
+commit 8cb70b1b134bb3a428a6bab070d46d0664917e4e 5a10bd6ee431e362facb03cfe763b9a3d9dfd02d
+Author: matthew-white <mwhite@poverty-action.org>
+Date: Fri Oct 24 14:59:45 2014 -0400 
+Message: Add example for diffing a renamed file
+---§
+
+83	0	src/main/java/org/dstadler/jgit/porcelain/DiffRenamedFile.java
+
+diff --git a/src/main/java/org/dstadler/jgit/porcelain/DiffRenamedFile.java b/src/main/java/org/dstadler/jgit/porcelain/DiffRenamedFile.java
+new file mode 100644
+index 0000000..4dddf63
+--- /dev/null
++++ b/src/main/java/org/dstadler/jgit/porcelain/DiffRenamedFile.java
+@@ -0,0 +1,83 @@
++package org.dstadler.jgit.porcelain;
++
++import java.io.IOException;
++import java.util.List;
++
++import org.dstadler.jgit.helper.CookbookHelper;
++import org.eclipse.jgit.api.Git;
++import org.eclipse.jgit.api.errors.GitAPIException;
++import org.eclipse.jgit.diff.DiffConfig;
++import org.eclipse.jgit.diff.DiffEntry;
++import org.eclipse.jgit.diff.DiffFormatter;
++import org.eclipse.jgit.errors.IncorrectObjectTypeException;
++import org.eclipse.jgit.errors.MissingObjectException;
++import org.eclipse.jgit.lib.Config;
++import org.eclipse.jgit.lib.ObjectId;
++import org.eclipse.jgit.lib.ObjectReader;
++import org.eclipse.jgit.lib.Repository;
++import org.eclipse.jgit.revwalk.FollowFilter;
++import org.eclipse.jgit.revwalk.RevCommit;
++import org.eclipse.jgit.revwalk.RevTree;
++import org.eclipse.jgit.revwalk.RevWalk;
++import org.eclipse.jgit.treewalk.AbstractTreeIterator;
++import org.eclipse.jgit.treewalk.CanonicalTreeParser;
++
++// Simple example that shows how to diff a single file between two commits when
++// the file may have been renamed.
++public class DiffRenamedFile {
++	private static AbstractTreeIterator prepareTreeParser(Repository repository, String objectId) throws IOException,
++			MissingObjectException,
++			IncorrectObjectTypeException {
++		// from the commit we can build the tree which allows us to construct the TreeParser
++		RevWalk walk = new RevWalk(repository);
++		RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
++		RevTree tree = walk.parseTree(commit.getTree().getId());
++
++		CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
++		ObjectReader oldReader = repository.newObjectReader();
++		try {
++			oldTreeParser.reset(oldReader, tree.getId());
++		} finally {
++			oldReader.release();
++		}
++
++		walk.dispose();
++
++		return oldTreeParser;
++	}
++
++	private static DiffEntry diffFile(Repository repo, String oldCommit,
++		String newCommit, String path) throws IOException, GitAPIException {
++		Config config = new Config();
++		config.setBoolean("diff", null, "renames", true);
++		DiffConfig diffConfig = config.get(DiffConfig.KEY);
++		List<DiffEntry> diffList = new Git(repo).diff().
++			setOldTree(prepareTreeParser(repo, oldCommit)).
++			setNewTree(prepareTreeParser(repo, newCommit)).
++			setPathFilter(FollowFilter.create(path, diffConfig)).
++			call();
++		if (diffList.size() == 0)
++			return null;
++		if (diffList.size() > 1)
++			throw new RuntimeException("invalid diff");
++		return diffList.get(0);
++	}
++
++	public static void main(String args[])
++		throws IOException, GitAPIException {
++		Repository repo = CookbookHelper.openJGitCookbookRepository();
++
++		// Diff README.md between two commits. The file is named README.md in
++		// the new commit (5a10bd6e), but was named "jgit-cookbook README.md" in
++		// the old commit (2e1d65e4).
++		DiffEntry diff = diffFile(repo,
++			"2e1d65e4cf6c5e267e109aa20fd68ae119fa5ec9",
++			"5a10bd6ee431e362facb03cfe763b9a3d9dfd02d",
++			"README.md");
++
++		// Display the diff.
++		DiffFormatter formatter = new DiffFormatter(System.out);
++		formatter.setRepository(repo);
++		formatter.format(diff);
++	}
++}
+
+§§--§§
+commit 05d18a76875716fbdbd2c200091b40caa06c713d 8cb70b1b134bb3a428a6bab070d46d0664917e4e
+Author: matthew-white <mwhite@poverty-action.org>
+Date: Fri Oct 24 14:59:45 2014 -0400 
+Message: Include example in readme
+---§
+
+1	0	README.md
+
+diff --git a/README.md b/README.md
+index a94bcc8..843bbff 100644
+--- a/README.md
++++ b/README.md
+@@ -44,6 +44,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
+ * [Return diff between two branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBranchDiff.java)
+ * [Show diff of changes to a file between two revs](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowFileDiff.java)
+ * [Show diff of changes to a file between two commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowChangedFilesBetweenCommits.java)
++* [Show diff of changes to a file between two commits when the file has been renamed](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/DiffRenamedFile.java)
+ * [Show Status](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowStatus.java)
+ * [Store contents of branch into a compressed file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateArchive.java)
+ * [Write contents of branch into a compressed file using a custom archive format](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateCustomFormatArchive.java)
+
+§§--§§
 commit 598b7c634d1029351b24019c796e963e7cc94a1e 17197f0c81266dbd63b9cd948be0ca3001fb801e
 Author: Dominik Stadler <dominik.stadler@gmx.at>
 Date: Sat Oct 25 09:09:16 2014 +0200 
@@ -16895,6 +17680,41 @@ index 089b562..0250fd6 100644
      </dependency>
  
  	<dependency>
+
+§§--§§
+commit e9ba2007b15fc612b9a7d95777df8114f6e0c09e 38d51408bdf594a3dbe67c7b53847375f46bf9de
+Author: Richard Möhn <richard.moehn@posteo.de>
+Date: Fri Dec 12 20:20:19 2014 +0100 
+Message: Add snippet for retrieving a commit by its SHA
+---§
+
+7	0	src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java
+
+diff --git a/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java b/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java
+index e5b2faa..8d5dfb7 100644
+--- a/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java
++++ b/src/main/java/org/dstadler/jgit/api/GetRevCommitFromObjectId.java
+@@ -19,6 +19,7 @@ package org.dstadler.jgit.api;
+ import java.io.IOException;
+ 
+ import org.dstadler.jgit.helper.CookbookHelper;
++import org.eclipse.jgit.lib.ObjectId;
+ import org.eclipse.jgit.lib.Ref;
+ import org.eclipse.jgit.lib.Repository;
+ import org.eclipse.jgit.revwalk.RevCommit;
+@@ -40,6 +41,12 @@ public class GetRevCommitFromObjectId {
+         RevCommit commit = walk.parseCommit(head.getObjectId());
+         System.out.println("Found Commit: " + commit);
+ 
++        // You can also get the commit for an (abbreviated) SHA
++        walk.reset();
++        ObjectId id = repository.resolve("38d51408bd");
++        RevCommit commitAgain = walk.parseCommit(id);
++        System.out.println("Found Commit again: " + commitAgain);
++
+         walk.dispose();
+ 
+         repository.close();
 
 §§--§§
 commit e6d5eeb172cfd6f1998fbd976059441cf537b00c f991c2d216d337ea1f661dcaec558be235c4a1fb
@@ -20382,6 +21202,28 @@ index 0000000..b07b622
 +        }
 +    }
 +}
+
+§§--§§
+commit d25358cde70cdaa511c0fa6674c3164a0f590b4e 7f71d0d00d237e903c60fb0774760e4fdf1f0058
+Author: Brad Wood <brad@bradwood.com>
+Date: Sat Aug 1 22:56:46 2015 -0500 
+Message: Fix for file system locks
+---§
+
+1	0	src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java
+
+diff --git a/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java b/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java
+index 89e5aac..d1ce016 100644
+--- a/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java
++++ b/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java
+@@ -51,6 +51,7 @@ public class CloneRemoteRepository {
+ 	        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
+ 	        System.out.println("Having repository: " + result.getRepository().getDirectory());
+         } finally {
++        	result.getRepository().close();
+         	result.close();
+         }
+     }
 
 §§--§§
 commit 2c11ab452269e5c27290548cdf403df53fea2620 766869389980f912ec17d27884fc79325260eb97
@@ -23924,6 +24766,66 @@ index 118b1a9..bf4b835 100644
                  walk.dispose();
              }
          }
+
+§§--§§
+commit 216afe993cc8c493a8d0e67f1fb1ee41c0a16741 dc965736a1a31bad5655546dc22091457af8c484
+Author: Gradle Update <gradleupdate@users.noreply.github.com>
+Date: Tue Oct 20 13:18:20 2015 +0900 
+Message: Gradle 2.8
+---§
+
+1	1	build.gradle
+-	-	gradle/wrapper/gradle-wrapper.jar
+2	2	gradle/wrapper/gradle-wrapper.properties
+2	2	gradlew
+0	0	gradlew.bat
+
+diff --git a/build.gradle b/build.gradle
+index 081f52a..6c6f334 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -35,5 +35,5 @@ eclipseJdt.finalizedBy adjustEclipseSettingsFile
+ eclipseJdt.finalizedBy sortEclipseSettingsFile
+ 
+ task wrapper(type: Wrapper) {
+-	gradleVersion = '2.7'
++	gradleVersion = '2.8'
+ }
+diff --git a/gradle/wrapper/gradle-wrapper.jar b/gradle/wrapper/gradle-wrapper.jar
+index e8c6bf7..05ef575 100644
+Binary files a/gradle/wrapper/gradle-wrapper.jar and b/gradle/wrapper/gradle-wrapper.jar differ
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+index 8126aa4..8ed5010 100644
+--- a/gradle/wrapper/gradle-wrapper.properties
++++ b/gradle/wrapper/gradle-wrapper.properties
+@@ -1,6 +1,6 @@
+-#Sun Sep 20 14:44:43 CEST 2015
++#Tue Oct 20 04:13:37 UTC 2015
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-2.7-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-2.8-bin.zip
+diff --git a/gradlew b/gradlew
+index 97fac78..9d82f78 100755
+--- a/gradlew
++++ b/gradlew
+@@ -56,9 +56,9 @@ while [ -h "$PRG" ] ; do
+     fi
+ done
+ SAVED="`pwd`"
+-cd "`dirname \"$PRG\"`/" >&-
++cd "`dirname \"$PRG\"`/" >/dev/null
+ APP_HOME="`pwd -P`"
+-cd "$SAVED" >&-
++cd "$SAVED" >/dev/null
+ 
+ CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+ 
+diff --git a/gradlew.bat b/gradlew.bat
+old mode 100755
+new mode 100644
 
 §§--§§
 commit bce6e5917b0066a5839766eab914d4a4a19975f5 4bc05abb10b4496f671994067826901aa6325f57

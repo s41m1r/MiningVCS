@@ -10,5 +10,6 @@
 
 ## Log format
 
-git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %t %cd %nMessage: %s%n---§%n" --no-merges --numstat -p HEAD -
-
+```
+git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %t %cd %nMessage: %s%n---§%n" --no-merges --numstat -p HEAD --
+```

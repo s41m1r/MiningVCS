@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,13 +37,15 @@ import at.ac.wu.infobiz.projectmining.util.DatabaseConnector;
 
 public class ReadGitPatchStatsLog {
 
-	static String inputFile = "data/jgit-cookbook.log";
+	static String inputFile = "data/camunda-bpm.log";
 	static String outputFile= "out.txt";
 
 	final static String START_COMMIT_DELIMITER = "§§--§§\n";
 	final static String END_MESSAGE_DELIMITER = "---§";
 
 	public static void main(String[] args) {
+		
+		long startTime = System.currentTimeMillis();
 
 		Map<String, String> optionsMap = CommandLineOptions.parseArgs(args);
 
@@ -53,15 +56,17 @@ public class ReadGitPatchStatsLog {
 		if(output!=null)
 			outputFile=output;
 
-		Map<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>> fileChangesMap = loadFileChangeMap();
+		Map<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>> fileChangesMap = loadFileChangeMapWithNumStat();
 
-		printToFile(fileChangesMap, outputFile);
-		OutputRedirect.toConsole();
+//		printToFile(fileChangesMap, outputFile);
 
-		String projectName = inputFile;
-
-		populateDB(fileChangesMap, projectName);
-
+		populateDB(fileChangesMap, inputFile);
+		long finishTime = (System.currentTimeMillis()-startTime);
+		
+		System.out.println("Finished in [h:m:s.m] "+
+				finishTime/(60*60*1000) +":"+
+				finishTime/(60*1000) +":"+
+				(finishTime/1000.00d));
 	}
 
 	private static void populateDB(Map<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>> fileChangesMap, String projectName) {
@@ -91,29 +96,31 @@ public class ReadGitPatchStatsLog {
 			for (FileChange fileChange : fileChanges) {
 				String author = fileChange.getAuthor();
 				u = parseUser(author);
+				if(users.containsKey(u.getName()+u.getEmail()))
+					u=users.get(u.getName()+u.getEmail());
 				//collect user
-				users.put(u.getName()+u.getEmail(), u);
+				else 
+					users.put(u.getName()+u.getEmail(), u);
 
 				if (commits.containsKey(fileChange.getCommitID())){
 					c = commits.get(fileChange.getCommitID());
 				} else {
 					c = new Commit(fileChange.getCommitID(), fileChange.getTimeOfChange().toDate(), fileChange.getComment());
 					c.setProject(p);
-					//persist commit
+					c.setUser(u);
+					u.addCommit(c);
+					//collect commit
 					commits.put(fileChange.getCommitID(), c);
 				}
+				
 				if(files.containsKey(fileChange.getFile().getPath())){
-					for (FileChange fch : fileChanges) {
-						if(fch.getFile().equals(fileChange.getFile())){
-							file = fch.getFile();
-							break;
-						}
-					}
+					file = files.get(fileChange.getFile().getPath());
 				}
 				else{
 					file = fileChange.getFile();
 					files.put(fileChange.getFile().getPath(), file);
 				}
+				
 				FileAction fa = new FileAction();
 				fa.setCommit(c);
 				fa.setFile(file);
@@ -130,38 +137,34 @@ public class ReadGitPatchStatsLog {
 					c.addEdit(eddy);
 					file.addEdit(eddy);
 				}
-
 				fileActions.add(fa);
 			}
 		}
-
-
-		//persist
-
+		
+		//persist		
 		for (String key : users.keySet()) {
 			persist(session, users.get(key));
 		}
-
-		for (String path : files.keySet()) {
-			persist(session, files.get(path));
+		
+		for (String key : commits.keySet()) {
+			persist(session, commits.get(key));
 		}
-
-//		for (String key : commits.keySet()) {
-//			persist(session, commits.get(key));
-//		}
-
-		//		for (Edit edit : edits) {
-		//			persist(session, edit);
-		//		}
+		
+		for (String fileName : files.keySet()) {
+			persist(session, files.get(fileName));
+		}
+		
+		for (FileAction fileAction : fileActions) {
+			persist(session, fileAction);
+		}
 
 		session.flush();
 		session.close();
 		DatabaseConnector.shutdown();
-		System.out.println("Done.");
 	}
 
 
-	private static void persist(Session session, Object object) {				
+	private static void persist(Session session, Object object) {	
 		Transaction tx = session.getTransaction();
 		tx.setTimeout(100);
 		tx.begin();
@@ -196,16 +199,186 @@ public class ReadGitPatchStatsLog {
 				System.out.println(fileChangesMap.get(key));
 				//				System.out.println();
 			}
-
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
+		}
+		OutputRedirect.toConsole();
+	}
+
+	/**
+	 * @return
+	 */
+	private static Map<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>> loadFileChangeMapNoNumStat() {
+		Map<at.ac.wu.infobiz.projectmining.model.File,List<FileChange>> fileChangesMap = 
+				new HashMap<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>>();
+		try{
+			Scanner interCommitScanner = new Scanner(new File(inputFile));
+			interCommitScanner.useDelimiter(START_COMMIT_DELIMITER);
+			int numCommits = 0;
+			String devNull = "/dev/null";
+			while (interCommitScanner.hasNext()) {
+				numCommits++;
+				String entry = interCommitScanner.next();
+				String[] entries = entry.split("\n");
+				String commitLine = null;
+				String commitID = null;
+				
+				String author = null; 
+				DateTime dateOfChange = null;
+				String comment = null; 
+				
+				for (String s : entries) {
+					if(s.toLowerCase().startsWith("commit")) {
+						commitLine = s;
+						String[] comms = parseCommitId(commitLine);
+						commitID = comms[0];
+					}
+					else 
+						if(s.toLowerCase().startsWith("author"))
+							author = parseAuthor(s);
+						else 
+							if(s.toLowerCase().startsWith("date"))
+								dateOfChange = parseDate(s);
+							else
+								if(s.toLowerCase().startsWith("message"))
+									comment = parseMessage(s);//trim
+								else
+									if(s.startsWith(END_MESSAGE_DELIMITER))
+										break;
+				}
+				
+				Scanner intraCommit = new Scanner(entry);
+				intraCommit.useDelimiter(END_MESSAGE_DELIMITER);
+				intraCommit.next();
+				// parse diffs
+				intraCommit.useDelimiter("diff");
+				intraCommit.next();
+				String diffString = intraCommit.next().trim();
+				List<DiffResults> diffResults = parseDiffsWithEdit(diffString);
+
+				for (DiffResults diffRes : diffResults) {
+					List<FileChange> fChList;				
+					//TODO: capture the case when a file is renamed
+					//if a file is created/modified use it's last name
+					if(!diffRes.getFileTo().getPath().equals(devNull)){ 
+						fChList = fileChangesMap.get(diffRes.getFileTo());
+					}
+					else //if a file is deleted use it's name in file-from
+						fChList = fileChangesMap.get(diffRes.getFileFrom());
+					
+					addChangePositionsFromDiffResults(diffRes, fChList);
+				}
+				intraCommit.close();
+			}
+			interCommitScanner.close();
+			System.out.println("loaded "+numCommits+" commits");
+		} catch (InputMismatchException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return fileChangesMap;
+	}
+	
+	private static List<DiffResults> parseDiffsWithEdit(String diffString) {
+		List<DiffResults> diffResults = new ArrayList<DiffResults>();
+		String affectedFile = null;
+		String devNull = "/dev/null";
+		Scanner scanner = new Scanner(diffString);
+		while(scanner.hasNext()){
+			scanner.useDelimiter("[\\-]{3}");
+			scanner.next();
+			if(!scanner.hasNext())
+				break; //is means that the file is binary
+			scanner.reset();
+			scanner.next();
+			String fileFrom = scanner.next();
+			if(!fileFrom.equals(devNull))
+				fileFrom=fileFrom.substring(2);
+			//file-to
+			scanner.useDelimiter("[\\+]{3}");
+			scanner.next();
+			scanner.reset();
+			scanner.next();
+			String fileTo = scanner.next().trim();
+			if(!fileTo.equals(devNull))
+				fileTo=fileTo.substring(2);
+			//what part of the file was affected 
+			scanner.useDelimiter("diff");	
+			String str = scanner.next();
+			List<Edit> edits = new ArrayList<Edit>();
+			
+			if(!fileFrom.equals(devNull))
+				affectedFile = fileFrom;
+			else 
+				affectedFile = fileTo;
+			
+			parsePositions(str.trim(), edits, affectedFile);
+			
+			DiffResults dr = new DiffResults(fileFrom, fileTo, edits);
+			diffResults.add(dr); 
+		}
+		scanner.close();
+		return diffResults;
+	}
+
+	private static void parsePositions(String positions, List<Edit> edits,
+			String affectedFile) {
+		Pattern pattern = Pattern.compile("(?<=@@)(.*)(?=@@)");
+
+		String[] editStrings = positions.split("@@ (.*) @@");
+		int index = 1;
+		Matcher matcher = pattern.matcher(positions);
+		
+		Logger logger = Logger.getAnonymousLogger();
+		logger.info("\"Printing editStrings ... \"");
+		
+		System.out.println("Printing editStrings ... ");
+		for (int i = 0; i < editStrings.length; i++) {
+			System.out.println(editStrings[i]);
+			System.exit(0);
+		}
+
+
+		while (matcher.find())
+		{
+			String nextPositionChange = matcher.group(0).trim();
+			//split into s1 = ["-l,s","+l,s"]
+			String s1[] = nextPositionChange.split("\\s");
+
+			//split s1[0] by ',' into ["-l","s"]
+			String lsOld[] = s1[0].split(",");
+
+			//split s1[1] by ',' into ["-l","s"]
+			String lsNew[] = s1[1].split(",");
+
+			int lOld = 0;
+			int sOld = 0;
+			int lNew = 0;
+			int sNew = 0;
+
+			lOld = Integer.parseInt(lsOld[0].substring(1));
+			if(lsOld.length==2)
+				sOld = Integer.parseInt(lsOld[1]);
+
+			lNew = Integer.parseInt(lsNew[0].substring(1));
+
+			if(lsNew.length==2)
+				sNew = Integer.parseInt(lsNew[1]);
+
+			String editString = editStrings[index++];
+			Edit edit = new Edit();
+			edit.setFromPos(new Position(lOld, sOld));
+			edit.setToPos(new Position(lNew, sNew));
+			edit.setLinesAdded(getLinesStartingWith(editString, "+"));
+			edit.setLinesRemoved(getLinesStartingWith(editString, "-"));
+			edit.setFile(new at.ac.wu.infobiz.projectmining.model.File(affectedFile));
+			edits.add(edit);
 		}
 	}
 
 	/**
 	 * @return
 	 */
-	private static Map<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>> loadFileChangeMap() {
+	private static Map<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>> loadFileChangeMapWithNumStat() {
 		Map<at.ac.wu.infobiz.projectmining.model.File,List<FileChange>> fileChangesMap = 
 				new HashMap<at.ac.wu.infobiz.projectmining.model.File, List<FileChange>>();
 		try{
@@ -225,9 +398,9 @@ public class ReadGitPatchStatsLog {
 				intraCommit.useDelimiter(END_MESSAGE_DELIMITER);
 				String comment = parseMessage(intraCommit.next()); //I need to perform this step to move on.
 				intraCommit.nextLine();
-
+				
 				//parse changes (up to diff)
-				intraCommit.useDelimiter("diff");
+				intraCommit.useDelimiter("\ndiff");
 				List<FileChange> changes = parseChanges(intraCommit.next().trim());
 				for (FileChange fCh : changes) {
 					fCh.setCommitID(commitID);
@@ -258,7 +431,7 @@ public class ReadGitPatchStatsLog {
 					}
 					else //if a file is deleted use it's name in file-from
 						fChList = fileChangesMap.get(diffRes.getFileFrom());
-
+					
 					addChangePositionsFromDiffResults(diffRes, fChList);
 				}
 				intraCommit.close();
@@ -330,7 +503,7 @@ public class ReadGitPatchStatsLog {
 	}
 
 	static String parseMessage(String messageString) {
-		String theMessage = messageString.split(END_MESSAGE_DELIMITER)[0].trim();
+		String theMessage = messageString.split("Message:")[1].trim();
 		return theMessage;
 	}
 
@@ -347,7 +520,7 @@ public class ReadGitPatchStatsLog {
 	static ArrayList<FileChange> parseChanges(String changesString){
 		ArrayList<FileChange> changes = new ArrayList<FileChange>();
 		//		int adds, dels;
-		String fileName;
+		String fileName = null;
 		String cleanChangeString = cleanOutBinaryEntries(changesString);
 		//		System.out.println(" **Clean String:"+cleanChangeString+"*************");
 		Scanner s = new Scanner(cleanChangeString);
@@ -357,6 +530,7 @@ public class ReadGitPatchStatsLog {
 			//			dels = 
 			s.nextInt();
 			fileName = s.next();
+			
 			changes.add(new FileChange(new at.ac.wu.infobiz.projectmining.model.File(fileName)));
 		}
 		s.close();
@@ -369,7 +543,7 @@ public class ReadGitPatchStatsLog {
 		s.useDelimiter("\n");
 		while (s.hasNext()) {
 			String line = s.next();
-			if(line.startsWith("-"))
+			if(!line.matches("\\d+\\s+\\d+\\s+\\p{Graph}+"))
 				continue;
 			res+=line+"\n";
 		}
@@ -395,7 +569,7 @@ public class ReadGitPatchStatsLog {
 			scanner.next();
 			String fileTo = scanner.next().trim();
 			//what part of the file was affected 
-			scanner.useDelimiter("diff");	
+			scanner.useDelimiter("\ndiff");	
 			String str = scanner.next();
 			List<Edit> edits = new ArrayList<Edit>();
 			parsePositions(str.trim(), edits);
@@ -414,6 +588,7 @@ public class ReadGitPatchStatsLog {
 		Pattern pattern = Pattern.compile("(?<=@@)(.*)(?=@@)");
 
 		String[] editStrings = positions.split("@@ (.*) @@");
+//		String[] editStrings = positions.split("(?<=@@)(.*)(?=@@)(.*)");
 		int index = 1;
 		Matcher matcher = pattern.matcher(positions);
 
@@ -442,14 +617,17 @@ public class ReadGitPatchStatsLog {
 
 			if(lsNew.length==2)
 				sNew = Integer.parseInt(lsNew[1]);
-
-			String editString = editStrings[index++];
-			Edit edit = new Edit();
-			edit.setFromPos(new Position(lOld, sOld));
-			edit.setToPos(new Position(lNew, sNew));
-			edit.setLinesAdded(getLinesStartingWith(editString, "+"));
-			edit.setLinesRemoved(getLinesStartingWith(editString, "-"));
-			edits.add(edit);
+			
+			while(index<editStrings.length){
+				String editString = editStrings[index++];
+				
+				Edit edit = new Edit();
+				edit.setFromPos(new Position(lOld, sOld));
+				edit.setToPos(new Position(lNew, sNew));
+				edit.setLinesAdded(getLinesStartingWith(editString, "+"));
+				edit.setLinesRemoved(getLinesStartingWith(editString, "-"));
+				edits.add(edit);
+			}
 		}
 	}
 
