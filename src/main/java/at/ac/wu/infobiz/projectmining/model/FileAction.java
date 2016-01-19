@@ -1,5 +1,6 @@
 package at.ac.wu.infobiz.projectmining.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,7 +16,7 @@ public class FileAction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, cascade={CascadeType.ALL})
 	private File file;
 	
 	@ManyToOne(optional=false)
@@ -25,7 +26,6 @@ public class FileAction {
 	private ActionType type;
 	
 	public FileAction() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -59,6 +59,14 @@ public class FileAction {
 	public void setType(ActionType type) {
 		this.type = type;
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "FileAction [id=" + id
+				+ ", type=" + type + "]";
+	}
 	
 }

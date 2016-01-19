@@ -1,0 +1,21 @@
+## The main entry point for the guy is DottedChart. It can be launched without any parameters. 
+
+## The test files ofter require the log directory as a parameter. In such cases the command takes a parameter like 
+
+
+-f /path/to/logfile
+
+## In case you run a test where you have to specify the aggregation then put additionally 
+-t numberOfDaysYouWant  
+
+## Log format
+
+```
+git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %t %cd %nMessage: %s%n---§%n" --no-merges --numstat -p HEAD --
+```
+
+## Export log without stats and with merges
+git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %cd %nMessage: %s%n---§%n" -M -p > camunda-bpm-platform.log
+
+## Set your diff.renameLimit variable 
+git config merge.renameLimit 10000

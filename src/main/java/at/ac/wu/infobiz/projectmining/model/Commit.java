@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,10 +24,11 @@ public class Commit {
 	private Integer id;
 	private String revisionId;
 	private Date timeStamp;
+	@Column(columnDefinition="TEXT")
 	private String comment;
 	@ManyToOne
 	private User user;
-	@OneToMany(mappedBy="commit", cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="commit")
 	private Collection<Edit> edits;
 	@OneToMany(mappedBy="commit")
 	private Collection<Rename> renames;
@@ -159,11 +160,16 @@ public class Commit {
 		this.user = user;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Commit [id=" + id + ", commitId=" + revisionId + ", timeStamp="
-				+ timeStamp + ", comment=" + comment + ", user=" + user
-				+ ", edits=" + edits + ", renames=" + renames
-				+ ", fileActions=" + fileActions + ", project=" + project + "]";
+		return "Commit [id=" + id + ", revisionId=" + revisionId
+				+ ", timeStamp=" + timeStamp + ", comment=" + comment
+				+ ", user=" + user + ", renames="
+				+ renames + ", fileActions=" + fileActions + ", project="
+				+ project + "]";
 	}
+
 }

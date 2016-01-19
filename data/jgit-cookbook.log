@@ -7875,6 +7875,13 @@ index 87fab90..c8d22b7 100644
   */
 
 §§--§§
+commit f148a699e8330b95263e560a56353bf81bc57670 786b4e863ec046d62de2e2a321826b71c0b06946 b58a1865e5cb27c59d478fb0940bf172dc18ab90
+Author: Dominik Stadler <dominik.stadler@gmx.at>
+Date: Wed Dec 11 22:04:21 2013 -0800 
+Message: Merge pull request #2 from g-pechorin/patch-1
+---§
+
+§§--§§
 commit 93686e5c8b9f61f73126d6691be899d2cba0fc0b f148a699e8330b95263e560a56353bf81bc57670
 Author: Dominik Stadler <dominik.stadler@gmx.at>
 Date: Fri Jan 17 08:22:23 2014 +0100 
@@ -8067,6 +8074,13 @@ index 0000000..ddd540d
 +		}
 +	}
 +}
+
+§§--§§
+commit 8feb550f8f7e4a49a2d8080174fe25c385e24f3b aa31703b65774e4a06010824601e56375a70078c 1e153d3261b5929212b1ecbd3173ead76ade2036
+Author: Dominik Stadler <dominik.stadler@gmx.at>
+Date: Tue Feb 25 20:46:36 2014 +0100 
+Message: Merge pull request #3 from ctran/master
+---§
 
 §§--§§
 commit d8d720aff09b92a2af15c79f9cab1647def0970c 8feb550f8f7e4a49a2d8080174fe25c385e24f3b
@@ -16801,6 +16815,13 @@ index a94bcc8..843bbff 100644
  * [Write contents of branch into a compressed file using a custom archive format](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateCustomFormatArchive.java)
 
 §§--§§
+commit 17197f0c81266dbd63b9cd948be0ca3001fb801e a837a9c5563ddb01ebd121f85d9d64cf3c1823cb 05d18a76875716fbdbd2c200091b40caa06c713d
+Author: Dominik Stadler <dominik.stadler@gmx.at>
+Date: Fri Oct 24 22:02:46 2014 +0200 
+Message: Merge pull request #7 from matthew-white/diff-renamed-file
+---§
+
+§§--§§
 commit 598b7c634d1029351b24019c796e963e7cc94a1e 17197f0c81266dbd63b9cd948be0ca3001fb801e
 Author: Dominik Stadler <dominik.stadler@gmx.at>
 Date: Sat Oct 25 09:09:16 2014 +0200 
@@ -17715,6 +17736,13 @@ index e5b2faa..8d5dfb7 100644
          walk.dispose();
  
          repository.close();
+
+§§--§§
+commit f991c2d216d337ea1f661dcaec558be235c4a1fb 38d51408bdf594a3dbe67c7b53847375f46bf9de e9ba2007b15fc612b9a7d95777df8114f6e0c09e
+Author: Dominik Stadler <dominik.stadler@gmx.at>
+Date: Sun Dec 14 12:01:09 2014 +0100 
+Message: Merge pull request #10 from rmoehn/master
+---§
 
 §§--§§
 commit e6d5eeb172cfd6f1998fbd976059441cf537b00c f991c2d216d337ea1f661dcaec558be235c4a1fb
@@ -21224,6 +21252,13 @@ index 89e5aac..d1ce016 100644
          	result.close();
          }
      }
+
+§§--§§
+commit 766869389980f912ec17d27884fc79325260eb97 a6586bfdd433c5470dcc489503a7829e9d0aa0ce d25358cde70cdaa511c0fa6674c3164a0f590b4e
+Author: Dominik Stadler <dominik.stadler@gmx.at>
+Date: Sun Aug 2 10:28:28 2015 +0200 
+Message: Merge pull request #12 from bdw429s/bdw429s-patch-1
+---§
 
 §§--§§
 commit 2c11ab452269e5c27290548cdf403df53fea2620 766869389980f912ec17d27884fc79325260eb97
@@ -24826,6 +24861,13 @@ index 97fac78..9d82f78 100755
 diff --git a/gradlew.bat b/gradlew.bat
 old mode 100755
 new mode 100644
+
+§§--§§
+commit 4bc05abb10b4496f671994067826901aa6325f57 dc965736a1a31bad5655546dc22091457af8c484 216afe993cc8c493a8d0e67f1fb1ee41c0a16741
+Author: Dominik Stadler <dominik.stadler@gmx.at>
+Date: Tue Oct 20 18:06:07 2015 +0200 
+Message: Merge pull request #14 from gradleupdate/gradle-2.8
+---§
 
 §§--§§
 commit bce6e5917b0066a5839766eab914d4a4a19975f5 4bc05abb10b4496f671994067826901aa6325f57

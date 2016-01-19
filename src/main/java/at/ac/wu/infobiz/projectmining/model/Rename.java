@@ -56,5 +56,14 @@ public class Rename {
 	public void setCommit(Commit commit) {
 		this.commit = commit;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Rename [id=" + id + ", from=" + from + ", to=" + to
+				+ ", commit=" + commit + "]";
+	}
 	
 }

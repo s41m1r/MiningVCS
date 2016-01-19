@@ -3,6 +3,7 @@ package at.ac.wu.infobiz.projectmining.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -47,7 +48,11 @@ public class File implements Serializable {
 		return edits.add(e);
 	}
 	
-	public boolean addFileActions(FileAction action) {
+	public boolean addEdits(List<Edit> edits){
+		return this.edits.addAll(edits);
+	}
+	
+	public boolean addFileAction(FileAction action) {
 		return fileActions.add(action);
 	}
 	
@@ -131,39 +136,21 @@ public class File implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		File other = (File) obj;
-		if (edits == null) {
-			if (other.edits != null)
-				return false;
-		} else if (!edits.equals(other.edits))
-			return false;
-		if (fileActions == null) {
-			if (other.fileActions != null)
-				return false;
-		} else if (!fileActions.equals(other.fileActions))
-			return false;
+		
 		if (path == null) {
 			if (other.path != null)
 				return false;
 		} else if (!path.equals(other.path))
 			return false;
-		if (renameFrom == null) {
-			if (other.renameFrom != null)
-				return false;
-		} else if (!renameFrom.equals(other.renameFrom))
-			return false;
-		if (renameTo == null) {
-			if (other.renameTo != null)
-				return false;
-		} else if (!renameTo.equals(other.renameTo))
-			return false;
+		
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "File [path=" + path + ", edits=" + edits + ", renameFrom="
-				+ renameFrom + ", fileActions=" + fileActions + ", renameTo="
-				+ renameTo + "]";
+		return "File [path=" + path + ", edits=" + edits.size() + ", renameFrom="
+				+ renameFrom.size() + ", fileActions=" + fileActions.size() + ", renameTo="
+				+ renameTo.size() + "]";
 	}
 
 }

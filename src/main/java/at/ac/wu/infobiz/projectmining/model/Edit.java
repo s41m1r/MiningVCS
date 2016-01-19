@@ -19,7 +19,7 @@ public class Edit {
 	@Column
 	private Integer linesRemoved;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	private Commit commit;
 	
 	@ManyToOne(cascade={CascadeType.ALL})
@@ -87,5 +87,15 @@ public class Edit {
 
 	public void setToPos(Position toPos) {
 		this.toPos = toPos;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Edit [linesAdded=" + linesAdded + ", linesRemoved="
+				+ linesRemoved + ", commit=" + commit + ", file=" + file
+				+ ", fromPos=" + fromPos + ", toPos=" + toPos + "]";
 	}
 }
