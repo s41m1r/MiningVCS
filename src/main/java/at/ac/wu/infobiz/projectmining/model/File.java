@@ -9,7 +9,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,7 +19,7 @@ public class File implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5044129239587030486L;
-	@Id @Column(columnDefinition="varchar(256) COLLATE latin1_general_cs")
+	@Id @Column(columnDefinition="varchar(512) COLLATE latin1_general_cs")
 	private String path;
 	@OneToMany(mappedBy="file", cascade={CascadeType.ALL})
 	public Collection<Edit> edits;

@@ -175,7 +175,14 @@ public class GitToDB {
 					at.ac.wu.infobiz.projectmining.model.File fileTo = new at.ac.wu.infobiz.projectmining.model.File();
 					Rename rename = new Rename();
 					FileAction fileAction = new FileAction();
-					parseDiffHeaders(afterDiff, fileFrom, fileTo, rename, fileAction);
+					
+					if(isBinaryChange(afterDiff))
+						continue; //ignore the changes for binary files  
+					
+					parseDiffs(afterDiff, fileFrom, fileTo, rename, fileAction);
+					
+					if(fileAction.getFile()==null)
+						continue;
 					
 					//link to user, commit,
 					fileAction.setCommit(commit);
@@ -242,7 +249,7 @@ public class GitToDB {
 		scanner.close();
 	}
 	
-	private void batchPersistEntities(Project thisProject,
+	public void batchPersistEntities(Project thisProject,
 			Map<String, Commit> commits,
 			Map<String, at.ac.wu.infobiz.projectmining.model.File> files,
 			Set<FileAction> fileActions, Map<String, User> users, Set<Rename> renames) {
@@ -307,7 +314,13 @@ public class GitToDB {
 		SessionFactory sessionFactory = DatabaseConnector.getSessionFactory();
 		StatelessSession session = sessionFactory.openStatelessSession();
 		Transaction tx = session.beginTransaction();
-		int total = users.size()+commits.size()+files.size()+renames.size();
+		int total = 1+
+				users.size()+
+				commits.size()+
+				files.size()+
+				renames.size()+
+				fileActions.size()+
+				edits.size();
 		
 		int i = 0;
 		session.insert(thisProject); //persist project
@@ -370,29 +383,24 @@ public class GitToDB {
 	 * @param rename
 	 * @param fileAction
 	 */
-	private static void parseDiffHeaders(String afterDiff, at.ac.wu.infobiz.projectmining.model.File fileFrom,
+	private static void parseDiffs(String afterDiff, at.ac.wu.infobiz.projectmining.model.File fileFrom,
 			at.ac.wu.infobiz.projectmining.model.File fileTo, Rename rename, FileAction fileAction) {
 		String[] headerLines = afterDiff.split("\n");
 		String fileFromPath = "";
 		String fileToPath="";
 		boolean filePathsParsed = false;
+		
+//		if(isBinaryChange(afterDiff)) //we ignore binary changes
+//			return;
+		
 		for (int i = 0; !filePathsParsed && i < headerLines.length; i++) {
 			if(headerLines[i].startsWith("---")){
-				fileFromPath+=headerLines[i].split(" ")[1]; // {"---" : " " : "/path/from"}
+				fileFromPath+= parseFileFrom(headerLines[i]);//.split(" ")[1]; // {"---" : " " : "/path/from"}
 			}
 			if(headerLines[i].startsWith("+++")){
-				fileToPath+=headerLines[i].split(" ")[1]; // {"+++" : " " : "/path/to"}
+				fileToPath+=parseFileTo(headerLines[i]);//.split(" ")[1]; // {"+++" : " " : "/path/to"}
 				filePathsParsed=true;
 			}
-		}
-		
-		//TODO: debugga qui il nome del file!!!!
-		if(fileFromPath.equals(" ") || fileFromPath.equals("") || fileFromPath.equals(").xml")){
-			System.out.println("qui");
-		}
-		
-		if(fileToPath.equals(" ") || fileToPath.equals("") || fileToPath.equals(").xml")){
-			System.out.println("qui");
 		}
 		
 		if(filePathsParsed){
@@ -406,14 +414,14 @@ public class GitToDB {
 				nullFirst=true;
 			}
 			else
-				fileFrom.setPath(fileFromPath.substring(2));
+				fileFrom.setPath(fileFromPath);
 			
 			if(fileToPath.equals(devNull)){
 				fileTo.setPath(devNull);
 				nullSecond=true;
 			}
 			else
-				fileTo.setPath(fileToPath.substring(2));
+				fileTo.setPath(fileToPath);
 			
 			if(nullFirst&&!nullSecond){
 				//creation
@@ -442,15 +450,73 @@ public class GitToDB {
 				}
 			}
 		}
-		else{ //here we only have a CHMOD
-			fileFromPath = headerLines[0].split(" ")[2].substring(2);
-			fileToPath = headerLines[0].split(" ")[3].substring(2);
+		else{ //here we can have a CHMOD or just a rename
+			boolean chmod=isChangeMode(afterDiff);
+			
+			fileFromPath = parseFileFrom(headerLines[0]);
+			fileToPath = parseFileTo(headerLines[0]);
 			fileFrom.setPath(fileFromPath);
 			fileTo.setPath(fileToPath);
-			fileAction.setType(ActionType.CHMOD);
-			fileFrom.addFileAction(fileAction);
-			fileTo.addFileAction(fileAction);
+			
+			if(chmod){			
+				fileAction.setType(ActionType.CHMOD);
+				fileFrom.addFileAction(fileAction);
+				fileTo.addFileAction(fileAction);
+			}			
+			if(afterDiff.contains("rename from")){
+				rename.setFrom(fileFrom);
+				rename.setTo(fileTo);
+				fileFrom.addRenameFrom(rename);
+				fileTo.addRenameTo(rename);
+			}
 		}
+	}
+	
+	private static boolean isChangeMode(String afterDiff) {
+		return afterDiff.contains("old mode") && afterDiff.contains("new mode");
+	}
+
+	/**
+	 * 
+	 * @param string it expects one line
+	 * @return
+	 */
+	private static String parseFileTo(String string) {
+		String devNull = "/dev/null";
+		if(string.contains(devNull))
+			return devNull;
+		int start = string.indexOf("b/");
+		return string.substring(start+2);
+	}
+	
+	/**
+	 * 
+	 * @param string it expects one line
+	 * @return
+	 */
+	private static String parseFileFrom(String string) {
+		String devNull = "/dev/null";
+		
+		if(string.contains(devNull))
+			return devNull;
+		
+		int start = string.indexOf("a/");
+		int end = string.indexOf("b/");
+		
+		if(end<start)
+			end=string.length();
+		
+		return string.substring(start+2, end-1);
+	}
+
+	private static boolean isBinaryChange(String afterDiff) {
+		/*	afterDiff wil be like:
+		 * 	 --git a/c.jar b/c.jar
+			deleted file mode 100644
+			index b377d9a..0000000
+			Binary files a/activiti-engine-test-api/target/activiti-engine-test-api-5.0.alpha3-SNAPSHOT.jar and /dev/null differ
+		 */
+		return afterDiff.contains("Binary files");
 	}
 
 	/**
