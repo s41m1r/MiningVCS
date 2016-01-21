@@ -10,9 +10,11 @@
   <property name="hibernate.connection.password">pmpass</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.default_schema">pm</property>
-  <property name="show_sql">true</property>
+  <property name="show_sql">false</property>
   <property name="hibernate.check_nullability">false</property>
   <property name="hibernate.hbm2ddl.auto">create</property>
+  <property name="hibernate.jdbc.batch_size">100000</property>
+  <!-- <property name="hibernate.cache.use_second_level_cache">false</property> -->
 <!--
   <mapping resource="com/mkyong/user/DBUser.hbm.xml"></mapping>
 -->

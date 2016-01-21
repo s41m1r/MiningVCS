@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class User implements Serializable {
 	private String name;
 	@Column(name="email")
 	private String email;
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade={CascadeType.ALL})
 	private Collection<Commit> commits;
 	
 	public User() {

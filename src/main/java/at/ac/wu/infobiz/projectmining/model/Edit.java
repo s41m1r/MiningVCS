@@ -1,6 +1,5 @@
 package at.ac.wu.infobiz.projectmining.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +21,7 @@ public class Edit {
 	@ManyToOne
 	private Commit commit;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	private File file;
 	
 	@Column

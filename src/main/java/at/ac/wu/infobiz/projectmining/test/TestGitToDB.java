@@ -8,6 +8,7 @@ import at.ac.wu.infobiz.projectmining.io.CommandLineOptions;
 import at.ac.wu.infobiz.projectmining.parsing.git.GitToDB;
 
 public class TestGitToDB {
+	// jgit-cookbookWithRename.log camunda-bpm-platform.log
 	public static String inputFile = "data/camunda-bpm-platform.log";
 	static String outputFile= "out.txt";
 
@@ -40,7 +41,6 @@ public class TestGitToDB {
 	 */
 	private static String getElapsedTime(long time, long startTime) {
 		long elapsed = time-startTime;
-		
 		long second = (elapsed / 1000) % 60;
 		long minute = (elapsed / (1000 * 60)) % 60;
 		long hour = (elapsed / (1000 * 60 * 60)) % 24;

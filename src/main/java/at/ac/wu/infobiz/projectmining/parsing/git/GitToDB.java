@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.Transaction;
 import org.jboss.logging.Logger;
 import org.joda.time.DateTime;
@@ -40,6 +41,8 @@ public class GitToDB {
 	private String inputFile;
 	private String startCommitDelimiter;
 	private String endMessageDelimiter;
+	
+	static int BATCH_SIZE = 100000;
 	
 	public static Logger logger = Logger.getLogger(GitToDB.class.getName());
 	
@@ -115,7 +118,7 @@ public class GitToDB {
 		
 		Map<String,Commit> commits = new HashMap<String,Commit>();
 		Set<Edit> edits = new HashSet<Edit>();
-		Map<String, at.ac.wu.infobiz.projectmining.model.File> files = new HashMap<String,at.ac.wu.infobiz.projectmining.model.File>();
+		Map<String, at.ac.wu.infobiz.projectmining.model.File> files = new HashMap<String, at.ac.wu.infobiz.projectmining.model.File>();
 		Set<FileAction> fileActions = new HashSet<FileAction>();
 		Set<Rename> renames = new HashSet<Rename>();
 		Map<String, User> users = new HashMap<String,User>();
@@ -193,20 +196,29 @@ public class GitToDB {
 					default:file=fileFrom;
 						break;
 					}
-									
+					
 					//store into sets/maps
-					if(files.containsKey(file.getPath()))
+					if(files.containsKey(file.getPath())){//if it is already there, get it
 						file = files.get(file.getPath());
+					}
 					else
-						files.put(file.getPath(), file);
+						files.put(file.getPath(),file);
 					
 					//parse file actions
 					fileAction.setFile(file);
 					fileActions.add(fileAction);
 					file.addFileAction(fileAction);
 					
-					if(rename.getFrom()!=null && rename.getTo()!=null) //file was renamed
+					if(rename.getFrom()!=null && rename.getTo()!=null){ //file was renamed
+						rename.setCommit(commit);
+						commit.addRename(rename);
 						renames.add(rename);
+						//make sure files referenced from rename are in the files collection
+						if(!files.containsKey(rename.getFrom().getPath()))
+							files.put(rename.getFrom().getPath(), rename.getFrom());
+						if(!files.containsKey(rename.getTo().getPath()))
+							files.put(rename.getTo().getPath(), rename.getTo());
+					}
 					//parse edits
 					List<Edit> editsForThisFile = new ArrayList<Edit>();
 					parseEdits(afterDiff, editsForThisFile);
@@ -225,10 +237,130 @@ public class GitToDB {
 			numCommits++;
 		}
 		logger.info("Entities created. Going to persist entries relative to "+numCommits+" commits into database.");		
-		persistEntities(thisProject, commits, files, fileActions, users);
+//		batchPersistEntities(thisProject, commits, files, fileActions, users, renames);
+		statelessBatchPersistEntities(thisProject, commits, files, fileActions, users, renames, edits);
 		scanner.close();
 	}
 	
+	private void batchPersistEntities(Project thisProject,
+			Map<String, Commit> commits,
+			Map<String, at.ac.wu.infobiz.projectmining.model.File> files,
+			Set<FileAction> fileActions, Map<String, User> users, Set<Rename> renames) {
+		
+		SessionFactory sessionFactory = DatabaseConnector.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		int total = users.size()+commits.size()+files.size()+renames.size();
+		
+		int i = 0;
+		session.save(thisProject); //persist project
+		
+		//users
+		for (String key : users.keySet()) {
+//			System.out.println("Saving ... "+key);
+			session.save(users.get(key));
+			if ( ++i % BATCH_SIZE == 0 ) { 
+				session.flush();
+		        session.clear();
+		    }
+			
+			if((100*i) % total == 0){
+				System.out.println( 100*i / total);
+			}
+		}
+//		System.out.println(100*(users.size()+commits.size())/total+"% done");
+		for (String path : files.keySet()) {
+			session.save(files.get(path));
+			if ( ++i % BATCH_SIZE == 0 ) { 
+				session.flush();
+		        session.clear();
+		    }
+			if((100*i) % total == 0){
+				System.out.println( 100*i / total);
+			}
+		}
+		session.flush();
+		session.clear();
+//		System.out.println(100*(users.size()+commits.size()+files.size())/total+"% done");
+		for (Rename rename : renames) {
+			session.save(rename);
+			if ( ++i % BATCH_SIZE == 0 ) { 
+				session.flush();
+		        session.clear();
+		    }
+			if((100*i) % total == 0){
+				System.out.println(100* i / total);
+			}
+		}
+		tx.commit();
+		session.flush();
+		session.close();
+//		System.out.println(100*(users.size()+commits.size()+files.size()+renames.size())/total+"% done");
+		DatabaseConnector.shutdown();
+	}
+	
+	private void statelessBatchPersistEntities(Project thisProject,
+			Map<String, Commit> commits,
+			Map<String, at.ac.wu.infobiz.projectmining.model.File> files,
+			Set<FileAction> fileActions, Map<String, User> users, Set<Rename> renames, Set<Edit> edits) {
+		
+		SessionFactory sessionFactory = DatabaseConnector.getSessionFactory();
+		StatelessSession session = sessionFactory.openStatelessSession();
+		Transaction tx = session.beginTransaction();
+		int total = users.size()+commits.size()+files.size()+renames.size();
+		
+		int i = 0;
+		session.insert(thisProject); //persist project
+		
+		//users
+		for (String key : users.keySet()) {
+			session.insert(users.get(key));
+			if(++i % total == 0){
+				System.out.println((i/total));
+			}
+		}
+		for (String path : files.keySet()) {
+			session.insert(files.get(path));
+			if(++i % total == 0){
+				System.out.println((i/total));
+			}
+		}
+		
+		for (String key : commits.keySet()) {
+			session.insert(commits.get(key));
+			if(++i % total == 0){
+				System.out.println((i/total));
+			}
+		}
+		
+		for (FileAction fileAction : fileActions) {
+			session.insert(fileAction);
+			if(++i % total == 0){
+				System.out.println((i/total));
+			}
+		}
+		
+		for (Rename rename : renames) {
+			session.insert(rename);
+			if(++i % total == 0){
+				System.out.println((i/total));
+			}
+		}
+		
+		for (Edit edit : edits) {
+			session.insert(edit);
+			if(++i % total == 0){
+				System.out.println((i/total));
+			}
+		}
+		
+		tx.commit();
+		session.close();
+//		System.out.println(100*(users.size()+commits.size()+files.size()+renames.size())/total+"% done");
+		DatabaseConnector.shutdown();
+	}
+
+
 	/**
 	 * This method iterates the part between two diffs and parses files, file actions and renames entities
 	 * 
@@ -252,6 +384,15 @@ public class GitToDB {
 				fileToPath+=headerLines[i].split(" ")[1]; // {"+++" : " " : "/path/to"}
 				filePathsParsed=true;
 			}
+		}
+		
+		//TODO: debugga qui il nome del file!!!!
+		if(fileFromPath.equals(" ") || fileFromPath.equals("") || fileFromPath.equals(").xml")){
+			System.out.println("qui");
+		}
+		
+		if(fileToPath.equals(" ") || fileToPath.equals("") || fileToPath.equals(").xml")){
+			System.out.println("qui");
 		}
 		
 		if(filePathsParsed){
@@ -302,8 +443,8 @@ public class GitToDB {
 			}
 		}
 		else{ //here we only have a CHMOD
-			fileFromPath = headerLines[0].split(" ")[2];
-			fileToPath = headerLines[0].split(" ")[3];
+			fileFromPath = headerLines[0].split(" ")[2].substring(2);
+			fileToPath = headerLines[0].split(" ")[3].substring(2);
 			fileFrom.setPath(fileFromPath);
 			fileTo.setPath(fileToPath);
 			fileAction.setType(ActionType.CHMOD);

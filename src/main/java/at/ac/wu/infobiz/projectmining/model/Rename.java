@@ -22,7 +22,6 @@ public class Rename {
 	private Commit commit;
 	
 	public Rename() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {

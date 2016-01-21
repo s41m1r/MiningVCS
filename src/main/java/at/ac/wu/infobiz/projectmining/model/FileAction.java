@@ -1,6 +1,5 @@
 package at.ac.wu.infobiz.projectmining.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +15,7 @@ public class FileAction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@ManyToOne(optional=false, cascade={CascadeType.ALL})
+	@ManyToOne(optional=false)
 	private File file;
 	
 	@ManyToOne(optional=false)

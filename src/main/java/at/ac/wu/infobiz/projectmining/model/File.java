@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,13 +20,13 @@ public class File implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5044129239587030486L;
-	@Id()
+	@Id @Column(columnDefinition="varchar(256) COLLATE latin1_general_cs")
 	private String path;
 	@OneToMany(mappedBy="file", cascade={CascadeType.ALL})
 	public Collection<Edit> edits;
 	@OneToMany(mappedBy="from")
 	public Collection<Rename> renameFrom;
-	@OneToMany(mappedBy="file")
+	@OneToMany(mappedBy="file", cascade={CascadeType.ALL})
 	public Collection<FileAction> fileActions;
 	@OneToMany(mappedBy="to")
 	public Collection<Rename> renameTo;
@@ -104,48 +106,6 @@ public class File implements Serializable {
 		this.renameTo = renameTo;
 	}
 	
-	
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((edits == null) ? 0 : edits.hashCode());
-		result = prime * result
-				+ ((fileActions == null) ? 0 : fileActions.hashCode());
-		result = prime * result + ((path == null) ? 0 : path.hashCode());
-		result = prime * result
-				+ ((renameFrom == null) ? 0 : renameFrom.hashCode());
-		result = prime * result
-				+ ((renameTo == null) ? 0 : renameTo.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		File other = (File) obj;
-		
-		if (path == null) {
-			if (other.path != null)
-				return false;
-		} else if (!path.equals(other.path))
-			return false;
-		
-		return true;
-	}
-
 	@Override
 	public String toString() {
 		return "File [path=" + path + ", edits=" + edits.size() + ", renameFrom="
