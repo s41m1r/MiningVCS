@@ -125,6 +125,8 @@ public class GitToDB {
 		
 		scanner.useDelimiter(startCommitDelimiter);
 		int numCommits = 0;
+		
+		Commit headCommit = null;
 		while (scanner.hasNext()) {
 			String commitChunk = scanner.next();
 			Scanner intraCommitScanner = new Scanner(commitChunk);
@@ -137,8 +139,19 @@ public class GitToDB {
 			String commitLine = headersScanner.next();
 			Commit commit = new Commit();
 			commit.setProject(thisProject);
-			String revisionId = parseCommitId(commitLine)[0];
-			commit.setRevisionId(revisionId);
+			String[] parsedCommitIds = parseCommitId(commitLine);
+			commit.setRevisionId(parsedCommitIds[0]);
+			if (parsedCommitIds[1]!=null){
+				if (commits.containsKey(parsedCommitIds[1])){
+					commit.addParent(commits.get(parsedCommitIds[1]));
+					if (commits.containsKey(parsedCommitIds[2])){
+						commit.addParent(commits.get(parsedCommitIds[2]));
+					}
+				} else {
+					System.out.println("DEbug me!");
+				}
+			}
+			headCommit = commit;
 			
 			//User
 			String authorLine = headersScanner.next();
@@ -243,12 +256,32 @@ public class GitToDB {
 			commits.put(commit.getRevisionId(), commit);
 			numCommits++;
 		}
+		updateCommitParentsOf(headCommit);
 		logger.info("Entities created. Going to persist entries relative to "+numCommits+" commits into database.");		
 //		batchPersistEntities(thisProject, commits, files, fileActions, users, renames);
 		statelessBatchPersistEntities(thisProject, commits, files, fileActions, users, renames, edits);
 		scanner.close();
 	}
 	
+	private void updateCommitParentsOf(Commit headCommit) {
+		headCommit.setInTrunk(true);
+		List<Commit> commitsInTrunk = new ArrayList<Commit>();
+		commitsInTrunk.addAll(headCommit.getParents());
+		while (!commitsInTrunk.isEmpty()){
+			Commit cInTrunk = commitsInTrunk.remove(0);
+			if (cInTrunk.isInTrunk()){
+				// do nothing...
+			} else {
+				cInTrunk.setInTrunk(true);
+				for (Commit c : cInTrunk.getParents()){
+					if (!c.isInTrunk()){
+						commitsInTrunk.add(0, c);
+					}
+				}
+			}
+		}
+	}
+
 	public void batchPersistEntities(Project thisProject,
 			Map<String, Commit> commits,
 			Map<String, at.ac.wu.infobiz.projectmining.model.File> files,
@@ -329,41 +362,41 @@ public class GitToDB {
 		for (String key : users.keySet()) {
 			session.insert(users.get(key));
 			if(++i % total == 0){
-				System.out.println((i/total));
+				System.out.println(i/total);
 			}
 		}
 		for (String path : files.keySet()) {
 			session.insert(files.get(path));
 			if(++i % total == 0){
-				System.out.println((i/total));
+				System.out.println(i/total);
 			}
 		}
 		
 		for (String key : commits.keySet()) {
 			session.insert(commits.get(key));
 			if(++i % total == 0){
-				System.out.println((i/total));
+				System.out.println(i/total);
 			}
 		}
 		
 		for (FileAction fileAction : fileActions) {
 			session.insert(fileAction);
 			if(++i % total == 0){
-				System.out.println((i/total));
+				System.out.println(i/total);
 			}
 		}
 		
 		for (Rename rename : renames) {
 			session.insert(rename);
 			if(++i % total == 0){
-				System.out.println((i/total));
+				System.out.println(i/total);
 			}
 		}
 		
 		for (Edit edit : edits) {
 			session.insert(edit);
 			if(++i % total == 0){
-				System.out.println((i/total));
+				System.out.println(i/total);
 			}
 		}
 		
@@ -458,12 +491,15 @@ public class GitToDB {
 			fileFrom.setPath(fileFromPath);
 			fileTo.setPath(fileToPath);
 			
-			if(chmod){			
+			if(chmod){
+				fileAction.setFile(fileTo);
 				fileAction.setType(ActionType.CHMOD);
 				fileFrom.addFileAction(fileAction);
 				fileTo.addFileAction(fileAction);
-			}			
+			}		
 			if(afterDiff.contains("rename from")){
+//				if(chmod)
+//					System.out.println(afterDiff);
 				rename.setFrom(fileFrom);
 				rename.setTo(fileTo);
 				fileFrom.addRenameFrom(rename);
@@ -473,7 +509,7 @@ public class GitToDB {
 	}
 	
 	private static boolean isChangeMode(String afterDiff) {
-		return afterDiff.contains("old mode") && afterDiff.contains("new mode");
+		return afterDiff.contains("mode");
 	}
 
 	/**
@@ -647,13 +683,24 @@ public class GitToDB {
 		}
 	}
 
+	/**
+	 * Returns an array of strings (first position is the commit id itself)
+	 * second and third are optional parent commit ids.
+	 * @param commitString
+	 * @return
+	 */
 	public static String[] parseCommitId(String commitString){
-		String[] commitIDandParent = new String[2];
+		String[] commitIDandParents = new String[3];
 		String[] allTokens = commitString.split(" ");
-		commitIDandParent[0] = allTokens[1];
-		if(allTokens.length==3)
-			commitIDandParent[1] = allTokens[2];
-		return commitIDandParent;
+		commitIDandParents[0] = allTokens[1];
+		if(allTokens.length>=3){
+			commitIDandParents[1] = allTokens[2];
+			if(allTokens.length>=4){
+				commitIDandParents[2] = allTokens[3];
+			}
+		}
+			
+		return commitIDandParents;
 	}
 
 	public static String parseAuthor(String authorString){

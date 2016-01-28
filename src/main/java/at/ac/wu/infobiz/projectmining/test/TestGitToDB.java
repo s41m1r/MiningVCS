@@ -8,7 +8,7 @@ import at.ac.wu.infobiz.projectmining.io.CommandLineOptions;
 import at.ac.wu.infobiz.projectmining.parsing.git.GitToDB;
 
 public class TestGitToDB {
-	// jgit-cookbookWithRename.log camunda-bpm-platform.log
+	//  jgit-cookbookWithRename.log
 	public static String inputFile = "data/camunda-bpm-platform.log";
 	static String outputFile= "out.txt";
 

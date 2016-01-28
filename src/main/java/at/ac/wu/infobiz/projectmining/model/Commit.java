@@ -3,6 +3,7 @@ package at.ac.wu.infobiz.projectmining.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,6 +25,10 @@ public class Commit {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String revisionId;
+	
+	@ManyToMany
+	private List<Commit> parents;
+	
 	private Date timeStamp;
 	@Column(columnDefinition="TEXT")
 	private String comment;
@@ -37,10 +43,17 @@ public class Commit {
 	@ManyToOne
 	private Project project;
 	
+	/**
+	 * Stores whether the commit made it into the trunk.
+	 * (Whether it is already a commit made directly on the trunk, or it was merged into the trunk)
+	 */
+	private boolean inTrunk;
+	
 	public Commit() {
 		edits = new ArrayList<Edit>();
 		renames = new ArrayList<Rename>();
 		fileActions = new ArrayList<FileAction>();
+		parents = new ArrayList<Commit>();
 	}
 	
 	public Commit(String id, Date timeStamp, String comment) {
@@ -51,6 +64,7 @@ public class Commit {
 		edits = new ArrayList<Edit>();
 		renames = new ArrayList<Rename>();
 		fileActions = new ArrayList<FileAction>();
+		parents = new ArrayList<Commit>();
 	}
 	
 	public boolean addEdit(Edit e){
@@ -158,6 +172,27 @@ public class Commit {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public List<Commit> getParents() {
+		return parents;
+	}
+
+	public void setParents(List<Commit> parents) {
+		this.parents = parents;
+	}
+
+	public void addParent(Commit parent){
+		this.parents.add(parent);
+	}
+	
+	public boolean isInTrunk() {
+		return inTrunk;
+	}
+
+	public void setInTrunk(boolean inTrunk) {
+		this.inTrunk = inTrunk;
 	}
 
 	/* (non-Javadoc)

@@ -17,5 +17,7 @@ git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %
 ## Export log without stats and with merges
 git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %cd %nMessage: %s%n---§%n" -M -p > camunda-bpm-platform.log
 
+git log --branches --remotes --tags  --reverse --full-history --parents --topo-order --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %cd %nMessage: %s%n---§%n" -M -p > camunda-bpm-platform.log
+
 ## Set your diff.renameLimit variable 
 git config merge.renameLimit 10000
