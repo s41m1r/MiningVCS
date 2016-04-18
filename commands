@@ -19,5 +19,8 @@ git log --reverse --parents --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %
 
 git log --branches --remotes --tags  --reverse --full-history --parents --topo-order --pretty=format:"§§--§§%ncommit %H %P%nAuthor: %an <%ae>%nDate: %cd %nMessage: %s%n---§%n" -M -p > camunda-bpm-platform.log
 
-## Set your diff.renameLimit variable 
+## Set your merge.renameLimit variable 
 git config merge.renameLimit 10000
+
+## Set your diff.renameLimit variable
+git config diff.renameLimit 10000
