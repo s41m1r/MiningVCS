@@ -1,5 +1,5 @@
 package at.ac.wu.infobiz.projectmining.model;
 
 public enum ActionType {
-	CREATED , DELETED, CHMOD, MODIFIED
+	CREATED , DELETED, CHMOD, MODIFIED, RENAMED
 }

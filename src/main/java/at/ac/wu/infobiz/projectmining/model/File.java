@@ -19,7 +19,10 @@ public class File implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5044129239587030486L;
-	@Id @Column(columnDefinition="varchar(512) COLLATE latin1_general_cs")
+//	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
+//	private Integer id;
+	@Id
+	@Column(columnDefinition="varchar(512) COLLATE latin1_general_cs")
 	private String path;
 	@OneToMany(mappedBy="file", cascade={CascadeType.ALL})
 	public Collection<Edit> edits;

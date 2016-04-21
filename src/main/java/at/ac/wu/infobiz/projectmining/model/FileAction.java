@@ -1,5 +1,6 @@
 package at.ac.wu.infobiz.projectmining.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -24,48 +25,55 @@ public class FileAction {
 	@Enumerated(EnumType.STRING)
 	private ActionType type;
 	
+	@Column
+	private Integer totalLines;
+	
 	public FileAction() {
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
 	}
 
 	public Commit getCommit() {
 		return commit;
 	}
 
-	public void setCommit(Commit commit) {
-		this.commit = commit;
+	public File getFile() {
+		return file;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public Integer getTotalLines() {
+		return totalLines;
 	}
 
 	public ActionType getType() {
 		return type;
 	}
 
+	public void setCommit(Commit commit) {
+		this.commit = commit;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setTotalLines(Integer totalLines) {
+		this.totalLines = totalLines;
+	}
+
 	public void setType(ActionType type) {
 		this.type = type;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "FileAction [id=" + id
-				+ ", type=" + type + "]";
+		return "FileAction [id=" + id + ", type=" + type + ", totalLines=" + totalLines + "]";
 	}
 	
 }

@@ -62,3 +62,14 @@ WHERE Commit.id in
 		(select commit_id from Edit) and 
 	Commit.id in 
 		(select commit_id from FileAction where type <> "CHMOD")
+		
+SELECT comment from Commit WHERE 1;
+
+select File.* from File where 1
+
+
+-- Select the file that do not appear in Rename
+SELECT * FROM `FileAction`,`Commit` 
+WHERE `FileAction`.`totalLines`<0 AND `FileAction`.`commit_id` = `Commit`.`id` 
+AND `FileAction`.`file_path` NOT IN (SELECT `Rename`.`from_path` FROM `Rename` UNION SELECT `Rename`.`to_path` FROM `Rename`)
+ORDER BY `Commit`.`timeStamp` ASC

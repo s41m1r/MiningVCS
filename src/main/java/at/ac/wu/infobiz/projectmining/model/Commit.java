@@ -202,9 +202,7 @@ public class Commit {
 	public String toString() {
 		return "Commit [id=" + id + ", revisionId=" + revisionId
 				+ ", timeStamp=" + timeStamp + ", comment=" + comment
-				+ ", user=" + user + ", renames="
-				+ renames + ", fileActions=" + fileActions + ", project="
-				+ project + "]";
+				+ ", project=" + project + "]";
 	}
 
 }

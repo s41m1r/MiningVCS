@@ -108,7 +108,7 @@ public class GitToDB {
 
 	public void toDB(File logFile) throws FileNotFoundException{
 		
-		logger.info("Parsing started");
+		logger.info("Parsing of "+logFile+" started");
 		
 		FileInputStream fis = new FileInputStream(logFile);
 		Scanner scanner = new Scanner(fis);
@@ -122,6 +122,8 @@ public class GitToDB {
 		Set<FileAction> fileActions = new HashSet<FileAction>();
 		Set<Rename> renames = new HashSet<Rename>();
 		Map<String, User> users = new HashMap<String,User>();
+		Map<at.ac.wu.infobiz.projectmining.model.File, List<Edit>> editsToFile = 
+				new HashMap<at.ac.wu.infobiz.projectmining.model.File, List<Edit>>();
 		
 		scanner.useDelimiter(startCommitDelimiter);
 		int numCommits = 0;
@@ -207,6 +209,7 @@ public class GitToDB {
 						//take the first one
 						file=fileFrom;
 						break;
+					case RENAMED:	
 					case CREATED:
 					case CHMOD:
 					case MODIFIED: //take the second one
@@ -221,8 +224,9 @@ public class GitToDB {
 					if(files.containsKey(file.getPath())){//if it is already there, get it
 						file = files.get(file.getPath());
 					}
-					else
+					else{
 						files.put(file.getPath(),file);
+					}
 					
 					//parse file actions
 					fileAction.setFile(file);
@@ -249,13 +253,26 @@ public class GitToDB {
 						edit.setFile(file);
 					}
 					edits.addAll(editsForThisFile);
+					
+					//mapping file to corresponding edits
+					if (editsToFile.containsKey(file)) {
+						editsToFile.get(file).addAll(editsForThisFile);
+					}
+					else 
+						editsToFile.put(file, editsForThisFile);
+					
+					//calculate size at this commit
+					fileAction.setTotalLines(countLinesFromEdits(file, editsToFile));
 				}
 			}
 			
 			intraCommitScanner.close();
 			commits.put(commit.getRevisionId(), commit);
 			numCommits++;
+			if(numCommits%100==0)
+				System.out.print(".");
 		}
+		System.out.println();
 		updateCommitParentsOf(headCommit);
 		logger.info("Entities created. Going to persist entries relative to "+numCommits+" commits into database.");		
 //		batchPersistEntities(thisProject, commits, files, fileActions, users, renames);
@@ -263,6 +280,22 @@ public class GitToDB {
 		scanner.close();
 	}
 	
+	/**
+	 * 
+	 * @param commit the commit to which 
+	 * @param file
+	 * @param editsToFile 
+	 * @return
+	 */
+	private Integer countLinesFromEdits(at.ac.wu.infobiz.projectmining.model.File file, Map<at.ac.wu.infobiz.projectmining.model.File, List<Edit>> editsToFile) {
+		Integer count = 0;
+		List<Edit> editsForFile = editsToFile.get(file);
+		for (Edit e : editsForFile) {
+			count+=e.getLinesAdded()-e.getLinesRemoved();
+		}
+		return count;
+	}
+
 	private void updateCommitParentsOf(Commit headCommit) {
 		headCommit.setInTrunk(true);
 		List<Commit> commitsInTrunk = new ArrayList<Commit>();
@@ -347,58 +380,64 @@ public class GitToDB {
 		SessionFactory sessionFactory = DatabaseConnector.getSessionFactory();
 		StatelessSession session = sessionFactory.openStatelessSession();
 		Transaction tx = session.beginTransaction();
-		int total = 1+
-				users.size()+
-				commits.size()+
-				files.size()+
-				renames.size()+
-				fileActions.size()+
-				edits.size();
 		
-		int i = 0;
+		long i = 0;
 		session.insert(thisProject); //persist project
 		
 		//users
+		logger.info("Persisting "+users.size()+" users");
 		for (String key : users.keySet()) {
 			session.insert(users.get(key));
-			if(++i % total == 0){
-				System.out.println(i/total);
+			if(++i%(users.size()/10) == 0){
+				System.out.print(".");
 			}
 		}
+		System.out.println();
+		
+		logger.info("Persisting "+files.size()+" files");
 		for (String path : files.keySet()) {
 			session.insert(files.get(path));
-			if(++i % total == 0){
-				System.out.println(i/total);
+			if(++i%(files.size()/10) == 0){
+				System.out.print(".");
 			}
 		}
+		System.out.println();
 		
+		logger.info("Persisting "+commits.size()+" commits");
 		for (String key : commits.keySet()) {
 			session.insert(commits.get(key));
-			if(++i % total == 0){
-				System.out.println(i/total);
+			if(++i%(commits.size()/10) == 0){
+				System.out.print(".");
 			}
 		}
+		System.out.println();
 		
+		logger.info("Persisting "+fileActions.size()+" fileActions");
 		for (FileAction fileAction : fileActions) {
 			session.insert(fileAction);
-			if(++i % total == 0){
-				System.out.println(i/total);
+			if(++i%(fileActions.size()/10) == 0){
+				System.out.print(".");
 			}
 		}
+		System.out.println();
 		
+		logger.info("Persisting "+renames.size()+" renames");
 		for (Rename rename : renames) {
 			session.insert(rename);
-			if(++i % total == 0){
-				System.out.println(i/total);
+			if(++i%(renames.size()/10) == 0){
+				System.out.print(".");
 			}
 		}
+		System.out.println();
 		
+		logger.info("Persisting "+edits.size()+" edits");
 		for (Edit edit : edits) {
 			session.insert(edit);
-			if(++i % total == 0){
-				System.out.println(i/total);
+			if(++i%(edits.size()/10) == 0){
+				System.out.print(".");
 			}
 		}
+		System.out.println();
 		
 		tx.commit();
 		session.close();
@@ -485,9 +524,24 @@ public class GitToDB {
 		}
 		else{ //here we can have a CHMOD or just a rename
 			boolean chmod=isChangeMode(afterDiff);
+			boolean isRename = false;
 			
-			fileFromPath = parseFileFrom(headerLines[0]);
-			fileToPath = parseFileTo(headerLines[0]);
+			for(int i=0;i<headerLines.length;i++){
+				if(headerLines[i].startsWith("rename from")){
+					fileFromPath = headerLines[i].replaceAll("rename from ","");
+					isRename=true;
+				}
+				if(headerLines[i].startsWith("rename to")){
+					fileToPath = headerLines[i].replaceAll("rename to ","").trim();
+				}
+			}
+			
+			if(!isRename){
+				String[] arr = getFileNameFromSingleHeaderLine(headerLines[0]);
+				fileFromPath = arr[0];
+				fileToPath = arr[1];
+			}
+			
 			fileFrom.setPath(fileFromPath);
 			fileTo.setPath(fileToPath);
 			
@@ -496,18 +550,42 @@ public class GitToDB {
 				fileAction.setType(ActionType.CHMOD);
 				fileFrom.addFileAction(fileAction);
 				fileTo.addFileAction(fileAction);
-			}		
-			if(afterDiff.contains("rename from")){
+			}
+			if(isRename){
 //				if(chmod)
 //					System.out.println(afterDiff);
 				rename.setFrom(fileFrom);
 				rename.setTo(fileTo);
 				fileFrom.addRenameFrom(rename);
 				fileTo.addRenameTo(rename);
+				
+				fileAction.setFile(fileTo);
+				fileAction.setType(ActionType.RENAMED);
+				fileFrom.addFileAction(fileAction);
+				fileTo.addFileAction(fileAction);
 			}
 		}
 	}
 	
+	/**
+	 * 
+	 * @param string ex. --git a/file1 b/file2
+	 * @return
+	 */
+	private static String[] getFileNameFromSingleHeaderLine(String string) {
+		String[] res = new String[2];
+		String[] splits = string.split("\\s+");
+		for (String s : splits) {
+			if(s.startsWith("a/")){
+				res[0] = parseFileFrom(s);
+			}
+			if(s.startsWith("b/")){
+				res[1] = parseFileTo(string);
+			}
+		}
+		return res;
+	}
+
 	private static boolean isChangeMode(String afterDiff) {
 		return afterDiff.contains("mode");
 	}
@@ -537,12 +615,8 @@ public class GitToDB {
 			return devNull;
 		
 		int start = string.indexOf("a/");
-		int end = string.indexOf("b/");
 		
-		if(end<start)
-			end=string.length();
-		
-		return string.substring(start+2, end-1);
+		return string.substring(start+2);
 	}
 
 	private static boolean isBinaryChange(String afterDiff) {
@@ -763,6 +837,9 @@ public class GitToDB {
 				Edit edit = new Edit();
 				edit.setFromPos(new Position(lOld, sOld));
 				edit.setToPos(new Position(lNew, sNew));
+//				int linesAdded = getLinesStartingWith(editString, "+");
+//				int linesRemoved = getLinesStartingWith(editString, "-");
+//				int unchangedLines = getLinesStartingWith(editString, " ");
 				edit.setLinesAdded(getLinesStartingWith(editString, "+"));
 				edit.setLinesRemoved(getLinesStartingWith(editString, "-"));
 				edits.add(edit);
