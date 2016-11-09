@@ -9,7 +9,7 @@ import at.ac.wu.infobiz.projectmining.parsing.git.GitToDB;
 
 public class TestGitToDB {
 	//  jgit-cookbookWithRename.log
-	public static String inputFile = "data/camunda-bpm-platform.log";
+	public static String inputFile = "data/camunda-bpm-examples.log";
 	static String outputFile= "out.txt";
 
 	public final static String START_COMMIT_DELIMITER = "§§--§§\n";

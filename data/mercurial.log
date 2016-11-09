@@ -1,0 +1,3737 @@
+changeset:   7656:93bde685ce19
+branch:      infinica_5.0_tthonhofer
+tag:         tip
+parent:      7644:3f2cd396145e
+user:        tthonhofer
+date:        Thu Oct 06 12:54:57 2016 +0200
+summary:     Close infinica_5.0_tthonhofer branch
+
+changeset:   7655:6d2928f90a5f
+branch:      infinica_5.1_tthonhofer
+parent:      7654:7d398d0f6d7c
+parent:      7644:3f2cd396145e
+user:        tthonhofer
+date:        Thu Oct 06 12:47:37 2016 +0200
+summary:     Merge with infinica_5.0_tthonhofer
+
+changeset:   7654:7d398d0f6d7c
+branch:      infinica_5.1_tthonhofer
+parent:      7645:a78ceb9c42a8
+user:        tthonhofer
+date:        Thu Oct 06 12:46:15 2016 +0200
+summary:     Changes in Neighbour model
+
+changeset:   7653:a204fa6b841f
+branch:      infinica_5.1
+parent:      7649:4982ff3cf4fb
+parent:      7652:7d5b72721011
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Oct 06 12:07:06 2016 +0200
+summary:     Merge  from infinica_5.1_mkovalik
+
+changeset:   7652:7d5b72721011
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Oct 06 12:04:42 2016 +0200
+summary:     compilation fixes
+
+changeset:   7651:b1329b9aea0b
+branch:      infinica_5.1_mkovalik
+parent:      7617:7925fd430f26
+parent:      7649:4982ff3cf4fb
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Oct 06 10:25:11 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7650:c14c4dd20021
+branch:      infinica_5.1_tmertes
+parent:      7648:214d7840a235
+parent:      7649:4982ff3cf4fb
+user:        tmertes
+date:        Thu Oct 06 10:08:58 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7649:4982ff3cf4fb
+branch:      infinica_5.1
+parent:      7646:ce2a3fcef5ad
+parent:      7648:214d7840a235
+user:        tmertes
+date:        Thu Oct 06 10:07:44 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7648:214d7840a235
+branch:      infinica_5.1_tmertes
+parent:      7647:b89420be069e
+parent:      7646:ce2a3fcef5ad
+user:        tmertes
+date:        Thu Oct 06 09:49:22 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7647:b89420be069e
+branch:      infinica_5.1_tmertes
+parent:      7628:7486c650b204
+user:        tmertes
+date:        Thu Oct 06 09:48:18 2016 +0200
+summary:     TD-2315: Allow undo when the column size is configured from the Outline View
+
+changeset:   7646:ce2a3fcef5ad
+branch:      infinica_5.1
+parent:      7640:0e26965d3e2b
+parent:      7645:a78ceb9c42a8
+user:        tthonhofer
+date:        Wed Oct 05 18:28:36 2016 +0200
+summary:     Merge with infinica_5.1_tthonhofer
+
+changeset:   7645:a78ceb9c42a8
+branch:      infinica_5.1_tthonhofer
+parent:      7641:10f5890e895d
+user:        tthonhofer
+date:        Wed Oct 05 18:03:25 2016 +0200
+summary:     Fixed task test case failures
+
+changeset:   7644:3f2cd396145e
+branch:      infinica_5.0_tthonhofer
+parent:      7477:cfcb19c388c6
+user:        tthonhofer
+date:        Wed Oct 05 18:01:06 2016 +0200
+summary:     First version of drag and drop functionality
+
+changeset:   7643:9f240f1885b1
+branch:      infinica_5.1_sso
+parent:      7639:3b5c22dbc1e5
+user:        mschedenig
+date:        Wed Oct 05 17:34:19 2016 +0200
+summary:     AUL API improvements and XSD.
+
+changeset:   7642:1c34bb1482ed
+branch:      infinica_5.0
+parent:      7629:7772a94b2452
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Oct 05 16:20:56 2016 +0200
+summary:     ESN - handle 'external' authentication
+
+changeset:   7641:10f5890e895d
+branch:      infinica_5.1_tthonhofer
+parent:      7599:73965a03cacb
+parent:      7640:0e26965d3e2b
+user:        tthonhofer
+date:        Wed Oct 05 15:39:47 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7640:0e26965d3e2b
+branch:      infinica_5.1
+parent:      7632:daa2e56be01d
+parent:      7636:b877c68e774c
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Wed Oct 05 15:14:17 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7639:3b5c22dbc1e5
+branch:      infinica_5.1_sso
+user:        mschedenig
+date:        Wed Oct 05 15:00:54 2016 +0200
+summary:     Code cleanup.
+
+changeset:   7638:8a089a631599
+branch:      infinica_5.1_sso
+parent:      7637:33aa92f001ff
+parent:      7618:3bb4a36a096a
+user:        mschedenig
+date:        Wed Oct 05 13:17:43 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7637:33aa92f001ff
+branch:      infinica_5.1_sso
+parent:      7621:b57918202c5d
+user:        mschedenig
+date:        Wed Oct 05 13:15:02 2016 +0200
+summary:     Switching SOAP client authentication to UAL.
+
+changeset:   7636:b877c68e774c
+branch:      infinica_5.1_mbranicky
+parent:      7635:4e61b9b6134c
+parent:      7632:daa2e56be01d
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Wed Oct 05 15:13:30 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7635:4e61b9b6134c
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Wed Oct 05 15:12:28 2016 +0200
+summary:     Composer Comment ID -> removed from list of serializable attributes. Comment Type still not serialized.
+
+changeset:   7634:97fcb5042c87
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Wed Oct 05 13:13:23 2016 +0200
+summary:     Unused instance variables removed and 'undefined' object missing property fix.
+
+changeset:   7633:fecc341c35bf
+branch:      infinica_5.1_mbranicky
+parent:      7614:38d583bb6849
+user:        mbranicky
+date:        Wed Oct 05 10:08:52 2016 +0200
+summary:     Syntax highlighter in plain mode now correctly displays string (not at one single line).
+
+changeset:   7632:daa2e56be01d
+branch:      infinica_5.1
+parent:      7631:4c9b8ebd7811
+parent:      7627:7aa43108cfa1
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Wed Oct 05 15:07:07 2016 +0200
+summary:     Merge
+
+changeset:   7631:4c9b8ebd7811
+branch:      infinica_5.1
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Wed Oct 05 15:06:28 2016 +0200
+summary:     Updated JMeter WP test
+
+changeset:   7630:afbeb1ace5e6
+branch:      infinica_5.1
+parent:      7596:7060040e8956
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Wed Oct 05 15:04:41 2016 +0200
+summary:     Updated UM feature to create JMeter users and JMeter test
+
+changeset:   7629:7772a94b2452
+branch:      infinica_5.0
+parent:      7590:d1c4f99c2f3e
+user:        mschwarz
+date:        Wed Oct 05 14:39:44 2016 +0200
+summary:     Created very specific Process Engine activity for Holding Graz (WEB-IDX post-processing).
+
+changeset:   7628:7486c650b204
+branch:      infinica_5.1_tmertes
+parent:      7626:103d5665cccd
+parent:      7627:7aa43108cfa1
+user:        tmertes
+date:        Wed Oct 05 14:23:46 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7627:7aa43108cfa1
+branch:      infinica_5.1
+parent:      7622:09db7e558103
+parent:      7626:103d5665cccd
+user:        tmertes
+date:        Wed Oct 05 14:22:05 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7626:103d5665cccd
+branch:      infinica_5.1_tmertes
+parent:      7625:a048c7137b6e
+parent:      7622:09db7e558103
+user:        tmertes
+date:        Wed Oct 05 13:57:54 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7625:a048c7137b6e
+branch:      infinica_5.1_tmertes
+user:        tmertes
+date:        Wed Oct 05 13:57:03 2016 +0200
+summary:     Backed out merge changeset: f38e2d82d4f7
+
+changeset:   7624:f38e2d82d4f7
+branch:      infinica_5.1_tmertes
+parent:      7623:230613db95f8
+parent:      7621:b57918202c5d
+user:        tmertes
+date:        Wed Oct 05 13:52:37 2016 +0200
+summary:     Merge with infinica_5.1_sso
+
+changeset:   7623:230613db95f8
+branch:      infinica_5.1_tmertes
+parent:      7607:881f7c956b8c
+user:        tmertes
+date:        Wed Oct 05 13:45:17 2016 +0200
+summary:     TD-2314: Column width not calculated correct when creating nested table inside table cell of 3cm
+
+changeset:   7622:09db7e558103
+branch:      infinica_5.1
+parent:      7618:3bb4a36a096a
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Oct 05 13:31:08 2016 +0200
+summary:     Cache the document.css.hbs in memory.
+
+changeset:   7621:b57918202c5d
+branch:      infinica_5.1_sso
+user:        mschedenig
+date:        Wed Oct 05 11:15:28 2016 +0200
+summary:     Dependency fixes.
+
+changeset:   7620:aefe98e7071b
+branch:      infinica_5.1_sso
+user:        mschedenig
+date:        Tue Oct 04 22:21:50 2016 +0200
+summary:     ICR entirely relies on AUL now.
+
+changeset:   7619:0a3451048205
+branch:      infinica_5.1_sso
+parent:      7524:e35585597e5c
+user:        mschedenig
+date:        Tue Oct 04 13:41:16 2016 +0200
+summary:     ICR uses AUL for authentication.
+
+changeset:   7618:3bb4a36a096a
+branch:      infinica_5.1
+parent:      7615:7b18385f43d6
+parent:      7617:7925fd430f26
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Oct 05 10:40:11 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7617:7925fd430f26
+branch:      infinica_5.1_mkovalik
+parent:      7616:d51ed60ea9c7
+parent:      7615:7b18385f43d6
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Oct 05 10:37:34 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7616:d51ed60ea9c7
+branch:      infinica_5.1_mkovalik
+parent:      7601:7ccc84495996
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Oct 05 10:35:10 2016 +0200
+summary:     Performance/logging issues
+
+changeset:   7615:7b18385f43d6
+branch:      infinica_5.1
+parent:      7613:03b5f47857db
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Oct 04 14:40:39 2016 +0200
+summary:     Notify with a delay the definitions change.
+
+changeset:   7614:38d583bb6849
+branch:      infinica_5.1_mbranicky
+parent:      7611:b33656bb8afe
+parent:      7613:03b5f47857db
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Wed Oct 05 08:28:19 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7613:03b5f47857db
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Oct 04 14:06:34 2016 +0200
+summary:     Fixed insertion point definition loading.
+
+changeset:   7612:b1aa9d7e17af
+branch:      infinica_5.1
+parent:      7606:a0f222106883
+parent:      7611:b33656bb8afe
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Tue Oct 04 12:53:24 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7611:b33656bb8afe
+branch:      infinica_5.1_mbranicky
+parent:      7610:eab10881bc9b
+parent:      7606:a0f222106883
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Tue Oct 04 12:52:19 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7610:eab10881bc9b
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Tue Oct 04 12:50:03 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - German translations.
+
+changeset:   7609:7a3da29eee3d
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Tue Oct 04 12:42:45 2016 +0200
+summary:     Fix for debug-pipeline-variables HT - no-more stack-overflow error for XML type of value.
+
+changeset:   7608:6e94fc4acccc
+branch:      infinica_5.1_mbranicky
+parent:      7585:3afa1523ce7c
+user:        mbranicky
+date:        Tue Oct 04 12:30:44 2016 +0200
+summary:     WP-885 It's not possible to edit user's own comments
+
+changeset:   7607:881f7c956b8c
+branch:      infinica_5.1_tmertes
+parent:      7605:5a1b29f2ade9
+parent:      7606:a0f222106883
+user:        tmertes
+date:        Tue Oct 04 10:59:23 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7606:a0f222106883
+branch:      infinica_5.1
+parent:      7602:15793093699d
+parent:      7605:5a1b29f2ade9
+user:        tmertes
+date:        Tue Oct 04 10:54:42 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7605:5a1b29f2ade9
+branch:      infinica_5.1_tmertes
+parent:      7604:acddcc34239d
+parent:      7602:15793093699d
+user:        tmertes
+date:        Tue Oct 04 10:25:34 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7604:acddcc34239d
+branch:      infinica_5.1_tmertes
+user:        tmertes
+date:        Tue Oct 04 10:24:14 2016 +0200
+summary:     TD-2310: Improve clipboard performance
+
+changeset:   7603:ec6b3abf46c4
+branch:      infinica_5.1_tmertes
+parent:      7566:298be413cd5b
+parent:      7580:a98db8689ced
+user:        tmertes
+date:        Mon Oct 03 09:51:33 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7602:15793093699d
+branch:      infinica_5.1
+parent:      7597:8f865972c7d6
+parent:      7601:7ccc84495996
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Oct 04 08:37:37 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7601:7ccc84495996
+branch:      infinica_5.1_mkovalik
+parent:      7600:2f5f2b7f8d7f
+parent:      7597:8f865972c7d6
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Oct 04 08:34:41 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7600:2f5f2b7f8d7f
+branch:      infinica_5.1_mkovalik
+parent:      7594:65aeb63aa4b0
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Oct 04 08:30:22 2016 +0200
+summary:     Reasonable logging defaults
+
+changeset:   7599:73965a03cacb
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Wed Oct 05 15:38:37 2016 +0200
+summary:     PE: Passing and persistence of dynamic constants
+
+changeset:   7598:51c4f88b20ba
+branch:      infinica_5.1_tthonhofer
+parent:      7540:6d2ccaab0c64
+user:        tthonhofer
+date:        Mon Oct 03 18:08:46 2016 +0200
+summary:     PE: Set constants for process execution
+
+changeset:   7597:8f865972c7d6
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Oct 03 17:22:26 2016 +0200
+summary:     Added deferred definition loading for IPs/BBs.
+
+changeset:   7596:7060040e8956
+branch:      infinica_5.1
+parent:      7595:f5f1587b680f
+parent:      7593:fc4062fa3a2f
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Mon Oct 03 16:57:09 2016 +0200
+summary:     Merge
+
+changeset:   7595:f5f1587b680f
+branch:      infinica_5.1
+parent:      7580:a98db8689ced
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Mon Oct 03 16:56:12 2016 +0200
+summary:     UM rt update and JMeter tests
+
+changeset:   7594:65aeb63aa4b0
+branch:      infinica_5.1_mkovalik
+parent:      7577:e2bfdb6d15ea
+parent:      7593:fc4062fa3a2f
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Oct 03 13:43:15 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7593:fc4062fa3a2f
+branch:      infinica_5.1
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Oct 03 12:39:33 2016 +0200
+summary:     WP-881 - Selected columns do not reflect table state
+
+changeset:   7592:4d7a54bb1bb5
+branch:      infinica_5.1
+user:        totht
+date:        Mon Oct 03 11:27:22 2016 +0200
+summary:     Fix timing issue for copy-paste feature
+
+changeset:   7591:5cf87c0cf0f6
+branch:      infinica_5.1
+parent:      7589:9fab5ac9dcf5
+parent:      7590:d1c4f99c2f3e
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Oct 03 11:14:04 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7590:d1c4f99c2f3e
+branch:      infinica_5.0
+parent:      7539:c9cc2790c716
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Oct 03 11:11:13 2016 +0200
+summary:     Fixed promises chaining on autosaving of the document.
+
+changeset:   7589:9fab5ac9dcf5
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Oct 03 11:11:13 2016 +0200
+summary:     Fixed promises chaining on autosaving of the document.
+
+changeset:   7588:78dc38acbf85
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 30 18:05:37 2016 +0200
+summary:     Fixed page right and left, added ComposerSaveToolbarButtons configuration, more tests fixes.
+
+changeset:   7587:c57690e76dae
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 30 16:16:08 2016 +0200
+summary:     Moving and editing BBs unsing the handles works now.
+
+changeset:   7586:113146207074
+branch:      infinica_5.1
+parent:      7580:a98db8689ced
+parent:      7585:3afa1523ce7c
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Oct 03 10:11:41 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7585:3afa1523ce7c
+branch:      infinica_5.1_mbranicky
+parent:      7584:dbfccdf86afd
+parent:      7580:a98db8689ced
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Oct 03 10:09:34 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7584:dbfccdf86afd
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Mon Oct 03 08:59:06 2016 +0200
+summary:     WP-873 Make comments correctly displayed in WP's color themes - code optimizations.
+
+changeset:   7583:d25dcb586101
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Sun Oct 02 16:11:37 2016 +0200
+summary:     WP-873 Make comments correctly displayed in WP's color themes - pumpkin and spring themes done
+
+changeset:   7582:2f2c3eb67a03
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Fri Sep 30 17:53:31 2016 +0200
+summary:     WP-873 Make comments correctly displayed in WP's color themes - neutral theme done
+
+changeset:   7581:63f3d0a82adf
+branch:      infinica_5.1_mbranicky
+parent:      7561:9e8cb12524ca
+user:        mbranicky
+date:        Fri Sep 30 17:21:15 2016 +0200
+summary:     WP-873 Make comments correctly displayed in WP's color themes - marine theme done
+
+changeset:   7580:a98db8689ced
+branch:      infinica_5.1
+parent:      7579:9bf2ffe0aee8
+parent:      7578:71df4a34a71e
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Fri Sep 30 17:26:54 2016 +0200
+summary:     Merge
+
+changeset:   7579:9bf2ffe0aee8
+branch:      infinica_5.1
+parent:      7554:edf858f005eb
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Fri Sep 30 17:24:19 2016 +0200
+summary:     WP rt updates and JMeter drafts
+
+changeset:   7578:71df4a34a71e
+branch:      infinica_5.1
+parent:      7575:798bcb9aa7a2
+parent:      7577:e2bfdb6d15ea
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 30 17:22:03 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7577:e2bfdb6d15ea
+branch:      infinica_5.1_mkovalik
+parent:      7576:799200f97cb7
+parent:      7575:798bcb9aa7a2
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 30 17:20:52 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7576:799200f97cb7
+branch:      infinica_5.1_mkovalik
+parent:      7551:b9a9179b7f4a
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 30 13:55:51 2016 +0200
+summary:     WP-881 - Selectable columns check-boxes do not reflect the state of the table
+
+changeset:   7575:798bcb9aa7a2
+branch:      infinica_5.1
+user:        totht
+date:        Fri Sep 30 15:24:55 2016 +0200
+summary:     Fixed Spell-Checking Service Testcases
+
+changeset:   7574:290a443cc629
+branch:      infinica_5.1
+user:        totht
+date:        Fri Sep 30 14:33:59 2016 +0200
+summary:     Fix the IE leading space issue
+
+changeset:   7573:a6c38b2f781e
+branch:      infinica_5.1
+user:        totht
+date:        Fri Sep 30 12:44:37 2016 +0200
+summary:     Hot-fix
+
+changeset:   7572:25758f373f88
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 30 14:33:39 2016 +0200
+summary:     Fixed changing parameters for a BB.
+
+changeset:   7571:21740bf9d711
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 30 13:43:07 2016 +0200
+summary:     Fixed rendering to work now with the parameters as well.
+
+changeset:   7570:e7c716c1a585
+branch:      infinica_5.1
+user:        mleitner
+date:        Fri Sep 30 12:29:30 2016 +0200
+summary:     fixed test problems after merge
+
+changeset:   7569:34d7524af691
+branch:      infinica_5.1
+user:        mleitner
+date:        Thu Sep 29 17:55:55 2016 +0200
+summary:     fixed compile errors after merge
+
+changeset:   7568:808588b2a065
+branch:      infinica_5.1
+parent:      7567:7f72ad4591c5
+parent:      7539:c9cc2790c716
+user:        mleitner
+date:        Thu Sep 29 17:09:34 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7567:7f72ad4591c5
+branch:      infinica_5.1
+parent:      7565:2064670ecdd8
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 30 12:11:55 2016 +0200
+summary:     Set the head nodes with a promise. Test if the metadata node is set.
+
+changeset:   7566:298be413cd5b
+branch:      infinica_5.1_tmertes
+parent:      7564:3f16c9483ee3
+parent:      7565:2064670ecdd8
+user:        tmertes
+date:        Fri Sep 30 11:50:25 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7565:2064670ecdd8
+branch:      infinica_5.1
+parent:      7563:830a64f36d9a
+parent:      7564:3f16c9483ee3
+user:        tmertes
+date:        Fri Sep 30 11:49:23 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7564:3f16c9483ee3
+branch:      infinica_5.1_tmertes
+parent:      7558:d67bc152055c
+parent:      7563:830a64f36d9a
+user:        tmertes
+date:        Fri Sep 30 11:48:16 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7563:830a64f36d9a
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 30 11:22:22 2016 +0200
+summary:     Check also for the BB not to be autoparagraphed.
+
+changeset:   7562:dadee42de6cd
+branch:      infinica_5.1
+parent:      7556:7224bdcac466
+parent:      7561:9e8cb12524ca
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Fri Sep 30 11:36:19 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7561:9e8cb12524ca
+branch:      infinica_5.1_mbranicky
+parent:      7560:f2796d4a7e13
+parent:      7556:7224bdcac466
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Fri Sep 30 11:35:33 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7560:f2796d4a7e13
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Fri Sep 30 11:33:15 2016 +0200
+summary:     WP-884 Check current composer comments and fix problems
+
+changeset:   7559:3fc559031698
+branch:      infinica_5.1_mbranicky
+parent:      7546:c21cb0a92dce
+user:        mbranicky
+date:        Fri Sep 30 07:03:32 2016 +0200
+summary:     Fix for debug-pipeline-variables HT. Fallback to text/plain syntax highlight for unsupported data types.
+
+changeset:   7558:d67bc152055c
+branch:      infinica_5.1_tmertes
+parent:      7557:d0134fce3c36
+parent:      7556:7224bdcac466
+user:        tmertes
+date:        Fri Sep 30 11:28:52 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7557:d0134fce3c36
+branch:      infinica_5.1_tmertes
+parent:      7534:30f3e5948019
+user:        tmertes
+date:        Fri Sep 30 11:27:21 2016 +0200
+summary:     TD-2200: Table column size configurable in Outline View
+
+changeset:   7556:7224bdcac466
+branch:      infinica_5.1
+user:        totht
+date:        Thu Sep 29 17:50:17 2016 +0200
+summary:     Imporve filler elements handling
+
+changeset:   7555:33bab3f64743
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 29 17:13:58 2016 +0200
+summary:     Fixed the asserts in the loading.
+
+changeset:   7554:edf858f005eb
+branch:      infinica_5.1
+parent:      7553:53c4b3d1523c
+parent:      7552:122fb15df146
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Thu Sep 29 18:38:20 2016 +0200
+summary:     Merge
+
+changeset:   7553:53c4b3d1523c
+branch:      infinica_5.1
+parent:      7523:fb75ea436280
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Thu Sep 29 18:35:41 2016 +0200
+summary:     WP rt updates and backups
+
+changeset:   7552:122fb15df146
+branch:      infinica_5.1
+parent:      7547:b3e64270b5aa
+parent:      7551:b9a9179b7f4a
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 29 18:19:24 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7551:b9a9179b7f4a
+branch:      infinica_5.1_mkovalik
+parent:      7550:7fbaf3e3ab5d
+parent:      7547:b3e64270b5aa
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 29 18:17:02 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7550:7fbaf3e3ab5d
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 29 14:04:18 2016 +0200
+summary:     WP-879 - multi-select issues
+
+changeset:   7549:25fff4a9c909
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 29 12:18:17 2016 +0200
+summary:     WP-880 - Select-all checkbox - Document List HT
+
+changeset:   7548:e526123f0d8b
+branch:      infinica_5.1_mkovalik
+parent:      7516:68b7cc1f9516
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 28 16:56:42 2016 +0200
+summary:     WP-880 - Email validator
+
+changeset:   7547:b3e64270b5aa
+branch:      infinica_5.1
+parent:      7537:d48be0d7049c
+parent:      7546:c21cb0a92dce
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Thu Sep 29 17:52:03 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7546:c21cb0a92dce
+branch:      infinica_5.1_mbranicky
+parent:      7545:b2fbee0cd1e2
+parent:      7537:d48be0d7049c
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Thu Sep 29 17:50:18 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7545:b2fbee0cd1e2
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Thu Sep 29 17:49:14 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - commented parts removed.
+
+changeset:   7544:a143e973a8ca
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Thu Sep 29 17:39:40 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - bugfixes and styling improvements.
+
+changeset:   7543:913a57223b4c
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Thu Sep 29 13:20:22 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - bugfixes and comments can be hidden by header bar mouse click.
+
+changeset:   7542:182bf0f85f62
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Thu Sep 29 12:52:10 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - toolbar comment icon synchronization with latest comment.
+
+changeset:   7541:128a7dae55a9
+branch:      infinica_5.1_mbranicky
+parent:      7529:eac9c8706cf4
+user:        mbranicky
+date:        Thu Sep 29 08:03:09 2016 +0200
+summary:     WP-841 - Vaadin formatted excel output file broken
+
+changeset:   7540:6d2ccaab0c64
+branch:      infinica_5.1_tthonhofer
+parent:      7442:290b91698120
+user:        tthonhofer
+date:        Thu Sep 29 17:39:02 2016 +0200
+summary:     Created Task Metadata
+
+changeset:   7539:c9cc2790c716
+branch:      infinica_5.0
+user:        mleitner
+date:        Thu Sep 29 16:16:52 2016 +0200
+summary:     allow setting of the AES key for Serializer in convertTemplate activity
+
+changeset:   7538:2512272f5819
+branch:      infinica_5.0
+parent:      7535:ad75486711c0
+user:        mleitner
+date:        Thu Sep 29 15:53:51 2016 +0200
+summary:     allow setting of the AES key for Serializer per thread, not only locally
+
+changeset:   7537:d48be0d7049c
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 29 15:23:13 2016 +0200
+summary:     Send the editor for deletion.
+
+changeset:   7536:48c909645bdb
+branch:      infinica_5.1
+parent:      7533:fe52dbcda742
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 29 15:00:24 2016 +0200
+summary:     Merge group and delete BB operations changed to use promises.
+
+changeset:   7535:ad75486711c0
+branch:      infinica_5.0
+parent:      7511:f0af03017c21
+user:        mleitner
+date:        Thu Sep 29 13:42:29 2016 +0200
+summary:     #REP-73: ZIP-Import: version creation date is always the import date -> breaks version by date feature
+
+changeset:   7534:30f3e5948019
+branch:      infinica_5.1_tmertes
+parent:      7532:a0ee3f1ce19f
+parent:      7533:fe52dbcda742
+user:        tmertes
+date:        Thu Sep 29 10:11:11 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7533:fe52dbcda742
+branch:      infinica_5.1
+parent:      7530:de63a9a32838
+parent:      7532:a0ee3f1ce19f
+user:        tmertes
+date:        Thu Sep 29 10:10:17 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7532:a0ee3f1ce19f
+branch:      infinica_5.1_tmertes
+parent:      7531:14d816476b07
+parent:      7530:de63a9a32838
+user:        tmertes
+date:        Thu Sep 29 09:40:28 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7531:14d816476b07
+branch:      infinica_5.1_tmertes
+parent:      7505:ab67695bf0a9
+user:        tmertes
+date:        Thu Sep 29 09:37:48 2016 +0200
+summary:     TD-2311: Expand new created table to fit the page when the column width is empty
+
+changeset:   7530:de63a9a32838
+branch:      infinica_5.1
+parent:      7523:fb75ea436280
+parent:      7529:eac9c8706cf4
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Thu Sep 29 07:10:13 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7529:eac9c8706cf4
+branch:      infinica_5.1_mbranicky
+parent:      7528:41e71812bc28
+parent:      7523:fb75ea436280
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Thu Sep 29 07:06:55 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7528:41e71812bc28
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Thu Sep 29 07:02:29 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - empty initial comments list fixes.
+
+changeset:   7527:5c0dbb79cd8d
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Wed Sep 28 17:04:12 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - empty initial comments list fixes.
+
+changeset:   7526:6f3565def517
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Wed Sep 28 15:42:06 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - finetuning and translations.
+
+changeset:   7525:55c6b3316e8b
+branch:      infinica_5.1_mbranicky
+parent:      7458:85a8ebe820bf
+user:        mbranicky
+date:        Wed Sep 28 14:56:14 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - comment type maintanance done.
+
+changeset:   7524:e35585597e5c
+branch:      infinica_5.1_sso
+parent:      7521:8f5f84b331a4
+user:        mschedenig
+date:        Wed Sep 28 21:28:03 2016 +0200
+summary:     Fixed modular authentication config.
+
+changeset:   7523:fb75ea436280
+branch:      infinica_5.1
+parent:      7522:a0f147f0b6e9
+parent:      7519:ae9c2a0f1e49
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Wed Sep 28 18:01:53 2016 +0200
+summary:     Merge
+
+changeset:   7522:a0f147f0b6e9
+branch:      infinica_5.1
+parent:      7498:55c798112b1e
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Wed Sep 28 17:52:41 2016 +0200
+summary:     WP rt updates
+
+changeset:   7521:8f5f84b331a4
+branch:      infinica_5.1_sso
+user:        mschedenig
+date:        Wed Sep 28 17:57:04 2016 +0200
+summary:     Authentication management, including configuration, is now handled by infinica-authentication-layer.
+
+changeset:   7520:b228091e1a87
+branch:      infinica_5.1_sso
+parent:      7496:602dda410f71
+user:        mschedenig
+date:        Wed Sep 28 17:55:32 2016 +0200
+summary:     Authentication management, including configuration, is now handled by infinica-authentication-layer.
+
+changeset:   7519:ae9c2a0f1e49
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 28 16:32:58 2016 +0200
+summary:     Recompiled CKEditor
+
+changeset:   7518:c95c20430b3b
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 28 16:25:43 2016 +0200
+summary:     Added editable inline building blocks.
+
+changeset:   7517:28ec6c684100
+branch:      infinica_5.1
+parent:      7512:e8da1605168c
+parent:      7516:68b7cc1f9516
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 28 16:19:38 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7516:68b7cc1f9516
+branch:      infinica_5.1_mkovalik
+parent:      7515:03adc96f42cb
+parent:      7512:e8da1605168c
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 28 16:18:07 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7515:03adc96f42cb
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 28 16:14:09 2016 +0200
+summary:     WP-877 - FTP HT no credentials issue
+
+changeset:   7514:e2759bcc7ca3
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 28 15:34:09 2016 +0200
+summary:     WP-875 - No warning when saving into forbidden FTP folder (FTP IHT)
+
+changeset:   7513:a9bdd3be16e6
+branch:      infinica_5.1_mkovalik
+parent:      7494:79b66e2e7915
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 28 11:19:45 2016 +0200
+summary:     WP-874 - Cannot expand FTP folders
+
+changeset:   7512:e8da1605168c
+branch:      infinica_5.1
+parent:      7509:c079542ad2cc
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 28 15:44:49 2016 +0200
+summary:     Operations seem to be largely working.
+
+changeset:   7511:f0af03017c21
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 28 15:36:31 2016 +0200
+summary:     #RE-145: Security settings on folder don't apply/work
+
+changeset:   7510:0c21d7e00a98
+branch:      infinica_5.0
+parent:      7503:8fc8d022e806
+user:        mleitner
+date:        Wed Sep 28 15:14:59 2016 +0200
+summary:     #RE-145: Security settings on folder don't apply/work
+
+changeset:   7509:c079542ad2cc
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 28 14:16:35 2016 +0200
+summary:     Removed a lot of console.logs. Added sameResult, and make sure it resolves correctly promises. Removed curry.
+
+changeset:   7508:16b46e8eb011
+branch:      infinica_5.1
+user:        totht
+date:        Wed Sep 28 13:57:25 2016 +0200
+summary:     Rename BB widget using INFINICA STANDARD part2
+
+changeset:   7507:cf00033166b6
+branch:      infinica_5.1
+user:        totht
+date:        Wed Sep 28 13:56:10 2016 +0200
+summary:     Rename BB widget using INFINICA STANDARD part1
+
+changeset:   7506:f9e4faa7943a
+branch:      infinica_5.1
+parent:      7504:c1f46b71fb20
+user:        totht
+date:        Wed Sep 28 12:52:38 2016 +0200
+summary:     Remove filler elements
+
+changeset:   7505:ab67695bf0a9
+branch:      infinica_5.1_tmertes
+parent:      7502:8bb07db055d0
+parent:      7504:c1f46b71fb20
+user:        tmertes
+date:        Wed Sep 28 12:59:44 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7504:c1f46b71fb20
+branch:      infinica_5.1
+parent:      7498:55c798112b1e
+parent:      7502:8bb07db055d0
+user:        tmertes
+date:        Wed Sep 28 12:58:32 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7503:8fc8d022e806
+branch:      infinica_5.0
+parent:      7485:a1f889e10e3c
+user:        mleitner
+date:        Mon Sep 26 17:32:21 2016 +0200
+summary:     added missing resources (names and icons)
+
+changeset:   7502:8bb07db055d0
+branch:      infinica_5.1_tmertes
+parent:      7501:e29c18f18ba5
+parent:      7498:55c798112b1e
+user:        tmertes
+date:        Wed Sep 28 10:36:53 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7501:e29c18f18ba5
+branch:      infinica_5.1_tmertes
+user:        tmertes
+date:        Wed Sep 28 10:34:17 2016 +0200
+summary:     TD-2311: Expand new created table to fit the page. Work when table is in PageContent.
+
+changeset:   7500:775650544581
+branch:      infinica_5.1_tmertes
+user:        tmertes
+date:        Wed Sep 28 10:11:08 2016 +0200
+summary:     Add test for pdfConcatenator
+
+changeset:   7499:03882f9b28fe
+branch:      infinica_5.1_tmertes
+parent:      7481:c4cffde721f1
+user:        tmertes
+date:        Wed Sep 28 10:10:19 2016 +0200
+summary:     Add itextpdfConcatenator + tests
+
+changeset:   7498:55c798112b1e
+branch:      infinica_5.1
+parent:      7497:cac5dbcfef0b
+parent:      7495:8a4db737dd99
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Tue Sep 27 18:21:17 2016 +0200
+summary:     Merge
+
+changeset:   7497:cac5dbcfef0b
+branch:      infinica_5.1
+parent:      7434:586a76cc51ab
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Tue Sep 27 18:19:11 2016 +0200
+summary:     WP RT tests updates
+
+changeset:   7496:602dda410f71
+branch:      infinica_5.1_sso
+parent:      7475:340afa7b5874
+user:        mschedenig
+date:        Tue Sep 27 17:55:19 2016 +0200
+summary:     Began to modularise credentials handlers.
+
+changeset:   7495:8a4db737dd99
+branch:      infinica_5.1
+parent:      7492:f35d894b814f
+parent:      7494:79b66e2e7915
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 27 17:35:48 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7494:79b66e2e7915
+branch:      infinica_5.1_mkovalik
+parent:      7493:b68abc04a5b5
+parent:      7492:f35d894b814f
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 27 17:33:57 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7493:b68abc04a5b5
+branch:      infinica_5.1_mkovalik
+parent:      7452:224cc3ee7c11
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 27 16:40:45 2016 +0200
+summary:     WP-742 - Composer compare HT
+
+changeset:   7492:f35d894b814f
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 27 17:25:02 2016 +0200
+summary:     Better logging.
+
+changeset:   7491:279f0eceef13
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 27 16:22:50 2016 +0200
+summary:     Try to keep the old structure for the operations.
+
+changeset:   7490:44e18bf29014
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 27 13:47:43 2016 +0200
+summary:     Debug functions, fixed group index computing.
+
+changeset:   7489:e1ac91ec6c9a
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 27 13:19:06 2016 +0200
+summary:     Added curry, more checks fixed simple insertion.
+
+changeset:   7488:1d17d1956332
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 27 10:54:25 2016 +0200
+summary:     Recompiled CKEditor.
+
+changeset:   7487:99c9b3894a05
+branch:      infinica_5.1
+parent:      7486:d0254d968332
+parent:      7482:358a22ebb236
+user:        christopher.prengel@infinica.com
+date:        Tue Sep 27 16:55:19 2016 +0200
+summary:     Merge
+
+changeset:   7486:d0254d968332
+branch:      infinica_5.1
+parent:      7359:6f7d61c3fcf5
+user:        christopher.prengel@infinica.com
+date:        Tue Sep 27 16:52:08 2016 +0200
+summary:     ReadMe_folder_information.txt:
+
+changeset:   7485:a1f889e10e3c
+branch:      infinica_5.0
+user:        mleitner
+date:        Tue Sep 27 13:52:27 2016 +0200
+summary:     #TD-2293: Proper error message dialogue missing when exporting FO while XML cannot be found
+
+changeset:   7484:1ce683023482
+branch:      infinica_5.0
+user:        mleitner
+date:        Tue Sep 27 12:55:17 2016 +0200
+summary:     #TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY
+
+changeset:   7483:45b354c62fe1
+branch:      infinica_5.0
+parent:      7448:7f029cf77f05
+user:        mleitner
+date:        Mon Sep 26 18:17:45 2016 +0200
+summary:     #TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY
+
+changeset:   7482:358a22ebb236
+branch:      infinica_5.1
+parent:      7479:52a5622ed28a
+user:        mleitner
+date:        Tue Sep 27 12:55:17 2016 +0200
+summary:     #TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY
+
+changeset:   7481:c4cffde721f1
+branch:      infinica_5.1_tmertes
+user:        tmertes
+date:        Tue Sep 27 10:34:55 2016 +0200
+summary:     Add test to concatenate XFA Forms.
+
+changeset:   7480:dccb78a77793
+branch:      infinica_5.1_tmertes
+parent:      7387:f3748fb7891e
+user:        tmertes
+date:        Thu Sep 22 09:35:03 2016 +0200
+summary:     TD-2309: Add default values
+
+changeset:   7479:52a5622ed28a
+branch:      infinica_5.1
+parent:      7478:8aa6963b784d
+parent:      7471:fb067909a1d7
+user:        christopher.prengel@infinica.com
+date:        Tue Sep 27 03:53:39 2016 +0200
+summary:     Merge
+
+changeset:   7478:8aa6963b784d
+branch:      infinica_5.1
+parent:      7407:6798c9e9f7ff
+user:        christopher.prengel@infinica.com
+date:        Tue Sep 27 03:50:24 2016 +0200
+summary:     ComposerDocumentSteps.py: add time to timer (this is legal)
+
+changeset:   7477:cfcb19c388c6
+branch:      infinica_5.0_tthonhofer
+parent:      7476:58f33057edc4
+parent:      7471:fb067909a1d7
+user:        tthonhofer
+date:        Mon Sep 26 22:16:36 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7476:58f33057edc4
+branch:      infinica_5.0_tthonhofer
+parent:      7403:c8370c3d5510
+user:        tthonhofer
+date:        Mon Sep 26 21:58:39 2016 +0200
+summary:     Started Drag and drop support
+
+changeset:   7475:340afa7b5874
+branch:      infinica_5.1_sso
+user:        mschedenig
+date:        Mon Sep 26 20:39:43 2016 +0200
+summary:     Merge fixes.
+
+changeset:   7474:c037adc69f2a
+branch:      infinica_5.1_sso
+parent:      7472:7cc0a938eaa8
+parent:      7473:9c2296bda1ae
+user:        mschedenig
+date:        Mon Sep 26 16:40:14 2016 +0200
+summary:     Merge with infinica_5.0_httpclient4
+
+changeset:   7473:9c2296bda1ae
+branch:      infinica_5.0_httpclient4
+parent:      7463:52d0f05f4b97
+user:        mschedenig
+date:        Mon Sep 26 16:06:35 2016 +0200
+summary:     Close infinica_5.0_httpclient4 branch
+
+changeset:   7472:7cc0a938eaa8
+branch:      infinica_5.1_sso
+parent:      7461:f2f4b87f4c34
+user:        mschedenig
+date:        Mon Sep 26 16:04:46 2016 +0200
+summary:     Moving SSO development to 5.1.
+
+changeset:   7471:fb067909a1d7
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 26 18:17:45 2016 +0200
+summary:     #TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY
+
+changeset:   7470:0f2ead2d30d1
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 26 17:57:41 2016 +0200
+summary:     Check for editables.
+
+changeset:   7469:46e7a8b57c73
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 26 17:32:21 2016 +0200
+summary:     added missing resources (names and icons)
+
+changeset:   7468:b9b4f10439bb
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 26 17:16:10 2016 +0200
+summary:     #TD-2303: Can't render template due to ClassNotFoundException
+
+changeset:   7467:cbcbda4385ec
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 26 16:38:15 2016 +0200
+summary:     fixed customer specific projects after merge
+
+changeset:   7466:d260218da282
+branch:      infinica_5.1
+parent:      7465:84c95ef82004
+parent:      7448:7f029cf77f05
+user:        mleitner
+date:        Mon Sep 26 16:34:46 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7465:84c95ef82004
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 26 16:34:03 2016 +0200
+summary:     fixed customer specific projects after merge
+
+changeset:   7464:631aa712477c
+branch:      infinica_5.1
+parent:      7461:f2f4b87f4c34
+parent:      7439:26680ee60d83
+user:        mleitner
+date:        Mon Sep 26 11:20:33 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7463:52d0f05f4b97
+branch:      infinica_5.0_httpclient4
+user:        mschedenig
+date:        Mon Sep 26 16:02:11 2016 +0200
+summary:     Merge fixes.
+
+changeset:   7462:559bcf6d3ad9
+branch:      infinica_5.0_httpclient4
+parent:      7020:a790edee0c20
+parent:      7443:ef2e1e253d23
+user:        mschedenig
+date:        Mon Sep 26 13:35:58 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7461:f2f4b87f4c34
+branch:      infinica_5.1
+user:        totht
+date:        Mon Sep 26 15:41:34 2016 +0200
+summary:     BB downcast inline
+
+changeset:   7460:0917f2be6279
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 26 15:35:11 2016 +0200
+summary:     Insert HTML without moving the range.
+
+changeset:   7459:a3a8b8c2df23
+branch:      infinica_5.1
+parent:      7456:4cccfb168187
+parent:      7458:85a8ebe820bf
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 26 14:47:52 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7458:85a8ebe820bf
+branch:      infinica_5.1_mbranicky
+parent:      7457:a2aff0258a21
+parent:      7456:4cccfb168187
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 26 14:46:49 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7457:a2aff0258a21
+branch:      infinica_5.1_mbranicky
+parent:      7437:0df9a62a95f3
+user:        mbranicky
+date:        Mon Sep 26 14:40:40 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - add/edit/remove done.
+
+changeset:   7456:4cccfb168187
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 26 14:02:34 2016 +0200
+summary:     BB groups are registered correctly on creation on the IP.
+
+changeset:   7455:e6e2c2349f5f
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 26 09:54:56 2016 +0200
+summary:     More work on the operations.
+
+changeset:   7454:96017618da8a
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 23 16:08:39 2016 +0200
+summary:     Made the factory static. More work on the BB insert operations.
+
+changeset:   7453:b7470eb11e25
+branch:      infinica_5.1
+parent:      7447:b8014bfa81a3
+parent:      7452:224cc3ee7c11
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 26 13:43:26 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7452:224cc3ee7c11
+branch:      infinica_5.1_mkovalik
+parent:      7451:a95fdfaf62c1
+parent:      7447:b8014bfa81a3
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 26 13:41:33 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7451:a95fdfaf62c1
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 26 13:33:26 2016 +0200
+summary:     WP-867 - Enable FTP access anonymously (FTP IHT)
+
+changeset:   7450:d6f6ccdc8a20
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 26 13:21:48 2016 +0200
+summary:     WP-868 - Show the root folder if ftpRoot not specified
+
+changeset:   7449:13dd8df819af
+branch:      infinica_5.1_mkovalik
+parent:      7431:8f98061f237d
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 26 12:53:40 2016 +0200
+summary:     WP-869 - Not possible to navigate FTP folder structure (FTP IHT)
+
+changeset:   7448:7f029cf77f05
+branch:      infinica_5.0
+parent:      7444:c1f6e6bc79f1
+user:        mleitner
+date:        Mon Sep 26 13:36:55 2016 +0200
+summary:     added ErsteBank security code (ALFA), fixed some compile problems
+
+changeset:   7447:b8014bfa81a3
+branch:      infinica_5.1
+user:        totht
+date:        Mon Sep 26 13:34:12 2016 +0200
+summary:     Missing promise spec from CKWidgetWrapper
+
+changeset:   7446:5831e84d2fe4
+branch:      infinica_5.1
+user:        totht
+date:        Mon Sep 26 13:12:03 2016 +0200
+summary:     BuildingBlock deletion
+
+changeset:   7445:e202b5247017
+branch:      infinica_5.1
+parent:      7435:e617395393bc
+parent:      7442:290b91698120
+user:        tthonhofer
+date:        Mon Sep 26 12:41:27 2016 +0200
+summary:     Merge with infinica_5.1_tthonhofer
+
+changeset:   7444:c1f6e6bc79f1
+branch:      infinica_5.0
+user:        mleitner
+date:        Mon Sep 26 12:17:17 2016 +0200
+summary:     added ErsteBank security code (ALFA), fixed some compile problems
+
+changeset:   7443:ef2e1e253d23
+branch:      infinica_5.0
+parent:      7440:9a56d5493057
+user:        mleitner
+date:        Mon Sep 26 12:13:30 2016 +0200
+summary:     added ErsteBank security code (ALFA), fixed some compile problems
+
+changeset:   7442:290b91698120
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Mon Sep 26 12:40:35 2016 +0200
+summary:     PD: Fixed compilation errors after changes in PE model
+
+changeset:   7441:f21321799dd8
+branch:      infinica_5.1_tthonhofer
+parent:      7401:ddc5606bcef4
+parent:      7435:e617395393bc
+user:        tthonhofer
+date:        Mon Sep 26 11:53:12 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7440:9a56d5493057
+branch:      infinica_5.0
+user:        mleitner
+date:        Mon Sep 26 11:47:54 2016 +0200
+summary:     added ErsteBank security code (ALFA)
+
+changeset:   7439:26680ee60d83
+branch:      infinica_5.0
+user:        mleitner
+date:        Mon Sep 26 11:18:05 2016 +0200
+summary:     code cleanup in customer projects
+
+changeset:   7438:a93107dc8793
+branch:      infinica_5.0
+parent:      7411:a95d81aaba1d
+user:        mleitner
+date:        Mon Sep 26 11:17:43 2016 +0200
+summary:     code cleanup in customer projects
+
+changeset:   7437:0df9a62a95f3
+branch:      infinica_5.1_mbranicky
+parent:      7436:d938e57a1633
+parent:      7435:e617395393bc
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Fri Sep 23 19:03:05 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7436:d938e57a1633
+branch:      infinica_5.1_mbranicky
+parent:      7420:38ebb52f538d
+user:        mbranicky
+date:        Fri Sep 23 18:53:02 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - not yet finished.
+
+changeset:   7435:e617395393bc
+branch:      infinica_5.1
+user:        totht
+date:        Fri Sep 23 14:28:26 2016 +0200
+summary:     BB operation
+
+changeset:   7434:586a76cc51ab
+branch:      infinica_5.1
+parent:      7433:c2346ddc5610
+parent:      7432:27b182780734
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Fri Sep 23 17:53:00 2016 +0200
+summary:     Merge
+
+changeset:   7433:c2346ddc5610
+branch:      infinica_5.1
+parent:      7379:b11918a667cc
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Fri Sep 23 17:51:29 2016 +0200
+summary:     WP test suite update
+
+changeset:   7432:27b182780734
+branch:      infinica_5.1
+parent:      7428:5f0b0539256f
+parent:      7431:8f98061f237d
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 23 16:45:16 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7431:8f98061f237d
+branch:      infinica_5.1_mkovalik
+parent:      7430:699f26a0d3b7
+parent:      7428:5f0b0539256f
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 23 16:42:47 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7430:699f26a0d3b7
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 23 16:40:20 2016 +0200
+summary:     WP-862 - Tomcat will not shutdown normally
+
+changeset:   7429:a17a686d9489
+branch:      infinica_5.1_mkovalik
+parent:      7385:fd09700f4507
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 23 16:17:11 2016 +0200
+summary:     WP-864 - Enable multi-select-allowed setup to false (Document List IHT)
+
+changeset:   7428:5f0b0539256f
+branch:      infinica_5.1
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 23 12:24:37 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7427:613cf84feb07
+branch:      infinica_5.1
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 23 12:22:30 2016 +0200
+summary:     WP-872 Allow vaadin HTs to be instantiated just by name
+
+changeset:   7426:4d9f68733682
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 23 12:08:53 2016 +0200
+summary:     Added the overlay rendering of context menus into the workplace project. Fixed Context menu appearance.
+
+changeset:   7425:60580d36e608
+branch:      infinica_5.1
+user:        totht
+date:        Thu Sep 22 19:05:27 2016 +0200
+summary:     BB operation
+
+changeset:   7424:a7d489f8ad24
+branch:      infinica_5.1
+user:        totht
+date:        Thu Sep 22 14:30:37 2016 +0200
+summary:     BB tune up
+
+changeset:   7423:d1f11e62827c
+branch:      infinica_5.1
+parent:      7421:96d3dafafaf0
+parent:      7422:3156a6f099a9
+user:        mschedenig
+date:        Thu Sep 22 17:59:00 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7422:3156a6f099a9
+branch:      infinica_5.1_mschedenig
+parent:      7415:d5ea5c8358ce
+user:        mschedenig
+date:        Thu Sep 22 17:58:10 2016 +0200
+summary:     Removed ugly intermediate Mapping class in PE JAXB classes.
+
+changeset:   7421:96d3dafafaf0
+branch:      infinica_5.1
+parent:      7417:6447ea511ec9
+parent:      7420:38ebb52f538d
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Thu Sep 22 17:42:07 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7420:38ebb52f538d
+branch:      infinica_5.1_mbranicky
+parent:      7419:859ee88a41e8
+parent:      7417:6447ea511ec9
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Thu Sep 22 17:41:16 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7419:859ee88a41e8
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Thu Sep 22 17:34:22 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - not yet finished.
+
+changeset:   7418:2572013a47d4
+branch:      infinica_5.1_mbranicky
+parent:      7392:4eb4b5957f73
+user:        mbranicky
+date:        Thu Sep 22 17:30:43 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments - not yet finished.
+
+changeset:   7417:6447ea511ec9
+branch:      infinica_5.1
+parent:      7416:a8b64b04520e
+parent:      7411:a95d81aaba1d
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 22 17:30:18 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7416:a8b64b04520e
+branch:      infinica_5.1
+parent:      7407:6798c9e9f7ff
+parent:      7415:d5ea5c8358ce
+user:        mschedenig
+date:        Thu Sep 22 16:28:21 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7415:d5ea5c8358ce
+branch:      infinica_5.1_mschedenig
+parent:      7414:d123925d8698
+parent:      7407:6798c9e9f7ff
+user:        mschedenig
+date:        Thu Sep 22 16:27:49 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7414:d123925d8698
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 22 14:45:40 2016 +0200
+summary:     Dependency fixes.
+
+changeset:   7413:dfd702985cd6
+branch:      infinica_5.1_mschedenig
+parent:      7412:55392f9828dd
+parent:      7400:8a79657282aa
+user:        mschedenig
+date:        Thu Sep 22 14:07:26 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7412:55392f9828dd
+branch:      infinica_5.1_mschedenig
+parent:      7397:52ae5b656d99
+user:        mschedenig
+date:        Thu Sep 22 14:06:47 2016 +0200
+summary:     PE modules can now have dependencies. Modules are initialised in dependency order.
+
+changeset:   7411:a95d81aaba1d
+branch:      infinica_5.0
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 22 16:01:35 2016 +0200
+summary:     Implemented #INFC-1586. Allow save via PE call.
+
+changeset:   7410:8727a1a716fd
+branch:      infinica_5.0
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 22 15:06:04 2016 +0200
+summary:     Allow hardcoded users for Composer.
+
+changeset:   7409:0be0c69da126
+branch:      infinica_5.0
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 21 17:33:01 2016 +0200
+summary:     WIP #INFC-1586. Created YUI module for the PE call, added I18N for the regular save.
+
+changeset:   7408:e5400a5ef482
+branch:      infinica_5.0
+parent:      7406:e50a21e0ee6c
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 21 17:30:47 2016 +0200
+summary:     Allow configuring the postback save buttons independently.
+
+changeset:   7407:6798c9e9f7ff
+branch:      infinica_5.1
+parent:      7400:8a79657282aa
+parent:      7406:e50a21e0ee6c
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 22 14:19:02 2016 +0200
+summary:     Merge from infinica_5.0
+
+changeset:   7406:e50a21e0ee6c
+branch:      infinica_5.0
+parent:      7377:5ddb44db234b
+parent:      7405:48eefaecc9be
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 22 14:12:09 2016 +0200
+summary:     Merge from infinica_5.0
+
+changeset:   7405:48eefaecc9be
+branch:      infinica_5.0_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 22 14:06:35 2016 +0200
+summary:     WP-865 - missing validation on template
+
+changeset:   7404:f144630c7faf
+branch:      infinica_5.0_mkovalik
+parent:      7001:b5ea2aa4d51a
+parent:      7377:5ddb44db234b
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 21 14:55:52 2016 +0200
+summary:     Merge from infinica_5.0
+
+changeset:   7403:c8370c3d5510
+branch:      infinica_5.0_tthonhofer
+parent:      7402:63efb8187b26
+parent:      7400:8a79657282aa
+user:        tthonhofer
+date:        Thu Sep 22 14:06:27 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7402:63efb8187b26
+branch:      infinica_5.0_tthonhofer
+parent:      7315:6255f17e6fcd
+user:        tthonhofer
+date:        Thu Sep 22 14:04:58 2016 +0200
+summary:     PD: Mapping creation in editor
+
+changeset:   7401:ddc5606bcef4
+branch:      infinica_5.1_tthonhofer
+parent:      7202:0659aeafc8ba
+parent:      7400:8a79657282aa
+user:        tthonhofer
+date:        Thu Sep 22 14:08:32 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7400:8a79657282aa
+branch:      infinica_5.1
+parent:      7399:dfd633f5f599
+parent:      7398:c7907cbd2724
+user:        tthonhofer
+date:        Thu Sep 22 14:01:35 2016 +0200
+summary:     Merge
+
+changeset:   7399:dfd633f5f599
+branch:      infinica_5.1
+parent:      7381:0bc95d8d058c
+user:        tthonhofer
+date:        Thu Sep 22 14:01:03 2016 +0200
+summary:     PD: Implemented Help view
+
+changeset:   7398:c7907cbd2724
+branch:      infinica_5.1
+parent:      7393:9120d98d9caf
+parent:      7397:52ae5b656d99
+user:        mschedenig
+date:        Wed Sep 21 19:59:36 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7397:52ae5b656d99
+branch:      infinica_5.1_mschedenig
+parent:      7396:8f1514316729
+parent:      7393:9120d98d9caf
+user:        mschedenig
+date:        Wed Sep 21 19:59:11 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7396:8f1514316729
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Wed Sep 21 16:34:50 2016 +0200
+summary:     Activity parameter resolvers.
+
+changeset:   7395:503d2370b5b6
+branch:      infinica_5.1_mschedenig
+parent:      7394:4e622abc4cab
+parent:      7377:5ddb44db234b
+user:        mschedenig
+date:        Wed Sep 21 12:48:52 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7394:4e622abc4cab
+branch:      infinica_5.1_mschedenig
+parent:      7351:72339c8d96a1
+parent:      7386:0361fb94f7d6
+user:        mschedenig
+date:        Wed Sep 21 12:48:35 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7393:9120d98d9caf
+branch:      infinica_5.1
+parent:      7391:6e0369c56056
+user:        totht
+date:        Wed Sep 21 18:25:15 2016 +0200
+summary:     Synchronize clean-up running
+
+changeset:   7392:4eb4b5957f73
+branch:      infinica_5.1_mbranicky
+parent:      7334:19fe64aa746d
+user:        mbranicky
+date:        Wed Sep 21 15:56:04 2016 +0200
+summary:     WP-871 Popup menus (including comment) appends (overwrites) hash in the URL
+
+changeset:   7391:6e0369c56056
+branch:      infinica_5.1
+user:        totht
+date:        Wed Sep 21 15:23:49 2016 +0200
+summary:     Adding filter for removing br-s from widget p-s
+
+changeset:   7390:66080d1f1c0e
+branch:      infinica_5.1
+user:        totht
+date:        Wed Sep 21 11:09:30 2016 +0200
+summary:     Change table row and column defaults
+
+changeset:   7389:c6dcf67afd8c
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 21 13:36:07 2016 +0200
+summary:     Added images
+
+changeset:   7388:5755b5ecf5c8
+branch:      infinica_5.1
+parent:      7386:0361fb94f7d6
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 20 17:13:20 2016 +0200
+summary:     Ajax calls fire.
+
+changeset:   7387:f3748fb7891e
+branch:      infinica_5.1_tmertes
+parent:      7374:73445cc4b34f
+parent:      7386:0361fb94f7d6
+user:        tmertes
+date:        Wed Sep 21 14:06:32 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7386:0361fb94f7d6
+branch:      infinica_5.1
+parent:      7379:b11918a667cc
+parent:      7385:fd09700f4507
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 21 11:51:13 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7385:fd09700f4507
+branch:      infinica_5.1_mkovalik
+parent:      7384:23554776b9cc
+parent:      7379:b11918a667cc
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 21 11:49:39 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7384:23554776b9cc
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 20 14:01:11 2016 +0200
+summary:     WP-865 - missing validation on template
+
+changeset:   7383:3177203b28f4
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 20 13:32:53 2016 +0200
+summary:     WP-863 - multi-select-allowed issues
+
+changeset:   7382:8826c3ee0aa0
+branch:      infinica_5.1_mkovalik
+parent:      7355:e75264e66b3d
+parent:      7356:5e487031f67c
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 19 18:05:07 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7381:0bc95d8d058c
+branch:      infinica_5.1
+parent:      7380:bdcd01a5e75d
+parent:      7379:b11918a667cc
+user:        tthonhofer
+date:        Wed Sep 21 00:15:02 2016 +0200
+summary:     Merge
+
+changeset:   7380:bdcd01a5e75d
+branch:      infinica_5.1
+parent:      7325:861bd2a351b6
+user:        tthonhofer
+date:        Wed Sep 21 00:11:54 2016 +0200
+summary:     Fixed Problem loading backend classes from eclipse plugins
+
+changeset:   7379:b11918a667cc
+branch:      infinica_5.1
+parent:      7378:71d6428a22b3
+parent:      7376:5c72dcbe938b
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Tue Sep 20 18:39:42 2016 +0200
+summary:     Merge
+
+changeset:   7378:71d6428a22b3
+branch:      infinica_5.1
+parent:      7230:54a1005de278
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Tue Sep 20 18:38:00 2016 +0200
+summary:     WP tests - fixes and speed-up
+
+changeset:   7377:5ddb44db234b
+branch:      infinica_5.0
+parent:      7361:9edeb6ee4032
+user:        mschedenig
+date:        Tue Sep 20 17:31:33 2016 +0200
+summary:     CP-171: Fixed.
+
+changeset:   7376:5c72dcbe938b
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 20 16:38:19 2016 +0200
+summary:     Use promises to initialize the widgets correctly.
+
+changeset:   7375:16bdb2a00d64
+branch:      infinica_5.1
+parent:      7373:82ea4d9b0ad0
+user:        totht
+date:        Tue Sep 20 16:17:27 2016 +0200
+summary:     Building block downcast
+
+changeset:   7374:73445cc4b34f
+branch:      infinica_5.1_tmertes
+parent:      7372:f7a650bff549
+parent:      7373:82ea4d9b0ad0
+user:        tmertes
+date:        Tue Sep 20 15:05:48 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7373:82ea4d9b0ad0
+branch:      infinica_5.1
+parent:      7369:04c6951237a8
+parent:      7372:f7a650bff549
+user:        tmertes
+date:        Tue Sep 20 15:04:48 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7372:f7a650bff549
+branch:      infinica_5.1_tmertes
+parent:      7371:4fea409186ee
+parent:      7369:04c6951237a8
+user:        tmertes
+date:        Tue Sep 20 15:03:54 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7371:4fea409186ee
+branch:      infinica_5.1_tmertes
+user:        tmertes
+date:        Tue Sep 20 15:03:14 2016 +0200
+summary:     TD-2307: RE embedded can't establish repository connection due to NoClassDefFoundError
+
+changeset:   7370:fe33c176a3d5
+branch:      infinica_5.1_tmertes
+parent:      7365:248d3d28a483
+parent:      7366:6ccb9a8138aa
+user:        tmertes
+date:        Tue Sep 20 12:56:22 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7369:04c6951237a8
+branch:      infinica_5.1
+user:        totht
+date:        Tue Sep 20 12:26:20 2016 +0200
+summary:     #INFC-1566 - Adding BB thru ckeditor API
+
+changeset:   7368:b50485ec6040
+branch:      infinica_5.1
+parent:      7366:6ccb9a8138aa
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 20 12:12:58 2016 +0200
+summary:     Fix the init order call.
+
+changeset:   7367:99ae764cee5c
+branch:      infinica_5.0_tmertes
+parent:      7360:4f1806e676aa
+parent:      7361:9edeb6ee4032
+user:        tmertes
+date:        Tue Sep 20 12:05:39 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7366:6ccb9a8138aa
+branch:      infinica_5.1
+parent:      7364:0bb7944f5801
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 20 11:48:11 2016 +0200
+summary:     Fix #INFC-1582, Image upload is now working.
+
+changeset:   7365:248d3d28a483
+branch:      infinica_5.1_tmertes
+parent:      7363:33d448909b22
+parent:      7364:0bb7944f5801
+user:        tmertes
+date:        Tue Sep 20 11:10:01 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7364:0bb7944f5801
+branch:      infinica_5.1
+parent:      7359:6f7d61c3fcf5
+parent:      7363:33d448909b22
+user:        tmertes
+date:        Tue Sep 20 11:09:06 2016 +0200
+summary:     Merge with infinica_5.1_tmertes
+
+changeset:   7363:33d448909b22
+branch:      infinica_5.1_tmertes
+parent:      7362:0a244f54b3ae
+parent:      7361:9edeb6ee4032
+user:        tmertes
+date:        Tue Sep 20 11:08:04 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7362:0a244f54b3ae
+branch:      infinica_5.1_tmertes
+parent:      7206:f0e8a6a67f1b
+parent:      7359:6f7d61c3fcf5
+user:        tmertes
+date:        Tue Sep 20 11:06:38 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7361:9edeb6ee4032
+branch:      infinica_5.0
+parent:      7336:263c7dd25244
+parent:      7360:4f1806e676aa
+user:        tmertes
+date:        Tue Sep 20 11:04:17 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7360:4f1806e676aa
+branch:      infinica_5.0_tmertes
+parent:      7337:3a48ef7c6585
+user:        tmertes
+date:        Tue Sep 20 11:02:00 2016 +0200
+summary:     TD-2306: Add colum width field to table creation dialog
+
+changeset:   7359:6f7d61c3fcf5
+branch:      infinica_5.1
+parent:      7358:c54068bfb016
+parent:      7356:5e487031f67c
+user:        christopher.prengel@infinica.com
+date:        Mon Sep 19 18:04:51 2016 +0200
+summary:     Merge
+
+changeset:   7358:c54068bfb016
+branch:      infinica_5.1
+user:        christopher.prengel@infinica.com
+date:        Mon Sep 19 18:03:55 2016 +0200
+summary:     ComposerDocumentSteps.py: add import
+
+changeset:   7357:ad7f84e001db
+branch:      infinica_5.1
+parent:      7321:d62e4f53316a
+user:        christopher.prengel@infinica.com
+date:        Mon Sep 19 18:01:05 2016 +0200
+summary:     Det-insert-N.feature now uses a reduced DET itx to make it somewhat faster in
+
+changeset:   7356:5e487031f67c
+branch:      infinica_5.1
+parent:      7352:fc5bfa9c9e75
+parent:      7355:e75264e66b3d
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 19 17:58:22 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7355:e75264e66b3d
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 19 17:36:57 2016 +0200
+summary:     WP-826 - Slow BC page on real ICR
+
+changeset:   7354:46a199beac7f
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 19 14:14:28 2016 +0200
+summary:     keep the taskManager client as instance variable
+
+changeset:   7353:6f6af0185633
+branch:      infinica_5.1_mkovalik
+parent:      7269:c3eaaf3e1c94
+parent:      7326:a422a4f1f706
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 19 11:46:28 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7352:fc5bfa9c9e75
+branch:      infinica_5.1
+parent:      7350:e216fb75572e
+parent:      7351:72339c8d96a1
+user:        mschedenig
+date:        Mon Sep 19 17:56:32 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7351:72339c8d96a1
+branch:      infinica_5.1_mschedenig
+parent:      7348:9638abb8a31a
+user:        mschedenig
+date:        Mon Sep 19 17:55:58 2016 +0200
+summary:     Activity interface documentation and some minor activity implementation improvements.
+
+changeset:   7350:e216fb75572e
+branch:      infinica_5.1
+parent:      7343:aa41a2655f25
+parent:      7349:b5de72e9b968
+user:        mschedenig
+date:        Mon Sep 19 16:44:46 2016 +0200
+summary:     Merge
+
+changeset:   7349:b5de72e9b968
+branch:      infinica_5.1
+parent:      7340:249dab77d426
+parent:      7348:9638abb8a31a
+user:        mschedenig
+date:        Mon Sep 19 16:43:18 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7348:9638abb8a31a
+branch:      infinica_5.1_mschedenig
+parent:      7347:65419f325e75
+parent:      7340:249dab77d426
+user:        mschedenig
+date:        Mon Sep 19 16:42:52 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7347:65419f325e75
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Mon Sep 19 16:42:35 2016 +0200
+summary:     Added JSON module to PE distribution.
+
+changeset:   7346:4b23c41f255d
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Mon Sep 19 16:39:30 2016 +0200
+summary:     JSON type improvements.
+
+changeset:   7345:fbdf6ec0615a
+branch:      infinica_5.1_mschedenig
+parent:      7344:48e1c26c3e4f
+parent:      7326:a422a4f1f706
+user:        mschedenig
+date:        Mon Sep 19 13:32:58 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7344:48e1c26c3e4f
+branch:      infinica_5.1_mschedenig
+parent:      7299:e0aa9207c928
+user:        mschedenig
+date:        Mon Sep 19 13:32:18 2016 +0200
+summary:     JSON type conversion improvements.
+
+changeset:   7343:aa41a2655f25
+branch:      infinica_5.1
+user:        totht
+date:        Mon Sep 19 16:40:04 2016 +0200
+summary:     Update widget node reference
+
+changeset:   7342:431e4ebdc0d3
+branch:      infinica_5.1
+user:        totht
+date:        Mon Sep 19 16:00:28 2016 +0200
+summary:     #INFC-1585 - Make internal link support
+
+changeset:   7341:3bd4f514d625
+branch:      infinica_5.1
+user:        totht
+date:        Mon Sep 19 14:44:59 2016 +0200
+summary:     #INFC-1583 - Make external link support
+
+changeset:   7340:249dab77d426
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 19 16:24:13 2016 +0200
+summary:     Fixed insertion point handle location.
+
+changeset:   7339:2896aecb5078
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 19 16:21:56 2016 +0200
+summary:     More cleanups.
+
+changeset:   7338:dce084e99c3b
+branch:      infinica_5.1
+parent:      7332:15be2253fc5c
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 19 16:02:51 2016 +0200
+summary:     Cleanups, use widgetNode/wrapperNode/contentNode for our document widgets.
+
+changeset:   7337:3a48ef7c6585
+branch:      infinica_5.0_tmertes
+parent:      7335:adc9509a6033
+parent:      7336:263c7dd25244
+user:        tmertes
+date:        Mon Sep 19 15:20:08 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7336:263c7dd25244
+branch:      infinica_5.0
+parent:      7329:a196e0a9c423
+parent:      7335:adc9509a6033
+user:        tmertes
+date:        Mon Sep 19 15:18:02 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7335:adc9509a6033
+branch:      infinica_5.0_tmertes
+parent:      7330:3d90898d0a46
+user:        tmertes
+date:        Mon Sep 19 15:15:57 2016 +0200
+summary:     TD-2306: Add colum width field to table creation dialog
+
+changeset:   7334:19fe64aa746d
+branch:      infinica_5.1_mbranicky
+parent:      7333:e4e59187bb5f
+parent:      7332:15be2253fc5c
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 19 14:42:31 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7333:e4e59187bb5f
+branch:      infinica_5.1_mbranicky
+parent:      7324:93b5aff75d16
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 19 14:41:25 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments
+
+changeset:   7332:15be2253fc5c
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 19 14:30:08 2016 +0200
+summary:     IP save/load seems to be working.
+
+changeset:   7331:8c0153933c4c
+branch:      infinica_5.1
+parent:      7326:a422a4f1f706
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 19 11:27:52 2016 +0200
+summary:     InsertionPoints are now with the full content inlined.
+
+changeset:   7330:3d90898d0a46
+branch:      infinica_5.0_tmertes
+parent:      7328:725336d3d8a3
+parent:      7329:a196e0a9c423
+user:        tmertes
+date:        Mon Sep 19 11:48:14 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7329:a196e0a9c423
+branch:      infinica_5.0
+parent:      7309:1f4228c42631
+parent:      7328:725336d3d8a3
+user:        tmertes
+date:        Mon Sep 19 11:47:26 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7328:725336d3d8a3
+branch:      infinica_5.0_tmertes
+parent:      7327:f15118609b4f
+parent:      7309:1f4228c42631
+user:        tmertes
+date:        Mon Sep 19 11:46:13 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7327:f15118609b4f
+branch:      infinica_5.0_tmertes
+parent:      7306:83bfe0bab13f
+user:        tmertes
+date:        Mon Sep 19 11:45:02 2016 +0200
+summary:     TD-2306: Use jface Dialog directly instead of via PropertiesDialog.
+
+changeset:   7326:a422a4f1f706
+branch:      infinica_5.1
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Mon Sep 19 11:17:27 2016 +0200
+summary:     compilation fixes
+
+changeset:   7325:861bd2a351b6
+branch:      infinica_5.1
+parent:      7311:a4ab3c189e2c
+parent:      7323:74c6bc4c7155
+user:        tthonhofer
+date:        Mon Sep 19 11:08:13 2016 +0200
+summary:     Merge
+
+changeset:   7324:93b5aff75d16
+branch:      infinica_5.1_mbranicky
+parent:      7322:e57721d2d320
+parent:      7323:74c6bc4c7155
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 19 10:23:36 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7323:74c6bc4c7155
+branch:      infinica_5.1
+parent:      7321:d62e4f53316a
+user:        mbranicky
+date:        Mon Sep 19 09:57:56 2016 +0200
+summary:     Uncommented the version for ?net.sf.json-lib. Let's see whether Webfronted Build will pass.
+
+changeset:   7322:e57721d2d320
+branch:      infinica_5.1_mbranicky
+parent:      7254:0fff8693ebc8
+user:        mbranicky
+date:        Mon Sep 19 09:31:44 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments
+
+changeset:   7321:d62e4f53316a
+branch:      infinica_5.1
+user:        christopher.prengel@infinica.com
+date:        Mon Sep 19 02:57:29 2016 +0200
+summary:     clone new feature files from /gherkin
+
+changeset:   7320:ac1ab97de584
+branch:      infinica_5.1
+user:        christopher.prengel@infinica.com
+date:        Mon Sep 19 02:50:44 2016 +0200
+summary:     clone new/modified step files fron /gherkin
+
+changeset:   7319:eb052ff9630c
+branch:      infinica_5.1
+user:        christopher.prengel@infinica.com
+date:        Mon Sep 19 02:38:51 2016 +0200
+summary:     clone new/changed *.feature files from /gherkin
+
+changeset:   7318:1d5e1393e751
+branch:      infinica_5.1
+user:        christopher.prengel@infinica.com
+date:        Sun Sep 18 19:56:11 2016 +0200
+summary:     *.feature: clone in new/changed features
+
+changeset:   7317:ce02da8bc107
+branch:      infinica_5.1
+parent:      7316:93a67a9ac4f7
+parent:      7310:9c5721b9c794
+user:        christopher.prengel@infinica.com
+date:        Sat Sep 17 05:17:43 2016 +0200
+summary:     Merge
+
+changeset:   7316:93a67a9ac4f7
+branch:      infinica_5.1
+parent:      7278:2047b04db6af
+user:        christopher.prengel@infinica.com
+date:        Sat Sep 17 05:15:50 2016 +0200
+summary:     ComposerDocumentSteps.py:
+
+changeset:   7315:6255f17e6fcd
+branch:      infinica_5.0_tthonhofer
+parent:      7314:668671e5e294
+parent:      7310:9c5721b9c794
+user:        tthonhofer
+date:        Fri Sep 16 17:43:43 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7314:668671e5e294
+branch:      infinica_5.0_tthonhofer
+user:        tthonhofer
+date:        Fri Sep 16 17:41:02 2016 +0200
+summary:     Improvements to Datafield
+
+changeset:   7313:6a97c8bb8476
+branch:      infinica_5.0_tthonhofer
+parent:      7312:58430e5a3807
+parent:      7155:794135172045
+user:        tthonhofer
+date:        Sun Sep 11 20:38:38 2016 +0200
+summary:     Merge with infinica_5.1_tthonhofer
+
+changeset:   7312:58430e5a3807
+branch:      infinica_5.0_tthonhofer
+parent:      7157:aabd9c53f1a1
+user:        tthonhofer
+date:        Sun Sep 11 20:31:50 2016 +0200
+summary:     Adapted process designer for engine plugin changes
+
+changeset:   7311:a4ab3c189e2c
+branch:      infinica_5.1
+user:        tthonhofer
+date:        Mon Sep 19 11:07:25 2016 +0200
+summary:     Fixed wrong IDataStoreType in PD
+
+changeset:   7310:9c5721b9c794
+branch:      infinica_5.1
+parent:      7293:44c77ad6be70
+parent:      7300:35cfc9bca6ea
+user:        tthonhofer
+date:        Fri Sep 16 17:37:24 2016 +0200
+summary:     Merge
+
+changeset:   7309:1f4228c42631
+branch:      infinica_5.0
+user:        mleitner
+date:        Fri Sep 16 14:50:54 2016 +0200
+summary:     #CP-149: RAL throws UnmarshalException when trying to fetch children of non existing resources
+
+changeset:   7308:689108932cb0
+branch:      infinica_5.0
+user:        mleitner
+date:        Fri Sep 16 14:00:22 2016 +0200
+summary:     #CP-154: RAL: COPY doesn't create copy of source in target anymore
+
+changeset:   7307:39672d2ea067
+branch:      infinica_5.0
+parent:      7305:425a695404be
+user:        mleitner
+date:        Fri Sep 16 11:58:37 2016 +0200
+summary:     #CP-155: Status code doesn't get resolved
+
+changeset:   7306:83bfe0bab13f
+branch:      infinica_5.0_tmertes
+parent:      7304:f92b5a889d9f
+parent:      7305:425a695404be
+user:        tmertes
+date:        Fri Sep 16 10:57:39 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7305:425a695404be
+branch:      infinica_5.0
+parent:      7301:1044c873b119
+parent:      7304:f92b5a889d9f
+user:        tmertes
+date:        Fri Sep 16 10:56:20 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7304:f92b5a889d9f
+branch:      infinica_5.0_tmertes
+parent:      7303:a95cb9325d8c
+parent:      7301:1044c873b119
+user:        tmertes
+date:        Fri Sep 16 10:55:23 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7303:a95cb9325d8c
+branch:      infinica_5.0_tmertes
+user:        tmertes
+date:        Fri Sep 16 10:52:39 2016 +0200
+summary:     TD-2305: Add table creation dialog to enter the number of colums and rows
+
+changeset:   7302:7a8a780509fe
+branch:      infinica_5.0_tmertes
+parent:      7251:6429471f2b01
+user:        tmertes
+date:        Fri Sep 16 10:44:29 2016 +0200
+summary:     Remove outdated bundle for compatibility layer for Eclipse 2.x.
+
+changeset:   7301:1044c873b119
+branch:      infinica_5.0
+parent:      7294:9b83a55c3b75
+user:        mleitner
+date:        Fri Sep 16 03:43:56 2016 +0200
+summary:     #CP-163: NewWebDavVariants2IT.testPce961()
+
+changeset:   7300:35cfc9bca6ea
+branch:      infinica_5.1
+parent:      7292:0fc430d7d270
+parent:      7299:e0aa9207c928
+user:        mschedenig
+date:        Thu Sep 15 20:12:37 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7299:e0aa9207c928
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 15 20:11:58 2016 +0200
+summary:     Merge fixes.
+
+changeset:   7298:8c2c0175b20c
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 15 20:11:18 2016 +0200
+summary:     Merge fixes.
+
+changeset:   7297:bc47b55726e2
+branch:      infinica_5.1_mschedenig
+parent:      7296:f670696e61c8
+parent:      7292:0fc430d7d270
+user:        mschedenig
+date:        Thu Sep 15 17:01:24 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7296:f670696e61c8
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 15 16:59:26 2016 +0200
+summary:     Primitive JSON type (probably still needs some improvements).
+
+changeset:   7295:7a83c7f87877
+branch:      infinica_5.1_mschedenig
+parent:      7291:bbd598ce2493
+user:        mschedenig
+date:        Thu Sep 15 16:17:57 2016 +0200
+summary:     Moved data store types to separate module.
+
+changeset:   7294:9b83a55c3b75
+branch:      infinica_5.0
+parent:      7282:f26bd2aa5d32
+user:        mleitner
+date:        Thu Sep 15 16:24:39 2016 +0200
+summary:     #CP-163: NewWebDavVariants2IT.testPce961()
+
+changeset:   7293:44c77ad6be70
+branch:      infinica_5.1
+user:        tthonhofer
+date:        Fri Sep 16 17:35:05 2016 +0200
+summary:     Fixed PE-347
+
+changeset:   7292:0fc430d7d270
+branch:      infinica_5.1
+parent:      7288:f10b85fa751d
+parent:      7287:ed88d2a5ecb2
+user:        tthonhofer
+date:        Thu Sep 15 15:58:06 2016 +0200
+summary:     Merge
+
+changeset:   7291:bbd598ce2493
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 15 15:12:57 2016 +0200
+summary:     Data store types are now also defined in XML descriptors.
+
+changeset:   7290:e0b5eceaea09
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 15 11:52:52 2016 +0200
+summary:     Code cleanup.
+
+changeset:   7289:3fe630357859
+branch:      infinica_5.1_mschedenig
+parent:      7274:be4960627e52
+user:        mschedenig
+date:        Thu Sep 15 11:40:16 2016 +0200
+summary:     Type conversions are now defined in XML.
+
+changeset:   7288:f10b85fa751d
+branch:      infinica_5.1
+parent:      7275:c6a53791193f
+user:        tthonhofer
+date:        Thu Sep 15 15:57:15 2016 +0200
+summary:     Fixed task type problems in PD and TM
+
+changeset:   7287:ed88d2a5ecb2
+branch:      infinica_5.1
+user:        mleitner
+date:        Thu Sep 15 14:02:57 2016 +0200
+summary:     removed Serializer feature: store insertion point information in the head section and reference it from the body
+
+changeset:   7286:d2c7500c3716
+branch:      infinica_5.1
+parent:      7285:8e1e657e3c5d
+parent:      7282:f26bd2aa5d32
+user:        mleitner
+date:        Thu Sep 15 12:57:35 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7285:8e1e657e3c5d
+branch:      infinica_5.1
+user:        mleitner
+date:        Thu Sep 15 11:30:10 2016 +0200
+summary:     fixed tests in merged code
+
+changeset:   7284:fa47761e1100
+branch:      infinica_5.1
+user:        mleitner
+date:        Thu Sep 15 11:09:46 2016 +0200
+summary:     cleaned up merged code
+
+changeset:   7283:2d78f43e212c
+branch:      infinica_5.1
+parent:      7278:2047b04db6af
+parent:      7281:723e1c952b64
+user:        mleitner
+date:        Thu Sep 15 10:46:55 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7282:f26bd2aa5d32
+branch:      infinica_5.0
+user:        mleitner
+date:        Thu Sep 15 12:13:54 2016 +0200
+summary:     #TD-2298: Add signature form field to Template Designer
+
+changeset:   7281:723e1c952b64
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 14 16:32:39 2016 +0200
+summary:     #TD-2299: Add signature form field as ModelElement
+
+changeset:   7280:366f9a7ae323
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 14 14:42:13 2016 +0200
+summary:     #TD-2302: test signature form handling in PE module pdf-forms
+
+changeset:   7279:a57187d0a822
+branch:      infinica_5.0
+parent:      7276:1112881155ce
+user:        mleitner
+date:        Wed Sep 14 14:32:10 2016 +0200
+summary:     #TD-2301: handle signature form field in PdfForm/PdfFormDefinition
+
+changeset:   7278:2047b04db6af
+branch:      infinica_5.1
+parent:      7277:92e8b04bf97c
+parent:      7275:c6a53791193f
+user:        christopher.prengel@infinica.com
+date:        Wed Sep 14 21:32:00 2016 +0200
+summary:     Merge
+
+changeset:   7277:92e8b04bf97c
+branch:      infinica_5.1
+parent:      7122:0948cceacb15
+user:        christopher.prengel@infinica.com
+date:        Wed Sep 14 21:30:24 2016 +0200
+summary:     renamed two tiny zips
+
+changeset:   7276:1112881155ce
+branch:      infinica_5.0
+parent:      7263:8e3c9486da17
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 14 18:41:32 2016 +0200
+summary:     estmk - logout from WP at the end
+
+changeset:   7275:c6a53791193f
+branch:      infinica_5.1
+parent:      7264:358ac9fc85cd
+parent:      7273:438ff7fdff1e
+user:        tthonhofer
+date:        Wed Sep 14 18:40:08 2016 +0200
+summary:     Merge
+
+changeset:   7274:be4960627e52
+branch:      infinica_5.1_mschedenig
+parent:      7258:fc6f06aab195
+user:        mschedenig
+date:        Wed Sep 14 18:00:18 2016 +0200
+summary:     All standard PE types are now defined in core module (and - for now - in a duplicate for the impl tests).
+
+changeset:   7273:438ff7fdff1e
+branch:      infinica_5.1
+user:        totht
+date:        Wed Sep 14 17:41:46 2016 +0200
+summary:     #INFC-1565 Widgetilize Building Blocks
+
+changeset:   7272:7b060f07eb8a
+branch:      infinica_5.1
+user:        mleitner
+date:        Wed Sep 14 16:56:08 2016 +0200
+summary:     #TD-2303: Can't render template due to IDataStoreBlackBox error
+
+changeset:   7271:e2c053d5cf31
+branch:      infinica_5.1
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 14 16:41:46 2016 +0200
+summary:     js typo
+
+changeset:   7270:fd148e2c40bd
+branch:      infinica_5.1
+parent:      7266:287146d2c4d8
+parent:      7269:c3eaaf3e1c94
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 14 16:13:40 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7269:c3eaaf3e1c94
+branch:      infinica_5.1_mkovalik
+parent:      7268:1fa639fe0902
+parent:      7266:287146d2c4d8
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 14 16:12:18 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7268:1fa639fe0902
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 14 16:09:37 2016 +0200
+summary:     WP-851 - Update human tasks meta data
+
+changeset:   7267:2f66c2ef0bcc
+branch:      infinica_5.1_mkovalik
+parent:      7233:346107e2a957
+parent:      7256:dad79576fda5
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Wed Sep 14 09:53:56 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7266:287146d2c4d8
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 14 15:06:58 2016 +0200
+summary:     InsertionPoints copy their content inside.
+
+changeset:   7265:4d072de396a3
+branch:      infinica_5.1
+parent:      7256:dad79576fda5
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Wed Sep 14 11:35:33 2016 +0200
+summary:     Adding groups if somewhat functional, with dem widgets.
+
+changeset:   7264:358ac9fc85cd
+branch:      infinica_5.1
+parent:      7203:ec5aed537f5a
+user:        tthonhofer
+date:        Wed Sep 14 17:35:43 2016 +0200
+summary:     PE: Added checking for missing inputs to IPDValidator
+
+changeset:   7263:8e3c9486da17
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 14 12:31:13 2016 +0200
+summary:     #TD-2300: handle signature form field in Serializer
+
+changeset:   7262:cd66e8c4b1ea
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 14 12:27:22 2016 +0200
+summary:     #TD-2300: handle signature form field in Serializer
+
+changeset:   7261:b34316c7f63a
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 14 12:18:58 2016 +0200
+summary:     #TD-2300: handle signature form field in Serializer
+
+changeset:   7260:cd7c6e4b5de2
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 14 12:10:51 2016 +0200
+summary:     #TD-2300: handle signature form field in Serializer
+
+changeset:   7259:4496c0ce9f66
+branch:      infinica_5.0
+parent:      7255:2ece9a6b1b8f
+user:        mleitner
+date:        Wed Sep 14 11:07:55 2016 +0200
+summary:     #TD-2299: Add signature form field as ModelElement
+
+changeset:   7258:fc6f06aab195
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Tue Sep 13 19:28:42 2016 +0200
+summary:     Type fixes and PdfFormReader output type fixes.
+
+changeset:   7257:615b39cbe08d
+branch:      infinica_5.1_mschedenig
+parent:      7232:05fa587570a0
+user:        mschedenig
+date:        Tue Sep 13 17:36:29 2016 +0200
+summary:     Modularisation of PE data types (in progress).
+
+changeset:   7256:dad79576fda5
+branch:      infinica_5.1
+parent:      7252:ffcca63b316b
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 18:21:06 2016 +0200
+summary:     WP-851 - Update human tasks meta data
+
+changeset:   7255:2ece9a6b1b8f
+branch:      infinica_5.0
+parent:      7250:b9c62524a20a
+user:        mleitner
+date:        Tue Sep 13 16:25:27 2016 +0200
+summary:     #CP-150: RAL: Other principals are removed when setting ACLs
+
+changeset:   7254:0fff8693ebc8
+branch:      infinica_5.1_mbranicky
+parent:      7253:7b49b009f1ce
+parent:      7252:ffcca63b316b
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Tue Sep 13 17:14:12 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7253:7b49b009f1ce
+branch:      infinica_5.1_mbranicky
+parent:      7244:c4e5d6489f88
+user:        mbranicky
+date:        Tue Sep 13 17:13:14 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments
+
+changeset:   7252:ffcca63b316b
+branch:      infinica_5.1
+parent:      7247:64c92ac4cf36
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 16:26:02 2016 +0200
+summary:     Made the insertion add the widgets with a promise.
+
+changeset:   7251:6429471f2b01
+branch:      infinica_5.0_tmertes
+parent:      7249:27550d5dc98b
+parent:      7250:b9c62524a20a
+user:        tmertes
+date:        Tue Sep 13 16:07:44 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7250:b9c62524a20a
+branch:      infinica_5.0
+parent:      7240:dfb2aaec7130
+parent:      7249:27550d5dc98b
+user:        tmertes
+date:        Tue Sep 13 16:06:38 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7249:27550d5dc98b
+branch:      infinica_5.0_tmertes
+parent:      7248:7d58d03a4b15
+parent:      7240:dfb2aaec7130
+user:        tmertes
+date:        Tue Sep 13 16:05:34 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7248:7d58d03a4b15
+branch:      infinica_5.0_tmertes
+parent:      7211:3103f00bbdba
+user:        tmertes
+date:        Tue Sep 13 16:04:21 2016 +0200
+summary:     TD-2235: Adaptive document
+
+changeset:   7247:64c92ac4cf36
+branch:      infinica_5.1
+user:        mschwarz
+date:        Tue Sep 13 15:49:51 2016 +0200
+summary:     Replaced deprecated methods with current ones.
+
+changeset:   7246:89ada201560a
+branch:      infinica_5.1
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 15:39:37 2016 +0200
+summary:     WP-850 - TaskType provider
+
+changeset:   7245:c5f6ad1f2fcd
+branch:      infinica_5.1
+parent:      7241:d37a7d918950
+parent:      7244:c4e5d6489f88
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Tue Sep 13 15:17:10 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7244:c4e5d6489f88
+branch:      infinica_5.1_mbranicky
+parent:      7243:54027df8dd1c
+parent:      7241:d37a7d918950
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Tue Sep 13 15:13:17 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7243:54027df8dd1c
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Tue Sep 13 15:09:31 2016 +0200
+summary:     WP-857 Implement a possibility to manage HT comments
+
+changeset:   7242:5606d5083e9f
+branch:      infinica_5.1_mbranicky
+parent:      7198:4a03033578b6
+user:        mbranicky
+date:        Tue Sep 13 15:07:04 2016 +0200
+summary:     Fix for FTP Human Task - NPE and other improvements.
+
+changeset:   7241:d37a7d918950
+branch:      infinica_5.1
+parent:      7239:f5fd344650f5
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 14:52:14 2016 +0200
+summary:     WP-850 - Implement Task Type provider in Workplace
+
+changeset:   7240:dfb2aaec7130
+branch:      infinica_5.0
+parent:      7231:9681c12afb0a
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 14:00:23 2016 +0200
+summary:     FIX #WP-860 Removed bogus XML escaping.
+
+changeset:   7239:f5fd344650f5
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 13:43:17 2016 +0200
+summary:     Whoops. Moved the definition inside the widget.
+
+changeset:   7238:ea9ca00bfc73
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 13:40:15 2016 +0200
+summary:     Removed commented code.
+
+changeset:   7237:7d659bcd598f
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 13:38:58 2016 +0200
+summary:     Added insertion points as widgets.
+
+changeset:   7236:ab02b47b3477
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 12:06:27 2016 +0200
+summary:     Move the head nodes first into the DOM, before calling setData, so we can get them in widgets.
+
+changeset:   7235:47464adea1b3
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 11:16:49 2016 +0200
+summary:     Started work on creating the InsertionPoints as widgets.
+
+changeset:   7234:050412562f81
+branch:      infinica_5.1
+parent:      7230:54a1005de278
+parent:      7233:346107e2a957
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 13:29:14 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7233:346107e2a957
+branch:      infinica_5.1_mkovalik
+parent:      7229:35d2871a0771
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 13:15:16 2016 +0200
+summary:     WP-850 - TaskType provider
+
+changeset:   7232:05fa587570a0
+branch:      infinica_5.1_mschedenig
+parent:      7222:cae67cfe6d79
+user:        mschedenig
+date:        Tue Sep 13 12:21:12 2016 +0200
+summary:     Fixed handling of type aliases for conversions.
+
+changeset:   7231:9681c12afb0a
+branch:      infinica_5.0
+parent:      7210:30a5b408d863
+user:        mleitner
+date:        Tue Sep 13 11:52:38 2016 +0200
+summary:     #CP-150: RAL: Other principals are removed when setting ACLs (not fixed)
+
+changeset:   7230:54a1005de278
+branch:      infinica_5.1
+parent:      7227:4c9e4ce2e685
+parent:      7229:35d2871a0771
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 10:44:25 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7229:35d2871a0771
+branch:      infinica_5.1_mkovalik
+parent:      7228:6534dc18ba0f
+parent:      7227:4c9e4ce2e685
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 10:41:37 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7228:6534dc18ba0f
+branch:      infinica_5.1_mkovalik
+parent:      7186:85d3c1d0423b
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Tue Sep 13 10:31:10 2016 +0200
+summary:     WP-855 - Document dependency designer
+
+changeset:   7227:4c9e4ce2e685
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 10:08:11 2016 +0200
+summary:     Scripts to build the documentation. Updates on hgignore.
+
+changeset:   7226:2b34bec74788
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 09:50:06 2016 +0200
+summary:     Added the compiled plugin.
+
+changeset:   7225:003bb242eccb
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Tue Sep 13 09:47:45 2016 +0200
+summary:     Added some scripts.
+
+changeset:   7224:037a17c5bbfa
+branch:      infinica_5.1
+user:        totht
+date:        Wed Sep 07 14:28:41 2016 +0200
+summary:     #INFC-1565 Widgetilize Building Blocks
+
+changeset:   7223:cb5b0022a585
+branch:      infinica_5.1
+parent:      7218:6ba090c55216
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 12 18:24:44 2016 +0200
+summary:     Use icons inside a plugin.
+
+changeset:   7222:cae67cfe6d79
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Mon Sep 12 16:59:05 2016 +0200
+summary:     Fixes.
+
+changeset:   7221:b377b53b7a3a
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Mon Sep 12 16:58:50 2016 +0200
+summary:     Fixes.
+
+changeset:   7220:b04a3632190f
+branch:      infinica_5.1_mschedenig
+parent:      7219:a152263151a4
+parent:      7199:ac50a5ffd449
+user:        mschedenig
+date:        Mon Sep 12 12:58:21 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7219:a152263151a4
+branch:      infinica_5.1_mschedenig
+parent:      7175:2d0aab027690
+user:        mschedenig
+date:        Mon Sep 12 12:57:42 2016 +0200
+summary:     Variable mapping can now handle multiple target types and conversions.
+
+changeset:   7218:6ba090c55216
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 12 16:41:20 2016 +0200
+summary:     fixed tests
+
+changeset:   7217:a08050484d6a
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 12 16:26:25 2016 +0200
+summary:     #CP-170: insertion point in newly rendered building block - WEBFO
+
+changeset:   7216:1b1dbc57928b
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 12 15:00:03 2016 +0200
+summary:     #CP-167: insertion point in chosen part - WEBFO
+
+changeset:   7215:c0b096a41204
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 12 14:58:51 2016 +0200
+summary:     #CP-168: insertion point in chosen part - IDX
+
+changeset:   7214:573ba1cc4a73
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 12 12:46:05 2016 +0200
+summary:     #CP-167: insertion point in chosen part - ITX
+
+changeset:   7213:9d34cae009ff
+branch:      infinica_5.1
+user:        mleitner
+date:        Mon Sep 12 12:42:55 2016 +0200
+summary:     #CP-166: insertion point in template part - WEBFO
+
+changeset:   7212:fd97c31f9dee
+branch:      infinica_5.1
+parent:      7205:80ac6d4e30b1
+user:        mleitner
+date:        Mon Sep 12 12:28:15 2016 +0200
+summary:     #CP-165: insertion point in template part - ITX
+
+changeset:   7211:3103f00bbdba
+branch:      infinica_5.0_tmertes
+parent:      7209:4bf3674cff81
+parent:      7210:30a5b408d863
+user:        tmertes
+date:        Mon Sep 12 15:03:31 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7210:30a5b408d863
+branch:      infinica_5.0
+parent:      7182:a3f1ede16aaf
+parent:      7209:4bf3674cff81
+user:        tmertes
+date:        Mon Sep 12 14:57:16 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7209:4bf3674cff81
+branch:      infinica_5.0_tmertes
+parent:      7208:566ab1e7980f
+parent:      7182:a3f1ede16aaf
+user:        tmertes
+date:        Mon Sep 12 14:56:09 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7208:566ab1e7980f
+branch:      infinica_5.0_tmertes
+user:        tmertes
+date:        Mon Sep 12 14:54:57 2016 +0200
+summary:     TD-2294: Analyse and improve document performance with mass tables.
+
+changeset:   7207:e82b19e31051
+branch:      infinica_5.0_tmertes
+parent:      7126:8fbcc42f79f7
+parent:      7160:609668ba0f13
+user:        tmertes
+date:        Fri Sep 09 11:39:47 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7206:f0e8a6a67f1b
+branch:      infinica_5.1_tmertes
+parent:      7098:c360dbf13945
+parent:      7122:0948cceacb15
+user:        tmertes
+date:        Wed Sep 07 09:28:39 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7205:80ac6d4e30b1
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 12 14:32:24 2016 +0200
+summary:     Don't put the sourcemaps in, for Compass, since Edge seems to choke on them.
+
+changeset:   7204:a52faff4af73
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Mon Sep 12 12:19:17 2016 +0200
+summary:     Fix #INFC-1549. On adding replies, the textarea shouldn't yield scrollbars.
+
+changeset:   7203:ec5aed537f5a
+branch:      infinica_5.1
+parent:      7199:ac50a5ffd449
+parent:      7202:0659aeafc8ba
+user:        tthonhofer
+date:        Mon Sep 12 13:59:03 2016 +0200
+summary:     Merge with infinica_5.1_tthonhofer
+
+changeset:   7202:0659aeafc8ba
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Mon Sep 12 13:46:43 2016 +0200
+summary:     PE: Generated new SOAP server stub
+
+changeset:   7201:d080832a3c42
+branch:      infinica_5.1_tthonhofer
+parent:      7200:dcb11b1ba8a3
+parent:      7199:ac50a5ffd449
+user:        tthonhofer
+date:        Mon Sep 12 11:26:16 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7200:dcb11b1ba8a3
+branch:      infinica_5.1_tthonhofer
+parent:      7155:794135172045
+user:        tthonhofer
+date:        Mon Sep 12 11:23:17 2016 +0200
+summary:     Fixed Nullpointer in PD when retrieving TaskTypes
+
+changeset:   7199:ac50a5ffd449
+branch:      infinica_5.1
+parent:      7196:e8618506108b
+parent:      7198:4a03033578b6
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 12 10:59:39 2016 +0200
+summary:     Merge with infinica_5.1_mbranicky
+
+changeset:   7198:4a03033578b6
+branch:      infinica_5.1_mbranicky
+parent:      7197:e9b9fdaea1c6
+parent:      7196:e8618506108b
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 12 10:57:42 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7197:e9b9fdaea1c6
+branch:      infinica_5.1_mbranicky
+parent:      7194:c8c7f7f53008
+user:        mbranicky <marek.branicky@infinica.com>
+date:        Mon Sep 12 10:56:20 2016 +0200
+summary:     Wrongly encoded file names (in fact duplicates) removed.
+
+changeset:   7196:e8618506108b
+branch:      infinica_5.1
+parent:      7195:ce7bd8da4f8d
+parent:      7191:72a11873d6f7
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Mon Sep 12 10:29:57 2016 +0200
+summary:     Merge
+
+changeset:   7195:ce7bd8da4f8d
+branch:      infinica_5.1
+parent:      7080:f30e2a6fc40d
+user:        Michal Oravec <michal.oravec@infinica.com>
+date:        Mon Sep 12 10:23:16 2016 +0200
+summary:     WP feature renamed
+
+changeset:   7194:c8c7f7f53008
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Mon Sep 12 10:16:05 2016 +0200
+summary:     WP-846 Implement a backend logic for FTP operations - DE translations.
+
+changeset:   7193:35a7b6c1dd43
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Mon Sep 12 09:48:54 2016 +0200
+summary:     WP-846 Implement a backend logic for FTP operations - finished except of missing DE translations.
+
+changeset:   7192:74e9e000d051
+branch:      infinica_5.1_mbranicky
+parent:      7181:675cf8126bfb
+user:        mbranicky
+date:        Fri Sep 09 17:08:54 2016 +0200
+summary:     WP-846 Implement a backend logic for FTP operations - error notifications still missing.
+
+changeset:   7191:72a11873d6f7
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 09 16:37:51 2016 +0200
+summary:     Recompiled CKEditor.
+
+changeset:   7190:e451f5491ca8
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 09 16:36:15 2016 +0200
+summary:     Related #INFC-1466. Use afterInit for initializing the plugins.
+
+changeset:   7189:e537a1e1e7b8
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 09 15:11:58 2016 +0200
+summary:     Fix #INFC-1466. No right margin for resizing.
+
+changeset:   7188:d515f4844e09
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 09 15:09:00 2016 +0200
+summary:     Fix #INFC-1466 allow resizing the table borders.
+
+changeset:   7187:ccbbbeec2367
+branch:      infinica_5.1
+parent:      7183:bb5ad1f0c141
+parent:      7186:85d3c1d0423b
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 09 12:38:35 2016 +0200
+summary:     Merge from infinica_5.1_mkovalik
+
+changeset:   7186:85d3c1d0423b
+branch:      infinica_5.1_mkovalik
+parent:      7185:47838d9e2f48
+parent:      7183:bb5ad1f0c141
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 09 12:33:31 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7185:47838d9e2f48
+branch:      infinica_5.1_mkovalik
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Fri Sep 09 12:29:16 2016 +0200
+summary:     WP-850 - Implement Task Type provider in WP
+
+changeset:   7184:36a43f4aa22a
+branch:      infinica_5.1_mkovalik
+parent:      7115:fba59d719832
+parent:      7146:f3b49288c798
+user:        Matej Kovalik <matej.kovalik@infinica.com>
+date:        Thu Sep 08 10:07:46 2016 +0200
+summary:     Merge from infinica_5.1
+
+changeset:   7183:bb5ad1f0c141
+branch:      infinica_5.1
+parent:      7176:0ff6d8e1337b
+parent:      7182:a3f1ede16aaf
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 09 11:33:12 2016 +0200
+summary:     Merge
+
+changeset:   7182:a3f1ede16aaf
+branch:      infinica_5.0
+parent:      7160:609668ba0f13
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Fri Sep 09 11:23:31 2016 +0200
+summary:     Don't cleanup contenteditable attributes in head nodes.
+
+changeset:   7181:675cf8126bfb
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Fri Sep 09 09:09:06 2016 +0200
+summary:     Vaadin Spreadsheet license set to FINAL.
+
+changeset:   7180:9f062e219e63
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Fri Sep 09 09:08:25 2016 +0200
+summary:     Autowired property moved to constructor parameter.
+
+changeset:   7179:787357db27bc
+branch:      infinica_5.1_mbranicky
+parent:      7178:b9e5766e7fa4
+parent:      7176:0ff6d8e1337b
+user:        Marek Branicky <mbranicky@infinica.com>
+date:        Fri Sep 09 08:57:17 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7178:b9e5766e7fa4
+branch:      infinica_5.1_mbranicky
+user:        mbranicky
+date:        Fri Sep 09 08:55:15 2016 +0200
+summary:     WP-846 Implement a backend logic for FTP operations - unfinished
+
+changeset:   7176:0ff6d8e1337b
+branch:      infinica_5.1
+parent:      7173:ccc95fcc001f
+parent:      7175:2d0aab027690
+user:        mschedenig
+date:        Thu Sep 08 23:44:04 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7175:2d0aab027690
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 08 20:11:20 2016 +0200
+summary:     Output parameter validation.
+
+changeset:   7174:988b779f6e1a
+branch:      infinica_5.1_mschedenig
+parent:      7172:69af3004cf61
+user:        mschedenig
+date:        Thu Sep 08 17:47:44 2016 +0200
+summary:     Validation of activity input parameter quantities and custom named parameters.
+
+changeset:   7173:ccc95fcc001f
+branch:      infinica_5.1
+parent:      7162:bfbb7ed6a7ba
+parent:      7172:69af3004cf61
+user:        mschedenig
+date:        Thu Sep 08 16:59:21 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7172:69af3004cf61
+branch:      infinica_5.1_mschedenig
+parent:      7171:c5accb9966c0
+parent:      7162:bfbb7ed6a7ba
+user:        mschedenig
+date:        Thu Sep 08 16:55:31 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7171:c5accb9966c0
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 08 16:54:59 2016 +0200
+summary:     Fixed tons of interfaces and webservice stuff.
+
+changeset:   7170:46415a5463de
+branch:      infinica_5.1_mschedenig
+parent:      7165:a11e675b4d13
+parent:      7169:e33891b28526
+user:        mschedenig
+date:        Thu Sep 08 13:06:08 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7169:e33891b28526
+branch:      infinica_5.1
+parent:      7168:a32e2cf08014
+parent:      7150:17e96c9d14a6
+user:        mschedenig
+date:        Thu Sep 08 13:05:40 2016 +0200
+summary:     Merge
+
+changeset:   7168:a32e2cf08014
+branch:      infinica_5.1
+user:        mschedenig
+date:        Thu Sep 08 13:05:04 2016 +0200
+summary:     Implemented default values for activity parameters.
+
+changeset:   7167:92246a830918
+branch:      infinica_5.1
+parent:      7166:61a6f36e193a
+parent:      7146:f3b49288c798
+user:        mschedenig
+date:        Thu Sep 08 01:25:09 2016 +0200
+summary:     Merge
+
+changeset:   7166:61a6f36e193a
+branch:      infinica_5.1
+parent:      7144:8cfc69901ca0
+parent:      7165:a11e675b4d13
+user:        mschedenig
+date:        Thu Sep 08 01:23:31 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7165:a11e675b4d13
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Thu Sep 08 01:22:43 2016 +0200
+summary:     Removed target classes.
+
+changeset:   7164:5e7c8f10187d
+branch:      infinica_5.1_mschedenig
+user:        mschedenig
+date:        Wed Sep 07 20:57:33 2016 +0200
+summary:     (Nearly) finished porting the core module to the new activity API.
+
+changeset:   7163:50962e665702
+branch:      infinica_5.1_mschedenig
+parent:      7145:44eadafd7deb
+parent:      7144:8cfc69901ca0
+user:        mschedenig
+date:        Wed Sep 07 18:46:43 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7162:bfbb7ed6a7ba
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 15:27:11 2016 +0200
+summary:     Fix #INFC-1551: Fixed i18n messages for che context menu.
+
+changeset:   7161:1a7de8274221
+branch:      infinica_5.1
+parent:      7159:bf8258a6a5a6
+parent:      7160:609668ba0f13
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 14:57:08 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7160:609668ba0f13
+branch:      infinica_5.0
+parent:      7151:7a6a1eb76118
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 14:55:26 2016 +0200
+summary:     Fix #INFC-1564: Added dimensions dependency.
+
+changeset:   7159:bf8258a6a5a6
+branch:      infinica_5.1
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 14:51:06 2016 +0200
+summary:     Open Browser with retries.
+
+changeset:   7158:583d2bcd9afc
+branch:      infinica_5.1
+parent:      7153:cb218d4bfc8f
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 14:24:16 2016 +0200
+summary:     Fix #INFC-1557. Added tests for left and right static page content.
+
+changeset:   7157:aabd9c53f1a1
+branch:      infinica_5.0_tthonhofer
+parent:      7156:723db278dda7
+parent:      7153:cb218d4bfc8f
+user:        tthonhofer
+date:        Thu Sep 08 14:15:42 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7156:723db278dda7
+branch:      infinica_5.0_tthonhofer
+parent:      7071:66947f2fdfbd
+user:        tthonhofer
+date:        Thu Sep 08 14:11:18 2016 +0200
+summary:     Fixed data field display issues
+
+changeset:   7155:794135172045
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Sun Sep 11 20:28:04 2016 +0200
+summary:     Extended process execution manager API with getTaskManager
+
+changeset:   7154:a29ab25b67a7
+branch:      infinica_5.1_tthonhofer
+parent:      7133:721ff0a75c59
+parent:      7153:cb218d4bfc8f
+user:        tthonhofer
+date:        Thu Sep 08 14:18:03 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7153:cb218d4bfc8f
+branch:      infinica_5.1
+parent:      7147:a59f5df0c02b
+parent:      7152:3bb9e6603625
+user:        tthonhofer
+date:        Thu Sep 08 14:09:31 2016 +0200
+summary:     Merge
+
+changeset:   7152:3bb9e6603625
+branch:      infinica_5.1
+parent:      7150:17e96c9d14a6
+parent:      7151:7a6a1eb76118
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 13:32:18 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7151:7a6a1eb76118
+branch:      infinica_5.0
+parent:      7149:f2742b8f2dd9
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 13:29:32 2016 +0200
+summary:     Fix #INFC-1564: Check if the attachedTrigger is actually attached.
+
+changeset:   7150:17e96c9d14a6
+branch:      infinica_5.1
+parent:      7146:f3b49288c798
+parent:      7149:f2742b8f2dd9
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 11:16:31 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7149:f2742b8f2dd9
+branch:      infinica_5.0
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 11:07:11 2016 +0200
+summary:     Fix #INFC-1564: Move the date picker into its correct position.
+
+changeset:   7148:b5538c971fa5
+branch:      infinica_5.0
+parent:      7141:9b06f704c16a
+user:        Bogdan Mustiata <bogdan.mustiata@infinica.com>
+date:        Thu Sep 08 10:43:21 2016 +0200
+summary:     Fix #INFC-1570: Keep aspect ratio of the Image when inserting an image.
+
+changeset:   7147:a59f5df0c02b
+branch:      infinica_5.1
+user:        tthonhofer
+date:        Thu Sep 08 14:09:02 2016 +0200
+summary:     Started loading TaskTypes in ProcesDesigner
+
+changeset:   7146:f3b49288c798
+branch:      infinica_5.1
+parent:      7144:8cfc69901ca0
+parent:      7133:721ff0a75c59
+user:        tthonhofer
+date:        Wed Sep 07 21:34:58 2016 +0200
+summary:     Merge with infinica_5.1_tthonhofer
+
+changeset:   7145:44eadafd7deb
+branch:      infinica_5.1_mschedenig
+parent:      7127:9c1eaa4a6125
+user:        mschedenig
+date:        Wed Sep 07 18:44:33 2016 +0200
+summary:     Refactored internal activity API and began refactoring activity implementations.
+
+changeset:   7144:8cfc69901ca0
+branch:      infinica_5.1
+parent:      7143:63e5540a4fa3
+parent:      7141:9b06f704c16a
+user:        mleitner
+date:        Wed Sep 07 16:07:49 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7143:63e5540a4fa3
+branch:      infinica_5.1
+parent:      7142:b88ad06011ee
+parent:      7140:3c70b3f94e56
+user:        mleitner
+date:        Wed Sep 07 16:07:30 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7142:b88ad06011ee
+branch:      infinica_5.1
+parent:      7128:30297e838ec9
+parent:      7125:32324546c717
+user:        mleitner
+date:        Wed Sep 07 16:07:04 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7141:9b06f704c16a
+branch:      infinica_5.0
+user:        mleitner
+date:        Wed Sep 07 14:59:41 2016 +0200
+summary:     updated release notes
+
+changeset:   7140:3c70b3f94e56
+branch:      infinica_5.0
+parent:      7125:32324546c717
+parent:      7139:c8b6060ef2a9
+user:        mleitner
+date:        Wed Sep 07 16:05:00 2016 +0200
+summary:     Merge with release 5.0.4.2
+
+changeset:   7139:c8b6060ef2a9
+branch:      release 5.0.4.2
+user:        mleitner
+date:        Wed Sep 07 16:02:48 2016 +0200
+summary:     Close release 5.0.4.2 branch
+
+changeset:   7138:f0b49880281c
+branch:      release 5.0.4.2
+user:        mleitner
+date:        Wed Sep 07 15:44:41 2016 +0200
+summary:     release 5.0.4.3-SNAPSHOT
+
+changeset:   7137:13907dca13f1
+branch:      release 5.0.4.2
+user:        mleitner
+date:        Wed Sep 07 14:24:26 2016 +0200
+summary:     created installers for Infinica Process Designer 5_0_4_2
+
+changeset:   7136:dececf22c8ab
+branch:      release 5.0.4.2
+user:        mleitner
+date:        Wed Sep 07 14:20:27 2016 +0200
+summary:     created installers for Infinica Template Designer 5_0_4_2
+
+changeset:   7135:611e73264ff3
+branch:      release 5.0.4.2
+user:        mleitner
+date:        Wed Sep 07 13:54:51 2016 +0200
+summary:     release 5.0.4.2
+
+changeset:   7134:796ee23f8b72
+branch:      release 5.0.4.2
+parent:      7125:32324546c717
+user:        mleitner
+date:        Wed Sep 07 12:46:28 2016 +0200
+summary:     release 5.0.4.2
+
+changeset:   7133:721ff0a75c59
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Wed Sep 07 21:30:04 2016 +0200
+summary:     Fixed engine test failures
+
+changeset:   7132:cbf8a355193e
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Wed Sep 07 15:45:13 2016 +0200
+summary:     Implemented Task Types
+
+changeset:   7131:764832a74f2d
+branch:      infinica_5.1_tthonhofer
+parent:      7130:9eba0c3e1d08
+parent:      7128:30297e838ec9
+user:        tthonhofer
+date:        Wed Sep 07 10:21:35 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7130:9eba0c3e1d08
+branch:      infinica_5.1_tthonhofer
+user:        tthonhofer
+date:        Wed Sep 07 10:20:48 2016 +0200
+summary:     Moved ScreenshotTest to processdesigner test plugin
+
+changeset:   7129:0d67ee5a30bd
+branch:      infinica_5.1_tthonhofer
+parent:      6936:577438a1f429
+user:        tthonhofer
+date:        Wed Sep 07 10:19:55 2016 +0200
+summary:     Created framework for headless testing
+
+changeset:   7128:30297e838ec9
+branch:      infinica_5.1
+parent:      7122:0948cceacb15
+parent:      7127:9c1eaa4a6125
+user:        mschedenig
+date:        Wed Sep 07 10:16:41 2016 +0200
+summary:     Merge with infinica_5.1_mschedenig
+
+changeset:   7127:9c1eaa4a6125
+branch:      infinica_5.1_mschedenig
+parent:      7120:a0ec7b9929ac
+parent:      7122:0948cceacb15
+user:        mschedenig
+date:        Wed Sep 07 10:16:06 2016 +0200
+summary:     Merge with infinica_5.1
+
+changeset:   7126:8fbcc42f79f7
+branch:      infinica_5.0_tmertes
+parent:      7124:ee85695243ba
+parent:      7125:32324546c717
+user:        tmertes
+date:        Wed Sep 07 09:24:01 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7125:32324546c717
+branch:      infinica_5.0
+parent:      7111:f4832ed7c6c2
+parent:      7124:ee85695243ba
+user:        tmertes
+date:        Wed Sep 07 09:23:13 2016 +0200
+summary:     Merge with infinica_5.0_tmertes
+
+changeset:   7124:ee85695243ba
+branch:      infinica_5.0_tmertes
+user:        tmertes
+date:        Wed Sep 07 09:21:59 2016 +0200
+summary:     RE-140: Typos in Publish dialog
+
+changeset:   7123:12cd9401e45b
+branch:      infinica_5.0_tmertes
+parent:      7093:b797f0fdd8fd
+parent:      7111:f4832ed7c6c2
+user:        tmertes
+date:        Wed Sep 07 09:19:08 2016 +0200
+summary:     Merge with infinica_5.0
+
+changeset:   7122:0948cceacb15
+branch:      infinica_5.1
+parent:      7121:b42819c92e5a
+parent:      7116:7577a3ed7883
+user:        christopher.prengel@infinica.com
+date:        Wed Sep 07 00:29:34 2016 +0200
+summary:     Merge
+
+changeset:   7121:b42819c92e5a
+branch:      infinica_5.1
+parent:      7032:e70b7a35fcf8
+user:        christopher.prengel@infinica.com
+date:        Wed Sep 07 00:28:04 2016 +0200
+summary:     update: reduced DET template using Berger latest on 91;
