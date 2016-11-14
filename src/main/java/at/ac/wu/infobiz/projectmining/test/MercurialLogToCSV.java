@@ -2,23 +2,15 @@ package at.ac.wu.infobiz.projectmining.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import at.ac.wu.infobiz.projectmining.io.CommandLineOptions;
 import at.ac.wu.infobiz.projectmining.parsing.mercurial.MercurialToDB;
 
-public class TestMercurialToDB {
+public class MercurialLogToCSV {
 	//  jgit-cookbookWithRename.log
 	public static String inputFile = "data/mercurial.log";
-	static String outputFile= "out.txt";
-
-	public final static String START_COMMIT_DELIMITER = "";
-	public final static String END_MESSAGE_DELIMITER = "\\^s*$";
+	static String outputFile= "out.csv";
 
 
 	public static void main(String[] args) {
@@ -31,9 +23,9 @@ public class TestMercurialToDB {
 		String output = optionsMap.get(CommandLineOptions.LOGFILE);
 		if(output!=null)
 			outputFile=output;
-		MercurialToDB mercurialToDB = new MercurialToDB(inputFile, START_COMMIT_DELIMITER, END_MESSAGE_DELIMITER);
+		MercurialToDB mercurialToDB = new MercurialToDB(inputFile);
 		try {
-			mercurialToDB.toCSV(new File(inputFile));
+			mercurialToDB.toCSV(new File(inputFile), new File(outputFile));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

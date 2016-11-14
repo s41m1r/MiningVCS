@@ -3,6 +3,8 @@ package at.ac.wu.infobiz.projectmining.parsing.mercurial;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +66,7 @@ public class MercurialToDB {
 		this.endMessageDelimiter = endMessageDelimiter;
 	}
 
-	public void toCSV(File logFile) throws FileNotFoundException{
+	public void toCSV(File logFile, File output) throws FileNotFoundException{
 
 		logger.info("Parsing of "+logFile+" started");
 
@@ -87,9 +89,38 @@ public class MercurialToDB {
 			commitsList.add(parseCommit(commitChunk));
 			numCommits++;
 		}
-		logger.info("Done. Read "+numCommits+" commits.");
-		System.out.println();
 		scanner.close();
+		logger.info("Done. Read "+numCommits+" commits.");
+		logger.info("Writing to "+output+".");
+		PrintWriter pw = new PrintWriter(new FileOutputStream(output));
+		String csvHeader = "revisionId\tbranch\ttimestamp\tuser\tcomment\tparent1\tparent2";
+		pw.println(csvHeader);
+		
+		for (int i = 0; i < commitsList.size(); i++) {
+			String csvRow = commitsList.get(i).getRevisionId()+
+					"\t"+
+					commitsList.get(i).getBranch()+
+					"\t"+
+					commitsList.get(i).getTimeStamp()+
+					"\t"+
+					usersList.get(i).getName()+
+					"\t"+
+					commitsList.get(i).getComment()+
+					"\t";
+			
+			if(commitsList.get(i).getParents().size()==2)
+				csvRow+=commitsList.get(i).getParents().get(0).getRevisionId()+ 
+				"\t" +commitsList.get(i).getParents().get(0).getRevisionId();
+			if(commitsList.get(i).getParents().size()==1)
+				csvRow+=commitsList.get(i).getParents().get(0).getRevisionId()+ 
+				"\t" + null;
+			if(commitsList.get(i).getParents().size()==0)
+				csvRow+=null+ "\t" + null;
+			
+			pw.println(csvRow);
+		}
+		pw.close();
+		logger.info("Done.");
 	}
 
 	private MercurialCommit parseCommit(String commitChunk) {
@@ -117,27 +148,15 @@ public class MercurialToDB {
 	}
 
 	private String parseBranch(String commitChunk) {
-		List<String> allBraches = lookFor("brach:", commitChunk);
+		List<String> allBraches = lookFor("branch:", commitChunk);
 		if (allBraches.size()==0)
 			return null;
 		return allBraches.get(0);
 	}
 
 	private User parseUser(String commitChunk) {
-//		Scanner s = new Scanner(commitChunk);
-//		User user = new User();
-//		while (s.hasNext()) {
-//			String line = s.nextLine(); //e.g. user:        tmertes
-//			if(line.startsWith("user")){
-//				user.setName(line.split("user:")[1].trim());
-//				s.close();
-//				return user;
-//			}
-//		}
-//		s.close();
-//		return null;
 		User user = new User();
-		user.setName(lookFor("user:", commitChunk).get(0));
+		user.setName(lookFor("user:", commitChunk).get(0).split("<")[0].trim());
 		return user;
 	}
 	
@@ -168,11 +187,8 @@ public class MercurialToDB {
 	/* Commit string is like
 	 * changeset:   7656:93bde685ce19
 	 */
-	private String parseCommitId(String commitString) {
-		String[] result = commitString.split("changeset:\\s+");
-		return result[1].trim();
+	private String parseCommitId(String commitChunk) {
+		return lookFor("changeset:", commitChunk).get(0).trim();
 	}
-
-
 
 }
