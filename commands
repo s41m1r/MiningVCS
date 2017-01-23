@@ -24,3 +24,6 @@ git config merge.renameLimit 10000
 
 ## Set your diff.renameLimit variable
 git config diff.renameLimit 10000
+
+## Run git importer from command line
+java -cp TestGitToDB -logFile data/jgit-cookbook.log -db jgitcookbook
