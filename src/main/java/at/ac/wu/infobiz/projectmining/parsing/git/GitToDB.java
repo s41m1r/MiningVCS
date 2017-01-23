@@ -41,6 +41,7 @@ public class GitToDB {
 	private String inputFile;
 	private String startCommitDelimiter;
 	private String endMessageDelimiter;
+	private String dbname;
 	
 	static int BATCH_SIZE = 100000;
 	
@@ -150,7 +151,8 @@ public class GitToDB {
 						commit.addParent(commits.get(parsedCommitIds[2]));
 					}
 				} else {
-					System.out.println("DEbug me!");
+					System.out.println("Debug me!");
+					System.out.println(commitChunk);
 				}
 			}
 			headCommit = commit;
@@ -377,7 +379,12 @@ public class GitToDB {
 			Map<String, at.ac.wu.infobiz.projectmining.model.File> files,
 			Set<FileAction> fileActions, Map<String, User> users, Set<Rename> renames, Set<Edit> edits) {
 		
-		SessionFactory sessionFactory = DatabaseConnector.getSessionFactory();
+		SessionFactory sessionFactory;
+		
+		if(dbname!=null)
+			sessionFactory = DatabaseConnector.getSessionFactory(dbname);
+		else
+			sessionFactory = DatabaseConnector.getSessionFactory();
 		StatelessSession session = sessionFactory.openStatelessSession();
 		Transaction tx = session.beginTransaction();
 		
@@ -388,7 +395,7 @@ public class GitToDB {
 		logger.info("Persisting "+users.size()+" users");
 		for (String key : users.keySet()) {
 			session.insert(users.get(key));
-			if(++i%(users.size()/10) == 0){
+			if(++i%(10*users.size()/10) == 0){
 				System.out.print(".");
 			}
 		}
@@ -856,5 +863,9 @@ public class GitToDB {
 			}
 		}
 		return count;
+	}
+	
+	public void setDB(String dbName){
+		this.dbname = dbName;
 	}
 }

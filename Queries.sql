@@ -73,3 +73,30 @@ SELECT * FROM `FileAction`,`Commit`
 WHERE `FileAction`.`totalLines`<0 AND `FileAction`.`commit_id` = `Commit`.`id` 
 AND `FileAction`.`file_path` NOT IN (SELECT `Rename`.`from_path` FROM `Rename` UNION SELECT `Rename`.`to_path` FROM `Rename`)
 ORDER BY `Commit`.`timeStamp` ASC
+
+-- Get the File story for each file
+SELECT `File`.`path`, `Commit`.`timeStamp`, `Commit`.`comment`, `User`.`id` as theUser, ABS(`Edit`.`linesAdded`-`Edit`.`linesRemoved`) as delta 
+FROM File, FileAction, `Edit`,`Commit`, `User` 
+WHERE `User`.`id` = `Commit`.`id` AND FileAction.file_path = File.path AND `Commit`.`id` = FileAction.commit_id 
+ORDER BY `File`.`path`, `Commit`.`timeStamp` ASC 
+LIMIT 100 
+
+
+-- Get the File story of a file
+SELECT `Commit`.*, `User`.`name`
+FROM `File`, `FileAction`, `Commit`, `User` 
+WHERE `File`.`path` = 'build.xml' 
+	AND `FileAction`.`commit_id` = `Commit`.`id` 
+	AND `FileAction`.`file_path` = `File`.`path`
+	AND `User`.`id` = `Commit`.`user_id`
+ORDER BY `Commit`.`timeStamp` ASC 
+
+
+SELECT `Commit`.*, `User`.`name`
+FROM `File`, `FileAction`, `Commit`, `User` 
+WHERE `File`.`path` = 'src/help/fr/EntryEditorHelp.html' 
+	AND `FileAction`.`commit_id` = `Commit`.`id` 
+	AND `FileAction`.`file_path` = `File`.`path`
+	AND `User`.`id` = `Commit`.`user_id`
+ORDER BY `Commit`.`timeStamp` ASC 
+

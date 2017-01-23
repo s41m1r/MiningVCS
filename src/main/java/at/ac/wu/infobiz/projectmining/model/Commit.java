@@ -84,7 +84,6 @@ public class Commit {
 		return comment;
 	}
 
-
 	
 	public Collection<Edit> getEdits() {
 		return edits;

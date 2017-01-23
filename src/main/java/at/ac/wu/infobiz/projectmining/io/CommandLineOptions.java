@@ -27,6 +27,7 @@ public abstract class CommandLineOptions {
 	public static String USEGITLOG = "useGitLog";
 	public static String USESVNLOG = "useSvnLog";
 	public static String OUTFILE = "outFile";
+	public static String DB = "db";
 	
 	
 	private static Options initOpts() {
@@ -37,12 +38,14 @@ public abstract class CommandLineOptions {
 		Option isGitLog   = new Option("g", "useGitLog", false, "the input log is from a Git repository");
 		Option isSvnLog   = new Option("svn", "useSvnLog", false, "the input log is from a Subversion repository");
 		Option outFile   = new Option("o", "outFile", true, "the output file");
+		Option db   = new Option("db", "database", true, "the database where to store the project");
 		
 		opts.addOption(logfile);
 		opts.addOption(threshold);
 		opts.addOption(isSvnLog);
 		opts.addOption(isGitLog);
 		opts.addOption(outFile);
+		opts.addOption(db);
 		
 		return opts;
 	}
@@ -69,6 +72,7 @@ public abstract class CommandLineOptions {
 	    optionValueMap.put("useGitLog", line.getOptionValue("g"));
 	    optionValueMap.put("useSvnLog", line.getOptionValue("svn"));
 	    optionValueMap.put("outFile", line.getOptionValue("o"));
+	    optionValueMap.put("database", line.getOptionValue("db"));
 	    
 	    return optionValueMap;
 	} 

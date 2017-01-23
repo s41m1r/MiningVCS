@@ -7,8 +7,8 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
 public class DatabaseConnector {
-	private static final Configuration cfg = new Configuration().configure();
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+	private static Configuration cfg = new Configuration().configure();
+	private static SessionFactory sessionFactory = buildSessionFactory();
 	private static ServiceRegistry serviceRegistry;
 	
 	private static SessionFactory buildSessionFactory() {
@@ -18,6 +18,14 @@ public class DatabaseConnector {
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
+	}
+	
+	public static SessionFactory getSessionFactory(String forDatabase){
+		  cfg = new Configuration().configure();
+	      cfg.setProperty("hibernate.default_schema", forDatabase);
+	      cfg.configure();
+	      sessionFactory = buildSessionFactory();
+	      return sessionFactory;
 	}
 
 	public static void shutdown() {

@@ -9,7 +9,7 @@ import at.ac.wu.infobiz.projectmining.parsing.git.GitToDB;
 
 public class TestGitToDB {
 	//  jgit-cookbookWithRename.log
-	public static String inputFile = "data/camunda-bpm-examples.log";
+	public static String inputFile = "data/jabref.log";
 	static String outputFile= "out.txt";
 
 	public final static String START_COMMIT_DELIMITER = "§§--§§\n";
@@ -26,8 +26,11 @@ public class TestGitToDB {
 		String output = optionsMap.get(CommandLineOptions.LOGFILE);
 		if(output!=null)
 			outputFile=output;
+		String dbName = optionsMap.get(CommandLineOptions.DB);
 		GitToDB gitToDB = new GitToDB(inputFile, START_COMMIT_DELIMITER, END_MESSAGE_DELIMITER);
 		try {
+			if(dbName!=null)
+				gitToDB.setDB(dbName);
 			gitToDB.toDB(new File(inputFile));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
