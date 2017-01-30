@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.ac.wu.infobiz.projectmining.test.workshop;
+package at.ac.wu.infobiz.projectmining.workshop;
 
 import at.ac.wu.infobiz.projectmining.util.DBUtil;
 
