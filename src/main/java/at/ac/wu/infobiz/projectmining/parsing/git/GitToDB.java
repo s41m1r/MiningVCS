@@ -381,6 +381,8 @@ public class GitToDB {
 		
 		SessionFactory sessionFactory;
 		
+		System.out.println("Attempt to connecto to "+dbname);
+		
 		if(dbname!=null)
 			sessionFactory = DatabaseConnector.getSessionFactory(dbname);
 		else

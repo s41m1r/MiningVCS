@@ -27,7 +27,7 @@ public abstract class CommandLineOptions {
 	public static String USEGITLOG = "useGitLog";
 	public static String USESVNLOG = "useSvnLog";
 	public static String OUTFILE = "outFile";
-	public static String DB = "db";
+	public static String DB = "database";
 	
 	
 	private static Options initOpts() {

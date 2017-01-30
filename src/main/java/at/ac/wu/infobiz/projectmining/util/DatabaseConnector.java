@@ -21,10 +21,11 @@ public class DatabaseConnector {
 	}
 	
 	public static SessionFactory getSessionFactory(String forDatabase){
-		  cfg = new Configuration().configure();
+		  cfg = new Configuration();
 	      cfg.setProperty("hibernate.default_schema", forDatabase);
 	      cfg.configure();
-	      sessionFactory = buildSessionFactory();
+	      serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+	      sessionFactory = cfg.buildSessionFactory(serviceRegistry);
 	      return sessionFactory;
 	}
 
