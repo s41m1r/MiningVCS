@@ -100,3 +100,25 @@ WHERE `File`.`path` = 'src/help/fr/EntryEditorHelp.html'
 	AND `User`.`id` = `Commit`.`user_id`
 ORDER BY `Commit`.`timeStamp` ASC 
 
+
+SELECT `Commit`.`id`, `Commit`.`comment`, `Commit`.`timeStamp`, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, 
+sum(linesAdded)/(sum(linesAdded)+sum(linesRemoved)) as PercentAdded,  
+(sum(linesAdded)-sum(linesRemoved))/(sum(linesAdded)+sum(linesRemoved)) as DeltaIndex, `User`.`name`
+FROM `File`, `Edit`, `Commit`, `User` 
+WHERE `File`.`path` = 'pom.xml' 
+	AND `Edit`.`commit_id` = `Commit`.`id` 
+	AND `Edit`.`file_path` = `File`.`path`
+	AND `User`.`id` = `Commit`.`user_id`
+GROUP BY `Edit`.`id`
+ORDER BY `Commit`.`timeStamp` ASC 
+
+-- Aggregate by date
+SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR '\n') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesAdded+linesRemoved) TotalChangeInTheDay, GROUP_CONCAT(`User`.`name` SEPARATOR '\n') as Users
+FROM `File`, `Edit`, `Commit`, `User` 
+WHERE `File`.`path` = 'pom.xml' 
+	AND `Edit`.`commit_id` = `Commit`.`id` 
+	AND `Edit`.`file_path` = `File`.`path`
+	AND `User`.`id` = `Commit`.`user_id`
+GROUP BY Date
+ORDER By Date ASC
+

@@ -390,68 +390,133 @@ public class GitToDB {
 		StatelessSession session = sessionFactory.openStatelessSession();
 		Transaction tx = session.beginTransaction();
 		
-		long i = 0;
+		
 		session.insert(thisProject); //persist project
 		
-		//users
-		logger.info("Persisting "+users.size()+" users");
-		for (String key : users.keySet()) {
-			session.insert(users.get(key));
-			if(++i%(10*users.size()/10) == 0){
-				System.out.print(".");
-			}
-		}
-		System.out.println();
+		//persist users
+		persistUsers(users, session);
 		
-		logger.info("Persisting "+files.size()+" files");
-		for (String path : files.keySet()) {
-			session.insert(files.get(path));
-			if(++i%(files.size()/10) == 0){
-				System.out.print(".");
-			}
-		}
-		System.out.println();
+		//persist files
+		persistFiles(files, session);
 		
-		logger.info("Persisting "+commits.size()+" commits");
-		for (String key : commits.keySet()) {
-			session.insert(commits.get(key));
-			if(++i%(commits.size()/10) == 0){
-				System.out.print(".");
-			}
-		}
-		System.out.println();
+		//persist commits
+		persistCommits(commits, session);
 		
-		logger.info("Persisting "+fileActions.size()+" fileActions");
-		for (FileAction fileAction : fileActions) {
-			session.insert(fileAction);
-			if(++i%(fileActions.size()/10) == 0){
-				System.out.print(".");
-			}
-		}
-		System.out.println();
+		//persist file actions
+		persistFileActions(fileActions, session);
 		
-		logger.info("Persisting "+renames.size()+" renames");
-		for (Rename rename : renames) {
-			session.insert(rename);
-			if(++i%(renames.size()/10) == 0){
-				System.out.print(".");
-			}
-		}
-		System.out.println();
+		//persist renames
+		persistRenames(renames, session);
 		
-		logger.info("Persisting "+edits.size()+" edits");
-		for (Edit edit : edits) {
-			session.insert(edit);
-			if(++i%(edits.size()/10) == 0){
-				System.out.print(".");
-			}
-		}
-		System.out.println();
+		//persist edits
+		persistEdits(edits, session);
 		
 		tx.commit();
 		session.close();
 //		System.out.println(100*(users.size()+commits.size()+files.size()+renames.size())/total+"% done");
 		DatabaseConnector.shutdown();
+	}
+
+	/**
+	 * @param edits
+	 * @param session
+	 */
+	private void persistEdits(Set<Edit> edits, StatelessSession session) {
+		long i = 0;
+		float step = (edits.size()>10)? edits.size()/10 : 1;
+		logger.info("Persisting "+edits.size()+" edits");
+		for (Edit edit : edits) {
+			session.insert(edit);
+			if(10/++i == step){
+				System.out.print(".");
+			}
+		}
+		System.out.println();
+	}
+
+	/**
+	 * @param renames
+	 * @param session
+	 */
+	private void persistRenames(Set<Rename> renames, StatelessSession session) {
+		long i = 0;
+		long step = (renames.size()>10)? renames.size()/10 : 1;
+		logger.info("Persisting "+renames.size()+" renames");
+		for (Rename rename : renames) {
+			session.insert(rename);
+			if(++i%step == 0){
+				System.out.print(".");
+			}
+		}
+		System.out.println();
+	}
+
+	/**
+	 * @param fileActions
+	 * @param session
+	 */
+	private void persistFileActions(Set<FileAction> fileActions, StatelessSession session) {
+		long i = 0;
+		long step = (fileActions.size()>10)? fileActions.size()/10 : 1;
+		logger.info("Persisting "+fileActions.size()+" fileActions");
+		for (FileAction fileAction : fileActions) {
+			session.insert(fileAction);
+			if(++i%step == 0){
+				System.out.print(".");
+			}
+		}
+		System.out.println();
+	}
+
+	/**
+	 * @param commits
+	 * @param session
+	 */
+	private void persistCommits(Map<String, Commit> commits, StatelessSession session) {
+		long i = 0;
+		long step = (commits.size()>10)? commits.size()/10 :1;
+		logger.info("Persisting "+commits.size()+" commits");
+		for (String key : commits.keySet()) {
+			session.insert(commits.get(key));
+			if(++i%step == 0){
+				System.out.print(".");
+			}
+		}
+		System.out.println();
+	}
+
+	/**
+	 * @param files
+	 * @param session
+	 * @return
+	 */
+	private void persistFiles(Map<String, at.ac.wu.infobiz.projectmining.model.File> files, StatelessSession session) {
+		long i = 0;
+		long step = (files.size()>10)? files.size()/10 : 1;
+		logger.info("Persisting "+files.size()+" files");
+		for (String path : files.keySet()) {
+			session.insert(files.get(path));
+			if(++i%step == 0){
+				System.out.print(".");
+			}
+		}
+		System.out.println();
+	}
+
+	private void persistUsers(Map<String, User> users, StatelessSession session) {
+		long step = users.size()/10;
+		if(step==0)
+			step=1;
+		long i = 0;
+		//users
+		logger.info("Persisting "+users.size()+" users");
+		for (String key : users.keySet()) {
+			session.insert(users.get(key));
+			if(++i%step == 0){
+				System.out.print(".");
+			}
+		}
+		System.out.println();
 	}
 
 
@@ -609,7 +674,7 @@ public class GitToDB {
 		if(string.contains(devNull))
 			return devNull;
 		int start = string.indexOf("b/");
-		return string.substring(start+2);
+		return string.substring(start+2).trim();
 	}
 	
 	/**
@@ -625,7 +690,7 @@ public class GitToDB {
 		
 		int start = string.indexOf("a/");
 		
-		return string.substring(start+2);
+		return string.substring(start+2).trim();
 	}
 
 	private static boolean isBinaryChange(String afterDiff) {

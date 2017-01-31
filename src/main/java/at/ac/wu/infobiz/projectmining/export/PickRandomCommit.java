@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.ac.wu.infobiz.projectmining.workshop;
+package at.ac.wu.infobiz.projectmining.export;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -8,7 +8,7 @@ import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
 public class DatabaseConnector {
 	private static Configuration cfg = new Configuration().configure();
-	private static SessionFactory sessionFactory = buildSessionFactory();
+	private static SessionFactory sessionFactory;
 	private static ServiceRegistry serviceRegistry;
 	
 	private static SessionFactory buildSessionFactory() {
@@ -17,12 +17,14 @@ public class DatabaseConnector {
 	}
 
 	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
+		return buildSessionFactory();
 	}
 	
 	public static SessionFactory getSessionFactory(String forDatabase){
 		  cfg = new Configuration();
 	      cfg.setProperty("hibernate.default_schema", forDatabase);
+//	      System.out.println("setting up: "+"jdbc:mysql://localhost:3306/"+forDatabase);
+	      cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/"+forDatabase);
 	      cfg.configure();
 	      serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
 	      sessionFactory = cfg.buildSessionFactory(serviceRegistry);
@@ -30,8 +32,9 @@ public class DatabaseConnector {
 	}
 
 	public static void shutdown() {
-		// Close caches and connection pools
-		getSessionFactory().close();
+		// Close caches and connection poolsd
+		sessionFactory.close();
+		StandardServiceRegistryBuilder.destroy(serviceRegistry);
 	}
 
 	public static void synch(boolean sideEffectOnDatabase) {
