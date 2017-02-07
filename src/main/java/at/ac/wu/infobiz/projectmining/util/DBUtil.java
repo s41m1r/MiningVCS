@@ -77,16 +77,24 @@ public abstract class DBUtil {
 		DatabaseConnector.shutdown();
 	}
 
-	public static void toCSV(String dirname, String theFile, List<Object[]> results) {
+	public static void toCSV(String dirname, String theFile, String[] header, List<Object[]> results, String sep) {
 		String dName = dirname+"-stories";
 		File dir = new File(dName);
 		dir.mkdir();
-		String filename = dName+"/"+theFile.replaceAll("/", "-")+".csv";		
+		String filename = dName+"/"+theFile.replaceAll("/", "-")+".csv";	
+		String head = "";
+		
+		for(int i=0;i<header.length-1;i++){
+			head+=header[i] + sep;
+		}
+		head+=header[header.length-1];
+		
 		try {
 			OutputRedirect.toFile(filename);
+			System.out.println(head);
 			for (Object[] row : results) {
 				for (Object cell : row) {
-					System.out.print(cell+"\t");
+					System.out.print(cell+sep);
 				}
 				System.out.println();
 			}
@@ -94,7 +102,7 @@ public abstract class DBUtil {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Ouput written into directory "+dirname);
+//		System.out.println("Ouput written into directory "+dirname);
 	}
 
 	public static void disconnect(Session session) {

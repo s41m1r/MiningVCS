@@ -381,7 +381,7 @@ public class GitToDB {
 		
 		SessionFactory sessionFactory;
 		
-		System.out.println("Attempt to connecto to "+dbname);
+		System.out.println("Attempt to connec to "+dbname);
 		
 		if(dbname!=null)
 			sessionFactory = DatabaseConnector.getSessionFactory(dbname);
@@ -761,7 +761,7 @@ public class GitToDB {
 	public static User parseUser(String author) {
 		String[] authSplit = author.split("<");
 		String userName = authSplit[0].trim();
-		String userEmail = authSplit[1].substring(0, authSplit[1].length()-1);
+		String userEmail = (authSplit[1].length()==0)? " ": authSplit[1].substring(0, authSplit[1].length()-1);
 		User u = new User();
 		u.setName(userName);
 		u.setEmail(userEmail);
@@ -852,7 +852,8 @@ public class GitToDB {
 	}
 
 	public static String parseAuthor(String authorString){
-		String authorWithEmail = authorString.split("Author: ")[1].trim();
+		String[] splits = authorString.split("Author: ");
+		String authorWithEmail = splits[splits.length-1].trim();
 		return authorWithEmail;
 	} 
 
@@ -874,7 +875,14 @@ public class GitToDB {
 	 * @return
 	 */
 	public static void parseEdits(String positions, List<Edit> edits) {
-		Pattern pattern = Pattern.compile("(?<=@@)( .*)(?=@@)");
+		
+//		String newline = System.getProperty("line.separator");
+//		if(!positions.startsWith(newline)){
+//			System.out.println("Bad input: \n"+positions);
+//			return;
+//		}
+		
+		Pattern pattern = Pattern.compile("(?<=\n@@)( .*)(?=@@)");
 		String[] editStrings = positions.split("\n@@ (.*) @@");
 		int index = 1;
 		Matcher matcher = pattern.matcher(positions);
@@ -882,6 +890,7 @@ public class GitToDB {
 		while (matcher.find())
 		{
 			String nextPositionChange = matcher.group(0).trim();
+			
 			//split into s1 = ["-l,s","+l,s"]
 			String s1[] = nextPositionChange.split("\\s");
 

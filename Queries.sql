@@ -122,3 +122,26 @@ WHERE `File`.`path` = 'pom.xml'
 GROUP BY Date
 ORDER By Date ASC
 
+-- With totalLines at each day
+SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR '\n') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesThisDay, MIN(`FileAction`.`totalLines`) as MinLinesThisDay, MAX(`FileAction`.`totalLines`) as MaxLinesThisDay, AVG(`FileAction`.`totalLines`) as AVGLinesThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR '\n') as Users
+FROM `File`, `Edit`, `FileAction`,`Commit`, `User` 
+WHERE `File`.`path` = 'pom.xml' 
+	AND `Edit`.`commit_id` = `Commit`.`id` 
+	AND `Edit`.`file_path` = `File`.`path`
+	AND `User`.`id` = `Commit`.`user_id`
+    AND `FileAction`.`file_path` = `File`.`path` 
+    AND `FileAction`.`commit_id` = `Commit`.`id`
+GROUP BY Date
+ORDER By Date ASC
+
+-- Same as above with less attributes
+SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR ' . ') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(linesAdded-linesRemoved) TotalDiffInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesUntilThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR ' . ') as Users
+FROM `File`, `Edit`, `FileAction`,`Commit`, `User` 
+WHERE `File`.`path` = 'pom.xml' 
+	AND `Edit`.`commit_id` = `Commit`.`id` 
+	AND `Edit`.`file_path` = `File`.`path`
+	AND `User`.`id` = `Commit`.`user_id`
+    AND `FileAction`.`file_path` = `File`.`path` 
+    AND `FileAction`.`commit_id` = `Commit`.`id`
+GROUP BY Date
+ORDER By Date ASC

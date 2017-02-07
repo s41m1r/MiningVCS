@@ -27,7 +27,7 @@ public class TestGitToDB {
 		if(output!=null)
 			outputFile=output;
 		String dbName = optionsMap.get(CommandLineOptions.DB);
-		System.out.println("Option dbName: "+dbName);
+//		System.out.println("Option dbName: "+dbName);
 		GitToDB gitToDB = new GitToDB(inputFile, START_COMMIT_DELIMITER, END_MESSAGE_DELIMITER);
 		try {
 			if(dbName!=null)

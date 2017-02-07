@@ -24,7 +24,7 @@ public class DatabaseConnector {
 		  cfg = new Configuration();
 	      cfg.setProperty("hibernate.default_schema", forDatabase);
 //	      System.out.println("setting up: "+"jdbc:mysql://localhost:3306/"+forDatabase);
-	      cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/"+forDatabase);
+	      cfg.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/"+forDatabase+"?createDatabaseIfNotExist=true");
 	      cfg.configure();
 	      serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
 	      sessionFactory = cfg.buildSessionFactory(serviceRegistry);

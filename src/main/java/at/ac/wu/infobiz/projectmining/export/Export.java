@@ -20,7 +20,13 @@ public class Export {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		exportFileStories("smsr");
+		String dbname = null;
+		if(args.length == 2)
+			dbname = args[1];
+		dbname = "node";
+		if(dbname != null)
+			exportFileStories(dbname);
+		//exportFileStories("smsr");
 	}
 
 	public static void exportFileStories(String fromDB) {
@@ -44,28 +50,42 @@ public class Export {
 //				+ "	AND `User`.`id` = `Commit`.`user_id`"
 //				+ " ORDER BY `Commit`.`timeStamp` ASC ";
 		
-		String queryString = "SELECT `Commit`.`id`, `Commit`.`comment`, `Commit`.`timeStamp`, "
-				+ " sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, "
-				+ " sum(linesAdded)/(sum(linesAdded)+sum(linesRemoved)) as PercentAdded, "
-				+ " (sum(linesAdded)-sum(linesRemoved))/(sum(linesAdded)+sum(linesRemoved)) as DeltaIndex, "
-				+ " `User`.`name` "
-				+ " FROM `File`, `Edit`, `Commit`, `User`"
-				+ " WHERE `File`.`path` = "+"'"+file+"'"
-				+ " AND `Edit`.`commit_id` = `Commit`.`id` "
-				+ " AND `Edit`.`file_path` = `File`.`path` "
-				+ " AND `User`.`id` = `Commit`.`user_id` "
-				+ " GROUP BY `Edit`.`id`"
-				+ " ORDER BY `Commit`.`timeStamp` ASC"; 
+//		String queryString = "SELECT `Commit`.`id`, `Commit`.`comment`, `Commit`.`timeStamp`, "
+//				+ " sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, "
+//				+ " sum(linesAdded)/(sum(linesAdded)+sum(linesRemoved)) as PercentAdded, "
+//				+ " (sum(linesAdded)-sum(linesRemoved))/(sum(linesAdded)+sum(linesRemoved)) as DeltaIndex, "
+//				+ " `User`.`name` "
+//				+ " FROM `File`, `Edit`, `Commit`, `User`"
+//				+ " WHERE `File`.`path` = "+"'"+file+"'"
+//				+ " AND `Edit`.`commit_id` = `Commit`.`id` "
+//				+ " AND `Edit`.`file_path` = `File`.`path` "
+//				+ " AND `User`.`id` = `Commit`.`user_id` "
+//				+ " GROUP BY `Edit`.`id`"
+//				+ " ORDER BY `Commit`.`timeStamp` ASC"; 
+		
+		String queryString = "SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR ' . ') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(linesAdded-linesRemoved) TotalDiffInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesUntilThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR ' . ') as Users "
+				+ "FROM `File`, `Edit`, `FileAction`,`Commit`, `User` "
+				+ "WHERE `File`.`path` = "+"'"+file+"'"
+				+ "AND `Edit`.`commit_id` = `Commit`.`id` "
+				+ "AND `Edit`.`file_path` = `File`.`path` "
+				+ "AND `User`.`id` = `Commit`.`user_id` "
+				+ "AND `FileAction`.`file_path` = `File`.`path`"
+				+ "AND `FileAction`.`commit_id` = `Commit`.`id` "
+				+ "GROUP BY Date "
+				+ "ORDER By Date ASC"; 
 		
 //		System.out.println("Executing query: "+queryString);
 		
 		SQLQuery q = session.createSQLQuery(queryString);
 		
+		@SuppressWarnings("unchecked")
 		List<Object[]> results = q.list();
 		
-		DBUtil.toCSV(dbname, file,results);
+		String[] header = {"Comments","Date","TotalLinesAdded","TotalLinesRemoved", "TotalChangeInTheDay", "TotalDiffInTheDay", "LinesUntilThisDay", "Users"};
+		DBUtil.toCSV(dbname, file, header, results, "\t");
 	}
 
+	@SuppressWarnings("unchecked")
 	public static List<String> getAllFilesFrom(Session session, String dbname) {
 		List<String> allfiles = null;
 		String queryString = "select * from File";

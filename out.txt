@@ -1,0 +1,536 @@
+revisionId	branch	timestamp	comment	parent1	parent2
+7656:93bde685ce19	infinica_5.0_tthonhofer	Thu Oct 06 12:54:57 CEST 2016	tthonhofer	Close infinica_5.0_tthonhofer branch	7644:3f2cd396145e	null
+7655:6d2928f90a5f	infinica_5.1_tthonhofer	Thu Oct 06 12:47:37 CEST 2016	tthonhofer	Merge with infinica_5.0_tthonhofer	7654:7d398d0f6d7c	7654:7d398d0f6d7c
+7654:7d398d0f6d7c	infinica_5.1_tthonhofer	Thu Oct 06 12:46:15 CEST 2016	tthonhofer	Changes in Neighbour model	7645:a78ceb9c42a8	null
+7653:a204fa6b841f	infinica_5.1	Thu Oct 06 12:07:06 CEST 2016	Matej Kovalik	Merge  from infinica_5.1_mkovalik	7649:4982ff3cf4fb	7649:4982ff3cf4fb
+7652:7d5b72721011	infinica_5.1_mkovalik	Thu Oct 06 12:04:42 CEST 2016	Matej Kovalik	compilation fixes	null	null
+7651:b1329b9aea0b	infinica_5.1_mkovalik	Thu Oct 06 10:25:11 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7617:7925fd430f26	7617:7925fd430f26
+7650:c14c4dd20021	infinica_5.1_tmertes	Thu Oct 06 10:08:58 CEST 2016	tmertes	Merge with infinica_5.1	7648:214d7840a235	7648:214d7840a235
+7649:4982ff3cf4fb	infinica_5.1	Thu Oct 06 10:07:44 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7646:ce2a3fcef5ad	7646:ce2a3fcef5ad
+7648:214d7840a235	infinica_5.1_tmertes	Thu Oct 06 09:49:22 CEST 2016	tmertes	Merge with infinica_5.1	7647:b89420be069e	7647:b89420be069e
+7647:b89420be069e	infinica_5.1_tmertes	Thu Oct 06 09:48:18 CEST 2016	tmertes	TD-2315: Allow undo when the column size is configured from the Outline View	7628:7486c650b204	null
+7646:ce2a3fcef5ad	infinica_5.1	Wed Oct 05 18:28:36 CEST 2016	tthonhofer	Merge with infinica_5.1_tthonhofer	7640:0e26965d3e2b	7640:0e26965d3e2b
+7645:a78ceb9c42a8	infinica_5.1_tthonhofer	Wed Oct 05 18:03:25 CEST 2016	tthonhofer	Fixed task test case failures	7641:10f5890e895d	null
+7644:3f2cd396145e	infinica_5.0_tthonhofer	Wed Oct 05 18:01:06 CEST 2016	tthonhofer	First version of drag and drop functionality	7477:cfcb19c388c6	null
+7643:9f240f1885b1	infinica_5.1_sso	Wed Oct 05 17:34:19 CEST 2016	mschedenig	AUL API improvements and XSD.	7639:3b5c22dbc1e5	null
+7642:1c34bb1482ed	infinica_5.0	Wed Oct 05 16:20:56 CEST 2016	Matej Kovalik	ESN - handle 'external' authentication	7629:7772a94b2452	null
+7641:10f5890e895d	infinica_5.1_tthonhofer	Wed Oct 05 15:39:47 CEST 2016	tthonhofer	Merge with infinica_5.1	7599:73965a03cacb	7599:73965a03cacb
+7640:0e26965d3e2b	infinica_5.1	Wed Oct 05 15:14:17 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7632:daa2e56be01d	7632:daa2e56be01d
+7639:3b5c22dbc1e5	infinica_5.1_sso	Wed Oct 05 15:00:54 CEST 2016	mschedenig	Code cleanup.	null	null
+7638:8a089a631599	infinica_5.1_sso	Wed Oct 05 13:17:43 CEST 2016	mschedenig	Merge with infinica_5.1	7637:33aa92f001ff	7637:33aa92f001ff
+7637:33aa92f001ff	infinica_5.1_sso	Wed Oct 05 13:15:02 CEST 2016	mschedenig	Switching SOAP client authentication to UAL.	7621:b57918202c5d	null
+7636:b877c68e774c	infinica_5.1_mbranicky	Wed Oct 05 15:13:30 CEST 2016	mbranicky	Merge with infinica_5.1	7635:4e61b9b6134c	7635:4e61b9b6134c
+7635:4e61b9b6134c	infinica_5.1_mbranicky	Wed Oct 05 15:12:28 CEST 2016	mbranicky	Composer Comment ID -> removed from list of serializable attributes. Comment Type still not serialized.	null	null
+7634:97fcb5042c87	infinica_5.1_mbranicky	Wed Oct 05 13:13:23 CEST 2016	mbranicky	Unused instance variables removed and 'undefined' object missing property fix.	null	null
+7633:fecc341c35bf	infinica_5.1_mbranicky	Wed Oct 05 10:08:52 CEST 2016	mbranicky	Syntax highlighter in plain mode now correctly displays string (not at one single line).	7614:38d583bb6849	null
+7632:daa2e56be01d	infinica_5.1	Wed Oct 05 15:07:07 CEST 2016	Michal Oravec	Merge	7631:4c9b8ebd7811	7631:4c9b8ebd7811
+7631:4c9b8ebd7811	infinica_5.1	Wed Oct 05 15:06:28 CEST 2016	Michal Oravec	Updated JMeter WP test	null	null
+7630:afbeb1ace5e6	infinica_5.1	Wed Oct 05 15:04:41 CEST 2016	Michal Oravec	Updated UM feature to create JMeter users and JMeter test	7596:7060040e8956	null
+7629:7772a94b2452	infinica_5.0	Wed Oct 05 14:39:44 CEST 2016	mschwarz	Created very specific Process Engine activity for Holding Graz (WEB-IDX post-processing).	7590:d1c4f99c2f3e	null
+7628:7486c650b204	infinica_5.1_tmertes	Wed Oct 05 14:23:46 CEST 2016	tmertes	Merge with infinica_5.1	7626:103d5665cccd	7626:103d5665cccd
+7627:7aa43108cfa1	infinica_5.1	Wed Oct 05 14:22:05 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7622:09db7e558103	7622:09db7e558103
+7626:103d5665cccd	infinica_5.1_tmertes	Wed Oct 05 13:57:54 CEST 2016	tmertes	Merge with infinica_5.1	7625:a048c7137b6e	7625:a048c7137b6e
+7625:a048c7137b6e	infinica_5.1_tmertes	Wed Oct 05 13:57:03 CEST 2016	tmertes	Backed out merge changeset: f38e2d82d4f7	null	null
+7624:f38e2d82d4f7	infinica_5.1_tmertes	Wed Oct 05 13:52:37 CEST 2016	tmertes	Merge with infinica_5.1_sso	7623:230613db95f8	7623:230613db95f8
+7623:230613db95f8	infinica_5.1_tmertes	Wed Oct 05 13:45:17 CEST 2016	tmertes	TD-2314: Column width not calculated correct when creating nested table inside table cell of 3cm	7607:881f7c956b8c	null
+7622:09db7e558103	infinica_5.1	Wed Oct 05 13:31:08 CEST 2016	Bogdan Mustiata	Cache the document.css.hbs in memory.	7618:3bb4a36a096a	null
+7621:b57918202c5d	infinica_5.1_sso	Wed Oct 05 11:15:28 CEST 2016	mschedenig	Dependency fixes.	null	null
+7620:aefe98e7071b	infinica_5.1_sso	Tue Oct 04 22:21:50 CEST 2016	mschedenig	ICR entirely relies on AUL now.	null	null
+7619:0a3451048205	infinica_5.1_sso	Tue Oct 04 13:41:16 CEST 2016	mschedenig	ICR uses AUL for authentication.	7524:e35585597e5c	null
+7618:3bb4a36a096a	infinica_5.1	Wed Oct 05 10:40:11 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7615:7b18385f43d6	7615:7b18385f43d6
+7617:7925fd430f26	infinica_5.1_mkovalik	Wed Oct 05 10:37:34 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7616:d51ed60ea9c7	7616:d51ed60ea9c7
+7616:d51ed60ea9c7	infinica_5.1_mkovalik	Wed Oct 05 10:35:10 CEST 2016	Matej Kovalik	Performance/logging issues	7601:7ccc84495996	null
+7615:7b18385f43d6	infinica_5.1	Tue Oct 04 14:40:39 CEST 2016	Bogdan Mustiata	Notify with a delay the definitions change.	7613:03b5f47857db	null
+7614:38d583bb6849	infinica_5.1_mbranicky	Wed Oct 05 08:28:19 CEST 2016	mbranicky	Merge with infinica_5.1	7611:b33656bb8afe	7611:b33656bb8afe
+7613:03b5f47857db	infinica_5.1	Tue Oct 04 14:06:34 CEST 2016	Bogdan Mustiata	Fixed insertion point definition loading.	null	null
+7612:b1aa9d7e17af	infinica_5.1	Tue Oct 04 12:53:24 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7606:a0f222106883	7606:a0f222106883
+7611:b33656bb8afe	infinica_5.1_mbranicky	Tue Oct 04 12:52:19 CEST 2016	mbranicky	Merge with infinica_5.1	7610:eab10881bc9b	7610:eab10881bc9b
+7610:eab10881bc9b	infinica_5.1_mbranicky	Tue Oct 04 12:50:03 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - German translations.	null	null
+7609:7a3da29eee3d	infinica_5.1_mbranicky	Tue Oct 04 12:42:45 CEST 2016	mbranicky	Fix for debug-pipeline-variables HT - no-more stack-overflow error for XML type of value.	null	null
+7608:6e94fc4acccc	infinica_5.1_mbranicky	Tue Oct 04 12:30:44 CEST 2016	mbranicky	WP-885 It's not possible to edit user's own comments	7585:3afa1523ce7c	null
+7607:881f7c956b8c	infinica_5.1_tmertes	Tue Oct 04 10:59:23 CEST 2016	tmertes	Merge with infinica_5.1	7605:5a1b29f2ade9	7605:5a1b29f2ade9
+7606:a0f222106883	infinica_5.1	Tue Oct 04 10:54:42 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7602:15793093699d	7602:15793093699d
+7605:5a1b29f2ade9	infinica_5.1_tmertes	Tue Oct 04 10:25:34 CEST 2016	tmertes	Merge with infinica_5.1	7604:acddcc34239d	7604:acddcc34239d
+7604:acddcc34239d	infinica_5.1_tmertes	Tue Oct 04 10:24:14 CEST 2016	tmertes	TD-2310: Improve clipboard performance	null	null
+7603:ec6b3abf46c4	infinica_5.1_tmertes	Mon Oct 03 09:51:33 CEST 2016	tmertes	Merge with infinica_5.1	7566:298be413cd5b	7566:298be413cd5b
+7602:15793093699d	infinica_5.1	Tue Oct 04 08:37:37 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7597:8f865972c7d6	7597:8f865972c7d6
+7601:7ccc84495996	infinica_5.1_mkovalik	Tue Oct 04 08:34:41 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7600:2f5f2b7f8d7f	7600:2f5f2b7f8d7f
+7600:2f5f2b7f8d7f	infinica_5.1_mkovalik	Tue Oct 04 08:30:22 CEST 2016	Matej Kovalik	Reasonable logging defaults	7594:65aeb63aa4b0	null
+7599:73965a03cacb	infinica_5.1_tthonhofer	Wed Oct 05 15:38:37 CEST 2016	tthonhofer	PE: Passing and persistence of dynamic constants	null	null
+7598:51c4f88b20ba	infinica_5.1_tthonhofer	Mon Oct 03 18:08:46 CEST 2016	tthonhofer	PE: Set constants for process execution	7540:6d2ccaab0c64	null
+7597:8f865972c7d6	infinica_5.1	Mon Oct 03 17:22:26 CEST 2016	Bogdan Mustiata	Added deferred definition loading for IPs/BBs.	null	null
+7596:7060040e8956	infinica_5.1	Mon Oct 03 16:57:09 CEST 2016	Michal Oravec	Merge	7595:f5f1587b680f	7595:f5f1587b680f
+7595:f5f1587b680f	infinica_5.1	Mon Oct 03 16:56:12 CEST 2016	Michal Oravec	UM rt update and JMeter tests	7580:a98db8689ced	null
+7594:65aeb63aa4b0	infinica_5.1_mkovalik	Mon Oct 03 13:43:15 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7577:e2bfdb6d15ea	7577:e2bfdb6d15ea
+7593:fc4062fa3a2f	infinica_5.1	Mon Oct 03 12:39:33 CEST 2016	Matej Kovalik	WP-881 - Selected columns do not reflect table state	null	null
+7592:4d7a54bb1bb5	infinica_5.1	Mon Oct 03 11:27:22 CEST 2016	totht	Fix timing issue for copy-paste feature	null	null
+7591:5cf87c0cf0f6	infinica_5.1	Mon Oct 03 11:14:04 CEST 2016	Bogdan Mustiata	Merge with infinica_5.0	7589:9fab5ac9dcf5	7589:9fab5ac9dcf5
+7590:d1c4f99c2f3e	infinica_5.0	Mon Oct 03 11:11:13 CEST 2016	Bogdan Mustiata	Fixed promises chaining on autosaving of the document.	7539:c9cc2790c716	null
+7589:9fab5ac9dcf5	infinica_5.1	Mon Oct 03 11:11:13 CEST 2016	Bogdan Mustiata	Fixed promises chaining on autosaving of the document.	null	null
+7588:78dc38acbf85	infinica_5.1	Fri Sep 30 18:05:37 CEST 2016	Bogdan Mustiata	Fixed page right and left, added ComposerSaveToolbarButtons configuration, more tests fixes.	null	null
+7587:c57690e76dae	infinica_5.1	Fri Sep 30 16:16:08 CEST 2016	Bogdan Mustiata	Moving and editing BBs unsing the handles works now.	null	null
+7586:113146207074	infinica_5.1	Mon Oct 03 10:11:41 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7580:a98db8689ced	7580:a98db8689ced
+7585:3afa1523ce7c	infinica_5.1_mbranicky	Mon Oct 03 10:09:34 CEST 2016	mbranicky	Merge with infinica_5.1	7584:dbfccdf86afd	7584:dbfccdf86afd
+7584:dbfccdf86afd	infinica_5.1_mbranicky	Mon Oct 03 08:59:06 CEST 2016	mbranicky	WP-873 Make comments correctly displayed in WP's color themes - code optimizations.	null	null
+7583:d25dcb586101	infinica_5.1_mbranicky	Sun Oct 02 16:11:37 CEST 2016	mbranicky	WP-873 Make comments correctly displayed in WP's color themes - pumpkin and spring themes done	null	null
+7582:2f2c3eb67a03	infinica_5.1_mbranicky	Fri Sep 30 17:53:31 CEST 2016	mbranicky	WP-873 Make comments correctly displayed in WP's color themes - neutral theme done	null	null
+7581:63f3d0a82adf	infinica_5.1_mbranicky	Fri Sep 30 17:21:15 CEST 2016	mbranicky	WP-873 Make comments correctly displayed in WP's color themes - marine theme done	7561:9e8cb12524ca	null
+7580:a98db8689ced	infinica_5.1	Fri Sep 30 17:26:54 CEST 2016	Michal Oravec	Merge	7579:9bf2ffe0aee8	7579:9bf2ffe0aee8
+7579:9bf2ffe0aee8	infinica_5.1	Fri Sep 30 17:24:19 CEST 2016	Michal Oravec	WP rt updates and JMeter drafts	7554:edf858f005eb	null
+7578:71df4a34a71e	infinica_5.1	Fri Sep 30 17:22:03 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7575:798bcb9aa7a2	7575:798bcb9aa7a2
+7577:e2bfdb6d15ea	infinica_5.1_mkovalik	Fri Sep 30 17:20:52 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7576:799200f97cb7	7576:799200f97cb7
+7576:799200f97cb7	infinica_5.1_mkovalik	Fri Sep 30 13:55:51 CEST 2016	Matej Kovalik	WP-881 - Selectable columns check-boxes do not reflect the state of the table	7551:b9a9179b7f4a	null
+7575:798bcb9aa7a2	infinica_5.1	Fri Sep 30 15:24:55 CEST 2016	totht	Fixed Spell-Checking Service Testcases	null	null
+7574:290a443cc629	infinica_5.1	Fri Sep 30 14:33:59 CEST 2016	totht	Fix the IE leading space issue	null	null
+7573:a6c38b2f781e	infinica_5.1	Fri Sep 30 12:44:37 CEST 2016	totht	Hot-fix	null	null
+7572:25758f373f88	infinica_5.1	Fri Sep 30 14:33:39 CEST 2016	Bogdan Mustiata	Fixed changing parameters for a BB.	null	null
+7571:21740bf9d711	infinica_5.1	Fri Sep 30 13:43:07 CEST 2016	Bogdan Mustiata	Fixed rendering to work now with the parameters as well.	null	null
+7570:e7c716c1a585	infinica_5.1	Fri Sep 30 12:29:30 CEST 2016	mleitner	fixed test problems after merge	null	null
+7569:34d7524af691	infinica_5.1	Thu Sep 29 17:55:55 CEST 2016	mleitner	fixed compile errors after merge	null	null
+7568:808588b2a065	infinica_5.1	Thu Sep 29 17:09:34 CEST 2016	mleitner	Merge with infinica_5.0	7567:7f72ad4591c5	7567:7f72ad4591c5
+7567:7f72ad4591c5	infinica_5.1	Fri Sep 30 12:11:55 CEST 2016	Bogdan Mustiata	Set the head nodes with a promise. Test if the metadata node is set.	7565:2064670ecdd8	null
+7566:298be413cd5b	infinica_5.1_tmertes	Fri Sep 30 11:50:25 CEST 2016	tmertes	Merge with infinica_5.1	7564:3f16c9483ee3	7564:3f16c9483ee3
+7565:2064670ecdd8	infinica_5.1	Fri Sep 30 11:49:23 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7563:830a64f36d9a	7563:830a64f36d9a
+7564:3f16c9483ee3	infinica_5.1_tmertes	Fri Sep 30 11:48:16 CEST 2016	tmertes	Merge with infinica_5.1	7558:d67bc152055c	7558:d67bc152055c
+7563:830a64f36d9a	infinica_5.1	Fri Sep 30 11:22:22 CEST 2016	Bogdan Mustiata	Check also for the BB not to be autoparagraphed.	null	null
+7562:dadee42de6cd	infinica_5.1	Fri Sep 30 11:36:19 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7556:7224bdcac466	7556:7224bdcac466
+7561:9e8cb12524ca	infinica_5.1_mbranicky	Fri Sep 30 11:35:33 CEST 2016	mbranicky	Merge with infinica_5.1	7560:f2796d4a7e13	7560:f2796d4a7e13
+7560:f2796d4a7e13	infinica_5.1_mbranicky	Fri Sep 30 11:33:15 CEST 2016	mbranicky	WP-884 Check current composer comments and fix problems	null	null
+7559:3fc559031698	infinica_5.1_mbranicky	Fri Sep 30 07:03:32 CEST 2016	mbranicky	Fix for debug-pipeline-variables HT. Fallback to text/plain syntax highlight for unsupported data types.	7546:c21cb0a92dce	null
+7558:d67bc152055c	infinica_5.1_tmertes	Fri Sep 30 11:28:52 CEST 2016	tmertes	Merge with infinica_5.1	7557:d0134fce3c36	7557:d0134fce3c36
+7557:d0134fce3c36	infinica_5.1_tmertes	Fri Sep 30 11:27:21 CEST 2016	tmertes	TD-2200: Table column size configurable in Outline View	7534:30f3e5948019	null
+7556:7224bdcac466	infinica_5.1	Thu Sep 29 17:50:17 CEST 2016	totht	Imporve filler elements handling	null	null
+7555:33bab3f64743	infinica_5.1	Thu Sep 29 17:13:58 CEST 2016	Bogdan Mustiata	Fixed the asserts in the loading.	null	null
+7554:edf858f005eb	infinica_5.1	Thu Sep 29 18:38:20 CEST 2016	Michal Oravec	Merge	7553:53c4b3d1523c	7553:53c4b3d1523c
+7553:53c4b3d1523c	infinica_5.1	Thu Sep 29 18:35:41 CEST 2016	Michal Oravec	WP rt updates and backups	7523:fb75ea436280	null
+7552:122fb15df146	infinica_5.1	Thu Sep 29 18:19:24 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7547:b3e64270b5aa	7547:b3e64270b5aa
+7551:b9a9179b7f4a	infinica_5.1_mkovalik	Thu Sep 29 18:17:02 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7550:7fbaf3e3ab5d	7550:7fbaf3e3ab5d
+7550:7fbaf3e3ab5d	infinica_5.1_mkovalik	Thu Sep 29 14:04:18 CEST 2016	Matej Kovalik	WP-879 - multi-select issues	null	null
+7549:25fff4a9c909	infinica_5.1_mkovalik	Thu Sep 29 12:18:17 CEST 2016	Matej Kovalik	WP-880 - Select-all checkbox - Document List HT	null	null
+7548:e526123f0d8b	infinica_5.1_mkovalik	Wed Sep 28 16:56:42 CEST 2016	Matej Kovalik	WP-880 - Email validator	7516:68b7cc1f9516	null
+7547:b3e64270b5aa	infinica_5.1	Thu Sep 29 17:52:03 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7537:d48be0d7049c	7537:d48be0d7049c
+7546:c21cb0a92dce	infinica_5.1_mbranicky	Thu Sep 29 17:50:18 CEST 2016	mbranicky	Merge with infinica_5.1	7545:b2fbee0cd1e2	7545:b2fbee0cd1e2
+7545:b2fbee0cd1e2	infinica_5.1_mbranicky	Thu Sep 29 17:49:14 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - commented parts removed.	null	null
+7544:a143e973a8ca	infinica_5.1_mbranicky	Thu Sep 29 17:39:40 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - bugfixes and styling improvements.	null	null
+7543:913a57223b4c	infinica_5.1_mbranicky	Thu Sep 29 13:20:22 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - bugfixes and comments can be hidden by header bar mouse click.	null	null
+7542:182bf0f85f62	infinica_5.1_mbranicky	Thu Sep 29 12:52:10 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - toolbar comment icon synchronization with latest comment.	null	null
+7541:128a7dae55a9	infinica_5.1_mbranicky	Thu Sep 29 08:03:09 CEST 2016	mbranicky	WP-841 - Vaadin formatted excel output file broken	7529:eac9c8706cf4	null
+7540:6d2ccaab0c64	infinica_5.1_tthonhofer	Thu Sep 29 17:39:02 CEST 2016	tthonhofer	Created Task Metadata	7442:290b91698120	null
+7539:c9cc2790c716	infinica_5.0	Thu Sep 29 16:16:52 CEST 2016	mleitner	allow setting of the AES key for Serializer in convertTemplate activity	null	null
+7538:2512272f5819	infinica_5.0	Thu Sep 29 15:53:51 CEST 2016	mleitner	allow setting of the AES key for Serializer per thread, not only locally	7535:ad75486711c0	null
+7537:d48be0d7049c	infinica_5.1	Thu Sep 29 15:23:13 CEST 2016	Bogdan Mustiata	Send the editor for deletion.	null	null
+7536:48c909645bdb	infinica_5.1	Thu Sep 29 15:00:24 CEST 2016	Bogdan Mustiata	Merge group and delete BB operations changed to use promises.	7533:fe52dbcda742	null
+7535:ad75486711c0	infinica_5.0	Thu Sep 29 13:42:29 CEST 2016	mleitner	#REP-73: ZIP-Import: version creation date is always the import date -> breaks version by date feature	7511:f0af03017c21	null
+7534:30f3e5948019	infinica_5.1_tmertes	Thu Sep 29 10:11:11 CEST 2016	tmertes	Merge with infinica_5.1	7532:a0ee3f1ce19f	7532:a0ee3f1ce19f
+7533:fe52dbcda742	infinica_5.1	Thu Sep 29 10:10:17 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7530:de63a9a32838	7530:de63a9a32838
+7532:a0ee3f1ce19f	infinica_5.1_tmertes	Thu Sep 29 09:40:28 CEST 2016	tmertes	Merge with infinica_5.1	7531:14d816476b07	7531:14d816476b07
+7531:14d816476b07	infinica_5.1_tmertes	Thu Sep 29 09:37:48 CEST 2016	tmertes	TD-2311: Expand new created table to fit the page when the column width is empty	7505:ab67695bf0a9	null
+7530:de63a9a32838	infinica_5.1	Thu Sep 29 07:10:13 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7523:fb75ea436280	7523:fb75ea436280
+7529:eac9c8706cf4	infinica_5.1_mbranicky	Thu Sep 29 07:06:55 CEST 2016	mbranicky	Merge with infinica_5.1	7528:41e71812bc28	7528:41e71812bc28
+7528:41e71812bc28	infinica_5.1_mbranicky	Thu Sep 29 07:02:29 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - empty initial comments list fixes.	null	null
+7527:5c0dbb79cd8d	infinica_5.1_mbranicky	Wed Sep 28 17:04:12 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - empty initial comments list fixes.	null	null
+7526:6f3565def517	infinica_5.1_mbranicky	Wed Sep 28 15:42:06 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - finetuning and translations.	null	null
+7525:55c6b3316e8b	infinica_5.1_mbranicky	Wed Sep 28 14:56:14 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - comment type maintanance done.	7458:85a8ebe820bf	null
+7524:e35585597e5c	infinica_5.1_sso	Wed Sep 28 21:28:03 CEST 2016	mschedenig	Fixed modular authentication config.	7521:8f5f84b331a4	null
+7523:fb75ea436280	infinica_5.1	Wed Sep 28 18:01:53 CEST 2016	Michal Oravec	Merge	7522:a0f147f0b6e9	7522:a0f147f0b6e9
+7522:a0f147f0b6e9	infinica_5.1	Wed Sep 28 17:52:41 CEST 2016	Michal Oravec	WP rt updates	7498:55c798112b1e	null
+7521:8f5f84b331a4	infinica_5.1_sso	Wed Sep 28 17:57:04 CEST 2016	mschedenig	Authentication management, including configuration, is now handled by infinica-authentication-layer.	null	null
+7520:b228091e1a87	infinica_5.1_sso	Wed Sep 28 17:55:32 CEST 2016	mschedenig	Authentication management, including configuration, is now handled by infinica-authentication-layer.	7496:602dda410f71	null
+7519:ae9c2a0f1e49	infinica_5.1	Wed Sep 28 16:32:58 CEST 2016	Bogdan Mustiata	Recompiled CKEditor	null	null
+7518:c95c20430b3b	infinica_5.1	Wed Sep 28 16:25:43 CEST 2016	Bogdan Mustiata	Added editable inline building blocks.	null	null
+7517:28ec6c684100	infinica_5.1	Wed Sep 28 16:19:38 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7512:e8da1605168c	7512:e8da1605168c
+7516:68b7cc1f9516	infinica_5.1_mkovalik	Wed Sep 28 16:18:07 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7515:03adc96f42cb	7515:03adc96f42cb
+7515:03adc96f42cb	infinica_5.1_mkovalik	Wed Sep 28 16:14:09 CEST 2016	Matej Kovalik	WP-877 - FTP HT no credentials issue	null	null
+7514:e2759bcc7ca3	infinica_5.1_mkovalik	Wed Sep 28 15:34:09 CEST 2016	Matej Kovalik	WP-875 - No warning when saving into forbidden FTP folder (FTP IHT)	null	null
+7513:a9bdd3be16e6	infinica_5.1_mkovalik	Wed Sep 28 11:19:45 CEST 2016	Matej Kovalik	WP-874 - Cannot expand FTP folders	7494:79b66e2e7915	null
+7512:e8da1605168c	infinica_5.1	Wed Sep 28 15:44:49 CEST 2016	Bogdan Mustiata	Operations seem to be largely working.	7509:c079542ad2cc	null
+7511:f0af03017c21	infinica_5.0	Wed Sep 28 15:36:31 CEST 2016	mleitner	#RE-145: Security settings on folder don't apply/work	null	null
+7510:0c21d7e00a98	infinica_5.0	Wed Sep 28 15:14:59 CEST 2016	mleitner	#RE-145: Security settings on folder don't apply/work	7503:8fc8d022e806	null
+7509:c079542ad2cc	infinica_5.1	Wed Sep 28 14:16:35 CEST 2016	Bogdan Mustiata	Removed a lot of console.logs. Added sameResult, and make sure it resolves correctly promises. Removed curry.	null	null
+7508:16b46e8eb011	infinica_5.1	Wed Sep 28 13:57:25 CEST 2016	totht	Rename BB widget using INFINICA STANDARD part2	null	null
+7507:cf00033166b6	infinica_5.1	Wed Sep 28 13:56:10 CEST 2016	totht	Rename BB widget using INFINICA STANDARD part1	null	null
+7506:f9e4faa7943a	infinica_5.1	Wed Sep 28 12:52:38 CEST 2016	totht	Remove filler elements	7504:c1f46b71fb20	null
+7505:ab67695bf0a9	infinica_5.1_tmertes	Wed Sep 28 12:59:44 CEST 2016	tmertes	Merge with infinica_5.1	7502:8bb07db055d0	7502:8bb07db055d0
+7504:c1f46b71fb20	infinica_5.1	Wed Sep 28 12:58:32 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7498:55c798112b1e	7498:55c798112b1e
+7503:8fc8d022e806	infinica_5.0	Mon Sep 26 17:32:21 CEST 2016	mleitner	added missing resources (names and icons)	7485:a1f889e10e3c	null
+7502:8bb07db055d0	infinica_5.1_tmertes	Wed Sep 28 10:36:53 CEST 2016	tmertes	Merge with infinica_5.1	7501:e29c18f18ba5	7501:e29c18f18ba5
+7501:e29c18f18ba5	infinica_5.1_tmertes	Wed Sep 28 10:34:17 CEST 2016	tmertes	TD-2311: Expand new created table to fit the page. Work when table is in PageContent.	null	null
+7500:775650544581	infinica_5.1_tmertes	Wed Sep 28 10:11:08 CEST 2016	tmertes	Add test for pdfConcatenator	null	null
+7499:03882f9b28fe	infinica_5.1_tmertes	Wed Sep 28 10:10:19 CEST 2016	tmertes	Add itextpdfConcatenator + tests	7481:c4cffde721f1	null
+7498:55c798112b1e	infinica_5.1	Tue Sep 27 18:21:17 CEST 2016	Michal Oravec	Merge	7497:cac5dbcfef0b	7497:cac5dbcfef0b
+7497:cac5dbcfef0b	infinica_5.1	Tue Sep 27 18:19:11 CEST 2016	Michal Oravec	WP RT tests updates	7434:586a76cc51ab	null
+7496:602dda410f71	infinica_5.1_sso	Tue Sep 27 17:55:19 CEST 2016	mschedenig	Began to modularise credentials handlers.	7475:340afa7b5874	null
+7495:8a4db737dd99	infinica_5.1	Tue Sep 27 17:35:48 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7492:f35d894b814f	7492:f35d894b814f
+7494:79b66e2e7915	infinica_5.1_mkovalik	Tue Sep 27 17:33:57 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7493:b68abc04a5b5	7493:b68abc04a5b5
+7493:b68abc04a5b5	infinica_5.1_mkovalik	Tue Sep 27 16:40:45 CEST 2016	Matej Kovalik	WP-742 - Composer compare HT	7452:224cc3ee7c11	null
+7492:f35d894b814f	infinica_5.1	Tue Sep 27 17:25:02 CEST 2016	Bogdan Mustiata	Better logging.	null	null
+7491:279f0eceef13	infinica_5.1	Tue Sep 27 16:22:50 CEST 2016	Bogdan Mustiata	Try to keep the old structure for the operations.	null	null
+7490:44e18bf29014	infinica_5.1	Tue Sep 27 13:47:43 CEST 2016	Bogdan Mustiata	Debug functions, fixed group index computing.	null	null
+7489:e1ac91ec6c9a	infinica_5.1	Tue Sep 27 13:19:06 CEST 2016	Bogdan Mustiata	Added curry, more checks fixed simple insertion.	null	null
+7488:1d17d1956332	infinica_5.1	Tue Sep 27 10:54:25 CEST 2016	Bogdan Mustiata	Recompiled CKEditor.	null	null
+7487:99c9b3894a05	infinica_5.1	Tue Sep 27 16:55:19 CEST 2016	christopher.prengel@infinica.com	Merge	7486:d0254d968332	7486:d0254d968332
+7486:d0254d968332	infinica_5.1	Tue Sep 27 16:52:08 CEST 2016	christopher.prengel@infinica.com	ReadMe_folder_information.txt:	7359:6f7d61c3fcf5	null
+7485:a1f889e10e3c	infinica_5.0	Tue Sep 27 13:52:27 CEST 2016	mleitner	#TD-2293: Proper error message dialogue missing when exporting FO while XML cannot be found	null	null
+7484:1ce683023482	infinica_5.0	Tue Sep 27 12:55:17 CEST 2016	mleitner	#TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY	null	null
+7483:45b354c62fe1	infinica_5.0	Mon Sep 26 18:17:45 CEST 2016	mleitner	#TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY	7448:7f029cf77f05	null
+7482:358a22ebb236	infinica_5.1	Tue Sep 27 12:55:17 CEST 2016	mleitner	#TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY	7479:52a5622ed28a	null
+7481:c4cffde721f1	infinica_5.1_tmertes	Tue Sep 27 10:34:55 CEST 2016	tmertes	Add test to concatenate XFA Forms.	null	null
+7480:dccb78a77793	infinica_5.1_tmertes	Thu Sep 22 09:35:03 CEST 2016	tmertes	TD-2309: Add default values	7387:f3748fb7891e	null
+7479:52a5622ed28a	infinica_5.1	Tue Sep 27 03:53:39 CEST 2016	christopher.prengel@infinica.com	Merge	7478:8aa6963b784d	7478:8aa6963b784d
+7478:8aa6963b784d	infinica_5.1	Tue Sep 27 03:50:24 CEST 2016	christopher.prengel@infinica.com	ComposerDocumentSteps.py: add time to timer (this is legal)	7407:6798c9e9f7ff	null
+7477:cfcb19c388c6	infinica_5.0_tthonhofer	Mon Sep 26 22:16:36 CEST 2016	tthonhofer	Merge with infinica_5.1	7476:58f33057edc4	7476:58f33057edc4
+7476:58f33057edc4	infinica_5.0_tthonhofer	Mon Sep 26 21:58:39 CEST 2016	tthonhofer	Started Drag and drop support	7403:c8370c3d5510	null
+7475:340afa7b5874	infinica_5.1_sso	Mon Sep 26 20:39:43 CEST 2016	mschedenig	Merge fixes.	null	null
+7474:c037adc69f2a	infinica_5.1_sso	Mon Sep 26 16:40:14 CEST 2016	mschedenig	Merge with infinica_5.0_httpclient4	7472:7cc0a938eaa8	7472:7cc0a938eaa8
+7473:9c2296bda1ae	infinica_5.0_httpclient4	Mon Sep 26 16:06:35 CEST 2016	mschedenig	Close infinica_5.0_httpclient4 branch	7463:52d0f05f4b97	null
+7472:7cc0a938eaa8	infinica_5.1_sso	Mon Sep 26 16:04:46 CEST 2016	mschedenig	Moving SSO development to 5.1.	7461:f2f4b87f4c34	null
+7471:fb067909a1d7	infinica_5.1	Mon Sep 26 18:17:45 CEST 2016	mleitner	#TD-2296: Erros when selecting text in design view with CTRL+SHIFT+ARROWKEY	null	null
+7470:0f2ead2d30d1	infinica_5.1	Mon Sep 26 17:57:41 CEST 2016	Bogdan Mustiata	Check for editables.	null	null
+7469:46e7a8b57c73	infinica_5.1	Mon Sep 26 17:32:21 CEST 2016	mleitner	added missing resources (names and icons)	null	null
+7468:b9b4f10439bb	infinica_5.1	Mon Sep 26 17:16:10 CEST 2016	mleitner	#TD-2303: Can't render template due to ClassNotFoundException	null	null
+7467:cbcbda4385ec	infinica_5.1	Mon Sep 26 16:38:15 CEST 2016	mleitner	fixed customer specific projects after merge	null	null
+7466:d260218da282	infinica_5.1	Mon Sep 26 16:34:46 CEST 2016	mleitner	Merge with infinica_5.0	7465:84c95ef82004	7465:84c95ef82004
+7465:84c95ef82004	infinica_5.1	Mon Sep 26 16:34:03 CEST 2016	mleitner	fixed customer specific projects after merge	null	null
+7464:631aa712477c	infinica_5.1	Mon Sep 26 11:20:33 CEST 2016	mleitner	Merge with infinica_5.0	7461:f2f4b87f4c34	7461:f2f4b87f4c34
+7463:52d0f05f4b97	infinica_5.0_httpclient4	Mon Sep 26 16:02:11 CEST 2016	mschedenig	Merge fixes.	null	null
+7462:559bcf6d3ad9	infinica_5.0_httpclient4	Mon Sep 26 13:35:58 CEST 2016	mschedenig	Merge with infinica_5.0	7020:a790edee0c20	7020:a790edee0c20
+7461:f2f4b87f4c34	infinica_5.1	Mon Sep 26 15:41:34 CEST 2016	totht	BB downcast inline	null	null
+7460:0917f2be6279	infinica_5.1	Mon Sep 26 15:35:11 CEST 2016	Bogdan Mustiata	Insert HTML without moving the range.	null	null
+7459:a3a8b8c2df23	infinica_5.1	Mon Sep 26 14:47:52 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7456:4cccfb168187	7456:4cccfb168187
+7458:85a8ebe820bf	infinica_5.1_mbranicky	Mon Sep 26 14:46:49 CEST 2016	mbranicky	Merge with infinica_5.1	7457:a2aff0258a21	7457:a2aff0258a21
+7457:a2aff0258a21	infinica_5.1_mbranicky	Mon Sep 26 14:40:40 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - add/edit/remove done.	7437:0df9a62a95f3	null
+7456:4cccfb168187	infinica_5.1	Mon Sep 26 14:02:34 CEST 2016	Bogdan Mustiata	BB groups are registered correctly on creation on the IP.	null	null
+7455:e6e2c2349f5f	infinica_5.1	Mon Sep 26 09:54:56 CEST 2016	Bogdan Mustiata	More work on the operations.	null	null
+7454:96017618da8a	infinica_5.1	Fri Sep 23 16:08:39 CEST 2016	Bogdan Mustiata	Made the factory static. More work on the BB insert operations.	null	null
+7453:b7470eb11e25	infinica_5.1	Mon Sep 26 13:43:26 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7447:b8014bfa81a3	7447:b8014bfa81a3
+7452:224cc3ee7c11	infinica_5.1_mkovalik	Mon Sep 26 13:41:33 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7451:a95fdfaf62c1	7451:a95fdfaf62c1
+7451:a95fdfaf62c1	infinica_5.1_mkovalik	Mon Sep 26 13:33:26 CEST 2016	Matej Kovalik	WP-867 - Enable FTP access anonymously (FTP IHT)	null	null
+7450:d6f6ccdc8a20	infinica_5.1_mkovalik	Mon Sep 26 13:21:48 CEST 2016	Matej Kovalik	WP-868 - Show the root folder if ftpRoot not specified	null	null
+7449:13dd8df819af	infinica_5.1_mkovalik	Mon Sep 26 12:53:40 CEST 2016	Matej Kovalik	WP-869 - Not possible to navigate FTP folder structure (FTP IHT)	7431:8f98061f237d	null
+7448:7f029cf77f05	infinica_5.0	Mon Sep 26 13:36:55 CEST 2016	mleitner	added ErsteBank security code (ALFA), fixed some compile problems	7444:c1f6e6bc79f1	null
+7447:b8014bfa81a3	infinica_5.1	Mon Sep 26 13:34:12 CEST 2016	totht	Missing promise spec from CKWidgetWrapper	null	null
+7446:5831e84d2fe4	infinica_5.1	Mon Sep 26 13:12:03 CEST 2016	totht	BuildingBlock deletion	null	null
+7445:e202b5247017	infinica_5.1	Mon Sep 26 12:41:27 CEST 2016	tthonhofer	Merge with infinica_5.1_tthonhofer	7435:e617395393bc	7435:e617395393bc
+7444:c1f6e6bc79f1	infinica_5.0	Mon Sep 26 12:17:17 CEST 2016	mleitner	added ErsteBank security code (ALFA), fixed some compile problems	null	null
+7443:ef2e1e253d23	infinica_5.0	Mon Sep 26 12:13:30 CEST 2016	mleitner	added ErsteBank security code (ALFA), fixed some compile problems	7440:9a56d5493057	null
+7442:290b91698120	infinica_5.1_tthonhofer	Mon Sep 26 12:40:35 CEST 2016	tthonhofer	PD: Fixed compilation errors after changes in PE model	null	null
+7441:f21321799dd8	infinica_5.1_tthonhofer	Mon Sep 26 11:53:12 CEST 2016	tthonhofer	Merge with infinica_5.1	7401:ddc5606bcef4	7401:ddc5606bcef4
+7440:9a56d5493057	infinica_5.0	Mon Sep 26 11:47:54 CEST 2016	mleitner	added ErsteBank security code (ALFA)	null	null
+7439:26680ee60d83	infinica_5.0	Mon Sep 26 11:18:05 CEST 2016	mleitner	code cleanup in customer projects	null	null
+7438:a93107dc8793	infinica_5.0	Mon Sep 26 11:17:43 CEST 2016	mleitner	code cleanup in customer projects	7411:a95d81aaba1d	null
+7437:0df9a62a95f3	infinica_5.1_mbranicky	Fri Sep 23 19:03:05 CEST 2016	mbranicky	Merge with infinica_5.1	7436:d938e57a1633	7436:d938e57a1633
+7436:d938e57a1633	infinica_5.1_mbranicky	Fri Sep 23 18:53:02 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - not yet finished.	7420:38ebb52f538d	null
+7435:e617395393bc	infinica_5.1	Fri Sep 23 14:28:26 CEST 2016	totht	BB operation	null	null
+7434:586a76cc51ab	infinica_5.1	Fri Sep 23 17:53:00 CEST 2016	Michal Oravec	Merge	7433:c2346ddc5610	7433:c2346ddc5610
+7433:c2346ddc5610	infinica_5.1	Fri Sep 23 17:51:29 CEST 2016	Michal Oravec	WP test suite update	7379:b11918a667cc	null
+7432:27b182780734	infinica_5.1	Fri Sep 23 16:45:16 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7428:5f0b0539256f	7428:5f0b0539256f
+7431:8f98061f237d	infinica_5.1_mkovalik	Fri Sep 23 16:42:47 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7430:699f26a0d3b7	7430:699f26a0d3b7
+7430:699f26a0d3b7	infinica_5.1_mkovalik	Fri Sep 23 16:40:20 CEST 2016	Matej Kovalik	WP-862 - Tomcat will not shutdown normally	null	null
+7429:a17a686d9489	infinica_5.1_mkovalik	Fri Sep 23 16:17:11 CEST 2016	Matej Kovalik	WP-864 - Enable multi-select-allowed setup to false (Document List IHT)	7385:fd09700f4507	null
+7428:5f0b0539256f	infinica_5.1	Fri Sep 23 12:24:37 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	null	null
+7427:613cf84feb07	infinica_5.1	Fri Sep 23 12:22:30 CEST 2016	Matej Kovalik	WP-872 Allow vaadin HTs to be instantiated just by name	null	null
+7426:4d9f68733682	infinica_5.1	Fri Sep 23 12:08:53 CEST 2016	Bogdan Mustiata	Added the overlay rendering of context menus into the workplace project. Fixed Context menu appearance.	null	null
+7425:60580d36e608	infinica_5.1	Thu Sep 22 19:05:27 CEST 2016	totht	BB operation	null	null
+7424:a7d489f8ad24	infinica_5.1	Thu Sep 22 14:30:37 CEST 2016	totht	BB tune up	null	null
+7423:d1f11e62827c	infinica_5.1	Thu Sep 22 17:59:00 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7421:96d3dafafaf0	7421:96d3dafafaf0
+7422:3156a6f099a9	infinica_5.1_mschedenig	Thu Sep 22 17:58:10 CEST 2016	mschedenig	Removed ugly intermediate Mapping class in PE JAXB classes.	7415:d5ea5c8358ce	null
+7421:96d3dafafaf0	infinica_5.1	Thu Sep 22 17:42:07 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7417:6447ea511ec9	7417:6447ea511ec9
+7420:38ebb52f538d	infinica_5.1_mbranicky	Thu Sep 22 17:41:16 CEST 2016	mbranicky	Merge with infinica_5.1	7419:859ee88a41e8	7419:859ee88a41e8
+7419:859ee88a41e8	infinica_5.1_mbranicky	Thu Sep 22 17:34:22 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - not yet finished.	null	null
+7418:2572013a47d4	infinica_5.1_mbranicky	Thu Sep 22 17:30:43 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments - not yet finished.	7392:4eb4b5957f73	null
+7417:6447ea511ec9	infinica_5.1	Thu Sep 22 17:30:18 CEST 2016	Bogdan Mustiata	Merge with infinica_5.0	7416:a8b64b04520e	7416:a8b64b04520e
+7416:a8b64b04520e	infinica_5.1	Thu Sep 22 16:28:21 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7407:6798c9e9f7ff	7407:6798c9e9f7ff
+7415:d5ea5c8358ce	infinica_5.1_mschedenig	Thu Sep 22 16:27:49 CEST 2016	mschedenig	Merge with infinica_5.1	7414:d123925d8698	7414:d123925d8698
+7414:d123925d8698	infinica_5.1_mschedenig	Thu Sep 22 14:45:40 CEST 2016	mschedenig	Dependency fixes.	null	null
+7413:dfd702985cd6	infinica_5.1_mschedenig	Thu Sep 22 14:07:26 CEST 2016	mschedenig	Merge with infinica_5.1	7412:55392f9828dd	7412:55392f9828dd
+7412:55392f9828dd	infinica_5.1_mschedenig	Thu Sep 22 14:06:47 CEST 2016	mschedenig	PE modules can now have dependencies. Modules are initialised in dependency order.	7397:52ae5b656d99	null
+7411:a95d81aaba1d	infinica_5.0	Thu Sep 22 16:01:35 CEST 2016	Bogdan Mustiata	Implemented #INFC-1586. Allow save via PE call.	null	null
+7410:8727a1a716fd	infinica_5.0	Thu Sep 22 15:06:04 CEST 2016	Bogdan Mustiata	Allow hardcoded users for Composer.	null	null
+7409:0be0c69da126	infinica_5.0	Wed Sep 21 17:33:01 CEST 2016	Bogdan Mustiata	WIP #INFC-1586. Created YUI module for the PE call, added I18N for the regular save.	null	null
+7408:e5400a5ef482	infinica_5.0	Wed Sep 21 17:30:47 CEST 2016	Bogdan Mustiata	Allow configuring the postback save buttons independently.	7406:e50a21e0ee6c	null
+7407:6798c9e9f7ff	infinica_5.1	Thu Sep 22 14:19:02 CEST 2016	Matej Kovalik	Merge from infinica_5.0	7400:8a79657282aa	7400:8a79657282aa
+7406:e50a21e0ee6c	infinica_5.0	Thu Sep 22 14:12:09 CEST 2016	Matej Kovalik	Merge from infinica_5.0	7377:5ddb44db234b	7377:5ddb44db234b
+7405:48eefaecc9be	infinica_5.0_mkovalik	Thu Sep 22 14:06:35 CEST 2016	Matej Kovalik	WP-865 - missing validation on template	null	null
+7404:f144630c7faf	infinica_5.0_mkovalik	Wed Sep 21 14:55:52 CEST 2016	Matej Kovalik	Merge from infinica_5.0	7001:b5ea2aa4d51a	7001:b5ea2aa4d51a
+7403:c8370c3d5510	infinica_5.0_tthonhofer	Thu Sep 22 14:06:27 CEST 2016	tthonhofer	Merge with infinica_5.1	7402:63efb8187b26	7402:63efb8187b26
+7402:63efb8187b26	infinica_5.0_tthonhofer	Thu Sep 22 14:04:58 CEST 2016	tthonhofer	PD: Mapping creation in editor	7315:6255f17e6fcd	null
+7401:ddc5606bcef4	infinica_5.1_tthonhofer	Thu Sep 22 14:08:32 CEST 2016	tthonhofer	Merge with infinica_5.1	7202:0659aeafc8ba	7202:0659aeafc8ba
+7400:8a79657282aa	infinica_5.1	Thu Sep 22 14:01:35 CEST 2016	tthonhofer	Merge	7399:dfd633f5f599	7399:dfd633f5f599
+7399:dfd633f5f599	infinica_5.1	Thu Sep 22 14:01:03 CEST 2016	tthonhofer	PD: Implemented Help view	7381:0bc95d8d058c	null
+7398:c7907cbd2724	infinica_5.1	Wed Sep 21 19:59:36 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7393:9120d98d9caf	7393:9120d98d9caf
+7397:52ae5b656d99	infinica_5.1_mschedenig	Wed Sep 21 19:59:11 CEST 2016	mschedenig	Merge with infinica_5.1	7396:8f1514316729	7396:8f1514316729
+7396:8f1514316729	infinica_5.1_mschedenig	Wed Sep 21 16:34:50 CEST 2016	mschedenig	Activity parameter resolvers.	null	null
+7395:503d2370b5b6	infinica_5.1_mschedenig	Wed Sep 21 12:48:52 CEST 2016	mschedenig	Merge with infinica_5.0	7394:4e622abc4cab	7394:4e622abc4cab
+7394:4e622abc4cab	infinica_5.1_mschedenig	Wed Sep 21 12:48:35 CEST 2016	mschedenig	Merge with infinica_5.1	7351:72339c8d96a1	7351:72339c8d96a1
+7393:9120d98d9caf	infinica_5.1	Wed Sep 21 18:25:15 CEST 2016	totht	Synchronize clean-up running	7391:6e0369c56056	null
+7392:4eb4b5957f73	infinica_5.1_mbranicky	Wed Sep 21 15:56:04 CEST 2016	mbranicky	WP-871 Popup menus (including comment) appends (overwrites) hash in the URL	7334:19fe64aa746d	null
+7391:6e0369c56056	infinica_5.1	Wed Sep 21 15:23:49 CEST 2016	totht	Adding filter for removing br-s from widget p-s	null	null
+7390:66080d1f1c0e	infinica_5.1	Wed Sep 21 11:09:30 CEST 2016	totht	Change table row and column defaults	null	null
+7389:c6dcf67afd8c	infinica_5.1	Wed Sep 21 13:36:07 CEST 2016	Bogdan Mustiata	Added images	null	null
+7388:5755b5ecf5c8	infinica_5.1	Tue Sep 20 17:13:20 CEST 2016	Bogdan Mustiata	Ajax calls fire.	7386:0361fb94f7d6	null
+7387:f3748fb7891e	infinica_5.1_tmertes	Wed Sep 21 14:06:32 CEST 2016	tmertes	Merge with infinica_5.1	7374:73445cc4b34f	7374:73445cc4b34f
+7386:0361fb94f7d6	infinica_5.1	Wed Sep 21 11:51:13 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7379:b11918a667cc	7379:b11918a667cc
+7385:fd09700f4507	infinica_5.1_mkovalik	Wed Sep 21 11:49:39 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7384:23554776b9cc	7384:23554776b9cc
+7384:23554776b9cc	infinica_5.1_mkovalik	Tue Sep 20 14:01:11 CEST 2016	Matej Kovalik	WP-865 - missing validation on template	null	null
+7383:3177203b28f4	infinica_5.1_mkovalik	Tue Sep 20 13:32:53 CEST 2016	Matej Kovalik	WP-863 - multi-select-allowed issues	null	null
+7382:8826c3ee0aa0	infinica_5.1_mkovalik	Mon Sep 19 18:05:07 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7355:e75264e66b3d	7355:e75264e66b3d
+7381:0bc95d8d058c	infinica_5.1	Wed Sep 21 00:15:02 CEST 2016	tthonhofer	Merge	7380:bdcd01a5e75d	7380:bdcd01a5e75d
+7380:bdcd01a5e75d	infinica_5.1	Wed Sep 21 00:11:54 CEST 2016	tthonhofer	Fixed Problem loading backend classes from eclipse plugins	7325:861bd2a351b6	null
+7379:b11918a667cc	infinica_5.1	Tue Sep 20 18:39:42 CEST 2016	Michal Oravec	Merge	7378:71d6428a22b3	7378:71d6428a22b3
+7378:71d6428a22b3	infinica_5.1	Tue Sep 20 18:38:00 CEST 2016	Michal Oravec	WP tests - fixes and speed-up	7230:54a1005de278	null
+7377:5ddb44db234b	infinica_5.0	Tue Sep 20 17:31:33 CEST 2016	mschedenig	CP-171: Fixed.	7361:9edeb6ee4032	null
+7376:5c72dcbe938b	infinica_5.1	Tue Sep 20 16:38:19 CEST 2016	Bogdan Mustiata	Use promises to initialize the widgets correctly.	null	null
+7375:16bdb2a00d64	infinica_5.1	Tue Sep 20 16:17:27 CEST 2016	totht	Building block downcast	7373:82ea4d9b0ad0	null
+7374:73445cc4b34f	infinica_5.1_tmertes	Tue Sep 20 15:05:48 CEST 2016	tmertes	Merge with infinica_5.1	7372:f7a650bff549	7372:f7a650bff549
+7373:82ea4d9b0ad0	infinica_5.1	Tue Sep 20 15:04:48 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7369:04c6951237a8	7369:04c6951237a8
+7372:f7a650bff549	infinica_5.1_tmertes	Tue Sep 20 15:03:54 CEST 2016	tmertes	Merge with infinica_5.1	7371:4fea409186ee	7371:4fea409186ee
+7371:4fea409186ee	infinica_5.1_tmertes	Tue Sep 20 15:03:14 CEST 2016	tmertes	TD-2307: RE embedded can't establish repository connection due to NoClassDefFoundError	null	null
+7370:fe33c176a3d5	infinica_5.1_tmertes	Tue Sep 20 12:56:22 CEST 2016	tmertes	Merge with infinica_5.1	7365:248d3d28a483	7365:248d3d28a483
+7369:04c6951237a8	infinica_5.1	Tue Sep 20 12:26:20 CEST 2016	totht	#INFC-1566 - Adding BB thru ckeditor API	null	null
+7368:b50485ec6040	infinica_5.1	Tue Sep 20 12:12:58 CEST 2016	Bogdan Mustiata	Fix the init order call.	7366:6ccb9a8138aa	null
+7367:99ae764cee5c	infinica_5.0_tmertes	Tue Sep 20 12:05:39 CEST 2016	tmertes	Merge with infinica_5.0	7360:4f1806e676aa	7360:4f1806e676aa
+7366:6ccb9a8138aa	infinica_5.1	Tue Sep 20 11:48:11 CEST 2016	Bogdan Mustiata	Fix #INFC-1582, Image upload is now working.	7364:0bb7944f5801	null
+7365:248d3d28a483	infinica_5.1_tmertes	Tue Sep 20 11:10:01 CEST 2016	tmertes	Merge with infinica_5.1	7363:33d448909b22	7363:33d448909b22
+7364:0bb7944f5801	infinica_5.1	Tue Sep 20 11:09:06 CEST 2016	tmertes	Merge with infinica_5.1_tmertes	7359:6f7d61c3fcf5	7359:6f7d61c3fcf5
+7363:33d448909b22	infinica_5.1_tmertes	Tue Sep 20 11:08:04 CEST 2016	tmertes	Merge with infinica_5.0	7362:0a244f54b3ae	7362:0a244f54b3ae
+7362:0a244f54b3ae	infinica_5.1_tmertes	Tue Sep 20 11:06:38 CEST 2016	tmertes	Merge with infinica_5.1	7206:f0e8a6a67f1b	7206:f0e8a6a67f1b
+7361:9edeb6ee4032	infinica_5.0	Tue Sep 20 11:04:17 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7336:263c7dd25244	7336:263c7dd25244
+7360:4f1806e676aa	infinica_5.0_tmertes	Tue Sep 20 11:02:00 CEST 2016	tmertes	TD-2306: Add colum width field to table creation dialog	7337:3a48ef7c6585	null
+7359:6f7d61c3fcf5	infinica_5.1	Mon Sep 19 18:04:51 CEST 2016	christopher.prengel@infinica.com	Merge	7358:c54068bfb016	7358:c54068bfb016
+7358:c54068bfb016	infinica_5.1	Mon Sep 19 18:03:55 CEST 2016	christopher.prengel@infinica.com	ComposerDocumentSteps.py: add import	null	null
+7357:ad7f84e001db	infinica_5.1	Mon Sep 19 18:01:05 CEST 2016	christopher.prengel@infinica.com	Det-insert-N.feature now uses a reduced DET itx to make it somewhat faster in	7321:d62e4f53316a	null
+7356:5e487031f67c	infinica_5.1	Mon Sep 19 17:58:22 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7352:fc5bfa9c9e75	7352:fc5bfa9c9e75
+7355:e75264e66b3d	infinica_5.1_mkovalik	Mon Sep 19 17:36:57 CEST 2016	Matej Kovalik	WP-826 - Slow BC page on real ICR	null	null
+7354:46a199beac7f	infinica_5.1_mkovalik	Mon Sep 19 14:14:28 CEST 2016	Matej Kovalik	keep the taskManager client as instance variable	null	null
+7353:6f6af0185633	infinica_5.1_mkovalik	Mon Sep 19 11:46:28 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7269:c3eaaf3e1c94	7269:c3eaaf3e1c94
+7352:fc5bfa9c9e75	infinica_5.1	Mon Sep 19 17:56:32 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7350:e216fb75572e	7350:e216fb75572e
+7351:72339c8d96a1	infinica_5.1_mschedenig	Mon Sep 19 17:55:58 CEST 2016	mschedenig	Activity interface documentation and some minor activity implementation improvements.	7348:9638abb8a31a	null
+7350:e216fb75572e	infinica_5.1	Mon Sep 19 16:44:46 CEST 2016	mschedenig	Merge	7343:aa41a2655f25	7343:aa41a2655f25
+7349:b5de72e9b968	infinica_5.1	Mon Sep 19 16:43:18 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7340:249dab77d426	7340:249dab77d426
+7348:9638abb8a31a	infinica_5.1_mschedenig	Mon Sep 19 16:42:52 CEST 2016	mschedenig	Merge with infinica_5.1	7347:65419f325e75	7347:65419f325e75
+7347:65419f325e75	infinica_5.1_mschedenig	Mon Sep 19 16:42:35 CEST 2016	mschedenig	Added JSON module to PE distribution.	null	null
+7346:4b23c41f255d	infinica_5.1_mschedenig	Mon Sep 19 16:39:30 CEST 2016	mschedenig	JSON type improvements.	null	null
+7345:fbdf6ec0615a	infinica_5.1_mschedenig	Mon Sep 19 13:32:58 CEST 2016	mschedenig	Merge with infinica_5.1	7344:48e1c26c3e4f	7344:48e1c26c3e4f
+7344:48e1c26c3e4f	infinica_5.1_mschedenig	Mon Sep 19 13:32:18 CEST 2016	mschedenig	JSON type conversion improvements.	7299:e0aa9207c928	null
+7343:aa41a2655f25	infinica_5.1	Mon Sep 19 16:40:04 CEST 2016	totht	Update widget node reference	null	null
+7342:431e4ebdc0d3	infinica_5.1	Mon Sep 19 16:00:28 CEST 2016	totht	#INFC-1585 - Make internal link support	null	null
+7341:3bd4f514d625	infinica_5.1	Mon Sep 19 14:44:59 CEST 2016	totht	#INFC-1583 - Make external link support	null	null
+7340:249dab77d426	infinica_5.1	Mon Sep 19 16:24:13 CEST 2016	Bogdan Mustiata	Fixed insertion point handle location.	null	null
+7339:2896aecb5078	infinica_5.1	Mon Sep 19 16:21:56 CEST 2016	Bogdan Mustiata	More cleanups.	null	null
+7338:dce084e99c3b	infinica_5.1	Mon Sep 19 16:02:51 CEST 2016	Bogdan Mustiata	Cleanups, use widgetNode/wrapperNode/contentNode for our document widgets.	7332:15be2253fc5c	null
+7337:3a48ef7c6585	infinica_5.0_tmertes	Mon Sep 19 15:20:08 CEST 2016	tmertes	Merge with infinica_5.0	7335:adc9509a6033	7335:adc9509a6033
+7336:263c7dd25244	infinica_5.0	Mon Sep 19 15:18:02 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7329:a196e0a9c423	7329:a196e0a9c423
+7335:adc9509a6033	infinica_5.0_tmertes	Mon Sep 19 15:15:57 CEST 2016	tmertes	TD-2306: Add colum width field to table creation dialog	7330:3d90898d0a46	null
+7334:19fe64aa746d	infinica_5.1_mbranicky	Mon Sep 19 14:42:31 CEST 2016	mbranicky	Merge with infinica_5.1	7333:e4e59187bb5f	7333:e4e59187bb5f
+7333:e4e59187bb5f	infinica_5.1_mbranicky	Mon Sep 19 14:41:25 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments	7324:93b5aff75d16	null
+7332:15be2253fc5c	infinica_5.1	Mon Sep 19 14:30:08 CEST 2016	Bogdan Mustiata	IP save/load seems to be working.	null	null
+7331:8c0153933c4c	infinica_5.1	Mon Sep 19 11:27:52 CEST 2016	Bogdan Mustiata	InsertionPoints are now with the full content inlined.	7326:a422a4f1f706	null
+7330:3d90898d0a46	infinica_5.0_tmertes	Mon Sep 19 11:48:14 CEST 2016	tmertes	Merge with infinica_5.0	7328:725336d3d8a3	7328:725336d3d8a3
+7329:a196e0a9c423	infinica_5.0	Mon Sep 19 11:47:26 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7309:1f4228c42631	7309:1f4228c42631
+7328:725336d3d8a3	infinica_5.0_tmertes	Mon Sep 19 11:46:13 CEST 2016	tmertes	Merge with infinica_5.0	7327:f15118609b4f	7327:f15118609b4f
+7327:f15118609b4f	infinica_5.0_tmertes	Mon Sep 19 11:45:02 CEST 2016	tmertes	TD-2306: Use jface Dialog directly instead of via PropertiesDialog.	7306:83bfe0bab13f	null
+7326:a422a4f1f706	infinica_5.1	Mon Sep 19 11:17:27 CEST 2016	Matej Kovalik	compilation fixes	null	null
+7325:861bd2a351b6	infinica_5.1	Mon Sep 19 11:08:13 CEST 2016	tthonhofer	Merge	7311:a4ab3c189e2c	7311:a4ab3c189e2c
+7324:93b5aff75d16	infinica_5.1_mbranicky	Mon Sep 19 10:23:36 CEST 2016	mbranicky	Merge with infinica_5.1	7322:e57721d2d320	7322:e57721d2d320
+7323:74c6bc4c7155	infinica_5.1	Mon Sep 19 09:57:56 CEST 2016	mbranicky	Uncommented the version for ?net.sf.json-lib. Let's see whether Webfronted Build will pass.	7321:d62e4f53316a	null
+7322:e57721d2d320	infinica_5.1_mbranicky	Mon Sep 19 09:31:44 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments	7254:0fff8693ebc8	null
+7321:d62e4f53316a	infinica_5.1	Mon Sep 19 02:57:29 CEST 2016	christopher.prengel@infinica.com	clone new feature files from /gherkin	null	null
+7320:ac1ab97de584	infinica_5.1	Mon Sep 19 02:50:44 CEST 2016	christopher.prengel@infinica.com	clone new/modified step files fron /gherkin	null	null
+7319:eb052ff9630c	infinica_5.1	Mon Sep 19 02:38:51 CEST 2016	christopher.prengel@infinica.com	clone new/changed *.feature files from /gherkin	null	null
+7318:1d5e1393e751	infinica_5.1	Sun Sep 18 19:56:11 CEST 2016	christopher.prengel@infinica.com	*.feature: clone in new/changed features	null	null
+7317:ce02da8bc107	infinica_5.1	Sat Sep 17 05:17:43 CEST 2016	christopher.prengel@infinica.com	Merge	7316:93a67a9ac4f7	7316:93a67a9ac4f7
+7316:93a67a9ac4f7	infinica_5.1	Sat Sep 17 05:15:50 CEST 2016	christopher.prengel@infinica.com	ComposerDocumentSteps.py:	7278:2047b04db6af	null
+7315:6255f17e6fcd	infinica_5.0_tthonhofer	Fri Sep 16 17:43:43 CEST 2016	tthonhofer	Merge with infinica_5.1	7314:668671e5e294	7314:668671e5e294
+7314:668671e5e294	infinica_5.0_tthonhofer	Fri Sep 16 17:41:02 CEST 2016	tthonhofer	Improvements to Datafield	null	null
+7313:6a97c8bb8476	infinica_5.0_tthonhofer	Sun Sep 11 20:38:38 CEST 2016	tthonhofer	Merge with infinica_5.1_tthonhofer	7312:58430e5a3807	7312:58430e5a3807
+7312:58430e5a3807	infinica_5.0_tthonhofer	Sun Sep 11 20:31:50 CEST 2016	tthonhofer	Adapted process designer for engine plugin changes	7157:aabd9c53f1a1	null
+7311:a4ab3c189e2c	infinica_5.1	Mon Sep 19 11:07:25 CEST 2016	tthonhofer	Fixed wrong IDataStoreType in PD	null	null
+7310:9c5721b9c794	infinica_5.1	Fri Sep 16 17:37:24 CEST 2016	tthonhofer	Merge	7293:44c77ad6be70	7293:44c77ad6be70
+7309:1f4228c42631	infinica_5.0	Fri Sep 16 14:50:54 CEST 2016	mleitner	#CP-149: RAL throws UnmarshalException when trying to fetch children of non existing resources	null	null
+7308:689108932cb0	infinica_5.0	Fri Sep 16 14:00:22 CEST 2016	mleitner	#CP-154: RAL: COPY doesn't create copy of source in target anymore	null	null
+7307:39672d2ea067	infinica_5.0	Fri Sep 16 11:58:37 CEST 2016	mleitner	#CP-155: Status code doesn't get resolved	7305:425a695404be	null
+7306:83bfe0bab13f	infinica_5.0_tmertes	Fri Sep 16 10:57:39 CEST 2016	tmertes	Merge with infinica_5.0	7304:f92b5a889d9f	7304:f92b5a889d9f
+7305:425a695404be	infinica_5.0	Fri Sep 16 10:56:20 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7301:1044c873b119	7301:1044c873b119
+7304:f92b5a889d9f	infinica_5.0_tmertes	Fri Sep 16 10:55:23 CEST 2016	tmertes	Merge with infinica_5.0	7303:a95cb9325d8c	7303:a95cb9325d8c
+7303:a95cb9325d8c	infinica_5.0_tmertes	Fri Sep 16 10:52:39 CEST 2016	tmertes	TD-2305: Add table creation dialog to enter the number of colums and rows	null	null
+7302:7a8a780509fe	infinica_5.0_tmertes	Fri Sep 16 10:44:29 CEST 2016	tmertes	Remove outdated bundle for compatibility layer for Eclipse 2.x.	7251:6429471f2b01	null
+7301:1044c873b119	infinica_5.0	Fri Sep 16 03:43:56 CEST 2016	mleitner	#CP-163: NewWebDavVariants2IT.testPce961()	7294:9b83a55c3b75	null
+7300:35cfc9bca6ea	infinica_5.1	Thu Sep 15 20:12:37 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7292:0fc430d7d270	7292:0fc430d7d270
+7299:e0aa9207c928	infinica_5.1_mschedenig	Thu Sep 15 20:11:58 CEST 2016	mschedenig	Merge fixes.	null	null
+7298:8c2c0175b20c	infinica_5.1_mschedenig	Thu Sep 15 20:11:18 CEST 2016	mschedenig	Merge fixes.	null	null
+7297:bc47b55726e2	infinica_5.1_mschedenig	Thu Sep 15 17:01:24 CEST 2016	mschedenig	Merge with infinica_5.1	7296:f670696e61c8	7296:f670696e61c8
+7296:f670696e61c8	infinica_5.1_mschedenig	Thu Sep 15 16:59:26 CEST 2016	mschedenig	Primitive JSON type (probably still needs some improvements).	null	null
+7295:7a83c7f87877	infinica_5.1_mschedenig	Thu Sep 15 16:17:57 CEST 2016	mschedenig	Moved data store types to separate module.	7291:bbd598ce2493	null
+7294:9b83a55c3b75	infinica_5.0	Thu Sep 15 16:24:39 CEST 2016	mleitner	#CP-163: NewWebDavVariants2IT.testPce961()	7282:f26bd2aa5d32	null
+7293:44c77ad6be70	infinica_5.1	Fri Sep 16 17:35:05 CEST 2016	tthonhofer	Fixed PE-347	null	null
+7292:0fc430d7d270	infinica_5.1	Thu Sep 15 15:58:06 CEST 2016	tthonhofer	Merge	7288:f10b85fa751d	7288:f10b85fa751d
+7291:bbd598ce2493	infinica_5.1_mschedenig	Thu Sep 15 15:12:57 CEST 2016	mschedenig	Data store types are now also defined in XML descriptors.	null	null
+7290:e0b5eceaea09	infinica_5.1_mschedenig	Thu Sep 15 11:52:52 CEST 2016	mschedenig	Code cleanup.	null	null
+7289:3fe630357859	infinica_5.1_mschedenig	Thu Sep 15 11:40:16 CEST 2016	mschedenig	Type conversions are now defined in XML.	7274:be4960627e52	null
+7288:f10b85fa751d	infinica_5.1	Thu Sep 15 15:57:15 CEST 2016	tthonhofer	Fixed task type problems in PD and TM	7275:c6a53791193f	null
+7287:ed88d2a5ecb2	infinica_5.1	Thu Sep 15 14:02:57 CEST 2016	mleitner	removed Serializer feature: store insertion point information in the head section and reference it from the body	null	null
+7286:d2c7500c3716	infinica_5.1	Thu Sep 15 12:57:35 CEST 2016	mleitner	Merge with infinica_5.0	7285:8e1e657e3c5d	7285:8e1e657e3c5d
+7285:8e1e657e3c5d	infinica_5.1	Thu Sep 15 11:30:10 CEST 2016	mleitner	fixed tests in merged code	null	null
+7284:fa47761e1100	infinica_5.1	Thu Sep 15 11:09:46 CEST 2016	mleitner	cleaned up merged code	null	null
+7283:2d78f43e212c	infinica_5.1	Thu Sep 15 10:46:55 CEST 2016	mleitner	Merge with infinica_5.0	7278:2047b04db6af	7278:2047b04db6af
+7282:f26bd2aa5d32	infinica_5.0	Thu Sep 15 12:13:54 CEST 2016	mleitner	#TD-2298: Add signature form field to Template Designer	null	null
+7281:723e1c952b64	infinica_5.0	Wed Sep 14 16:32:39 CEST 2016	mleitner	#TD-2299: Add signature form field as ModelElement	null	null
+7280:366f9a7ae323	infinica_5.0	Wed Sep 14 14:42:13 CEST 2016	mleitner	#TD-2302: test signature form handling in PE module pdf-forms	null	null
+7279:a57187d0a822	infinica_5.0	Wed Sep 14 14:32:10 CEST 2016	mleitner	#TD-2301: handle signature form field in PdfForm/PdfFormDefinition	7276:1112881155ce	null
+7278:2047b04db6af	infinica_5.1	Wed Sep 14 21:32:00 CEST 2016	christopher.prengel@infinica.com	Merge	7277:92e8b04bf97c	7277:92e8b04bf97c
+7277:92e8b04bf97c	infinica_5.1	Wed Sep 14 21:30:24 CEST 2016	christopher.prengel@infinica.com	renamed two tiny zips	7122:0948cceacb15	null
+7276:1112881155ce	infinica_5.0	Wed Sep 14 18:41:32 CEST 2016	Matej Kovalik	estmk - logout from WP at the end	7263:8e3c9486da17	null
+7275:c6a53791193f	infinica_5.1	Wed Sep 14 18:40:08 CEST 2016	tthonhofer	Merge	7264:358ac9fc85cd	7264:358ac9fc85cd
+7274:be4960627e52	infinica_5.1_mschedenig	Wed Sep 14 18:00:18 CEST 2016	mschedenig	All standard PE types are now defined in core module (and - for now - in a duplicate for the impl tests).	7258:fc6f06aab195	null
+7273:438ff7fdff1e	infinica_5.1	Wed Sep 14 17:41:46 CEST 2016	totht	#INFC-1565 Widgetilize Building Blocks	null	null
+7272:7b060f07eb8a	infinica_5.1	Wed Sep 14 16:56:08 CEST 2016	mleitner	#TD-2303: Can't render template due to IDataStoreBlackBox error	null	null
+7271:e2c053d5cf31	infinica_5.1	Wed Sep 14 16:41:46 CEST 2016	Matej Kovalik	js typo	null	null
+7270:fd148e2c40bd	infinica_5.1	Wed Sep 14 16:13:40 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7266:287146d2c4d8	7266:287146d2c4d8
+7269:c3eaaf3e1c94	infinica_5.1_mkovalik	Wed Sep 14 16:12:18 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7268:1fa639fe0902	7268:1fa639fe0902
+7268:1fa639fe0902	infinica_5.1_mkovalik	Wed Sep 14 16:09:37 CEST 2016	Matej Kovalik	WP-851 - Update human tasks meta data	null	null
+7267:2f66c2ef0bcc	infinica_5.1_mkovalik	Wed Sep 14 09:53:56 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7233:346107e2a957	7233:346107e2a957
+7266:287146d2c4d8	infinica_5.1	Wed Sep 14 15:06:58 CEST 2016	Bogdan Mustiata	InsertionPoints copy their content inside.	null	null
+7265:4d072de396a3	infinica_5.1	Wed Sep 14 11:35:33 CEST 2016	Bogdan Mustiata	Adding groups if somewhat functional, with dem widgets.	7256:dad79576fda5	null
+7264:358ac9fc85cd	infinica_5.1	Wed Sep 14 17:35:43 CEST 2016	tthonhofer	PE: Added checking for missing inputs to IPDValidator	7203:ec5aed537f5a	null
+7263:8e3c9486da17	infinica_5.0	Wed Sep 14 12:31:13 CEST 2016	mleitner	#TD-2300: handle signature form field in Serializer	null	null
+7262:cd66e8c4b1ea	infinica_5.0	Wed Sep 14 12:27:22 CEST 2016	mleitner	#TD-2300: handle signature form field in Serializer	null	null
+7261:b34316c7f63a	infinica_5.0	Wed Sep 14 12:18:58 CEST 2016	mleitner	#TD-2300: handle signature form field in Serializer	null	null
+7260:cd7c6e4b5de2	infinica_5.0	Wed Sep 14 12:10:51 CEST 2016	mleitner	#TD-2300: handle signature form field in Serializer	null	null
+7259:4496c0ce9f66	infinica_5.0	Wed Sep 14 11:07:55 CEST 2016	mleitner	#TD-2299: Add signature form field as ModelElement	7255:2ece9a6b1b8f	null
+7258:fc6f06aab195	infinica_5.1_mschedenig	Tue Sep 13 19:28:42 CEST 2016	mschedenig	Type fixes and PdfFormReader output type fixes.	null	null
+7257:615b39cbe08d	infinica_5.1_mschedenig	Tue Sep 13 17:36:29 CEST 2016	mschedenig	Modularisation of PE data types (in progress).	7232:05fa587570a0	null
+7256:dad79576fda5	infinica_5.1	Tue Sep 13 18:21:06 CEST 2016	Matej Kovalik	WP-851 - Update human tasks meta data	7252:ffcca63b316b	null
+7255:2ece9a6b1b8f	infinica_5.0	Tue Sep 13 16:25:27 CEST 2016	mleitner	#CP-150: RAL: Other principals are removed when setting ACLs	7250:b9c62524a20a	null
+7254:0fff8693ebc8	infinica_5.1_mbranicky	Tue Sep 13 17:14:12 CEST 2016	mbranicky	Merge with infinica_5.1	7253:7b49b009f1ce	7253:7b49b009f1ce
+7253:7b49b009f1ce	infinica_5.1_mbranicky	Tue Sep 13 17:13:14 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments	7244:c4e5d6489f88	null
+7252:ffcca63b316b	infinica_5.1	Tue Sep 13 16:26:02 CEST 2016	Bogdan Mustiata	Made the insertion add the widgets with a promise.	7247:64c92ac4cf36	null
+7251:6429471f2b01	infinica_5.0_tmertes	Tue Sep 13 16:07:44 CEST 2016	tmertes	Merge with infinica_5.0	7249:27550d5dc98b	7249:27550d5dc98b
+7250:b9c62524a20a	infinica_5.0	Tue Sep 13 16:06:38 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7240:dfb2aaec7130	7240:dfb2aaec7130
+7249:27550d5dc98b	infinica_5.0_tmertes	Tue Sep 13 16:05:34 CEST 2016	tmertes	Merge with infinica_5.0	7248:7d58d03a4b15	7248:7d58d03a4b15
+7248:7d58d03a4b15	infinica_5.0_tmertes	Tue Sep 13 16:04:21 CEST 2016	tmertes	TD-2235: Adaptive document	7211:3103f00bbdba	null
+7247:64c92ac4cf36	infinica_5.1	Tue Sep 13 15:49:51 CEST 2016	mschwarz	Replaced deprecated methods with current ones.	null	null
+7246:89ada201560a	infinica_5.1	Tue Sep 13 15:39:37 CEST 2016	Matej Kovalik	WP-850 - TaskType provider	null	null
+7245:c5f6ad1f2fcd	infinica_5.1	Tue Sep 13 15:17:10 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7241:d37a7d918950	7241:d37a7d918950
+7244:c4e5d6489f88	infinica_5.1_mbranicky	Tue Sep 13 15:13:17 CEST 2016	mbranicky	Merge with infinica_5.1	7243:54027df8dd1c	7243:54027df8dd1c
+7243:54027df8dd1c	infinica_5.1_mbranicky	Tue Sep 13 15:09:31 CEST 2016	mbranicky	WP-857 Implement a possibility to manage HT comments	null	null
+7242:5606d5083e9f	infinica_5.1_mbranicky	Tue Sep 13 15:07:04 CEST 2016	mbranicky	Fix for FTP Human Task - NPE and other improvements.	7198:4a03033578b6	null
+7241:d37a7d918950	infinica_5.1	Tue Sep 13 14:52:14 CEST 2016	Matej Kovalik	WP-850 - Implement Task Type provider in Workplace	7239:f5fd344650f5	null
+7240:dfb2aaec7130	infinica_5.0	Tue Sep 13 14:00:23 CEST 2016	Bogdan Mustiata	FIX #WP-860 Removed bogus XML escaping.	7231:9681c12afb0a	null
+7239:f5fd344650f5	infinica_5.1	Tue Sep 13 13:43:17 CEST 2016	Bogdan Mustiata	Whoops. Moved the definition inside the widget.	null	null
+7238:ea9ca00bfc73	infinica_5.1	Tue Sep 13 13:40:15 CEST 2016	Bogdan Mustiata	Removed commented code.	null	null
+7237:7d659bcd598f	infinica_5.1	Tue Sep 13 13:38:58 CEST 2016	Bogdan Mustiata	Added insertion points as widgets.	null	null
+7236:ab02b47b3477	infinica_5.1	Tue Sep 13 12:06:27 CEST 2016	Bogdan Mustiata	Move the head nodes first into the DOM, before calling setData, so we can get them in widgets.	null	null
+7235:47464adea1b3	infinica_5.1	Tue Sep 13 11:16:49 CEST 2016	Bogdan Mustiata	Started work on creating the InsertionPoints as widgets.	null	null
+7234:050412562f81	infinica_5.1	Tue Sep 13 13:29:14 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7230:54a1005de278	7230:54a1005de278
+7233:346107e2a957	infinica_5.1_mkovalik	Tue Sep 13 13:15:16 CEST 2016	Matej Kovalik	WP-850 - TaskType provider	7229:35d2871a0771	null
+7232:05fa587570a0	infinica_5.1_mschedenig	Tue Sep 13 12:21:12 CEST 2016	mschedenig	Fixed handling of type aliases for conversions.	7222:cae67cfe6d79	null
+7231:9681c12afb0a	infinica_5.0	Tue Sep 13 11:52:38 CEST 2016	mleitner	#CP-150: RAL: Other principals are removed when setting ACLs (not fixed)	7210:30a5b408d863	null
+7230:54a1005de278	infinica_5.1	Tue Sep 13 10:44:25 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7227:4c9e4ce2e685	7227:4c9e4ce2e685
+7229:35d2871a0771	infinica_5.1_mkovalik	Tue Sep 13 10:41:37 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7228:6534dc18ba0f	7228:6534dc18ba0f
+7228:6534dc18ba0f	infinica_5.1_mkovalik	Tue Sep 13 10:31:10 CEST 2016	Matej Kovalik	WP-855 - Document dependency designer	7186:85d3c1d0423b	null
+7227:4c9e4ce2e685	infinica_5.1	Tue Sep 13 10:08:11 CEST 2016	Bogdan Mustiata	Scripts to build the documentation. Updates on hgignore.	null	null
+7226:2b34bec74788	infinica_5.1	Tue Sep 13 09:50:06 CEST 2016	Bogdan Mustiata	Added the compiled plugin.	null	null
+7225:003bb242eccb	infinica_5.1	Tue Sep 13 09:47:45 CEST 2016	Bogdan Mustiata	Added some scripts.	null	null
+7224:037a17c5bbfa	infinica_5.1	Wed Sep 07 14:28:41 CEST 2016	totht	#INFC-1565 Widgetilize Building Blocks	null	null
+7223:cb5b0022a585	infinica_5.1	Mon Sep 12 18:24:44 CEST 2016	Bogdan Mustiata	Use icons inside a plugin.	7218:6ba090c55216	null
+7222:cae67cfe6d79	infinica_5.1_mschedenig	Mon Sep 12 16:59:05 CEST 2016	mschedenig	Fixes.	null	null
+7221:b377b53b7a3a	infinica_5.1_mschedenig	Mon Sep 12 16:58:50 CEST 2016	mschedenig	Fixes.	null	null
+7220:b04a3632190f	infinica_5.1_mschedenig	Mon Sep 12 12:58:21 CEST 2016	mschedenig	Merge with infinica_5.1	7219:a152263151a4	7219:a152263151a4
+7219:a152263151a4	infinica_5.1_mschedenig	Mon Sep 12 12:57:42 CEST 2016	mschedenig	Variable mapping can now handle multiple target types and conversions.	7175:2d0aab027690	null
+7218:6ba090c55216	infinica_5.1	Mon Sep 12 16:41:20 CEST 2016	mleitner	fixed tests	null	null
+7217:a08050484d6a	infinica_5.1	Mon Sep 12 16:26:25 CEST 2016	mleitner	#CP-170: insertion point in newly rendered building block - WEBFO	null	null
+7216:1b1dbc57928b	infinica_5.1	Mon Sep 12 15:00:03 CEST 2016	mleitner	#CP-167: insertion point in chosen part - WEBFO	null	null
+7215:c0b096a41204	infinica_5.1	Mon Sep 12 14:58:51 CEST 2016	mleitner	#CP-168: insertion point in chosen part - IDX	null	null
+7214:573ba1cc4a73	infinica_5.1	Mon Sep 12 12:46:05 CEST 2016	mleitner	#CP-167: insertion point in chosen part - ITX	null	null
+7213:9d34cae009ff	infinica_5.1	Mon Sep 12 12:42:55 CEST 2016	mleitner	#CP-166: insertion point in template part - WEBFO	null	null
+7212:fd97c31f9dee	infinica_5.1	Mon Sep 12 12:28:15 CEST 2016	mleitner	#CP-165: insertion point in template part - ITX	7205:80ac6d4e30b1	null
+7211:3103f00bbdba	infinica_5.0_tmertes	Mon Sep 12 15:03:31 CEST 2016	tmertes	Merge with infinica_5.0	7209:4bf3674cff81	7209:4bf3674cff81
+7210:30a5b408d863	infinica_5.0	Mon Sep 12 14:57:16 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7182:a3f1ede16aaf	7182:a3f1ede16aaf
+7209:4bf3674cff81	infinica_5.0_tmertes	Mon Sep 12 14:56:09 CEST 2016	tmertes	Merge with infinica_5.0	7208:566ab1e7980f	7208:566ab1e7980f
+7208:566ab1e7980f	infinica_5.0_tmertes	Mon Sep 12 14:54:57 CEST 2016	tmertes	TD-2294: Analyse and improve document performance with mass tables.	null	null
+7207:e82b19e31051	infinica_5.0_tmertes	Fri Sep 09 11:39:47 CEST 2016	tmertes	Merge with infinica_5.0	7126:8fbcc42f79f7	7126:8fbcc42f79f7
+7206:f0e8a6a67f1b	infinica_5.1_tmertes	Wed Sep 07 09:28:39 CEST 2016	tmertes	Merge with infinica_5.1	7098:c360dbf13945	7098:c360dbf13945
+7205:80ac6d4e30b1	infinica_5.1	Mon Sep 12 14:32:24 CEST 2016	Bogdan Mustiata	Don't put the sourcemaps in, for Compass, since Edge seems to choke on them.	null	null
+7204:a52faff4af73	infinica_5.1	Mon Sep 12 12:19:17 CEST 2016	Bogdan Mustiata	Fix #INFC-1549. On adding replies, the textarea shouldn't yield scrollbars.	null	null
+7203:ec5aed537f5a	infinica_5.1	Mon Sep 12 13:59:03 CEST 2016	tthonhofer	Merge with infinica_5.1_tthonhofer	7199:ac50a5ffd449	7199:ac50a5ffd449
+7202:0659aeafc8ba	infinica_5.1_tthonhofer	Mon Sep 12 13:46:43 CEST 2016	tthonhofer	PE: Generated new SOAP server stub	null	null
+7201:d080832a3c42	infinica_5.1_tthonhofer	Mon Sep 12 11:26:16 CEST 2016	tthonhofer	Merge with infinica_5.1	7200:dcb11b1ba8a3	7200:dcb11b1ba8a3
+7200:dcb11b1ba8a3	infinica_5.1_tthonhofer	Mon Sep 12 11:23:17 CEST 2016	tthonhofer	Fixed Nullpointer in PD when retrieving TaskTypes	7155:794135172045	null
+7199:ac50a5ffd449	infinica_5.1	Mon Sep 12 10:59:39 CEST 2016	mbranicky	Merge with infinica_5.1_mbranicky	7196:e8618506108b	7196:e8618506108b
+7198:4a03033578b6	infinica_5.1_mbranicky	Mon Sep 12 10:57:42 CEST 2016	mbranicky	Merge with infinica_5.1	7197:e9b9fdaea1c6	7197:e9b9fdaea1c6
+7197:e9b9fdaea1c6	infinica_5.1_mbranicky	Mon Sep 12 10:56:20 CEST 2016	mbranicky	Wrongly encoded file names (in fact duplicates) removed.	7194:c8c7f7f53008	null
+7196:e8618506108b	infinica_5.1	Mon Sep 12 10:29:57 CEST 2016	Michal Oravec	Merge	7195:ce7bd8da4f8d	7195:ce7bd8da4f8d
+7195:ce7bd8da4f8d	infinica_5.1	Mon Sep 12 10:23:16 CEST 2016	Michal Oravec	WP feature renamed	7080:f30e2a6fc40d	null
+7194:c8c7f7f53008	infinica_5.1_mbranicky	Mon Sep 12 10:16:05 CEST 2016	mbranicky	WP-846 Implement a backend logic for FTP operations - DE translations.	null	null
+7193:35a7b6c1dd43	infinica_5.1_mbranicky	Mon Sep 12 09:48:54 CEST 2016	mbranicky	WP-846 Implement a backend logic for FTP operations - finished except of missing DE translations.	null	null
+7192:74e9e000d051	infinica_5.1_mbranicky	Fri Sep 09 17:08:54 CEST 2016	mbranicky	WP-846 Implement a backend logic for FTP operations - error notifications still missing.	7181:675cf8126bfb	null
+7191:72a11873d6f7	infinica_5.1	Fri Sep 09 16:37:51 CEST 2016	Bogdan Mustiata	Recompiled CKEditor.	null	null
+7190:e451f5491ca8	infinica_5.1	Fri Sep 09 16:36:15 CEST 2016	Bogdan Mustiata	Related #INFC-1466. Use afterInit for initializing the plugins.	null	null
+7189:e537a1e1e7b8	infinica_5.1	Fri Sep 09 15:11:58 CEST 2016	Bogdan Mustiata	Fix #INFC-1466. No right margin for resizing.	null	null
+7188:d515f4844e09	infinica_5.1	Fri Sep 09 15:09:00 CEST 2016	Bogdan Mustiata	Fix #INFC-1466 allow resizing the table borders.	null	null
+7187:ccbbbeec2367	infinica_5.1	Fri Sep 09 12:38:35 CEST 2016	Matej Kovalik	Merge from infinica_5.1_mkovalik	7183:bb5ad1f0c141	7183:bb5ad1f0c141
+7186:85d3c1d0423b	infinica_5.1_mkovalik	Fri Sep 09 12:33:31 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7185:47838d9e2f48	7185:47838d9e2f48
+7185:47838d9e2f48	infinica_5.1_mkovalik	Fri Sep 09 12:29:16 CEST 2016	Matej Kovalik	WP-850 - Implement Task Type provider in WP	null	null
+7184:36a43f4aa22a	infinica_5.1_mkovalik	Thu Sep 08 10:07:46 CEST 2016	Matej Kovalik	Merge from infinica_5.1	7115:fba59d719832	7115:fba59d719832
+7183:bb5ad1f0c141	infinica_5.1	Fri Sep 09 11:33:12 CEST 2016	Bogdan Mustiata	Merge	7176:0ff6d8e1337b	7176:0ff6d8e1337b
+7182:a3f1ede16aaf	infinica_5.0	Fri Sep 09 11:23:31 CEST 2016	Bogdan Mustiata	Don't cleanup contenteditable attributes in head nodes.	7160:609668ba0f13	null
+7181:675cf8126bfb	infinica_5.1_mbranicky	Fri Sep 09 09:09:06 CEST 2016	mbranicky	Vaadin Spreadsheet license set to FINAL.	null	null
+7180:9f062e219e63	infinica_5.1_mbranicky	Fri Sep 09 09:08:25 CEST 2016	mbranicky	Autowired property moved to constructor parameter.	null	null
+7179:787357db27bc	infinica_5.1_mbranicky	Fri Sep 09 08:57:17 CEST 2016	Marek Branicky	Merge with infinica_5.1	7178:b9e5766e7fa4	7178:b9e5766e7fa4
+7178:b9e5766e7fa4	infinica_5.1_mbranicky	Fri Sep 09 08:55:15 CEST 2016	mbranicky	WP-846 Implement a backend logic for FTP operations - unfinished	null	null
+7176:0ff6d8e1337b	infinica_5.1	Thu Sep 08 23:44:04 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7173:ccc95fcc001f	7173:ccc95fcc001f
+7175:2d0aab027690	infinica_5.1_mschedenig	Thu Sep 08 20:11:20 CEST 2016	mschedenig	Output parameter validation.	null	null
+7174:988b779f6e1a	infinica_5.1_mschedenig	Thu Sep 08 17:47:44 CEST 2016	mschedenig	Validation of activity input parameter quantities and custom named parameters.	7172:69af3004cf61	null
+7173:ccc95fcc001f	infinica_5.1	Thu Sep 08 16:59:21 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7162:bfbb7ed6a7ba	7162:bfbb7ed6a7ba
+7172:69af3004cf61	infinica_5.1_mschedenig	Thu Sep 08 16:55:31 CEST 2016	mschedenig	Merge with infinica_5.1	7171:c5accb9966c0	7171:c5accb9966c0
+7171:c5accb9966c0	infinica_5.1_mschedenig	Thu Sep 08 16:54:59 CEST 2016	mschedenig	Fixed tons of interfaces and webservice stuff.	null	null
+7170:46415a5463de	infinica_5.1_mschedenig	Thu Sep 08 13:06:08 CEST 2016	mschedenig	Merge with infinica_5.1	7165:a11e675b4d13	7165:a11e675b4d13
+7169:e33891b28526	infinica_5.1	Thu Sep 08 13:05:40 CEST 2016	mschedenig	Merge	7168:a32e2cf08014	7168:a32e2cf08014
+7168:a32e2cf08014	infinica_5.1	Thu Sep 08 13:05:04 CEST 2016	mschedenig	Implemented default values for activity parameters.	null	null
+7167:92246a830918	infinica_5.1	Thu Sep 08 01:25:09 CEST 2016	mschedenig	Merge	7166:61a6f36e193a	7166:61a6f36e193a
+7166:61a6f36e193a	infinica_5.1	Thu Sep 08 01:23:31 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7144:8cfc69901ca0	7144:8cfc69901ca0
+7165:a11e675b4d13	infinica_5.1_mschedenig	Thu Sep 08 01:22:43 CEST 2016	mschedenig	Removed target classes.	null	null
+7164:5e7c8f10187d	infinica_5.1_mschedenig	Wed Sep 07 20:57:33 CEST 2016	mschedenig	(Nearly) finished porting the core module to the new activity API.	null	null
+7163:50962e665702	infinica_5.1_mschedenig	Wed Sep 07 18:46:43 CEST 2016	mschedenig	Merge with infinica_5.1	7145:44eadafd7deb	7145:44eadafd7deb
+7162:bfbb7ed6a7ba	infinica_5.1	Thu Sep 08 15:27:11 CEST 2016	Bogdan Mustiata	Fix #INFC-1551: Fixed i18n messages for che context menu.	null	null
+7161:1a7de8274221	infinica_5.1	Thu Sep 08 14:57:08 CEST 2016	Bogdan Mustiata	Merge with infinica_5.0	7159:bf8258a6a5a6	7159:bf8258a6a5a6
+7160:609668ba0f13	infinica_5.0	Thu Sep 08 14:55:26 CEST 2016	Bogdan Mustiata	Fix #INFC-1564: Added dimensions dependency.	7151:7a6a1eb76118	null
+7159:bf8258a6a5a6	infinica_5.1	Thu Sep 08 14:51:06 CEST 2016	Bogdan Mustiata	Open Browser with retries.	null	null
+7158:583d2bcd9afc	infinica_5.1	Thu Sep 08 14:24:16 CEST 2016	Bogdan Mustiata	Fix #INFC-1557. Added tests for left and right static page content.	7153:cb218d4bfc8f	null
+7157:aabd9c53f1a1	infinica_5.0_tthonhofer	Thu Sep 08 14:15:42 CEST 2016	tthonhofer	Merge with infinica_5.1	7156:723db278dda7	7156:723db278dda7
+7156:723db278dda7	infinica_5.0_tthonhofer	Thu Sep 08 14:11:18 CEST 2016	tthonhofer	Fixed data field display issues	7071:66947f2fdfbd	null
+7155:794135172045	infinica_5.1_tthonhofer	Sun Sep 11 20:28:04 CEST 2016	tthonhofer	Extended process execution manager API with getTaskManager	null	null
+7154:a29ab25b67a7	infinica_5.1_tthonhofer	Thu Sep 08 14:18:03 CEST 2016	tthonhofer	Merge with infinica_5.1	7133:721ff0a75c59	7133:721ff0a75c59
+7153:cb218d4bfc8f	infinica_5.1	Thu Sep 08 14:09:31 CEST 2016	tthonhofer	Merge	7147:a59f5df0c02b	7147:a59f5df0c02b
+7152:3bb9e6603625	infinica_5.1	Thu Sep 08 13:32:18 CEST 2016	Bogdan Mustiata	Merge with infinica_5.0	7150:17e96c9d14a6	7150:17e96c9d14a6
+7151:7a6a1eb76118	infinica_5.0	Thu Sep 08 13:29:32 CEST 2016	Bogdan Mustiata	Fix #INFC-1564: Check if the attachedTrigger is actually attached.	7149:f2742b8f2dd9	null
+7150:17e96c9d14a6	infinica_5.1	Thu Sep 08 11:16:31 CEST 2016	Bogdan Mustiata	Merge with infinica_5.0	7146:f3b49288c798	7146:f3b49288c798
+7149:f2742b8f2dd9	infinica_5.0	Thu Sep 08 11:07:11 CEST 2016	Bogdan Mustiata	Fix #INFC-1564: Move the date picker into its correct position.	null	null
+7148:b5538c971fa5	infinica_5.0	Thu Sep 08 10:43:21 CEST 2016	Bogdan Mustiata	Fix #INFC-1570: Keep aspect ratio of the Image when inserting an image.	7141:9b06f704c16a	null
+7147:a59f5df0c02b	infinica_5.1	Thu Sep 08 14:09:02 CEST 2016	tthonhofer	Started loading TaskTypes in ProcesDesigner	null	null
+7146:f3b49288c798	infinica_5.1	Wed Sep 07 21:34:58 CEST 2016	tthonhofer	Merge with infinica_5.1_tthonhofer	7144:8cfc69901ca0	7144:8cfc69901ca0
+7145:44eadafd7deb	infinica_5.1_mschedenig	Wed Sep 07 18:44:33 CEST 2016	mschedenig	Refactored internal activity API and began refactoring activity implementations.	7127:9c1eaa4a6125	null
+7144:8cfc69901ca0	infinica_5.1	Wed Sep 07 16:07:49 CEST 2016	mleitner	Merge with infinica_5.0	7143:63e5540a4fa3	7143:63e5540a4fa3
+7143:63e5540a4fa3	infinica_5.1	Wed Sep 07 16:07:30 CEST 2016	mleitner	Merge with infinica_5.0	7142:b88ad06011ee	7142:b88ad06011ee
+7142:b88ad06011ee	infinica_5.1	Wed Sep 07 16:07:04 CEST 2016	mleitner	Merge with infinica_5.0	7128:30297e838ec9	7128:30297e838ec9
+7141:9b06f704c16a	infinica_5.0	Wed Sep 07 14:59:41 CEST 2016	mleitner	updated release notes	null	null
+7140:3c70b3f94e56	infinica_5.0	Wed Sep 07 16:05:00 CEST 2016	mleitner	Merge with release 5.0.4.2	7125:32324546c717	7125:32324546c717
+7139:c8b6060ef2a9	release 5.0.4.2	Wed Sep 07 16:02:48 CEST 2016	mleitner	Close release 5.0.4.2 branch	null	null
+7138:f0b49880281c	release 5.0.4.2	Wed Sep 07 15:44:41 CEST 2016	mleitner	release 5.0.4.3-SNAPSHOT	null	null
+7137:13907dca13f1	release 5.0.4.2	Wed Sep 07 14:24:26 CEST 2016	mleitner	created installers for Infinica Process Designer 5_0_4_2	null	null
+7136:dececf22c8ab	release 5.0.4.2	Wed Sep 07 14:20:27 CEST 2016	mleitner	created installers for Infinica Template Designer 5_0_4_2	null	null
+7135:611e73264ff3	release 5.0.4.2	Wed Sep 07 13:54:51 CEST 2016	mleitner	release 5.0.4.2	null	null
+7134:796ee23f8b72	release 5.0.4.2	Wed Sep 07 12:46:28 CEST 2016	mleitner	release 5.0.4.2	7125:32324546c717	null
+7133:721ff0a75c59	infinica_5.1_tthonhofer	Wed Sep 07 21:30:04 CEST 2016	tthonhofer	Fixed engine test failures	null	null
+7132:cbf8a355193e	infinica_5.1_tthonhofer	Wed Sep 07 15:45:13 CEST 2016	tthonhofer	Implemented Task Types	null	null
+7131:764832a74f2d	infinica_5.1_tthonhofer	Wed Sep 07 10:21:35 CEST 2016	tthonhofer	Merge with infinica_5.1	7130:9eba0c3e1d08	7130:9eba0c3e1d08
+7130:9eba0c3e1d08	infinica_5.1_tthonhofer	Wed Sep 07 10:20:48 CEST 2016	tthonhofer	Moved ScreenshotTest to processdesigner test plugin	null	null
+7129:0d67ee5a30bd	infinica_5.1_tthonhofer	Wed Sep 07 10:19:55 CEST 2016	tthonhofer	Created framework for headless testing	6936:577438a1f429	null
+7128:30297e838ec9	infinica_5.1	Wed Sep 07 10:16:41 CEST 2016	mschedenig	Merge with infinica_5.1_mschedenig	7122:0948cceacb15	7122:0948cceacb15
+7127:9c1eaa4a6125	infinica_5.1_mschedenig	Wed Sep 07 10:16:06 CEST 2016	mschedenig	Merge with infinica_5.1	7120:a0ec7b9929ac	7120:a0ec7b9929ac
+7126:8fbcc42f79f7	infinica_5.0_tmertes	Wed Sep 07 09:24:01 CEST 2016	tmertes	Merge with infinica_5.0	7124:ee85695243ba	7124:ee85695243ba
+7125:32324546c717	infinica_5.0	Wed Sep 07 09:23:13 CEST 2016	tmertes	Merge with infinica_5.0_tmertes	7111:f4832ed7c6c2	7111:f4832ed7c6c2
+7124:ee85695243ba	infinica_5.0_tmertes	Wed Sep 07 09:21:59 CEST 2016	tmertes	RE-140: Typos in Publish dialog	null	null
+7123:12cd9401e45b	infinica_5.0_tmertes	Wed Sep 07 09:19:08 CEST 2016	tmertes	Merge with infinica_5.0	7093:b797f0fdd8fd	7093:b797f0fdd8fd
+7122:0948cceacb15	infinica_5.1	Wed Sep 07 00:29:34 CEST 2016	christopher.prengel@infinica.com	Merge	7121:b42819c92e5a	7121:b42819c92e5a
+7121:b42819c92e5a	infinica_5.1	Wed Sep 07 00:28:04 CEST 2016	christopher.prengel@infinica.com	update: reduced DET template using Berger latest on 91;	7032:e70b7a35fcf8	null
