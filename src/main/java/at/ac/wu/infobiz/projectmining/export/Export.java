@@ -21,9 +21,14 @@ public class Export {
 	 */
 	public static void main(String[] args) {
 		String dbname = null;
-		if(args.length == 2)
-			dbname = args[1];
-		dbname = "node";
+		int i=0;
+		for (String string : args) {
+			System.out.println(i+++" "+string);
+		}
+		if(args.length == 1)
+			dbname = args[0];
+//		dbname = "node";
+		System.out.println(dbname);
 		if(dbname != null)
 			exportFileStories(dbname);
 		//exportFileStories("smsr");
