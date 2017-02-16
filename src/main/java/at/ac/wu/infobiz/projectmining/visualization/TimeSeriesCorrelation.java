@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.math.stat.correlation.PearsonsCorrelation;
+import org.joda.time.DateTime;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -23,11 +25,15 @@ public class TimeSeriesCorrelation {
 
 	public static void main(String[] args) {
 		String folder = null;
-		if(args.length == 1)
+		String outFile = null;
+		if(args.length == 1){
 			folder = args[0];
+			outFile = "correlations/"+args[0]+"-"+DateTime.now()+".csv";
+		}
 		if(folder == null)
 			System.exit(-1);
-
+		
+		long start = System.currentTimeMillis();
 		System.out.println("Reading stories from folder: "+folder);
 
 		List<File> allFiles = listFilesForFolder(new File(folder));
@@ -40,11 +46,14 @@ public class TimeSeriesCorrelation {
 		
 		TimeSeriesTable tst = new TimeSeriesTable(map);
 		map = tst.getExpandedFileStoryMap();
-		System.out.println(map);
+//		System.out.println(map);
 
 		Double[][] correlationMatrix = doPairWiseCorrelations(map, 3);
 		
-		printCorrelationMatrix(correlationMatrix, map, "corremat");
+		printCorrelationMatrix(correlationMatrix, map, outFile);
+		
+		System.out.println("Done. "+(System.currentTimeMillis()-start)/1000.0+ " Sec.");
+		System.out.println("Results written into: "+outFile);
 	}
 	
 	/**
@@ -71,7 +80,7 @@ public class TimeSeriesCorrelation {
 		String[] header = new String[files.size()+1];
 		Double[][] correlationMatrix = new Double[files.size()][files.size()];
 		for(int i=0; i<files.size(); i++){
-			for(int j=i+1; j<files.size(); j++){
+			for(int j=i; j<files.size(); j++){
 				FileStory fs1 = map.get(files.get(i));
 				FileStory fs2 = map.get(files.get(j));
 				if(fs1.story.size()!=fs2.story.size()){
@@ -92,10 +101,21 @@ public class TimeSeriesCorrelation {
 		List<File> files = new ArrayList<File>(map.keySet());
 		String[] header = new String[files.size()+1];
 		
+		for (int i = 0; i < correlationMatrix.length; i++) {
+			for (int j = 0; j < correlationMatrix.length; j++) {
+				System.out.print(correlationMatrix[i][j]+"\t");
+			}
+			System.out.println();
+		}
 		
 		try {
-			CSVWriter csvWriter = new CSVWriter(new FileWriter(filename,true));
-			header[0] = "";
+			File file = new File(filename);
+			File absolute = file.getAbsoluteFile();
+			absolute.getParentFile().mkdirs();
+			FileWriter writer = new FileWriter(absolute, true);
+			
+			CSVWriter csvWriter = new CSVWriter(writer);
+			header[0] = "Correlations";
 			for(int i = 1; i<header.length;i++){
 				header[i] = files.get(i-1).getName();
 			}
@@ -105,9 +125,9 @@ public class TimeSeriesCorrelation {
 			
 			for(int i = 0; i<correlationMatrix.length; i++){
 				String[] row = new String[correlationMatrix[i].length+1];
-				row[0] = files.get(0).getName();
-				for(int j=0;j<correlationMatrix[i].length-2; j++)
-					row[j+1] = correlationMatrix[i][j].toString();
+				row[0] = files.get(i).getName();
+				for(int j=0;j<correlationMatrix[i].length; j++)
+					row[j+1] = correlationMatrix[i][j] + "";
 			
 				csvRows.add(row);
 			}
@@ -185,7 +205,6 @@ public class TimeSeriesCorrelation {
 			reader = new CSVReader(new FileReader(file), '\t', '"', 1);
 			String[] line;
 			while ((line = reader.readNext()) != null) {
-				//                System.out.println("Country [id= " + line[0] + ", code= " + line[1] + " , name=" + line[2] + "]");
 				String comment = line[0];
 				String dateString = line[1];
 				String tlA = line[2];
