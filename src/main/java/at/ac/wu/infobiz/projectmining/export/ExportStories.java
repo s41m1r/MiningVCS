@@ -5,6 +5,8 @@ package at.ac.wu.infobiz.projectmining.export;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -14,7 +16,7 @@ import at.ac.wu.infobiz.projectmining.util.DBUtil;
  * @author Saimir
  *
  */
-public class Export {
+public class ExportStories {
 
 	/**
 	 * @param args
@@ -22,11 +24,12 @@ public class Export {
 	public static void main(String[] args) {
 		String dbname = null;
 		int i=0;
-		for (String string : args) {
-			System.out.println(i+++" "+string);
-		}
+//		for (String string : args) {
+//			System.out.println(i+++" "+string);
+//		}
 		if(args.length == 1)
 			dbname = args[0];
+		dbname = JOptionPane.showInputDialog("String dbname?");
 //		dbname = "node";
 		System.out.println(dbname);
 		if(dbname != null)
@@ -42,6 +45,7 @@ public class Export {
 			extractStory(session, fromDB, file);
 		}
 		DBUtil.disconnect(session);
+		System.out.println("Results written into directory "+fromDB+"-stories");
 		System.out.println("Extracted "+allfiles.size()+ " stories in "+ (System.currentTimeMillis()-start)/1000.0+ " sec.");
 	}
 
@@ -53,7 +57,7 @@ public class Export {
 //				+ " AND `FileAction`.`commit_id` = `Commit`.`id`"
 //				+ "	AND `FileAction`.`file_path` = `File`.`path`"
 //				+ "	AND `User`.`id` = `Commit`.`user_id`"
-//				+ " ORDER BY `Commit`.`timeStamp` ASC ";
+//				+ " ORDER BY `Commit`.eStamp` ASC ";
 		
 //		String queryString = "SELECT `Commit`.`id`, `Commit`.`comment`, `Commit`.`timeStamp`, "
 //				+ " sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, "
@@ -68,7 +72,7 @@ public class Export {
 //				+ " GROUP BY `Edit`.`id`"
 //				+ " ORDER BY `Commit`.`timeStamp` ASC"; 
 		
-		String queryString = "SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR ' . ') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(linesAdded-linesRemoved) TotalDiffInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesUntilThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR ' . ') as Users "
+		String queryString = "SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR ' § ') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(linesAdded-linesRemoved) TotalDiffInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesUntilThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR ' § ') as Users "
 				+ "FROM `File`, `Edit`, `FileAction`,`Commit`, `User` "
 				+ "WHERE `File`.`path` = "+"'"+file+"'"
 				+ "AND `Edit`.`commit_id` = `Commit`.`id` "

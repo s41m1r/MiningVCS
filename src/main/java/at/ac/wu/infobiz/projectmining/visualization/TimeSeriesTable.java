@@ -67,7 +67,7 @@ public class TimeSeriesTable {
 				if(!map.get(f).hasDate(date)){
 					String[] s = null;
 					FileStoryRecord fsr = 
-							new FileStoryRecord("", date, 0, 0, 0, 0, 0, s);
+							new FileStoryRecord("", date, 0, 0, 0, 0, 0, new String[]{});
 					map.get(f).story.add(fsr);
 					res.put(f, map.get(f));
 				}
