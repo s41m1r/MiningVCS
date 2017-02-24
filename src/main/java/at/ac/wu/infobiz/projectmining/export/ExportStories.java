@@ -3,7 +3,11 @@
  */
 package at.ac.wu.infobiz.projectmining.export;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
@@ -29,7 +33,7 @@ public class ExportStories {
 //		}
 		if(args.length == 1)
 			dbname = args[0];
-		dbname = JOptionPane.showInputDialog("String dbname?");
+//		dbname = JOptionPane.showInputDialog("String dbname?");
 //		dbname = "node";
 		System.out.println(dbname);
 		if(dbname != null)
@@ -41,15 +45,37 @@ public class ExportStories {
 		long start = System.currentTimeMillis();
 		Session session = DBUtil.connectTo(fromDB);
 		List<String> allfiles = getAllFilesFrom(session, fromDB);
+		int i = 0;
+		String codename = fromDB+"-stories/f";
+		Map<String, String> namesMap = new TreeMap<String, String>();
 		for (String file : allfiles) {
-			extractStory(session, fromDB, file);
+			String newName = codename+i+++".csv";
+			extractStory(session, file, newName);
+			namesMap.put(newName, file);
 		}
 		DBUtil.disconnect(session);
+		DBUtil.toCSV2(fromDB+"-namesMap/namesMap.csv", 
+				new String[]{"coded","original name"}, listofObjectArrayFrom(namesMap), '\t');
+//		printNamesMap(namesMap, fromDB+"/namesMap/namesMap.csv");
 		System.out.println("Results written into directory "+fromDB+"-stories");
 		System.out.println("Extracted "+allfiles.size()+ " stories in "+ (System.currentTimeMillis()-start)/1000.0+ " sec.");
 	}
 
-	public static void extractStory(Session session, String dbname, String file) {
+	private static List<String[]> listofObjectArrayFrom(Map<String, String> namesMap) {
+		Iterator<String> it = namesMap.keySet().iterator();
+		List<String[]> rows = new ArrayList<String[]>();
+		while (it.hasNext()) {
+			String string = it.next();
+			String[] r = new String[2];
+			r[0] = string;
+			r[1] = namesMap.get(string);
+
+			rows.add(r);
+		}
+		return rows;
+	}
+
+	public static void extractStory(Session session, String file, String newName) {
 
 //		String queryString = "SELECT `Commit`.*, `User`.`name` "
 //				+ " FROM `File`, `FileAction`, `Commit`, `User` "
@@ -91,7 +117,7 @@ public class ExportStories {
 		List<Object[]> results = q.list();
 		
 		String[] header = {"Comments","Date","TotalLinesAdded","TotalLinesRemoved", "TotalChangeInTheDay", "TotalDiffInTheDay", "LinesUntilThisDay", "Users"};
-		DBUtil.toCSV(dbname, file, header, results, "\t");
+		DBUtil.toCSVLongFileNames(newName, header, results, '\t');
 	}
 
 	@SuppressWarnings("unchecked")
