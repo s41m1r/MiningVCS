@@ -63,7 +63,7 @@ public class ExportTimeSeriesCorrelation {
 		String outFile = null;
 		if(args.length == 1){
 			folder = args[0];
-			folder = JOptionPane.showInputDialog("Stories-folder?");
+//			folder = JOptionPane.showInputDialog("Stories-folder?");
 			if(folder==null)
 				System.exit(-1);
 			outFile = folder+"-"+DateTime.now()+".csv";
@@ -659,6 +659,7 @@ public class ExportTimeSeriesCorrelation {
 
 				storyRecords.add(fsr);
 			}
+			reader.close();
 		} catch (IOException | ParseException | ArrayIndexOutOfBoundsException e) {
 			System.err.println("Problem when reading file "+file);
 			e.printStackTrace();
