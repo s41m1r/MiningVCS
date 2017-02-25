@@ -1,8 +1,6 @@
 ## The main entry point for the guy is DottedChart. It can be launched without any parameters. 
 
-## The test files ofter require the log directory as a parameter. In such cases the command takes a parameter like 
-
-
+## Some test files require the log directory as a parameter. In such cases the command takes a parameter like 
 -f /path/to/logfile
 
 ## In case you run a test where you have to specify the aggregation then put additionally 
