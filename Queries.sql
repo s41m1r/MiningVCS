@@ -145,3 +145,12 @@ WHERE `File`.`path` = 'pom.xml'
     AND `FileAction`.`commit_id` = `Commit`.`id`
 GROUP BY Date
 ORDER By Date ASC
+
+-- Get change frequency for file
+SELECT File.path, SUM(`Commit`.id) as Frq 
+FROM File, FileAction, `Commit` 
+WHERE FileAction.file_path = File.path AND FileAction.id = `Commit`.`id` 
+GROUP BY File.path 
+ORDER BY Frq DESC 
+
+

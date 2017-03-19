@@ -25,3 +25,10 @@ git config diff.renameLimit 10000
 
 ## Run git importer from command line
 java -cp TestGitToDB -logFile data/jgit-cookbook.log -db jgitcookbook
+
+
+## Export stories from database
+java -cp project-mining-jar-with-dependencies.jar at.ac.wu.infobiz.projectmining.export.ExportStories database-story
+
+##Export time series correlations
+java -cp project-mining-jar-with-dependencies.jar at.ac.wu.infobiz.projectmining.export.ExportTimeSeriesCorrelation caret-stories

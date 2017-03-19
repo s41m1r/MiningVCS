@@ -17,8 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.math.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math.stat.descriptive.DescriptiveStatistics;
 import org.joda.time.DateTime;
@@ -29,12 +27,13 @@ import com.opencsv.CSVWriter;
 import at.ac.wu.infobiz.projectmining.visualization.FileStory;
 import at.ac.wu.infobiz.projectmining.visualization.FileStoryRecord;
 import at.ac.wu.infobiz.projectmining.visualization.TimeSeriesTable;
+import at.ac.wu.infobiz.projectmining.visualization.TreeDistance;
 
 public class ExportTimeSeriesCorrelation {
 
 	private static final double STRENGTH_THRESHOLD = 0.7;
 	private static final double WEAK_THRESHOLD = 0.3;
-	private static final String SEP = "\t";
+	private static final String SEP = ";";
 	//#Artifacts	#Users	#Containments	#MaxPossibleContainments	
 //	#Strong Dependencies	#Weak Dependencies	#Intra-Containment Dependencies	
 //	#Inter-Containment Dependencies	#Strong Inter-Containment Dependencies	
@@ -56,6 +55,8 @@ public class ExportTimeSeriesCorrelation {
 	public static double MAX_TREE_DEPTH;
 	public static double AVG_ACITIVIES_PROCESS;
 	public static double AVG_USER_ARTIFACT;
+	public static double MAX_TREE_DISTANCE;
+	public static double AVG_TREE_DISTANCE;
 
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -105,10 +106,12 @@ public class ExportTimeSeriesCorrelation {
 		
 		System.out.println("Computing containments.");
 //		boolean[][] containmentsMatrix = doPairWiseContainmentsCheck(map);
+		int[][] treeDistance = computeTreeDistances(namesMap);
 		boolean[][] containmentsMatrix = doPairWiseContainmentsCheck2(namesMap);
 		
 		printCorrelationMatrix(correlationMatrix, map, "correlations/"+outFile);
 		printContainmentsMatrix2(containmentsMatrix, namesMap, "containments/"+outFile);
+		printDistanceMatrix(treeDistance, map, "distances/"+outFile);
 		
 //		System.out.println(computeUsersPerFile(map) + " average users per file");
 //		System.out.println(computeAverageProcessLength(map)+ " average process length");
@@ -123,14 +126,30 @@ public class ExportTimeSeriesCorrelation {
 				+ "INTRA_CONTA_DEPEND"+SEP+" WEAK_INTRA_CONTA_DEPEND"+SEP+" STRONG_INTRA_CONTA_DEPEND"+SEP+" "
 				+ "INTER_CONTA_DEPEND"+SEP+"WEAK_INTER_CONTA_DEP"+SEP+" STRONG_INTER_CONTA_DEP"+SEP+""
 				+ "AVG_TREE_DEPTH"+SEP+" MAX_TREE_DEPTH"+SEP+""
-				+ "AVG_ACITIVIES_PROCESS"+SEP+"AVG_USER_ARTIFACT");
+				+ "AVG_ACITIVIES_PROCESS"+SEP+"AVG_USER_ARTIFACT" + SEP 
+				+ "AVG_TREE_DISTANCE"+SEP+"MAX_TREE_DISTANCE");
 		System.out.println(folder+SEP+""+SEP+""+SEP+""+SEP+ARTIFACTS+SEP+CONTAINMENTS+SEP+
-				STRONG_DEPENDENCIES+SEP+WEAK_DEPENDENCIES+SEP+INTRA_CONTA_DEPEND+SEP+WEAK_INTRA_CONTA_DEPEND+SEP+
+				STRONG_DEPENDENCIES+""+SEP+WEAK_DEPENDENCIES+SEP+INTRA_CONTA_DEPEND+SEP+WEAK_INTRA_CONTA_DEPEND+SEP+
 				STRONG_INTRA_CONTA_DEPEND+SEP+INTER_CONTA_DEPEND+SEP+WEAK_INTER_CONTA_DEP+SEP+STRONG_INTER_CONTA_DEP+SEP+
 				AVG_TREE_DEPTH+SEP+MAX_TREE_DEPTH+SEP+
-				AVG_ACITIVIES_PROCESS+SEP+AVG_USER_ARTIFACT);
+				AVG_ACITIVIES_PROCESS+SEP+AVG_USER_ARTIFACT + SEP +
+				+ AVG_TREE_DISTANCE+SEP+MAX_TREE_DISTANCE);
 	}
 	
+	private static int[][] computeTreeDistances(Map<String, String> namesMap) {
+		int[][] distanceMatrix = new int[namesMap.size()][namesMap.size()];
+		List<String> filenames = new ArrayList<String>(namesMap.values());
+		for (int i = 0; i < distanceMatrix.length; i++) {				
+			for(int j=i+1; j<distanceMatrix[0].length; j++){
+				File f1 = new File(filenames.get(i));
+				File f2 = new File(filenames.get(j));
+				int c = TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath());				
+				distanceMatrix[i][j] = c;
+			}
+		}
+		return distanceMatrix;
+	}
+
 	private static double[][] doPairWiseCorrelations2(Map<String, String> namesMap, Map<File, FileStory> map, int field) {
 		List<File> files = new ArrayList<File>(map.keySet());
 //		String[] header = new String[files.size()+1];
@@ -153,28 +172,31 @@ public class ExportTimeSeriesCorrelation {
 					File f1 = new File(namesMap.get(files.get(i).toString()));
 					File f2 = new File(namesMap.get(files.get(j).toString()));
 					cor = correlation(fs1, fs2, field);
+					double corStrength = Math.abs(cor); 
 					corCount++;
 					
 					boolean sameContainment = sameContainment(f1, f2);
 					
 					if(sameContainment){
 						intraContainmentCount++;
-						if(Math.abs(cor)>STRENGTH_THRESHOLD){
+						if(corStrength>STRENGTH_THRESHOLD){
 							strongIntraContainmentCount++;
 							strongCorCount++;
 						}
-						if(Math.abs(cor)<WEAK_THRESHOLD){
+						if(corStrength<WEAK_THRESHOLD){
 							weakIntraContainmentCount++;
 							weakCorCount++;
 						}
 					}
 					else{
 						interContainmentCount++;
-						if(Math.abs(cor)>STRENGTH_THRESHOLD){
+						if(corStrength>STRENGTH_THRESHOLD){
 							strongInterContainmentCount++;
+//							if(corStrength > .9)
+//								System.out.println(f1 + " + "+ f2 + " corr = "+cor);
 							strongCorCount++;
 						}
-						if(Math.abs(cor)<WEAK_THRESHOLD){
+						if(corStrength<WEAK_THRESHOLD){
 							weakInterContainmentCount++;
 							weakCorCount++;
 						}
@@ -182,7 +204,6 @@ public class ExportTimeSeriesCorrelation {
 						
 					
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				correlationMatrix[i][j] = cor;
@@ -278,6 +299,12 @@ public class ExportTimeSeriesCorrelation {
 		return ds.getMean();
 	}
 	
+	/**
+	 * 
+	 * @param containmentsMatrix
+	 * @param map
+	 * @param filename
+	 */
 	private static void printContainmentsMatrix2(boolean[][] containmentsMatrix, Map<String, String> map,
 			String filename) {
 		List<String> files = new ArrayList<String>(map.values());
@@ -331,14 +358,67 @@ public class ExportTimeSeriesCorrelation {
 		AVG_TREE_DEPTH = ds.getMean();
 	}
 
-	private static void printContainmentsMatrix(boolean[][] containmentsMatrix, Map<File, FileStory> map,
+//	private static void printContainmentsMatrix(boolean[][] containmentsMatrix, Map<File, FileStory> map,
+//			String filename) {
+//		List<File> files = new ArrayList<File>(map.keySet());
+//		String[] header = new String[files.size()+1];
+//		
+////		for (int i = 0; i < correlationMatrix.length; i++) {
+////			for (int j = 0; j < correlationMatrix.length; j++) {
+////				System.out.print(correlationMatrix[i][j]+"\t");
+////			}
+////			System.out.println();
+////		}
+//		
+//		DescriptiveStatistics ds = new DescriptiveStatistics();
+//		
+//		try {
+//			File file = new File(filename);
+//			File absolute = file.getAbsoluteFile();
+//			absolute.getParentFile().mkdirs();
+//			FileWriter writer = new FileWriter(absolute, true);
+//			
+//			CSVWriter csvWriter = new CSVWriter(writer);
+//			header[0] = "Containments";
+//			for(int i = 1; i<header.length;i++){
+//				header[i] = files.get(i-1).getName().replaceAll("§", "/");
+//			}
+//			csvWriter.writeNext(header);
+//			
+//			List<String[]> csvRows = new ArrayList<String[]>();
+//			
+//			for(int i = 0; i<containmentsMatrix.length; i++){
+//				String[] row = new String[containmentsMatrix[i].length+1];
+//				row[0] = files.get(i).getName().replaceAll("§", "/");
+//				ds.addValue(Paths.get(row[0]).getNameCount());
+//				for(int j=0;j<containmentsMatrix[i].length; j++){
+//					boolean val = containmentsMatrix[i][j];
+//					row[j+1] = val? "1": "0";
+//				}
+//				csvRows.add(row);
+//			}
+//			csvWriter.writeAll(csvRows);
+//			csvWriter.flush();
+//			csvWriter.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+////		System.out.println(ds.getMax() +" Tree depth");
+////		System.out.println(ds.getMean() +" Mean tree depth");
+//		
+//		MAX_TREE_DEPTH = ds.getMax();
+//		AVG_TREE_DEPTH = ds.getMean();
+//	}
+	
+	private static void printDistanceMatrix(int[][] distanceMatrix, Map<File, FileStory> map,
 			String filename) {
 		List<File> files = new ArrayList<File>(map.keySet());
 		String[] header = new String[files.size()+1];
 		
-//		for (int i = 0; i < correlationMatrix.length; i++) {
-//			for (int j = 0; j < correlationMatrix.length; j++) {
-//				System.out.print(correlationMatrix[i][j]+"\t");
+//		for (int i = 0; i < distanceMatrix.length; i++) {
+//			for (int j = 0; j < distanceMatrix.length; j++) {
+//				System.out.print(distanceMatrix[i][j]+"\t");
 //			}
 //			System.out.println();
 //		}
@@ -352,7 +432,7 @@ public class ExportTimeSeriesCorrelation {
 			FileWriter writer = new FileWriter(absolute, true);
 			
 			CSVWriter csvWriter = new CSVWriter(writer);
-			header[0] = "Containments";
+			header[0] = "Distances";
 			for(int i = 1; i<header.length;i++){
 				header[i] = files.get(i-1).getName().replaceAll("§", "/");
 			}
@@ -360,13 +440,13 @@ public class ExportTimeSeriesCorrelation {
 			
 			List<String[]> csvRows = new ArrayList<String[]>();
 			
-			for(int i = 0; i<containmentsMatrix.length; i++){
-				String[] row = new String[containmentsMatrix[i].length+1];
+			for(int i = 0; i<map.size(); i++){
+				String[] row = new String[distanceMatrix[i].length+1];
 				row[0] = files.get(i).getName().replaceAll("§", "/");
-				ds.addValue(Paths.get(row[0]).getNameCount());
-				for(int j=0;j<containmentsMatrix[i].length; j++){
-					boolean val = containmentsMatrix[i][j];
-					row[j+1] = val? "1": "0";
+				for(int j=0;j<distanceMatrix[i].length; j++){
+					int val = distanceMatrix[i][j];
+					row[j+1] = val+"";
+					ds.addValue(val);
 				}
 				csvRows.add(row);
 			}
@@ -380,8 +460,8 @@ public class ExportTimeSeriesCorrelation {
 //		System.out.println(ds.getMax() +" Tree depth");
 //		System.out.println(ds.getMean() +" Mean tree depth");
 		
-		MAX_TREE_DEPTH = ds.getMax();
-		AVG_TREE_DEPTH = ds.getMean();
+		MAX_TREE_DISTANCE = ds.getMax();
+		AVG_TREE_DISTANCE = ds.getMean();
 	}
 
 	private static boolean[][] doPairWiseContainmentsCheck(Map<File, FileStory> map ) {
@@ -459,27 +539,27 @@ public class ExportTimeSeriesCorrelation {
 					File f2 = new File(files.get(j).getName().replaceAll("§", "/"));
 					cor = correlation(fs1, fs2, field);
 					corCount++;
-					
+					double corStrength = Math.abs(cor);
 					boolean sameContainment = sameContainment(f1, f2);
 					
 					if(sameContainment){
 						intraContainmentCount++;
-						if(Math.abs(cor)>STRENGTH_THRESHOLD){
+						if(corStrength>STRENGTH_THRESHOLD){
 							strongIntraContainmentCount++;
 							strongCorCount++;
 						}
-						if(Math.abs(cor)<WEAK_THRESHOLD){
+						if(corStrength<WEAK_THRESHOLD){
 							weakIntraContainmentCount++;
 							weakCorCount++;
 						}
 					}
 					else{
 						interContainmentCount++;
-						if(Math.abs(cor)>STRENGTH_THRESHOLD){
+						if(corStrength>STRENGTH_THRESHOLD){
 							strongInterContainmentCount++;
 							strongCorCount++;
 						}
-						if(Math.abs(cor)<WEAK_THRESHOLD){
+						if(corStrength<WEAK_THRESHOLD){
 							weakInterContainmentCount++;
 							weakCorCount++;
 						}
@@ -616,7 +696,7 @@ public class ExportTimeSeriesCorrelation {
 	public static List<File> listFilesForFolder(File folder) {
 		List<File> allFiles = new ArrayList<File>();
 		for (final File fileEntry : folder.listFiles()) {
-			if (fileEntry.isDirectory()) {
+			if (fileEntry.isDirectory() && !fileEntry.isHidden()) {
 				allFiles.addAll(listFilesForFolder(fileEntry));
 			} else {
 				//	            System.out.println(fileEntry.getName());
@@ -674,8 +754,9 @@ public class ExportTimeSeriesCorrelation {
 		for (File file : allFiles) {
 //			if(hasEmptyStory(file))
 //				continue;
-			FileStory fStory = new FileStory(file.getName(), getStoryDataForFile(file));
-			stories.put(file,fStory);
+			String name = file.getName();
+			FileStory fStory = new FileStory(name, getStoryDataForFile(file));
+			stories.put(new File(name),fStory);
 		}
 
 		return stories;

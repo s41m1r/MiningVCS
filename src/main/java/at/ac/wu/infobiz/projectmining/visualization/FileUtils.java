@@ -37,8 +37,10 @@ public class FileUtils {
 	}
 	
 	public static void main(String[] args){
-		String p1 = "d/a/b/c";
-		String p2 = "b/c";
+		String p1 = "/d/d/f/c";
+		String p2 = "/d/a/a";
+		
+		System.out.println(TreeDistance.lca(p1, p2));
 		
 		System.out.println(isContained(p1, p2));
 	}

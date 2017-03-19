@@ -46,11 +46,12 @@ public class ExportStories {
 		Session session = DBUtil.connectTo(fromDB);
 		List<String> allfiles = getAllFilesFrom(session, fromDB);
 		int i = 0;
-		String codename = fromDB+"-stories/f";
+//		String codename = fromDB+"-stories/f";
+		String codename = "f";
 		Map<String, String> namesMap = new TreeMap<String, String>();
 		for (String file : allfiles) {
 			String newName = codename+i+++".csv";
-			extractStory(session, file, newName);
+			extractStory(session, file, fromDB+"-stories/"+newName);
 			namesMap.put(newName, file);
 		}
 		DBUtil.disconnect(session);
