@@ -26,8 +26,10 @@ import com.opencsv.CSVWriter;
 
 import at.ac.wu.infobiz.projectmining.visualization.FileStory;
 import at.ac.wu.infobiz.projectmining.visualization.FileStoryRecord;
+import at.ac.wu.infobiz.projectmining.visualization.FileUtils;
 import at.ac.wu.infobiz.projectmining.visualization.TimeSeriesTable;
 import at.ac.wu.infobiz.projectmining.visualization.TreeDistance;
+import javassist.compiler.ast.Symbol;
 
 public class ExportTimeSeriesCorrelation {
 
@@ -192,8 +194,12 @@ public class ExportTimeSeriesCorrelation {
 						interContainmentCount++;
 						if(corStrength>STRENGTH_THRESHOLD){
 							strongInterContainmentCount++;
-//							if(corStrength > .9)
+							if(corStrength > .7){
 //								System.out.println(f1 + " + "+ f2 + " corr = "+cor);
+								if(!f1.equals(f2) && TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath()) > 2){
+									System.out.println("f1="+f1+" f2="+f2 +" Cor="+cor+ " LCA="+TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath()));
+								}
+							}
 							strongCorCount++;
 						}
 						if(corStrength<WEAK_THRESHOLD){
@@ -557,6 +563,8 @@ public class ExportTimeSeriesCorrelation {
 						interContainmentCount++;
 						if(corStrength>STRENGTH_THRESHOLD){
 							strongInterContainmentCount++;
+							System.out.println("f1="+f1);
+							System.out.println("f2="+f2);
 							strongCorCount++;
 						}
 						if(corStrength<WEAK_THRESHOLD){

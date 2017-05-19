@@ -27,6 +27,10 @@ git config diff.renameLimit 10000
 java -cp TestGitToDB -logFile data/jgit-cookbook.log -db jgitcookbook
 
 
+## Run git importer from command line
+java -cp project-mining-jar-with-dependencies.jar at.ac.wu.infobiz.projectmining.test.TestGitToDB -logFile data/jgit-cookbook.log -db jgitcookbook
+
+
 ## Export stories from database
 java -cp project-mining-jar-with-dependencies.jar at.ac.wu.infobiz.projectmining.export.ExportStories database-story
 

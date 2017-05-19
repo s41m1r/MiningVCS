@@ -132,7 +132,7 @@ WHERE `File`.`path` = 'pom.xml'
     AND `FileAction`.`file_path` = `File`.`path` 
     AND `FileAction`.`commit_id` = `Commit`.`id`
 GROUP BY Date
-ORDER By Date ASC
+ORDER By Date ASCsh
 
 -- Same as above with less attributes
 SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR ' . ') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(linesAdded-linesRemoved) TotalDiffInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesUntilThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR ' . ') as Users
