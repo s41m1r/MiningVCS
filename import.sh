@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 #usage import.sh directory/of/your/git/project databasename
 #generates a file named "project.log" inside the folder
 

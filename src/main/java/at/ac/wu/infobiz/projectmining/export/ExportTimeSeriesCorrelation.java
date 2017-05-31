@@ -135,6 +135,7 @@ public class ExportTimeSeriesCorrelation {
 	 */
 	private static void doAnalysisForFolder(String folder, String outFile) throws FileNotFoundException, IOException {
 		long start = System.currentTimeMillis();
+		System.out.println();
 		System.out.println("Reading stories from folder: "+folder);
 
 		List<File> allFiles = listFilesForFolder(new File(folder));
@@ -166,7 +167,7 @@ public class ExportTimeSeriesCorrelation {
 		printDistanceMatrix(treeDistance, map, "distances/"+outFile);
 		
 		System.out.println("Generating Correlations VS Distance Table. Writing into file correlationsVersusDistance.csv");
-		printCorrelationVersusDistance(correlationMatrix, treeDistance, map,"correlationsVersusDistance.csv");
+		printCorrelationVersusDistance(correlationMatrix, treeDistance, map,"correlationsVersusDistance"+outFile);
 		
 		
 //		System.out.println(computeUsersPerFile(map) + " average users per file");
@@ -379,9 +380,9 @@ public class ExportTimeSeriesCorrelation {
 							strongInterContainmentCount++;
 							if(corStrength > .7){
 //								System.out.println(f1 + " + "+ f2 + " corr = "+cor);
-								if(!f1.equals(f2) && TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath()) > 2){
-									System.out.println("f1="+f1+" f2="+f2 +" Cor="+cor+ " LCA="+TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath()));
-								}
+//								if(!f1.equals(f2) && TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath()) > 2){
+//									System.out.println("f1="+f1+" f2="+f2 +" Cor="+cor+ " LCA="+TreeDistance.lca(f1.getAbsolutePath(), f2.getAbsolutePath()));
+//								}
 							}
 							strongCorCount++;
 						}
