@@ -1,4 +1,4 @@
-package at.ac.wu.infobiz.projectmining.visualization;
+package at.ac.wu.infobiz.projectmining.timeseries;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -123,12 +123,10 @@ public class FileStoryRecord implements Comparable<FileStoryRecord> {
 				+ Arrays.toString(users) + "]";
 	}
 
-
 	@Override
 	public int compareTo(FileStoryRecord o) {
 		DateTime d1 = new DateTime(this.date.getTime());
 		DateTime d2 = new DateTime(o.getDate().getTime());
 		return d1.compareTo(d2);
 	}
-
 }

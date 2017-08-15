@@ -21,6 +21,14 @@ GROUP BY Name
 ORDER BY NumberOfEdits DESC 
 LIMIT 10
 
+-- Top 20 Edits for USER with name %bernd%
+SELECT `User`.`name` as Name, count(*) as NumberOfEdits 
+FROM `User`, `Edit`, `Commit` 
+WHERE `User`.`id` = `Commit`.`user_id` AND `Edit`.`commit_id` = `Commit`.`id` AND `User`.`email` LIKE "%bernd%"
+GROUP BY Name
+ORDER BY NumberOfEdits DESC 
+LIMIT 20
+
 -- Top 10 users with the number of lines added/removed
 SELECT Name, count(*) as NumberOfEdits, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved
 FROM `User`, `Edit`, `Commit` 
@@ -132,7 +140,7 @@ WHERE `File`.`path` = 'pom.xml'
     AND `FileAction`.`file_path` = `File`.`path` 
     AND `FileAction`.`commit_id` = `Commit`.`id`
 GROUP BY Date
-ORDER By Date ASCsh
+ORDER By Date ASC
 
 -- Same as above with less attributes
 SELECT GROUP_CONCAT(`Commit`.`comment` SEPARATOR ' . ') as Comments, DATE(`Commit`.`timeStamp`) as Date, sum(linesAdded) as TotalLinesAdded, sum(linesRemoved) as TotalLinesRemoved, sum(linesAdded+linesRemoved) TotalChangeInTheDay, sum(linesAdded-linesRemoved) TotalDiffInTheDay, sum(DISTINCT `FileAction`.`totalLines`) as LinesUntilThisDay, GROUP_CONCAT(`User`.`name` SEPARATOR ' . ') as Users

@@ -1,4 +1,4 @@
-package at.ac.wu.infobiz.projectmining.visualization;
+package at.ac.wu.infobiz.projectmining.timeseries;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

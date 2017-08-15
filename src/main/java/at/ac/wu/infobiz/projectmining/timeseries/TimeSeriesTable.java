@@ -1,4 +1,4 @@
-package at.ac.wu.infobiz.projectmining.visualization;
+package at.ac.wu.infobiz.projectmining.timeseries;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,8 +64,7 @@ public class TimeSeriesTable {
 		
 		for (Date date : dates) {
 			for(File f : map.keySet()){
-				if(!map.get(f).hasDate(date)){
-					String[] s = null;
+				if(!map.get(f).containsDate(date)){
 					FileStoryRecord fsr = 
 							new FileStoryRecord("", date, 0, 0, 0, 0, 0, new String[]{});
 					map.get(f).story.add(fsr);
@@ -76,11 +75,11 @@ public class TimeSeriesTable {
 				}
 			}
 		}
-		return sortByDate(res);
+		return res;
 	}
 	
 	
-	private Map<File, FileStory> sortByDate(Map<File, FileStory> map) {
+	public Map<File, FileStory> sortByDate(Map<File, FileStory> map) {
 		Map<File, FileStory> res = new HashMap<File, FileStory>();
 		for(File file : map.keySet()){
 			List<FileStoryRecord> storyRecords = map.get(file).story;

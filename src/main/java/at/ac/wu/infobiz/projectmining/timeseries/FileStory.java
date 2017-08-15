@@ -1,8 +1,11 @@
-package at.ac.wu.infobiz.projectmining.visualization;
+package at.ac.wu.infobiz.projectmining.timeseries;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FileStory implements Comparable<FileStory> {
 	
@@ -25,7 +28,7 @@ public class FileStory implements Comparable<FileStory> {
 		this.story = story;
 	}
 	
-	public boolean hasDate(Date d){
+	public boolean containsDate(Date d){
 		for (FileStoryRecord fileStoryRecord : story) {
 			if(fileStoryRecord.date.equals(d))
 				return true;
@@ -50,6 +53,14 @@ public class FileStory implements Comparable<FileStory> {
 		}
 		return Date.from(max);
 	}
+	
+	public Set<Date> getAllDates(){
+		Set<Date> allDates = new HashSet<Date>();
+		for (FileStoryRecord fileStoryRecord : story) {
+			allDates.add(fileStoryRecord.date);
+		}
+		return allDates;
+	}
 
 	@Override
 	public String toString() {
@@ -59,5 +70,10 @@ public class FileStory implements Comparable<FileStory> {
 	@Override
 	public int compareTo(FileStory o) {
 		return this.getMinDate().compareTo(o.getMinDate());
+	}
+
+	public void addDateWithZeroChange(Date date) {
+		this.story.add(new FileStoryRecord("",date,0,0,0,0,0,new String[]{}));
+		Collections.sort(story);
 	}	
 }

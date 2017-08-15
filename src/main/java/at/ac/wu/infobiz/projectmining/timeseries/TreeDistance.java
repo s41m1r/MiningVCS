@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.ac.wu.infobiz.projectmining.visualization;
+package at.ac.wu.infobiz.projectmining.timeseries;
 
 import java.util.Collection;
 import java.util.Scanner;
