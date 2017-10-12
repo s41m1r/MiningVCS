@@ -39,7 +39,9 @@ git config merge.renameLimit 10000
 ## Prepare the dataset
 
 1. Choose a project from GitHub and clone it locally. E.g., Tablesaw 
+
 `git clone https://github.com/jtablesaw/tablesaw.git`
+
 This will create a directory, e.g., `~/git/tablesaw`.
 
 2. Import the dataset. Run the `import.sh` script.
@@ -60,7 +62,7 @@ This will create two folders
 
 # Publication
 
-Please refer to the paper published in BPM 2017.
+Please refer to the [paper](https://link.springer.com/chapter/10.1007/978-3-319-65000-5_10 "Uncovering the Hidden Co-evolution in the Work History of Software Projects") published in BPM 2017.
 ```
 Bala S., Revoredo K., de A.R. Gonçalves J.C., Baião F., Mendling J., Santoro F. (2017) 
 Uncovering the Hidden Co-evolution in the Work History of Software Projects. 
