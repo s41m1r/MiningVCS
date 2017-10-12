@@ -42,8 +42,7 @@ git config merge.renameLimit 10000
 `git clone https://github.com/jtablesaw/tablesaw.git`
 This will create a directory, e.g., `~/git/tablesaw`.
 
-2. Import the dataset
-Run the `import.sh` script.
+2. Import the dataset. Run the `import.sh` script.
 ``` 
 ./import.sh ~/git/tablesaw/ tablesaw
 ```
@@ -67,6 +66,30 @@ Bala S., Revoredo K., de A.R. Gonçalves J.C., Baião F., Mendling J., Santoro F
 Uncovering the Hidden Co-evolution in the Work History of Software Projects. 
 In: Carmona J., Engels G., Kumar A. (eds) Business Process Management. BPM 2017. 
 Lecture Notes in Computer Science, vol 10445. Springer, Cham
+```
+BibTex
+```
+@Inbook{Bala2017,
+author="Bala, Saimir
+and Revoredo, Kate
+and de A.R. Gon{\c{c}}alves, Jo{\~a}o Carlos
+and Bai{\~a}o, Fernanda
+and Mendling, Jan
+and Santoro, Flavia",
+editor="Carmona, Josep
+and Engels, Gregor
+and Kumar, Akhil",
+title="Uncovering the Hidden Co-evolution in the Work History of Software Projects",
+bookTitle="Business Process Management: 15th International Conference, BPM 2017, Barcelona, Spain, September 10--15, 2017, Proceedings",
+year="2017",
+publisher="Springer International Publishing",
+address="Cham",
+pages="164--180",
+isbn="978-3-319-65000-5",
+doi="10.1007/978-3-319-65000-5_10",
+url="https://doi.org/10.1007/978-3-319-65000-5_10"
+}
+
 ```
 
 The paper was evaluated on the following GitHub projects.
