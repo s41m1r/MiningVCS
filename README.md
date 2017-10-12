@@ -30,7 +30,7 @@ Features main brach:
 Put everything under the same directory `~/projectmining`.
 
 ## Configure your git client
-To keep track of many merges and renames, set your `diff.rename` and `merge.rename limits to a high number.
+To keep track of many merges and renames, set your `diff.rename` and `merge.rename` limits to a high number.
 ```
 git config diff.renameLimit 10000
 git config merge.renameLimit 10000
